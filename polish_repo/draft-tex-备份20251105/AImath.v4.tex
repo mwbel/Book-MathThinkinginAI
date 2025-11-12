@@ -1,0 +1,182 @@
+% 让 Latex Workshop/TeX 引擎知道这是“主文件”
+
+% 放在 \documentclass 之前
+\PassOptionsToPackage{backend=biber,style=numeric-comp,sorting=nyt,refsegment=chapter,defernumbers=true}{biblatex}
+
+\documentclass[lang=cn,scheme=chinese,12pt]{elegantbook}
+
+% 显式加载 biblatex，确保使用 biber
+\usepackage{biblatex}
+
+%\usepackage[pass]{geometry}
+\title{人工智能的数学思维}
+%\subtitle{Elegant\LaTeX{} 经典之作}
+%\author{吴敏 蒲戈光  }
+\institute{华东师范大学 软件工程学院}
+\date{2024}
+%\version{4.3}
+%\bioinfo{自定义}{信息}
+
+%\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。--- 比企谷八幡}
+% --- 全局：三层级（章→节→小节），编号与目录仅到小节 ---
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+% 版式统一：将 \subsubsection 呈现为段落式标题（与此前章节内的局部设置一致）
+\renewcommand\subsubsection{\paragraph}
+%\logo{logo-blue.png}
+\cover{cover.jpg}
+
+%\setCJKmainfont{Songti SC}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\usepackage{graphicx}
+\usepackage{amsmath}  % 确保加载了 amsmath 包
+\usepackage{amssymb}
+
+\usepackage{titlesec} 
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- 文本/URL 自动换行，减少 Overfull ---
+\usepackage{xurl} % 让长链接可断行
+\usepackage{microtype}           % 微排版（XeLaTeX 支持部分特性）
+\sloppy                          % 宽松排版（先用，后面可再收紧）
+% 临时缓解 Overfull \hbox（版面溢出）
+\emergencystretch=4em
+
+% --- 中文换行更友好 ---
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 0.2em minus 0.1em
+
+% --- hyperref 选项务必在加载前传入 ---
+\PassOptionsToPackage{unicode,breaklinks}{hyperref}
+\usepackage{hyperref} % 可选：使得 \eqref 的引用带有链接功能
+\hypersetup{hidelinks}
+
+% --- 书签里禁用/替换某些命令（安全写法） ---
+\usepackage{newunicodechar}
+\newunicodechar{＝}{=}
+\newunicodechar{－}{-}
+\newunicodechar{Ｄ}{D}
+\newunicodechar{ｇ}{g}
+\newunicodechar{^^^^200b}{} % 忽略零宽空格 U+200B（注意用 4 个 ^ 的 16 进制写法）
+% 推荐把罗马数字的 Unicode 映射掉（见第 4 节）：（避免 Missing character）
+\newunicodechar{Ⅰ}{I}
+\newunicodechar{Ⅱ}{II}
+\newunicodechar{Ⅲ}{III}
+
+% PDF 书签里不允许出现的东西（如 \\、数学），这里给替代
+\pdfstringdefDisableCommands{%
+  \def\eqref#1{(\ref{#1})}%
+  \def\texttt#1{#1}% 书签里去等宽体
+  \def\footnote#1{}% 书签里丢弃脚注
+  % 如有别的自定义命令造成书签报警，再按此格式加一行
+}
+% --- 目录书签更稳，消除 “Rerun … use package ‘bookmark’” ---
+\usepackage{bookmark}
+
+\newcommand{\chapterwithsubtitle}[2]{ \chapter{#1\\ \textit{#2}}  }
+
+% --- 中文右对齐名言（解决 cmr12 缺中文、避免 \\ 进书签）
+\newcommand{\cnquote}[2]{%
+  \begin{flushright}
+    \begin{minipage}{0.85\linewidth}
+      \kaishu #1\par\medskip
+      \hfill---\,#2
+    \end{minipage}
+  \end{flushright}
+}
+
+\newenvironment{appendixsection}[1]{
+    \section*{附录：#1}
+    \addcontentsline{toc}{section}{附录：#1}
+}{}
+
+
+\newenvironment{story}[1]
+{
+    \section*{小故事：#1}
+    \addcontentsline{toc}{section}{小故事：#1}
+}{}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+% 不需要 ifthen；IfFileExists 属于 LaTeX 内核
+\makeatletter
+\newcommand{\preferInput}[1]{%
+  \begingroup
+  \def\@base{#1}%
+  \IfFileExists{\@base_polished.tex}{%
+    \typeout{[preferInput] -> Using \@base_polished.tex}%
+    \input{\@base_polished}%
+  }{%
+    \IfFileExists{\@base_refined.tex}{%
+      \typeout{[preferInput] -> Using \@base_refined.tex}%
+      \input{\@base_refined}%
+    }{%
+      \typeout{[preferInput] -> Fallback to \@base.tex}%
+      \input{\@base}%
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+
+
+
+\begin{document}
+\maketitle
+
+\frontmatter
+% 前言/致谢/目录等（无编号）
+
+\preferInput{chapters/00自序}
+\preferInput{chapters/01他序}
+
+\tableofcontents
+
+\mainmatter   % ★ 从这里开始：第1章、第2章……
+
+\preferInput{chapters/0-Intro.v2}
+
+% ===== 正文章节 =====
+\part{追问智能}
+\preferInput{chapters/1-Def.v1}  % 什么是智能
+\preferInput{chapters/2-History-Math.v3.2-conservative} % 智能，生于数学
+% \preferInput{chapters/2-History-Math.v3.1} % 智能，生于数学（旧版本，备选）
+\preferInput{chapters/3-History-computer.v1}  % **MOD** 更新至最新存在版本（v1）
+
+\part{学习的逻辑}
+\preferInput{chapters/3-Thinking.v1}  % **MOD** 更新版本 - 三种思维方法论
+\preferInput{chapters/4-Tools.v1}  % **MOD** 更新版本 - 数学工具基础
+\preferInput{chapters/5-ML.v3}  
+\preferInput{chapters/6ML2DL.v1} % **MOD** 更新版本 - 从机器学习到深度学习
+\preferInput{chapters/7-DL.v1} % **MOD** 更新版本 - 深度学习实践
+%\input{阅读地图}
+
+\part{理解的边界}
+\preferInput{chapters/8-深度学习的挑战与幻觉.v4} % **MOD** 二次扩写更新版本
+\preferInput{chapters/9-AI的边界：图灵机、哥德尔与计算的极限.v3} % **MOD** 二次扩写更新版本
+\preferInput{chapters/10-符号、神经与因果：智能的三种建构方式.v3} % **MOD** 二次扩写更新版本
+\preferInput{chapters/11-智能的物理基础：从熵到量子计算.v3} % **MOD** 二次扩写更新版本
+
+\part{回归与超越}
+\preferInput{chapters/12-语言中的智能：Transformer的意外胜利.v3} 
+% **MOD** 二次扩写更新版本
+\preferInput{chapters/13-AI+.v3} 
+% **MOD** 二次扩写更新版本
+\preferInput{chapters/14-理解智能的尽头：理性与取舍的未来.v3} % **MOD** 二次扩写更新版本
+\preferInput{chapters/15-伦理与挑战.v3} % **MOD** 二次扩写更新版本
+
+\part{向上的道路}
+\preferInput{chapters/16-Conclusion.v1} % **MOD** 二次扩写更新版本
+
+\nocite{*}
+\printbibliography[heading=bibintoc, title=参考文献]
+
+\end{document}

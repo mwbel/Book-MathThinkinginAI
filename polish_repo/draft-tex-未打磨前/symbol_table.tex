@@ -1,0 +1,30 @@
+%% 
+% 维护规则
+% 新增数学推导前，先检查这里是否已有同名符号；若冲突，优先改章内符号，保证全书一致。
+% 需要矩阵/向量排版规则（粗体、黑板体、希腊字母）时，在表头下面加一条“排版约定”注释：
+%- 向量/矩阵使用粗体罗马体：$\mathbf{x}, \mathbf{W}$；
+%-集合/域使用黑板体：$\mathbb{R}, \mathbb{N}$；
+%-标量使用斜体：$x, y, \lambda$。
+% 本表同样用 \input{symbol_table.tex} 引入（通常放在前言或附录）
+
+% symbol_table.tex 符号表（集中维护）
+\begin{table}[htbp]
+\centering
+\caption{通用符号约定}
+\begin{tabular}{@{}p{2.2cm}p{7.2cm}p{3.0cm}p{3.0cm}p{2.2cm}@{}}
+\toprule
+符号 & 含义 & 域/形状/单位 & 默认约定 & 首次出现 \\
+\midrule
+$\mathbf{x}$ & 输入特征向量 & $\mathbb{R}^{d}$ & 列向量，粗体表向量 & 第7章 \\
+$y$ & 监督标签 & $\{0,1\}$ 或 $\mathbb{R}$ & 分类/回归上下文限定 & 第7章 \\
+$\hat{y}$ & 模型预测 & 同 $y$ & argmax 或回归输出 & 第7章 \\
+$\mathbf{W}$ & 权重矩阵 & $\mathbb{R}^{n\times d}$ & 行对应单元，列对应特征 & 第7章 \\
+$b$ & 偏置 & $\mathbb{R}$ & 标量 & 第7章 \\
+$\mathcal{L}$ & 损失函数 & — & 统一写作“损失（loss）” & 第7章 \\
+$\lambda$ & 正则系数 & $\mathbb{R}_{\ge 0}$ & L2 默认为权重衰减 & 第7章 \\
+$\eta$ & 学习率 & $\mathbb{R}_{>0}$ & SGD/Adam上下文说明 & 第7章 \\
+$\sigma(\cdot)$ & 激活函数 & — & 章内注明具体形式 & 第7章 \\
+$\epsilon$ & 扰动幅度 & $\mathbb{R}_{\ge 0}$ & 对抗样本/数值稳定 & 第10章 \\
+\bottomrule
+\end{tabular}
+\end{table}
