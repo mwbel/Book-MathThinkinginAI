@@ -1,0 +1,159 @@
+% 放在 \documentclass 之前
+\PassOptionsToPackage{backend=biber,style=numeric-comp,sorting=nyt,refsegment=chapter,defernumbers=true}{biblatex}
+
+\documentclass[lang=cn,scheme=chinese,12pt]{elegantbook}
+
+%\usepackage[pass]{geometry}
+\title{人工智能的数学思维}
+%\subtitle{Elegant\LaTeX{} 经典之作}
+%\author{吴敏 蒲戈光  }
+\institute{华东师范大学 软件工程学院}
+\date{2024}
+%\version{4.3}
+%\bioinfo{自定义}{信息}
+
+%\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
+\setcounter{tocdepth}{3}t
+%\logo{logo-blue.png}
+\cover{cover.jpg}
+
+%\setCJKmainfont{Songti SC}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\usepackage{graphicx}
+\usepackage{amsmath}  % 确保加载了 amsmath 包
+\usepackage{amssymb}
+
+\usepackage{titlesec} 
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- 文本/URL 自动换行，减少 Overfull ---
+\usepackage{xurl} % 让长链接可断行
+\usepackage{microtype}           % 微排版（XeLaTeX 支持部分特性）
+\sloppy                          % 宽松排版（先用，后面可再收紧）
+% 临时缓解 Overfull \hbox（版面溢出）
+\emergencystretch=4em
+
+% --- 中文换行更友好 ---
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 0.2em minus 0.1em
+
+% --- hyperref 选项务必在加载前传入 ---
+\PassOptionsToPackage{unicode,breaklinks}{hyperref}
+\usepackage{hyperref} % 可选：使得 \eqref 的引用带有链接功能
+\hypersetup{hidelinks}
+
+% --- 书签里禁用/替换某些命令（安全写法） ---
+\usepackage{newunicodechar}
+\newunicodechar{＝}{=}
+\newunicodechar{－}{-}
+\newunicodechar{Ｄ}{D}
+\newunicodechar{ｇ}{g}
+\newunicodechar{^^^^200b}{} % 忽略零宽空格 U+200B（注意用 4 个 ^ 的 16 进制写法）
+% 推荐把罗马数字的 Unicode 映射掉（见第 4 节）：（避免 Missing character）
+\newunicodechar{Ⅰ}{I}
+\newunicodechar{Ⅱ}{II}
+\newunicodechar{Ⅲ}{III}
+
+% PDF 书签里不允许出现的东西（如 \\、数学），这里给替代
+\pdfstringdefDisableCommands{%
+  \def\eqref#1{(\ref{#1})}%
+  \def\texttt#1{#1}% 书签里去等宽体
+  \def\footnote#1{}% 书签里丢弃脚注
+  % 如有别的自定义命令造成书签报警，再按此格式加一行
+}
+% --- 目录书签更稳，消除 “Rerun … use package ‘bookmark’” ---
+\usepackage{bookmark}
+
+\newcommand{\chapterwithsubtitle}[2]{ \chapter{#1\\ \textit{#2}}  }
+
+% —— 中文右对齐名言（解决 cmr12 缺中文、避免 \\ 进书签）
+\newcommand{\cnquote}[2]{%
+  \begin{flushright}
+    \begin{minipage}{0.85\linewidth}
+      \kaishu #1\par\medskip
+      \hfill——\,#2
+    \end{minipage}
+  \end{flushright}
+}
+
+\newenvironment{appendixsection}[1]{
+    \section*{附录：#1}
+    \addcontentsline{toc}{section}{附录：#1}
+}{}
+
+
+\newenvironment{story}[1]
+{
+    \section*{小故事：#1}
+    \addcontentsline{toc}{section}{小故事：#1}
+}{}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\begin{document}
+\maketitle
+
+
+\frontmatter
+% 前言/致谢/目录等（无编号）
+\tableofcontents
+
+\mainmatter   % ★ 从这里开始：第1章、第2章……
+
+% ===== 正文章节 =====
+
+\part{追问智能}
+\include{0-Intro}
+\include{1-Def}  %---检查完毕 什么是智能--基本改完
+\include{2-History-Math.v2.1} %---基本检查完毕%--基本改完
+\include{2-History-Math_history} %---检查完毕%智能，生于数学--基本改完
+\include{3-History-computer}  %---检查完毕% 一个手写数字识别的图片未识别，智能，成于计算机--基本改完
+
+\part{学习的逻辑}
+\include{3-Thinking}  %---检查完毕%人工智能的三种思维--基本改完
+\include{4-Tools}
+\include{5-ML.v2} ---检查完毕 % 机器学习：学习如何学习
+\include{6ML2DL} %从传统机器学习到深度学习
+\include{7-DL} % ---检查完毕 深度学习，真的行
+%\include{阅读地图}
+
+\part{理解的边界}
+\include{8-深度学习的挑战与幻觉} %  ---检查完毕技术挑战
+\include{9-AI的边界：图灵机、哥德尔与计算的极限} % ---检查完毕 理论边界：
+\include{10-符号、神经与因果：智能的三种建构方式} % ---检查完毕
+\include{11-智能的物理基础：从熵到量子计算} %---检查完毕
+
+\part{回归与超越}
+\include{12-语言中的智能：Transformer的意外胜利} %AI对语言的“结构感知”代表突破范式 %---检查完毕
+\include{13-AI+}  %---检查完毕
+\include{14-理解智能的尽头：理性与取舍的未来}	 %人类对“智能”定义的终极反思 %---检查完毕
+\include{15-伦理与挑战}
+
+\include{8-RL} 
+
+\part{尾声}
+\include{16-Conclusion}
+
+
+\part{参考文献}
+\include{reference.bib}
+
+\include{17-Ack}
+
+%% ===== 从这里才进入附录（只写一次）=====
+\appendix                  % ★ 只在主文件出现这一行
+
+%\include{18-Append}
+\input{glossary.tex} 
+\input{symbol_table.tex}
+
+\backmatter   
+
+\end{document}

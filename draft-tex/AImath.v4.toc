@@ -1,0 +1,855 @@
+\contentsline {chapter}{\numberline {1} 前言}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}从"困难重重"到"显而易见"：智能发展的历史辩证法}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}数学史：智能追求的发展主线}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}智能的层次：从模仿到创造}{1}{section.1.3}%
+\contentsline {section}{\numberline {1.4}本书的目标与挑战}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}致读者}{2}{section.1.5}%
+\contentsline {section}{\numberline {1.6}目标受众}{2}{section.1.6}%
+\contentsline {part}{第一部分\hspace {1em}追问智能}{4}{part.1}%
+\contentsline {chapter}{\numberline {2} 引言\,\, 什么是智能？}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}什么是智能与人工智能}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}数学在智能中的角色}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}机器智能的进化：从计算到学习}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}数学思维：解码智能的钥匙}{8}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}鹦鹉与乌鸦：何种智能?}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}鹦鹉式智能：模仿而不理解}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}乌鸦式智能：推理与创造}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}智能的层次：从鹦鹉到乌鸦}{10}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}鹦鹉式智能：精确模仿的艺术与局限}{10}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}鹦鹉式智能：精确模仿的艺术与局限}{11}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}乌鸦式智能：推理与创新的典范}{12}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}乌鸦式智能：推理与创新的典范}{12}{subsection.2.2.7}%
+\contentsline {subsection}{\numberline {2.2.8}两种智能模式的深层对比}{13}{subsection.2.2.8}%
+\contentsline {subsection}{\numberline {2.2.9}两种智能模式的深层对比}{13}{subsection.2.2.9}%
+\contentsline {subsection}{\numberline {2.2.10}AI的未来：向"乌鸦式智能"的艰难迈进}{14}{subsection.2.2.10}%
+\contentsline {subsection}{\numberline {2.2.11}小结}{16}{subsection.2.2.11}%
+\contentsline {chapter}{\numberline {3}智能，生于数学 \\简明数学史}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}萌芽时期：从计数到位值制}{18}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}史前数学：日常需求与实用计算}{18}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}手指：长在身上的计数器}{18}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}荒岛上的自然教育，人类数字文明的缩影}{20}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}数字的位值系统}{20}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}位值制与对数增长在现代计算机中的应用}{22}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}数字：从具象到抽象}{22}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}初等数学时期：从计算到推理}{23}{section.3.3}%
+\contentsline {section}{\numberline {3.4}近代数学时期：变量、函数与微积分}{25}{section.3.4}%
+\contentsline {section}{\numberline {3.5}现代数学时期：抽象、结构与计算}{26}{section.3.5}%
+\contentsline {section}{\numberline {3.6}三次数学危机}{27}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}第一次数学危机：无理数的发现}{28}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}第二次数学危机：微积分基础的争议}{28}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}第三次数学危机：集合论与逻辑悖论}{28}{subsection.3.6.3}%
+\contentsline {section}{\numberline {3.7}小结}{29}{section.3.7}%
+\contentsline {chapter}{\numberline {4}智能，成于计算机：简明AI史}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}AI的萌芽期：理论起源与计算基础}{32}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}理论起源：从哲学思辨到科学构想}{32}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}计算机的诞生：从算盘到电子计算机}{33}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}1950–1970年代：AI的奠基与早期探索}{34}{section.4.2}%
+\contentsline {section}{\numberline {4.3}AI的第一次寒冬：理性遇冷与机器受限（1970–1980）}{36}{section.4.3}%
+\contentsline {section}{\numberline {4.4}1950–1970年代：AI的奠基与早期探索}{37}{section.4.4}%
+\contentsline {section}{\numberline {4.5}AI的第一次寒冬：理性遇冷与机器受限（1970–1980）}{38}{section.4.5}%
+\contentsline {section}{\numberline {4.6}第二次复兴：从专家系统到神经网络重启（1980–1990）}{39}{section.4.6}%
+\contentsline {section}{\numberline {4.7}神经网络的回归：从连接主义到深度学习的萌芽（1990–2000）}{41}{section.4.7}%
+\contentsline {section}{\numberline {4.8}深度学习的崛起：算力、数据与算法的三重共振（2000–2020）}{42}{section.4.8}%
+\contentsline {section}{\numberline {4.9}通向智能的未来：从大模型到通用人工智能（AGI）}{44}{section.4.9}%
+\contentsline {part}{第二部分\hspace {1em}学习的逻辑}{46}{part.2}%
+\contentsline {chapter}{\numberline {5}人工智能的三种思维：从理论到应用的跨越}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}数学思维：智能的理论基石}{47}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}数学思维的核心特征}{47}{subsection.5.1.1}%
+\contentsline {paragraph}{抽象化：从现象到本质的认知跃迁}{48}{subsection.5.1.1}%
+\contentsline {paragraph}{形式化：精确的数学表达与逻辑推理}{49}{subsection.5.1.1}%
+\contentsline {paragraph}{严谨性：逻辑的一致性与可验证性}{51}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}数学思维在AI中的具体体现}{52}{subsection.5.1.2}%
+\contentsline {paragraph}{线性代数：高维空间的几何直觉与现代表示学习}{52}{subsection.5.1.2}%
+\contentsline {paragraph}{微积分的优化理论：智能学习的数学引擎}{53}{subsection.5.1.2}%
+\contentsline {paragraph}{概率论与统计学：不确定性的数学描述与贝叶斯智能}{54}{subsection.5.1.2}%
+\contentsline {paragraph}{信息论：信息的量化与传输，智能的信息视角}{54}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}数学思维的理论探索：存在性、可构造性与复杂性}{54}{subsection.5.1.3}%
+\contentsline {paragraph}{存在性问题：理论可能性的边界与智能的数学基础}{54}{subsection.5.1.3}%
+\contentsline {paragraph}{可构造性问题：从理论到算法的实现桥梁}{56}{subsection.5.1.3}%
+\contentsline {paragraph}{复杂性问题：计算资源的限制与智能的边界}{57}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}算法思维：从理论到计算的桥梁}{58}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}数学等价与计算等价的根本差异}{58}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}算法思维的核心要素}{60}{subsection.5.2.2}%
+\contentsline {paragraph}{复杂度分析：效率的量化评估}{60}{subsection.5.2.2}%
+\contentsline {paragraph}{优化策略：性能提升的系统方法}{62}{subsection.5.2.2}%
+\contentsline {paragraph}{稳定性保证：鲁棒性的系统设计}{63}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}算法思维在AI中的实践应用}{65}{subsection.5.2.3}%
+\contentsline {paragraph}{搜索引擎：大规模信息检索}{65}{subsection.5.2.3}%
+\contentsline {paragraph}{推荐系统：个性化服务的工程实现}{65}{subsection.5.2.3}%
+\contentsline {paragraph}{自动驾驶：安全关键系统的工程实践}{66}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}工程思维：从可计算到可用的现实桥梁}{67}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}工程思维的核心特征}{69}{subsection.5.3.1}%
+\contentsline {paragraph}{实用性导向：从完美到可用的思维转换}{69}{subsection.5.3.1}%
+\contentsline {paragraph}{约束意识：在限制中寻找最优解}{69}{subsection.5.3.1}%
+\contentsline {paragraph}{系统性思考：统筹多维度的复杂权衡}{70}{subsection.5.3.1}%
+\contentsline {paragraph}{迭代优化：在实践中持续完善}{71}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}工程思维在AI中的具体体现}{73}{subsection.5.3.2}%
+\contentsline {paragraph}{系统架构：可扩展性与可靠性的工程设计}{73}{subsection.5.3.2}%
+\contentsline {paragraph}{性能优化：在约束条件下的效率最大化}{73}{subsection.5.3.2}%
+\contentsline {paragraph}{质量保障：测试、监控与持续改进}{73}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}三种思维的协同：AI系统设计的完整方法论}{74}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}思维层次的递进关系}{74}{subsection.5.4.1}%
+\contentsline {paragraph}{递进关系的深层机制：从抽象到具体的系统性转化}{74}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}思维间的相互促进}{75}{subsection.5.4.2}%
+\contentsline {paragraph}{双向促进机制：实践与理论的螺旋式发展}{75}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}综合应用案例分析}{76}{subsection.5.4.3}%
+\contentsline {paragraph}{综合案例分析：大语言模型与自动驾驶中的三种思维协同}{76}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}实例解剖：同一问题中的三种思维}{78}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}问题设定：智能手机的实时物体识别}{79}{subsection.5.5.1}%
+\contentsline {paragraph}{数学思维：问题的抽象化与形式化}{79}{subsection.5.5.1}%
+\contentsline {paragraph}{算法思维：从理论到可计算实现}{80}{subsection.5.5.1}%
+\contentsline {paragraph}{工程思维：系统集成与产品化}{82}{subsection.5.5.1}%
+\contentsline {paragraph}{三种思维的协同作用}{85}{subsection.5.5.1}%
+\contentsline {paragraph}{三种思维的融合方法论}{86}{subsection.5.5.1}%
+\contentsline {paragraph}{分层递进的设计原则}{86}{subsection.5.5.1}%
+\contentsline {paragraph}{迭代反馈的优化机制}{87}{subsection.5.5.1}%
+\contentsline {paragraph}{跨层协同的设计模式}{89}{subsection.5.5.1}%
+\contentsline {paragraph}{领域特定的融合策略}{91}{subsection.5.5.1}%
+\contentsline {section}{\numberline {5.6}案例研究：从数学到工程的完整实现}{93}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}案例一：图像识别系统的设计与实现}{93}{subsection.5.6.1}%
+\contentsline {paragraph}{数学思维：理论基础的建立}{94}{subsection.5.6.1}%
+\contentsline {paragraph}{算法思维：计算方法的设计}{94}{subsection.5.6.1}%
+\contentsline {paragraph}{工程思维：系统的实际部署}{95}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}案例二：推荐系统的全栈设计}{96}{subsection.5.6.2}%
+\contentsline {paragraph}{数学思维：推荐问题的数学建模}{96}{subsection.5.6.2}%
+\contentsline {paragraph}{算法思维：推荐算法的设计与优化}{97}{subsection.5.6.2}%
+\contentsline {paragraph}{工程思维：大规模推荐系统的构建}{98}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}案例三：自动驾驶系统的综合设计}{100}{subsection.5.6.3}%
+\contentsline {paragraph}{数学思维：多模态感知与决策的理论基础}{100}{subsection.5.6.3}%
+\contentsline {paragraph}{算法思维：实时感知与决策算法}{101}{subsection.5.6.3}%
+\contentsline {paragraph}{工程思维：安全关键系统的构建}{102}{subsection.5.6.3}%
+\contentsline {subsection}{\numberline {5.6.4}三个案例的对比分析}{104}{subsection.5.6.4}%
+\contentsline {subsection}{\numberline {5.6.5}三种思维的核心价值}{104}{subsection.5.6.5}%
+\contentsline {subsection}{\numberline {5.6.6}思维融合的发展趋势}{105}{subsection.5.6.6}%
+\contentsline {subsection}{\numberline {5.6.7}未来AI发展的启示}{105}{subsection.5.6.7}%
+\contentsline {section}{\numberline {5.7}本章小结：从思维到工具的桥梁}{105}{section.5.7}%
+\contentsline {chapter}{\numberline {6}人工智能的数学工具箱：从基础到应用}{108}{chapter.6}%
+\contentsline {section}{\numberline {6.1}引言：从思维到工具的实现}{108}{section.6.1}%
+\contentsline {section}{\numberline {6.2}核心数学工具概览}{108}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}微积分：变化与优化的数学}{108}{subsection.6.2.1}%
+\contentsline {paragraph}{导数与梯度}{109}{subsection.6.2.1}%
+\contentsline {paragraph}{链式法则与反向传播}{109}{subsection.6.2.1}%
+\contentsline {paragraph}{自动微分}{109}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}线性代数：数据表示与变换的基石}{109}{subsection.6.2.2}%
+\contentsline {paragraph}{向量与矩阵运算}{109}{subsection.6.2.2}%
+\contentsline {paragraph}{矩阵分解技术}{109}{subsection.6.2.2}%
+\contentsline {paragraph}{线性方程组求解的理论与实践}{109}{subsection.6.2.2}%
+\contentsline {paragraph}{特征值与特征向量}{110}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}微积分：变化与优化的数学}{110}{subsection.6.2.3}%
+\contentsline {paragraph}{导数与梯度的深层理解}{110}{subsection.6.2.3}%
+\contentsline {paragraph}{链式法则与反向传播算法}{110}{subsection.6.2.3}%
+\contentsline {paragraph}{自动微分技术}{111}{subsection.6.2.3}%
+\contentsline {paragraph}{高阶导数与优化理论}{111}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}概率论与统计：不确定性的数学}{111}{subsection.6.2.4}%
+\contentsline {paragraph}{概率分布的深层理解}{111}{subsection.6.2.4}%
+\contentsline {paragraph}{贝叶斯推断的数学框架}{112}{subsection.6.2.4}%
+\contentsline {paragraph}{统计学习理论}{112}{subsection.6.2.4}%
+\contentsline {paragraph}{信息论：量化信息的数学框架}{113}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}优化理论：寻找最优解的数学}{114}{subsection.6.2.5}%
+\contentsline {paragraph}{凸优化}{114}{subsection.6.2.5}%
+\contentsline {paragraph}{梯度下降算法}{114}{subsection.6.2.5}%
+\contentsline {paragraph}{约束优化}{114}{subsection.6.2.5}%
+\contentsline {section}{\numberline {6.3}数学工具在图像处理中的应用案例}{114}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}图像的数学表示}{115}{subsection.6.3.1}%
+\contentsline {paragraph}{图像矩阵化}{115}{subsection.6.3.1}%
+\contentsline {paragraph}{颜色空间变换}{115}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}传统图像处理算法}{115}{subsection.6.3.2}%
+\contentsline {paragraph}{图像增强}{115}{subsection.6.3.2}%
+\contentsline {paragraph}{图像滤波}{115}{subsection.6.3.2}%
+\contentsline {paragraph}{边缘检测}{115}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}深度学习中的数学工具}{116}{subsection.6.3.3}%
+\contentsline {paragraph}{卷积神经网络}{116}{subsection.6.3.3}%
+\contentsline {paragraph}{损失函数与优化}{116}{subsection.6.3.3}%
+\contentsline {section}{\numberline {6.4}算法复杂度与效率分析}{116}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}时间复杂度分析}{116}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}空间复杂度分析}{116}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}次线性算法}{117}{subsection.6.4.3}%
+\contentsline {section}{\numberline {6.5}数学思维在AI中的体现}{117}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}抽象与建模}{117}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}严谨性与可验证性}{117}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}优化与改进}{117}{subsection.6.5.3}%
+\contentsline {section}{\numberline {6.6}未来发展趋势}{117}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}新兴数学工具}{117}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}跨学科融合}{117}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}计算效率的挑战}{118}{subsection.6.6.3}%
+\contentsline {section}{\numberline {6.7}结语}{118}{section.6.7}%
+\contentsline {chapter}{\numberline {7}机器学习：学习如何学习？}{119}{chapter.7}%
+\contentsline {section}{\numberline {7.1}从数据到模型：学习的基本框架}{120}{section.7.1}%
+\contentsline {section}{\numberline {7.2}监督学习与无监督学习}{121}{section.7.2}%
+\contentsline {section}{\numberline {7.3}强化学习：从试错中学习}{122}{section.7.3}%
+\contentsline {section}{\numberline {7.4}优化理论与损失函数}{124}{section.7.4}%
+\contentsline {section}{\numberline {7.5}泛化能力与过拟合}{126}{section.7.5}%
+\contentsline {section}{\numberline {7.6}小结：学习的数学本质}{128}{section.7.6}%
+\contentsline {chapter}{\numberline {8}从机器学习到深度学习：智能的层次化演进}{130}{chapter.8}%
+\contentsline {section}{\numberline {8.1}引言：从符号主义到连接主义的范式转换}{130}{section.8.1}%
+\contentsline {section}{\numberline {8.2}深度学习的核心优势：从特征工程到端到端学习}{131}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}传统机器学习的特征工程困境}{131}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}深度学习的端到端学习范式}{131}{subsection.8.2.2}%
+\contentsline {paragraph}{自动特征学习}{132}{equation.8.1}%
+\contentsline {paragraph}{自动特征学习}{132}{equation.8.1}%
+\contentsline {paragraph}{端到端优化}{132}{equation.8.1}%
+\contentsline {paragraph}{端到端优化}{132}{equation.8.1}%
+\contentsline {paragraph}{强大的表达能力}{132}{equation.8.1}%
+\contentsline {paragraph}{强大的表达能力}{132}{equation.8.1}%
+\contentsline {section}{\numberline {8.3}深度学习的生物学基础：从神经元到神经网络}{132}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}生物神经元的信息处理机制}{132}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}从生物启发到数学抽象}{133}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}生物神经网络与人工神经网络的对比}{134}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}神经网络的历史演进：从感知机到深度网络}{134}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}M-P模型：神经网络的数学基础}{134}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}感知机：第一个可训练的神经网络}{135}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}多层感知机与反向传播算法}{136}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}神经网络的历史演进：从感知机到深度网络}{136}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}M-P模型：神经网络的数学基础}{136}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}感知机：第一个可训练的神经网络}{137}{subsection.8.5.2}%
+\contentsline {subsection}{\numberline {8.5.3}多层感知机与反向传播算法}{138}{subsection.8.5.3}%
+\contentsline {section}{\numberline {8.6}通用逼近定理的局限性与深度学习的必要性}{138}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}通用逼近定理的理论意义}{138}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}浅层网络的实践局限}{139}{subsection.8.6.2}%
+\contentsline {paragraph}{指数级的网络规模}{139}{subsection.8.6.2}%
+\contentsline {paragraph}{指数级的网络规模}{139}{subsection.8.6.2}%
+\contentsline {paragraph}{优化困难}{140}{subsection.8.6.2}%
+\contentsline {paragraph}{优化困难}{140}{subsection.8.6.2}%
+\contentsline {paragraph}{泛化能力不足}{140}{subsection.8.6.2}%
+\contentsline {paragraph}{泛化能力不足}{140}{subsection.8.6.2}%
+\contentsline {subsection}{\numberline {8.6.3}深度网络的优势}{140}{subsection.8.6.3}%
+\contentsline {section}{\numberline {8.7}深度学习的技术突破与应用成就}{141}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}计算机视觉领域的革命}{141}{subsection.8.7.1}%
+\contentsline {subsection}{\numberline {8.7.2}自然语言处理的范式转变}{141}{subsection.8.7.2}%
+\contentsline {subsection}{\numberline {8.7.3}多模态学习的兴起}{142}{subsection.8.7.3}%
+\contentsline {section}{\numberline {8.8}深度学习的理论基础与数学原理}{142}{section.8.8}%
+\contentsline {subsection}{\numberline {8.8.1}深度网络的表达能力}{142}{subsection.8.8.1}%
+\contentsline {paragraph}{函数复合的威力}{142}{subsection.8.8.1}%
+\contentsline {paragraph}{函数复合的威力}{142}{equation.8.16}%
+\contentsline {paragraph}{特征层次化}{143}{equation.8.17}%
+\contentsline {paragraph}{特征层次化}{143}{equation.8.17}%
+\contentsline {subsection}{\numberline {8.8.2}深度学习的优化理论}{143}{subsection.8.8.2}%
+\contentsline {paragraph}{损失函数的几何性质}{143}{subsection.8.8.2}%
+\contentsline {paragraph}{损失函数的几何性质}{143}{subsection.8.8.2}%
+\contentsline {paragraph}{优化算法的发展}{144}{subsection.8.8.2}%
+\contentsline {paragraph}{优化算法的发展}{144}{subsection.8.8.2}%
+\contentsline {section}{\numberline {8.9}深度学习面临的挑战与未来发展}{144}{section.8.9}%
+\contentsline {subsection}{\numberline {8.9.1}当前面临的主要挑战}{144}{subsection.8.9.1}%
+\contentsline {subsection}{\numberline {8.9.2}未来发展方向}{145}{subsection.8.9.2}%
+\contentsline {paragraph}{更高效的学习范式}{145}{subsection.8.9.2}%
+\contentsline {paragraph}{更强的模型架构}{145}{subsection.8.9.2}%
+\contentsline {paragraph}{更好的理论理解}{146}{subsection.8.9.2}%
+\contentsline {section}{\numberline {8.10}小结：智能演进的新篇章}{146}{section.8.10}%
+\contentsline {chapter}{\numberline {9}深度学习：智能的层次化构建}{148}{chapter.9}%
+\contentsline {section}{\numberline {9.1}引言：从浅层到深层的智能跃迁}{148}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}深度学习的三大支柱}{149}{subsection.9.1.1}%
+\contentsline {paragraph}{大规模数据的可获得性}{149}{subsection.9.1.1}%
+\contentsline {paragraph}{大规模数据的可获得性}{149}{subsection.9.1.1}%
+\contentsline {paragraph}{计算能力的指数级增长}{149}{subsection.9.1.1}%
+\contentsline {paragraph}{计算能力的指数级增长}{149}{subsection.9.1.1}%
+\contentsline {paragraph}{算法优化的突破性进展}{149}{subsection.9.1.1}%
+\contentsline {paragraph}{算法优化的突破性进展}{149}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}深度学习的本质：表示学习}{150}{subsection.9.1.2}%
+\contentsline {section}{\numberline {9.2}深度学习的数学基础}{150}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}通用逼近定理的启示与局限}{150}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}深度的优势：层次化表示的数学原理}{151}{subsection.9.2.2}%
+\contentsline {paragraph}{组合函数的高效表示}{151}{subsection.9.2.2}%
+\contentsline {paragraph}{组合函数的高效表示}{151}{subsection.9.2.2}%
+\contentsline {paragraph}{特征重用机制}{152}{subsection.9.2.2}%
+\contentsline {paragraph}{特征重用机制}{152}{subsection.9.2.2}%
+\contentsline {paragraph}{抽象层次的递进}{152}{subsection.9.2.2}%
+\contentsline {paragraph}{抽象层次的递进}{152}{subsection.9.2.2}%
+\contentsline {section}{\numberline {9.3}深度学习的核心架构}{152}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}全连接神经网络：深度学习的基石}{152}{subsection.9.3.1}%
+\contentsline {paragraph}{激活函数的作用}{153}{subsection.9.3.1}%
+\contentsline {paragraph}{激活函数的作用}{153}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}卷积神经网络：视觉智能的突破}{153}{subsection.9.3.2}%
+\contentsline {paragraph}{CNN的核心原理}{154}{subsection.9.3.2}%
+\contentsline {paragraph}{CNN的核心原理}{154}{subsection.9.3.2}%
+\contentsline {paragraph}{典型CNN架构演进}{154}{subsection.9.3.2}%
+\contentsline {paragraph}{典型CNN架构演进}{154}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}循环神经网络：序列建模的利器}{154}{subsection.9.3.3}%
+\contentsline {paragraph}{长短时记忆网络（LSTM）}{155}{subsection.9.3.3}%
+\contentsline {paragraph}{长短时记忆网络（LSTM）}{155}{subsection.9.3.3}%
+\contentsline {subsection}{\numberline {9.3.4}Transformer：注意力机制的革命}{155}{subsection.9.3.4}%
+\contentsline {paragraph}{多头注意力机制}{156}{subsection.9.3.4}%
+\contentsline {paragraph}{多头注意力机制}{156}{subsection.9.3.4}%
+\contentsline {paragraph}{Transformer的优势}{156}{subsection.9.3.4}%
+\contentsline {paragraph}{Transformer的优势}{156}{subsection.9.3.4}%
+\contentsline {section}{\numberline {9.4}深度学习的优化理论}{157}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}反向传播算法}{157}{subsection.9.4.1}%
+\contentsline {paragraph}{梯度消失与梯度爆炸}{157}{subsection.9.4.1}%
+\contentsline {paragraph}{梯度消失与梯度爆炸}{157}{subsection.9.4.1}%
+\contentsline {paragraph}{解决方案}{157}{subsection.9.4.1}%
+\contentsline {paragraph}{解决方案}{158}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}现代优化算法}{158}{subsection.9.4.2}%
+\contentsline {paragraph}{自适应学习率算法}{158}{subsection.9.4.2}%
+\contentsline {paragraph}{自适应学习率算法}{158}{equation.9.11}%
+\contentsline {subsection}{\numberline {9.4.3}正则化技术}{159}{subsection.9.4.3}%
+\contentsline {paragraph}{Dropout}{159}{subsection.9.4.3}%
+\contentsline {paragraph}{Dropout}{159}{subsection.9.4.3}%
+\contentsline {paragraph}{批量归一化}{159}{subsection.9.4.3}%
+\contentsline {paragraph}{批量归一化}{160}{subsection.9.4.3}%
+\contentsline {section}{\numberline {9.5}深度学习的应用与影响}{160}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}计算机视觉的革命}{160}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}自然语言处理的突破}{160}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}科学研究的加速器}{161}{subsection.9.5.3}%
+\contentsline {section}{\numberline {9.6}深度学习的挑战与局限}{161}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}数据依赖性}{161}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}可解释性问题}{162}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}鲁棒性与安全性}{162}{subsection.9.6.3}%
+\contentsline {subsection}{\numberline {9.6.4}计算资源需求}{163}{subsection.9.6.4}%
+\contentsline {section}{\numberline {9.7}深度学习的理论前沿}{163}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}深度学习的泛化理论}{163}{subsection.9.7.1}%
+\contentsline {paragraph}{PAC-Bayes理论}{163}{subsection.9.7.1}%
+\contentsline {paragraph}{信息论观点}{163}{subsection.9.7.1}%
+\contentsline {paragraph}{PAC-Bayes理论}{163}{subsection.9.7.1}%
+\contentsline {paragraph}{信息论观点}{164}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}深度学习的表达能力}{164}{subsection.9.7.2}%
+\contentsline {paragraph}{神经网络的函数空间}{164}{subsection.9.7.2}%
+\contentsline {paragraph}{深度与宽度的权衡}{164}{subsection.9.7.2}%
+\contentsline {paragraph}{神经网络的函数空间}{164}{subsection.9.7.2}%
+\contentsline {paragraph}{深度与宽度的权衡}{164}{subsection.9.7.2}%
+\contentsline {section}{\numberline {9.8}未来发展方向}{164}{section.9.8}%
+\contentsline {subsection}{\numberline {9.8.1}自监督学习}{164}{subsection.9.8.1}%
+\contentsline {subsection}{\numberline {9.8.2}神经符号结合}{165}{subsection.9.8.2}%
+\contentsline {subsection}{\numberline {9.8.3}元学习与少样本学习}{165}{subsection.9.8.3}%
+\contentsline {subsection}{\numberline {9.8.4}可解释AI}{166}{subsection.9.8.4}%
+\contentsline {section}{\numberline {9.9}总结：深度学习的历史意义}{166}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}技术层面的贡献}{166}{subsection.9.9.1}%
+\contentsline {subsection}{\numberline {9.9.2}科学层面的启示}{167}{subsection.9.9.2}%
+\contentsline {subsection}{\numberline {9.9.3}哲学层面的思考}{167}{subsection.9.9.3}%
+\contentsline {part}{第三部分\hspace {1em}理解的边界}{169}{part.3}%
+\contentsline {chapter}{\numberline {10}深度学习的挑战与局限：理性审视智能的边界}{170}{chapter.10}%
+\contentsline {section}{\numberline {10.1}引言：技术神话的理性解构}{170}{section.10.1}%
+\contentsline {section}{\numberline {10.2}数据饥渴：深度学习的阿喀琉斯之踵}{170}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}数据依赖的数学本质}{170}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}计算成本的指数级增长}{171}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}环境影响与能耗问题}{171}{subsection.10.2.3}%
+\contentsline {subsection}{\numberline {10.2.4}数据质量与标注成本}{171}{subsection.10.2.4}%
+\contentsline {section}{\numberline {10.3}泛化能力的脆弱性：记忆与理解的鸿沟}{171}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}过拟合的数学分析}{171}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}分布偏移的挑战}{171}{subsection.10.3.2}%
+\contentsline {paragraph}{协变量偏移（Covariate Shift）}{172}{subsection.10.3.2}%
+\contentsline {paragraph}{标签偏移（Label Shift）}{172}{subsection.10.3.2}%
+\contentsline {paragraph}{概念偏移（Concept Shift）}{172}{subsection.10.3.2}%
+\contentsline {subsection}{\numberline {10.3.3}域适应的理论基础}{172}{subsection.10.3.3}%
+\contentsline {section}{\numberline {10.4}可解释性危机：黑盒中的智能}{172}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}可解释性的层次结构}{172}{subsection.10.4.1}%
+\contentsline {paragraph}{全局可解释性}{172}{subsection.10.4.1}%
+\contentsline {paragraph}{局部可解释性}{172}{subsection.10.4.1}%
+\contentsline {paragraph}{反事实可解释性}{172}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {10.4.2}可解释性方法的分类}{172}{subsection.10.4.2}%
+\contentsline {paragraph}{事后解释方法}{172}{subsection.10.4.2}%
+\contentsline {paragraph}{内在可解释方法}{173}{subsection.10.4.2}%
+\contentsline {subsection}{\numberline {10.4.3}可解释性与性能的权衡}{173}{subsection.10.4.3}%
+\contentsline {section}{\numberline {10.5}对抗攻击：智能的脆弱性}{173}{section.10.5}%
+\contentsline {subsection}{\numberline {10.5.1}对抗样本的数学定义}{173}{subsection.10.5.1}%
+\contentsline {subsection}{\numberline {10.5.2}对抗攻击的分类}{173}{subsection.10.5.2}%
+\contentsline {paragraph}{白盒攻击}{173}{subsection.10.5.2}%
+\contentsline {paragraph}{黑盒攻击}{173}{subsection.10.5.2}%
+\contentsline {paragraph}{物理攻击}{173}{subsection.10.5.2}%
+\contentsline {subsection}{\numberline {10.5.3}对抗鲁棒性的理论分析}{173}{subsection.10.5.3}%
+\contentsline {section}{\numberline {10.6}数据偏见与算法公平性}{174}{section.10.6}%
+\contentsline {subsection}{\numberline {10.6.1}偏见的数学建模}{174}{subsection.10.6.1}%
+\contentsline {paragraph}{统计平等}{174}{subsection.10.6.1}%
+\contentsline {paragraph}{机会均等}{174}{subsection.10.6.1}%
+\contentsline {paragraph}{校准}{174}{subsection.10.6.1}%
+\contentsline {subsection}{\numberline {10.6.2}不可能定理}{174}{subsection.10.6.2}%
+\contentsline {subsection}{\numberline {10.6.3}偏见的来源}{174}{subsection.10.6.3}%
+\contentsline {section}{\numberline {10.7}因果推理的局限：相关性与因果性的鸿沟}{174}{section.10.7}%
+\contentsline {subsection}{\numberline {10.7.1}相关性与因果性的区别}{174}{subsection.10.7.1}%
+\contentsline {subsection}{\numberline {10.7.2}混淆变量问题}{175}{subsection.10.7.2}%
+\contentsline {subsection}{\numberline {10.7.3}因果发现的挑战}{175}{subsection.10.7.3}%
+\contentsline {section}{\numberline {10.8}深度学习的认知局限}{175}{section.10.8}%
+\contentsline {subsection}{\numberline {10.8.1}符号推理的缺失}{175}{subsection.10.8.1}%
+\contentsline {subsection}{\numberline {10.8.2}常识推理的挑战}{175}{subsection.10.8.2}%
+\contentsline {subsection}{\numberline {10.8.3}创造性思维的局限}{175}{subsection.10.8.3}%
+\contentsline {section}{\numberline {10.9}应对挑战的技术路径}{176}{section.10.9}%
+\contentsline {subsection}{\numberline {10.9.1}数据效率的提升}{176}{subsection.10.9.1}%
+\contentsline {paragraph}{少样本学习}{176}{subsection.10.9.1}%
+\contentsline {paragraph}{自监督学习}{176}{subsection.10.9.1}%
+\contentsline {subsection}{\numberline {10.9.2}鲁棒性的增强}{176}{subsection.10.9.2}%
+\contentsline {paragraph}{对抗训练}{176}{subsection.10.9.2}%
+\contentsline {paragraph}{数据增强}{176}{subsection.10.9.2}%
+\contentsline {subsection}{\numberline {10.9.3}可解释性的改进}{176}{subsection.10.9.3}%
+\contentsline {paragraph}{注意力机制}{176}{subsection.10.9.3}%
+\contentsline {paragraph}{概念激活向量}{176}{subsection.10.9.3}%
+\contentsline {subsection}{\numberline {10.9.4}公平性的保障}{177}{subsection.10.9.4}%
+\contentsline {paragraph}{预处理方法}{177}{subsection.10.9.4}%
+\contentsline {paragraph}{训练中约束}{177}{subsection.10.9.4}%
+\contentsline {paragraph}{后处理方法}{177}{subsection.10.9.4}%
+\contentsline {section}{\numberline {10.10}未来发展方向}{177}{section.10.10}%
+\contentsline {subsection}{\numberline {10.10.1}神经符号结合}{177}{subsection.10.10.1}%
+\contentsline {subsection}{\numberline {10.10.2}因果深度学习}{177}{subsection.10.10.2}%
+\contentsline {subsection}{\numberline {10.10.3}持续学习}{177}{subsection.10.10.3}%
+\contentsline {subsection}{\numberline {10.10.4}多模态学习}{178}{subsection.10.10.4}%
+\contentsline {section}{\numberline {10.11}哲学思考：智能的本质}{178}{section.10.11}%
+\contentsline {subsection}{\numberline {10.11.1}理解与模拟的区别}{178}{subsection.10.11.1}%
+\contentsline {subsection}{\numberline {10.11.2}智能的层次}{178}{subsection.10.11.2}%
+\contentsline {subsection}{\numberline {10.11.3}人工智能的未来}{178}{subsection.10.11.3}%
+\contentsline {section}{\numberline {10.12}结论：理性的乐观主义}{178}{section.10.12}%
+\contentsline {subsection}{\numberline {10.12.1}技术发展的辩证观}{179}{subsection.10.12.1}%
+\contentsline {subsection}{\numberline {10.12.2}科学研究的价值}{179}{subsection.10.12.2}%
+\contentsline {subsection}{\numberline {10.12.3}未来的展望}{179}{subsection.10.12.3}%
+\contentsline {chapter}{\numberline {11}AI的边界：图灵机、哥德尔与计算的极限 \\有些问题，AI永远无法回答}{180}{chapter.11}%
+\contentsline {paragraph}{关于“可计算”}{185}{chapter.11}%
+\contentsline {paragraph}{关于“复杂性”}{185}{chapter.11}%
+\contentsline {chapter}{\numberline {12}符号、神经与因果：智能的三种建构方式}{187}{chapter.12}%
+\contentsline {section}{\numberline {12.1}引言：智能建构的多元路径}{187}{section.12.1}%
+\contentsline {section}{\numberline {12.2}符号主义：逻辑推理的形式化}{188}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}理论基础与哲学根源}{188}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}数学基础：一阶逻辑与推理}{188}{subsection.12.2.2}%
+\contentsline {paragraph}{语法结构}{188}{subsection.12.2.2}%
+\contentsline {paragraph}{语法结构}{188}{subsection.12.2.2}%
+\contentsline {paragraph}{推理规则}{189}{subsection.12.2.2}%
+\contentsline {paragraph}{推理规则}{189}{subsection.12.2.2}%
+\contentsline {subsection}{\numberline {12.2.3}知识表示与推理机制}{189}{subsection.12.2.3}%
+\contentsline {paragraph}{产生式规则系统}{189}{subsection.12.2.3}%
+\contentsline {paragraph}{产生式规则系统}{189}{subsection.12.2.3}%
+\contentsline {paragraph}{语义网络}{190}{subsection.12.2.3}%
+\contentsline {paragraph}{语义网络}{190}{subsection.12.2.3}%
+\contentsline {paragraph}{框架理论}{190}{subsection.12.2.3}%
+\contentsline {paragraph}{框架理论}{190}{subsection.12.2.3}%
+\contentsline {subsection}{\numberline {12.2.4}经典成就与应用}{190}{subsection.12.2.4}%
+\contentsline {paragraph}{专家系统}{190}{subsection.12.2.4}%
+\contentsline {paragraph}{专家系统}{190}{subsection.12.2.4}%
+\contentsline {paragraph}{定理证明}{191}{subsection.12.2.4}%
+\contentsline {paragraph}{定理证明}{191}{subsection.12.2.4}%
+\contentsline {subsection}{\numberline {12.2.5}局限性分析}{191}{subsection.12.2.5}%
+\contentsline {paragraph}{知识获取瓶颈}{191}{subsection.12.2.5}%
+\contentsline {paragraph}{知识获取瓶颈}{191}{subsection.12.2.5}%
+\contentsline {paragraph}{脆性问题}{191}{subsection.12.2.5}%
+\contentsline {paragraph}{脆性问题}{191}{subsection.12.2.5}%
+\contentsline {paragraph}{感知能力限制}{192}{subsection.12.2.5}%
+\contentsline {paragraph}{感知能力限制}{192}{subsection.12.2.5}%
+\contentsline {section}{\numberline {12.3}连接主义：神经网络的分布式表示}{192}{section.12.3}%
+\contentsline {subsection}{\numberline {12.3.1}理论基础与生物启发}{192}{subsection.12.3.1}%
+\contentsline {subsection}{\numberline {12.3.2}数学基础：神经网络理论}{192}{subsection.12.3.2}%
+\contentsline {paragraph}{神经元模型}{192}{subsection.12.3.2}%
+\contentsline {paragraph}{网络学习算法}{193}{subsection.12.3.2}%
+\contentsline {paragraph}{通用逼近定理}{193}{subsection.12.3.2}%
+\contentsline {subsection}{\numberline {12.3.3}深度学习的突破}{193}{subsection.12.3.3}%
+\contentsline {paragraph}{表示学习}{193}{subsection.12.3.3}%
+\contentsline {paragraph}{注意力机制}{194}{subsection.12.3.3}%
+\contentsline {paragraph}{残差连接}{194}{subsection.12.3.3}%
+\contentsline {subsection}{\numberline {12.3.4}连接主义的优势}{194}{subsection.12.3.4}%
+\contentsline {paragraph}{强大的模式识别能力}{194}{subsection.12.3.4}%
+\contentsline {paragraph}{自适应学习机制}{194}{subsection.12.3.4}%
+\contentsline {subsection}{\numberline {12.3.5}连接主义的局限}{194}{subsection.12.3.5}%
+\contentsline {paragraph}{可解释性问题}{195}{subsection.12.3.5}%
+\contentsline {paragraph}{推理能力限制}{195}{subsection.12.3.5}%
+\contentsline {paragraph}{数据依赖性}{195}{subsection.12.3.5}%
+\contentsline {section}{\numberline {12.4}因果主义：理解世界的因果结构}{195}{section.12.4}%
+\contentsline {subsection}{\numberline {12.4.1}因果推理的理论基础}{195}{subsection.12.4.1}%
+\contentsline {paragraph}{因果层次}{195}{subsection.12.4.1}%
+\contentsline {paragraph}{因果层次}{195}{Item.18}%
+\contentsline {subsection}{\numberline {12.4.2}因果图与结构方程模型}{195}{subsection.12.4.2}%
+\contentsline {paragraph}{因果图}{196}{subsection.12.4.2}%
+\contentsline {paragraph}{因果图}{196}{subsection.12.4.2}%
+\contentsline {paragraph}{结构方程模型}{196}{subsection.12.4.2}%
+\contentsline {paragraph}{结构方程模型}{196}{subsection.12.4.2}%
+\contentsline {subsection}{\numberline {12.4.3}因果推理的数学工具}{196}{subsection.12.4.3}%
+\contentsline {paragraph}{do-演算}{196}{subsection.12.4.3}%
+\contentsline {paragraph}{do-演算}{196}{subsection.12.4.3}%
+\contentsline {paragraph}{后门准则}{197}{subsection.12.4.3}%
+\contentsline {paragraph}{后门准则}{197}{subsection.12.4.3}%
+\contentsline {paragraph}{前门准则}{197}{Item.23}%
+\contentsline {paragraph}{前门准则}{197}{Item.23}%
+\contentsline {subsection}{\numberline {12.4.4}因果发现方法}{197}{subsection.12.4.4}%
+\contentsline {paragraph}{基于约束的方法}{198}{subsection.12.4.4}%
+\contentsline {paragraph}{基于约束的方法}{198}{subsection.12.4.4}%
+\contentsline {paragraph}{基于评分的方法}{198}{subsection.12.4.4}%
+\contentsline {paragraph}{基于评分的方法}{198}{subsection.12.4.4}%
+\contentsline {paragraph}{基于函数的方法}{198}{subsection.12.4.4}%
+\contentsline {paragraph}{基于函数的方法}{198}{subsection.12.4.4}%
+\contentsline {subsection}{\numberline {12.4.5}因果主义的优势}{198}{subsection.12.4.5}%
+\contentsline {paragraph}{可解释性}{198}{subsection.12.4.5}%
+\contentsline {paragraph}{泛化能力}{199}{subsection.12.4.5}%
+\contentsline {paragraph}{决策支持}{199}{subsection.12.4.5}%
+\contentsline {subsection}{\numberline {12.4.6}因果主义的局限}{199}{subsection.12.4.6}%
+\contentsline {paragraph}{因果发现的困难}{199}{subsection.12.4.6}%
+\contentsline {paragraph}{计算复杂性}{199}{subsection.12.4.6}%
+\contentsline {paragraph}{数据需求}{200}{subsection.12.4.6}%
+\contentsline {section}{\numberline {12.5}三种范式的比较与分析}{200}{section.12.5}%
+\contentsline {subsection}{\numberline {12.5.1}认知能力对比}{200}{subsection.12.5.1}%
+\contentsline {subsection}{\numberline {12.5.2}适用场景分析}{200}{subsection.12.5.2}%
+\contentsline {paragraph}{符号主义适用场景}{201}{subsection.12.5.2}%
+\contentsline {paragraph}{连接主义适用场景}{201}{subsection.12.5.2}%
+\contentsline {paragraph}{因果主义适用场景}{201}{subsection.12.5.2}%
+\contentsline {section}{\numberline {12.6}神经符号融合：走向统一的智能}{201}{section.12.6}%
+\contentsline {subsection}{\numberline {12.6.1}融合的必要性}{201}{subsection.12.6.1}%
+\contentsline {subsection}{\numberline {12.6.2}融合架构}{202}{subsection.12.6.2}%
+\contentsline {paragraph}{松耦合架构}{202}{subsection.12.6.2}%
+\contentsline {paragraph}{松耦合架构}{202}{subsection.12.6.2}%
+\contentsline {paragraph}{紧耦合架构}{202}{subsection.12.6.2}%
+\contentsline {paragraph}{紧耦合架构}{202}{subsection.12.6.2}%
+\contentsline {paragraph}{端到端架构}{202}{subsection.12.6.2}%
+\contentsline {paragraph}{端到端架构}{202}{subsection.12.6.2}%
+\contentsline {subsection}{\numberline {12.6.3}典型融合方法}{202}{subsection.12.6.3}%
+\contentsline {paragraph}{神经模块网络}{203}{subsection.12.6.3}%
+\contentsline {paragraph}{神经模块网络}{203}{subsection.12.6.3}%
+\contentsline {paragraph}{可微分神经计算机}{203}{subsection.12.6.3}%
+\contentsline {paragraph}{可微分神经计算机}{203}{subsection.12.6.3}%
+\contentsline {paragraph}{图神经网络}{203}{subsection.12.6.3}%
+\contentsline {paragraph}{图神经网络}{203}{subsection.12.6.3}%
+\contentsline {subsection}{\numberline {12.6.4}因果感知的神经网络}{203}{subsection.12.6.4}%
+\contentsline {paragraph}{因果表示学习}{203}{subsection.12.6.4}%
+\contentsline {paragraph}{因果表示学习}{204}{subsection.12.6.4}%
+\contentsline {paragraph}{反事实数据增强}{204}{subsection.12.6.4}%
+\contentsline {paragraph}{反事实数据增强}{204}{subsection.12.6.4}%
+\contentsline {paragraph}{因果注意力机制}{204}{subsection.12.6.4}%
+\contentsline {paragraph}{因果注意力机制}{204}{subsection.12.6.4}%
+\contentsline {section}{\numberline {12.7}实际应用案例}{204}{section.12.7}%
+\contentsline {subsection}{\numberline {12.7.1}医疗诊断系统}{204}{subsection.12.7.1}%
+\contentsline {paragraph}{多模态融合}{204}{subsection.12.7.1}%
+\contentsline {paragraph}{多模态融合}{205}{subsection.12.7.1}%
+\contentsline {paragraph}{系统架构}{205}{subsection.12.7.1}%
+\contentsline {paragraph}{系统架构}{205}{subsection.12.7.1}%
+\contentsline {subsection}{\numberline {12.7.2}自动驾驶系统}{205}{subsection.12.7.2}%
+\contentsline {paragraph}{感知-推理-决策链条}{205}{subsection.12.7.2}%
+\contentsline {paragraph}{感知-推理-决策链条}{205}{Item.29}%
+\contentsline {paragraph}{安全保障}{205}{Item.32}%
+\contentsline {paragraph}{安全保障}{205}{Item.32}%
+\contentsline {subsection}{\numberline {12.7.3}科学发现系统}{206}{subsection.12.7.3}%
+\contentsline {paragraph}{假设生成与验证}{206}{subsection.12.7.3}%
+\contentsline {paragraph}{假设生成与验证}{206}{subsection.12.7.3}%
+\contentsline {paragraph}{发现流程}{206}{subsection.12.7.3}%
+\contentsline {paragraph}{发现流程}{206}{subsection.12.7.3}%
+\contentsline {section}{\numberline {12.8}挑战与未来方向}{206}{section.12.8}%
+\contentsline {subsection}{\numberline {12.8.1}技术挑战}{206}{subsection.12.8.1}%
+\contentsline {paragraph}{表示对齐}{206}{subsection.12.8.1}%
+\contentsline {paragraph}{表示对齐}{206}{subsection.12.8.1}%
+\contentsline {paragraph}{学习机制}{207}{subsection.12.8.1}%
+\contentsline {paragraph}{学习机制}{207}{subsection.12.8.1}%
+\contentsline {paragraph}{推理效率}{207}{subsection.12.8.1}%
+\contentsline {paragraph}{推理效率}{207}{subsection.12.8.1}%
+\contentsline {subsection}{\numberline {12.8.2}哲学与认知层面的思考}{207}{subsection.12.8.2}%
+\contentsline {paragraph}{智能的多维定义}{207}{subsection.12.8.2}%
+\contentsline {paragraph}{智能的多维定义}{207}{subsection.12.8.2}%
+\contentsline {paragraph}{形式与理解的张力}{207}{subsection.12.8.2}%
+\contentsline {paragraph}{形式与理解的张力}{207}{subsection.12.8.2}%
+\contentsline {paragraph}{理性与经验的平衡}{208}{subsection.12.8.2}%
+\contentsline {paragraph}{理性与经验的平衡}{208}{subsection.12.8.2}%
+\contentsline {subsection}{\numberline {12.8.3}未来展望：走向可理解的智能}{208}{subsection.12.8.3}%
+\contentsline {paragraph}{符号、神经与因果的再融合}{208}{subsection.12.8.3}%
+\contentsline {paragraph}{符号、神经与因果的再融合}{208}{subsection.12.8.3}%
+\contentsline {paragraph}{从工具到伙伴}{208}{subsection.12.8.3}%
+\contentsline {paragraph}{从工具到伙伴}{208}{subsection.12.8.3}%
+\contentsline {subsection}{\numberline {12.8.4}本章小结}{208}{subsection.12.8.4}%
+\contentsline {chapter}{\numberline {13}智能的物理基础：从熵到量子计算}{210}{chapter.13}%
+\contentsline {section}{\numberline {13.1}引言：智能的物理实在性}{210}{section.13.1}%
+\contentsline {section}{\numberline {13.2}信息论基础：从香农熵到计算复杂性}{211}{section.13.2}%
+\contentsline {subsection}{\numberline {13.2.1}香农信息论的革命性贡献}{211}{subsection.13.2.1}%
+\contentsline {paragraph}{信息熵的定义}{211}{subsection.13.2.1}%
+\contentsline {paragraph}{信息熵的定义}{211}{subsection.13.2.1}%
+\contentsline {paragraph}{条件熵与互信息}{211}{subsection.13.2.1}%
+\contentsline {paragraph}{条件熵与互信息}{212}{subsection.13.2.1}%
+\contentsline {subsection}{\numberline {13.2.2}算法信息论与柯尔莫哥洛夫复杂性}{212}{subsection.13.2.2}%
+\contentsline {paragraph}{柯尔莫哥洛夫复杂性}{212}{subsection.13.2.2}%
+\contentsline {paragraph}{柯尔莫哥洛夫复杂性}{212}{subsection.13.2.2}%
+\contentsline {paragraph}{最小描述长度原理}{212}{subsection.13.2.2}%
+\contentsline {paragraph}{最小描述长度原理}{212}{subsection.13.2.2}%
+\contentsline {subsection}{\numberline {13.2.3}信息论在机器学习中的应用}{212}{subsection.13.2.3}%
+\contentsline {paragraph}{信息瓶颈理论}{213}{subsection.13.2.3}%
+\contentsline {paragraph}{信息瓶颈理论}{213}{subsection.13.2.3}%
+\contentsline {paragraph}{变分信息最大化}{213}{subsection.13.2.3}%
+\contentsline {paragraph}{变分信息最大化}{213}{subsection.13.2.3}%
+\contentsline {section}{\numberline {13.3}计算的热力学：兰道尔原理与不可逆性}{213}{section.13.3}%
+\contentsline {subsection}{\numberline {13.3.1}兰道尔原理的提出与证明}{213}{subsection.13.3.1}%
+\contentsline {paragraph}{兰道尔原理的表述}{213}{subsection.13.3.1}%
+\contentsline {paragraph}{兰道尔原理的表述}{214}{subsection.13.3.1}%
+\contentsline {paragraph}{理论证明}{214}{subsection.13.3.1}%
+\contentsline {paragraph}{理论证明}{214}{subsection.13.3.1}%
+\contentsline {subsection}{\numberline {13.3.2}计算的可逆性与能耗}{214}{subsection.13.3.2}%
+\contentsline {paragraph}{可逆计算}{214}{subsection.13.3.2}%
+\contentsline {paragraph}{可逆计算}{214}{subsection.13.3.2}%
+\contentsline {paragraph}{实际计算中的不可逆性}{214}{subsection.13.3.2}%
+\contentsline {paragraph}{实际计算中的不可逆性}{214}{subsection.13.3.2}%
+\contentsline {subsection}{\numberline {13.3.3}深度学习的能耗分析}{215}{subsection.13.3.3}%
+\contentsline {paragraph}{训练过程的能耗}{215}{subsection.13.3.3}%
+\contentsline {paragraph}{训练过程的能耗}{215}{subsection.13.3.3}%
+\contentsline {paragraph}{能耗的理论下界}{215}{subsection.13.3.3}%
+\contentsline {paragraph}{能耗的理论下界}{215}{subsection.13.3.3}%
+\contentsline {section}{\numberline {13.4}热力学与学习：自由能原理}{215}{section.13.4}%
+\contentsline {subsection}{\numberline {13.4.1}自由能原理的理论基础}{215}{subsection.13.4.1}%
+\contentsline {paragraph}{变分自由能}{216}{subsection.13.4.1}%
+\contentsline {paragraph}{变分自由能}{216}{subsection.13.4.1}%
+\contentsline {paragraph}{自由能分解}{216}{subsection.13.4.1}%
+\contentsline {paragraph}{自由能分解}{216}{subsection.13.4.1}%
+\contentsline {subsection}{\numberline {13.4.2}预测编码与贝叶斯大脑}{216}{subsection.13.4.2}%
+\contentsline {paragraph}{预测编码框架}{216}{subsection.13.4.2}%
+\contentsline {paragraph}{预测编码框架}{217}{subsection.13.4.2}%
+\contentsline {paragraph}{贝叶斯大脑假说}{217}{subsection.13.4.2}%
+\contentsline {paragraph}{贝叶斯大脑假说}{217}{subsection.13.4.2}%
+\contentsline {subsection}{\numberline {13.4.3}自由能原理在AI中的应用}{217}{subsection.13.4.3}%
+\contentsline {paragraph}{变分自编码器}{217}{subsection.13.4.3}%
+\contentsline {paragraph}{变分自编码器}{217}{subsection.13.4.3}%
+\contentsline {paragraph}{主动推理}{217}{subsection.13.4.3}%
+\contentsline {paragraph}{主动推理}{218}{subsection.13.4.3}%
+\contentsline {section}{\numberline {13.5}量子计算与智能：超越经典的可能性}{218}{section.13.5}%
+\contentsline {subsection}{\numberline {13.5.1}量子计算的基本原理}{218}{subsection.13.5.1}%
+\contentsline {paragraph}{量子比特与叠加态}{218}{subsection.13.5.1}%
+\contentsline {paragraph}{量子比特与叠加态}{218}{subsection.13.5.1}%
+\contentsline {paragraph}{量子纠缠}{218}{subsection.13.5.1}%
+\contentsline {paragraph}{量子纠缠}{218}{subsection.13.5.1}%
+\contentsline {paragraph}{量子门操作}{219}{subsection.13.5.1}%
+\contentsline {paragraph}{量子门操作}{219}{subsection.13.5.1}%
+\contentsline {subsection}{\numberline {13.5.2}量子算法的优势}{219}{subsection.13.5.2}%
+\contentsline {paragraph}{Shor算法}{219}{subsection.13.5.2}%
+\contentsline {paragraph}{Shor算法}{219}{subsection.13.5.2}%
+\contentsline {paragraph}{Grover算法}{219}{subsection.13.5.2}%
+\contentsline {paragraph}{Grover算法}{220}{subsection.13.5.2}%
+\contentsline {subsection}{\numberline {13.5.3}量子机器学习}{220}{subsection.13.5.3}%
+\contentsline {paragraph}{量子神经网络}{220}{subsection.13.5.3}%
+\contentsline {paragraph}{量子神经网络}{220}{subsection.13.5.3}%
+\contentsline {paragraph}{变分量子算法}{220}{subsection.13.5.3}%
+\contentsline {paragraph}{变分量子算法}{220}{subsection.13.5.3}%
+\contentsline {paragraph}{量子核方法}{220}{subsection.13.5.3}%
+\contentsline {paragraph}{量子核方法}{220}{subsection.13.5.3}%
+\contentsline {subsection}{\numberline {13.5.4}量子计算的局限性}{221}{subsection.13.5.4}%
+\contentsline {paragraph}{量子退相干}{221}{subsection.13.5.4}%
+\contentsline {paragraph}{量子退相干}{221}{subsection.13.5.4}%
+\contentsline {paragraph}{量子纠错}{221}{subsection.13.5.4}%
+\contentsline {paragraph}{量子纠错}{221}{subsection.13.5.4}%
+\contentsline {paragraph}{NISQ时代的限制}{221}{subsection.13.5.4}%
+\contentsline {paragraph}{NISQ时代的限制}{221}{subsection.13.5.4}%
+\contentsline {section}{\numberline {13.6}生物计算与神经形态计算}{222}{section.13.6}%
+\contentsline {subsection}{\numberline {13.6.1}大脑的计算效率}{222}{subsection.13.6.1}%
+\contentsline {paragraph}{能耗对比}{222}{subsection.13.6.1}%
+\contentsline {paragraph}{能耗对比}{222}{subsection.13.6.1}%
+\contentsline {paragraph}{神经元的计算模型}{222}{subsection.13.6.1}%
+\contentsline {paragraph}{神经元的计算模型}{222}{subsection.13.6.1}%
+\contentsline {subsection}{\numberline {13.6.2}神经形态计算}{222}{subsection.13.6.2}%
+\contentsline {paragraph}{脉冲神经网络}{222}{subsection.13.6.2}%
+\contentsline {paragraph}{脉冲神经网络}{223}{subsection.13.6.2}%
+\contentsline {paragraph}{神经形态芯片}{223}{subsection.13.6.2}%
+\contentsline {paragraph}{神经形态芯片}{223}{subsection.13.6.2}%
+\contentsline {subsection}{\numberline {13.6.3}DNA计算}{223}{subsection.13.6.3}%
+\contentsline {paragraph}{DNA作为存储介质}{223}{subsection.13.6.3}%
+\contentsline {paragraph}{DNA作为存储介质}{223}{subsection.13.6.3}%
+\contentsline {paragraph}{DNA计算原理}{223}{subsection.13.6.3}%
+\contentsline {paragraph}{DNA计算原理}{223}{subsection.13.6.3}%
+\contentsline {section}{\numberline {13.7}计算复杂性的物理限制}{224}{section.13.7}%
+\contentsline {subsection}{\numberline {13.7.1}兰道尔极限与计算速度}{224}{subsection.13.7.1}%
+\contentsline {paragraph}{Margolus-Levitin定理}{224}{subsection.13.7.1}%
+\contentsline {paragraph}{Margolus–Levitin定理}{224}{subsection.13.7.1}%
+\contentsline {paragraph}{Bekenstein界}{224}{subsection.13.7.1}%
+\contentsline {paragraph}{Bekenstein界}{224}{subsection.13.7.1}%
+\contentsline {subsection}{\numberline {13.7.2}黑洞计算与全息原理}{224}{subsection.13.7.2}%
+\contentsline {paragraph}{黑洞信息悖论}{224}{subsection.13.7.2}%
+\contentsline {paragraph}{黑洞信息悖论}{224}{subsection.13.7.2}%
+\contentsline {paragraph}{全息原理}{225}{subsection.13.7.2}%
+\contentsline {paragraph}{全息原理}{225}{subsection.13.7.2}%
+\contentsline {subsection}{\numberline {13.7.3}宇宙计算能力}{225}{subsection.13.7.3}%
+\contentsline {paragraph}{可观测宇宙的计算限制}{225}{subsection.13.7.3}%
+\contentsline {paragraph}{可观测宇宙的计算限制}{225}{subsection.13.7.3}%
+\contentsline {paragraph}{对AI发展的启示}{225}{subsection.13.7.3}%
+\contentsline {paragraph}{对AI发展的启示}{225}{subsection.13.7.3}%
+\contentsline {section}{\numberline {13.8}智能的热力学理论}{226}{section.13.8}%
+\contentsline {subsection}{\numberline {13.8.1}智能作为熵减过程}{226}{subsection.13.8.1}%
+\contentsline {paragraph}{Maxwell妖与信息}{226}{subsection.13.8.1}%
+\contentsline {paragraph}{Maxwell妖与信息}{226}{subsection.13.8.1}%
+\contentsline {paragraph}{智能的热力学代价}{226}{subsection.13.8.1}%
+\contentsline {paragraph}{智能的热力学代价}{226}{subsection.13.8.1}%
+\contentsline {subsection}{\numberline {13.8.2}智能系统的热力学效率}{226}{subsection.13.8.2}%
+\contentsline {paragraph}{效率定义}{226}{subsection.13.8.2}%
+\contentsline {paragraph}{效率定义}{227}{subsection.13.8.2}%
+\contentsline {paragraph}{效率优化}{227}{subsection.13.8.2}%
+\contentsline {paragraph}{效率优化}{227}{subsection.13.8.2}%
+\contentsline {section}{\numberline {13.9}未来展望：物理感知的AI}{227}{section.13.9}%
+\contentsline {subsection}{\numberline {13.9.1}新兴计算范式}{227}{subsection.13.9.1}%
+\contentsline {paragraph}{光子计算}{227}{subsection.13.9.1}%
+\contentsline {paragraph}{光子计算}{227}{subsection.13.9.1}%
+\contentsline {paragraph}{分子计算}{228}{subsection.13.9.1}%
+\contentsline {paragraph}{分子计算}{228}{subsection.13.9.1}%
+\contentsline {subsection}{\numberline {13.9.2}物理感知的AI设计原则}{228}{subsection.13.9.2}%
+\contentsline {paragraph}{能效优先}{228}{subsection.13.9.2}%
+\contentsline {paragraph}{能效优先}{228}{subsection.13.9.2}%
+\contentsline {paragraph}{物理约束感知}{228}{subsection.13.9.2}%
+\contentsline {paragraph}{物理约束感知}{228}{subsection.13.9.2}%
+\contentsline {subsection}{\numberline {13.9.3}理论研究方向}{229}{subsection.13.9.3}%
+\contentsline {paragraph}{计算热力学}{229}{subsection.13.9.3}%
+\contentsline {paragraph}{计算热力学}{229}{subsection.13.9.3}%
+\contentsline {paragraph}{量子智能}{229}{subsection.13.9.3}%
+\contentsline {paragraph}{量子智能}{229}{subsection.13.9.3}%
+\contentsline {section}{\numberline {13.10}哲学思考：智能与物理实在}{229}{section.13.10}%
+\contentsline {subsection}{\numberline {13.10.1}计算主义的物理基础}{229}{subsection.13.10.1}%
+\contentsline {subsection}{\numberline {13.10.2}信息与物质的关系}{230}{subsection.13.10.2}%
+\contentsline {paragraph}{信息的物理性}{230}{subsection.13.10.2}%
+\contentsline {paragraph}{信息的物理性}{230}{subsection.13.10.2}%
+\contentsline {paragraph}{智能的涌现}{230}{subsection.13.10.2}%
+\contentsline {paragraph}{智能的涌现}{230}{subsection.13.10.2}%
+\contentsline {subsection}{\numberline {13.10.3}智能的宇宙学意义}{230}{subsection.13.10.3}%
+\contentsline {paragraph}{宇宙中的智能}{230}{subsection.13.10.3}%
+\contentsline {paragraph}{宇宙中的智能}{231}{subsection.13.10.3}%
+\contentsline {paragraph}{技术奇点的物理限制}{231}{subsection.13.10.3}%
+\contentsline {paragraph}{技术奇点的物理限制}{231}{subsection.13.10.3}%
+\contentsline {section}{\numberline {13.11}结论：智能的物理边界与可能性}{231}{section.13.11}%
+\contentsline {subsection}{\numberline {13.11.1}主要发现总结}{231}{subsection.13.11.1}%
+\contentsline {subsection}{\numberline {13.11.2}对AI发展的启示}{232}{subsection.13.11.2}%
+\contentsline {paragraph}{设计原则}{232}{subsection.13.11.2}%
+\contentsline {paragraph}{设计原则}{232}{subsection.13.11.2}%
+\contentsline {paragraph}{研究方向}{232}{subsection.13.11.2}%
+\contentsline {paragraph}{研究方向}{232}{subsection.13.11.2}%
+\contentsline {paragraph}{研究方向}{232}{subsection.13.11.2}%
+\contentsline {subsection}{\numberline {13.11.3}未来展望}{232}{subsection.13.11.3}%
+\contentsline {part}{第四部分\hspace {1em}回归与超越}{234}{part.4}%
+\contentsline {chapter}{\numberline {14}语言中的智能：Transformer的意外胜利}{235}{chapter.14}%
+\contentsline {section}{\numberline {14.1}引言：语言作为智能的试金石}{235}{section.14.1}%
+\contentsline {section}{\numberline {14.2}语言理解的根本挑战}{235}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}语言的复杂性层次}{235}{subsection.14.2.1}%
+\contentsline {paragraph}{词汇层面的挑战}{235}{subsection.14.2.1}%
+\contentsline {paragraph}{句法层面的挑战}{235}{subsection.14.2.1}%
+\contentsline {paragraph}{语义层面的挑战}{236}{subsection.14.2.1}%
+\contentsline {paragraph}{语用层面的挑战}{236}{subsection.14.2.1}%
+\contentsline {subsection}{\numberline {14.2.2}传统方法的局限性}{236}{subsection.14.2.2}%
+\contentsline {paragraph}{基于规则的方法}{236}{subsection.14.2.2}%
+\contentsline {paragraph}{统计方法}{236}{subsection.14.2.2}%
+\contentsline {paragraph}{早期神经网络方法}{237}{subsection.14.2.2}%
+\contentsline {section}{\numberline {14.3}Transformer：注意力机制的革命}{237}{section.14.3}%
+\contentsline {subsection}{\numberline {14.3.1}注意力机制的核心思想}{237}{subsection.14.3.1}%
+\contentsline {paragraph}{注意力的直觉理解}{237}{subsection.14.3.1}%
+\contentsline {paragraph}{注意力机制的数学表述}{237}{subsection.14.3.1}%
+\contentsline {paragraph}{自注意力机制}{238}{subsection.14.3.1}%
+\contentsline {subsection}{\numberline {14.3.2}多头注意力机制}{238}{subsection.14.3.2}%
+\contentsline {subsection}{\numberline {14.3.3}Transformer架构详解}{238}{subsection.14.3.3}%
+\contentsline {paragraph}{编码器-解码器结构}{238}{subsection.14.3.3}%
+\contentsline {paragraph}{位置编码}{239}{subsection.14.3.3}%
+\contentsline {paragraph}{前馈网络}{239}{subsection.14.3.3}%
+\contentsline {paragraph}{残差连接和层归一化}{239}{subsection.14.3.3}%
+\contentsline {section}{\numberline {14.4}从BERT到GPT：语言模型的演进}{239}{section.14.4}%
+\contentsline {subsection}{\numberline {14.4.1}BERT：双向编码器的突破}{239}{subsection.14.4.1}%
+\contentsline {paragraph}{双向上下文建模}{239}{subsection.14.4.1}%
+\contentsline {paragraph}{下一句预测任务}{240}{subsection.14.4.1}%
+\contentsline {paragraph}{预训练-微调范式}{240}{subsection.14.4.1}%
+\contentsline {subsection}{\numberline {14.4.2}GPT：生成式预训练的力量}{240}{subsection.14.4.2}%
+\contentsline {paragraph}{自回归语言建模}{240}{subsection.14.4.2}%
+\contentsline {paragraph}{规模效应}{240}{subsection.14.4.2}%
+\contentsline {paragraph}{涌现能力}{241}{subsection.14.4.2}%
+\contentsline {subsection}{\numberline {14.4.3}指令调优和人类反馈}{241}{subsection.14.4.3}%
+\contentsline {paragraph}{指令调优（Instruction Tuning）}{241}{subsection.14.4.3}%
+\contentsline {paragraph}{基于人类反馈的强化学习（RLHF）}{241}{subsection.14.4.3}%
+\contentsline {section}{\numberline {14.5}语言理解的哲学思辨}{241}{section.14.5}%
+\contentsline {subsection}{\numberline {14.5.1}理解与模拟的边界}{241}{subsection.14.5.1}%
+\contentsline {paragraph}{中文房间论证的现代版本}{241}{subsection.14.5.1}%
+\contentsline {paragraph}{功能主义的观点}{242}{subsection.14.5.1}%
+\contentsline {paragraph}{意向性的缺失}{242}{subsection.14.5.1}%
+\contentsline {subsection}{\numberline {14.5.2}语言与思维的关系}{242}{subsection.14.5.2}%
+\contentsline {paragraph}{语言相对性假说}{242}{subsection.14.5.2}%
+\contentsline {paragraph}{语言作为思维工具}{242}{subsection.14.5.2}%
+\contentsline {subsection}{\numberline {14.5.3}意识与语言的关系}{242}{subsection.14.5.3}%
+\contentsline {paragraph}{语言意识的标志}{242}{subsection.14.5.3}%
+\contentsline {paragraph}{意识的难问题}{242}{subsection.14.5.3}%
+\contentsline {section}{\numberline {14.6}语言模型的局限性与挑战}{243}{section.14.6}%
+\contentsline {subsection}{\numberline {14.6.1}知识与推理的局限}{243}{subsection.14.6.1}%
+\contentsline {paragraph}{事实性错误}{243}{subsection.14.6.1}%
+\contentsline {paragraph}{推理能力的限制}{243}{subsection.14.6.1}%
+\contentsline {paragraph}{常识推理的挑战}{243}{subsection.14.6.1}%
+\contentsline {subsection}{\numberline {14.6.2}上下文和记忆的限制}{243}{subsection.14.6.2}%
+\contentsline {paragraph}{上下文长度限制}{243}{subsection.14.6.2}%
+\contentsline {paragraph}{长期记忆的缺失}{243}{subsection.14.6.2}%
+\contentsline {subsection}{\numberline {14.6.3}偏见和公平性问题}{244}{subsection.14.6.3}%
+\contentsline {paragraph}{训练数据的偏见}{244}{subsection.14.6.3}%
+\contentsline {paragraph}{偏见的量化和缓解}{244}{subsection.14.6.3}%
+\contentsline {section}{\numberline {14.7}神经符号融合：语言理解的新方向}{244}{section.14.7}%
+\contentsline {subsection}{\numberline {14.7.1}符号推理与神经网络的结合}{244}{subsection.14.7.1}%
+\contentsline {paragraph}{神经符号AI的动机}{244}{subsection.14.7.1}%
+\contentsline {paragraph}{神经符号架构}{244}{subsection.14.7.1}%
+\contentsline {subsection}{\numberline {14.7.2}检索增强生成（RAG）}{244}{subsection.14.7.2}%
+\contentsline {paragraph}{RAG的基本思想}{244}{subsection.14.7.2}%
+\contentsline {paragraph}{RAG的优势}{245}{subsection.14.7.2}%
+\contentsline {paragraph}{RAG的挑战}{245}{subsection.14.7.2}%
+\contentsline {subsection}{\numberline {14.7.3}工具使用和代码生成}{245}{subsection.14.7.3}%
+\contentsline {paragraph}{工具增强的语言模型}{245}{subsection.14.7.3}%
+\contentsline {paragraph}{代码生成能力}{245}{subsection.14.7.3}%
+\contentsline {section}{\numberline {14.8}语言智能的未来展望}{245}{section.14.8}%
+\contentsline {subsection}{\numberline {14.8.1}技术发展方向}{245}{subsection.14.8.1}%
+\contentsline {paragraph}{模型架构创新}{245}{subsection.14.8.1}%
+\contentsline {paragraph}{训练方法改进}{246}{subsection.14.8.1}%
+\contentsline {paragraph}{推理能力增强}{246}{subsection.14.8.1}%
+\contentsline {subsection}{\numberline {14.8.2}应用前景}{246}{subsection.14.8.2}%
+\contentsline {paragraph}{教育领域}{246}{subsection.14.8.2}%
+\contentsline {paragraph}{创意产业}{246}{subsection.14.8.2}%
+\contentsline {paragraph}{科学研究}{246}{subsection.14.8.2}%
+\contentsline {subsection}{\numberline {14.8.3}挑战与风险}{246}{subsection.14.8.3}%
+\contentsline {paragraph}{技术挑战}{246}{subsection.14.8.3}%
+\contentsline {paragraph}{社会风险}{247}{subsection.14.8.3}%
+\contentsline {paragraph}{伦理考量}{247}{subsection.14.8.3}%
+\contentsline {section}{\numberline {14.9}结论：语言智能的意义与启示}{247}{section.14.9}%
+\contentsline {subsection}{\numberline {14.9.1}Transformer革命的深层意义}{247}{subsection.14.9.1}%
+\contentsline {subsection}{\numberline {14.9.2}对智能理解的启示}{247}{subsection.14.9.2}%
+\contentsline {paragraph}{智能的层次性}{247}{subsection.14.9.2}%
+\contentsline {paragraph}{智能的涌现性}{247}{subsection.14.9.2}%
+\contentsline {paragraph}{智能的可计算性}{247}{subsection.14.9.2}%
+\contentsline {subsection}{\numberline {14.9.3}未来的思考方向}{248}{subsection.14.9.3}%
+\contentsline {paragraph}{理解与模拟的边界}{248}{subsection.14.9.3}%
+\contentsline {paragraph}{意识与智能的关系}{248}{subsection.14.9.3}%
+\contentsline {paragraph}{人机协作的未来}{248}{subsection.14.9.3}%
+\contentsline {paragraph}{智能的多样性}{248}{subsection.14.9.3}%
+\contentsline {subsection}{\numberline {14.9.4}最终思考}{248}{subsection.14.9.4}%
+\contentsline {chapter}{\numberline {15}AI+：学会站在智能的肩膀上}{249}{chapter.15}%
+\contentsline {section}{\numberline {15.1}站在巨人肩膀上：AI+ 的时代逻辑}{249}{section.15.1}%
+\contentsline {section}{\numberline {15.2}AI+科学：让发现更快一步}{250}{section.15.2}%
+\contentsline {section}{\numberline {15.3}AI+教育：学习的重新定义}{251}{section.15.3}%
+\contentsline {section}{\numberline {15.4}AI+社会：协同与共善的智能}{252}{section.15.4}%
+\contentsline {section}{\numberline {15.5}AI+创造力：从模仿到共创}{253}{section.15.5}%
+\contentsline {section}{\numberline {15.6}AI+哲学：理解理解本身}{254}{section.15.6}%
+\contentsline {section}{\numberline {15.7}AI+科学：探索的加速器}{255}{section.15.7}%
+\contentsline {section}{\numberline {15.8}AI+未来：人类的新立场}{256}{section.15.8}%
+\contentsline {chapter}{\numberline {16}理解智能的尽头：理性与取舍的未来}{258}{chapter.16}%
+\contentsline {section}{\numberline {16.1}引言：站在智能探索的十字路口}{258}{section.16.1}%
+\contentsline {section}{\numberline {16.2}智能的根本边界：三道不可逾越的门槛}{259}{section.16.2}%
+\contentsline {subsection}{\numberline {16.2.1}意识之谜：主观体验的不可及性}{259}{subsection.16.2.1}%
+\contentsline {paragraph}{意识的哲学定义}{259}{subsection.16.2.1}%
+\contentsline {paragraph}{质感的不可传达性}{260}{subsection.16.2.1}%
+\contentsline {paragraph}{意识的数学建模困境}{260}{subsection.16.2.1}%
+\contentsline {paragraph}{图灵测试的局限性}{261}{subsection.16.2.1}%
+\contentsline {paragraph}{整合信息理论的尝试}{261}{subsection.16.2.1}%
+\contentsline {subsection}{\numberline {16.2.2}常识推理：世界模型的缺失}{262}{subsection.16.2.2}%
+\contentsline {subsection}{\numberline {16.2.3}创造力的边界：组合与突破的辩证}{262}{subsection.16.2.3}%
+\contentsline {subsection}{\numberline {16.2.4}因果推理：从相关到解释的跨越}{264}{subsection.16.2.4}%
+\contentsline {section}{\numberline {16.3}算法治理：权力、责任与公正的重构}{266}{section.16.3}%
+\contentsline {subsection}{\numberline {16.3.1}算法权力的集中与分散}{266}{subsection.16.3.1}%
+\contentsline {paragraph}{技术寡头的崛起}{266}{subsection.16.3.1}%
+\contentsline {paragraph}{权力制衡的机制设计}{266}{subsection.16.3.1}%
+\contentsline {subsection}{\numberline {16.3.2}算法决策的透明度与可解释性}{267}{subsection.16.3.2}%
+\contentsline {paragraph}{黑箱问题的多重维度}{267}{subsection.16.3.2}%
+\contentsline {paragraph}{可解释AI的技术路径}{267}{subsection.16.3.2}%
+\contentsline {paragraph}{透明度的现实权衡}{267}{subsection.16.3.2}%
+\contentsline {subsection}{\numberline {16.3.3}算法公正性：数据中的隐形偏见}{267}{subsection.16.3.3}%
+\contentsline {paragraph}{偏见的来源与传播}{268}{subsection.16.3.3}%
+\contentsline {paragraph}{算法公正性的度量}{268}{subsection.16.3.3}%
+\contentsline {paragraph}{消除偏见的路径}{268}{equation.16.7}%
+\contentsline {paragraph}{文化与制度的支撑}{269}{equation.16.7}%
+\contentsline {subsection}{\numberline {16.3.4}责任归属与问责机制：谁来为算法负责？}{269}{subsection.16.3.4}%
+\contentsline {paragraph}{责任的分散与模糊}{269}{subsection.16.3.4}%
+\contentsline {paragraph}{算法审计的必要性}{269}{subsection.16.3.4}%
+\contentsline {paragraph}{法律框架的适应性挑战}{270}{subsection.16.3.4}%
+\contentsline {subsection}{\numberline {16.3.5}技术垄断与民主赤字：当算法超越了制度的速度}{270}{subsection.16.3.5}%
+\contentsline {paragraph}{算力的集中与门槛的抬高}{270}{subsection.16.3.5}%
+\contentsline {paragraph}{信息不对称与认知失衡}{271}{subsection.16.3.5}%
+\contentsline {paragraph}{民主参与的速度困境}{271}{subsection.16.3.5}%
+\contentsline {subsection}{\numberline {16.3.6}人机协同：重新定义智能的边界}{272}{subsection.16.3.6}%
+\contentsline {paragraph}{从工具到伙伴：智能的角色转变}{272}{subsection.16.3.6}%
+\contentsline {paragraph}{认知的分工与共创}{272}{subsection.16.3.6}%
+\contentsline {paragraph}{共情与可解释性：情感维度的协作}{272}{subsection.16.3.6}%
+\contentsline {paragraph}{协作的未来：共生而非竞争}{273}{subsection.16.3.6}%
+\contentsline {chapter}{\numberline {17}伦理与挑战}{274}{chapter.17}%
+\contentsline {section}{\numberline {17.1}2010年代至今：AI的全面爆发与伦理挑战}{274}{section.17.1}%
+\contentsline {subsection}{\numberline {17.1.1}深度学习革命：从ImageNet到ChatGPT}{274}{subsection.17.1.1}%
+\contentsline {subsection}{\numberline {17.1.2}AI应用的全面渗透与社会影响}{275}{subsection.17.1.2}%
+\contentsline {subsection}{\numberline {17.1.3}就业冲击与社会变革的深层思考}{276}{subsection.17.1.3}%
+\contentsline {subsection}{\numberline {17.1.4}创造力与人机协作的新范式}{277}{subsection.17.1.4}%
+\contentsline {section}{\numberline {17.2}超级计算机：速度和功耗成为终极挑战}{278}{section.17.2}%
+\contentsline {subsection}{\numberline {17.2.1}算力军备竞赛：从FLOPS到参数规模}{278}{subsection.17.2.1}%
+\contentsline {subsection}{\numberline {17.2.2}能耗危机：数据中心的环境代价}{278}{subsection.17.2.2}%
+\contentsline {subsection}{\numberline {17.2.3}技术创新与效率提升}{279}{subsection.17.2.3}%
+\contentsline {subsection}{\numberline {17.2.4}资源分配与数字鸿沟}{280}{subsection.17.2.4}%
+\contentsline {section}{\numberline {17.3}通用人工智能(AGI)的治理挑战}{280}{section.17.3}%
+\contentsline {subsection}{\numberline {17.3.1}负责任的AI发展理念}{281}{subsection.17.3.1}%
+\contentsline {subsection}{\numberline {17.3.2}AGI治理的三个核心问题}{281}{subsection.17.3.2}%
+\contentsline {subsection}{\numberline {17.3.3}AI安全与对齐问题}{282}{subsection.17.3.3}%
+\contentsline {section}{\numberline {17.4}AI时代的具体伦理挑战}{282}{section.17.4}%
+\contentsline {subsection}{\numberline {17.4.1}自动驾驶的道德困境}{283}{subsection.17.4.1}%
+\contentsline {subsection}{\numberline {17.4.2}信息过载与认知影响}{283}{subsection.17.4.2}%
+\contentsline {subsection}{\numberline {17.4.3}人类独特性的哲学思考}{284}{subsection.17.4.3}%
+\contentsline {section}{\numberline {17.5}构建AI时代的价值框架}{284}{section.17.5}%
+\contentsline {subsection}{\numberline {17.5.1}比尔·盖茨的三个指导原则}{285}{subsection.17.5.1}%
+\contentsline {subsection}{\numberline {17.5.2}技术伦理的实践路径}{285}{subsection.17.5.2}%
+\contentsline {part}{第五部分\hspace {1em}向上的道路}{288}{part.5}%

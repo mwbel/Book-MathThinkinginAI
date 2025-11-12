@@ -1,0 +1,21 @@
+%% 谈“词与词怎么叫”，不写公式。
+% 维护规则
+% 新术语先加到这里，再回章内统一用词（例如“损失（loss）”）。
+%若需要改中文名或英文名，先在这里改并在 structure_report.md 的“变更记录”注明。
+%不新增命令、不改变章节文件结构；本表用 \input{glossary.tex} 插入到附录或尾章。 
+
+\begin{table}[htbp]
+\centering
+\caption{术语对照表}
+\begin{tabular}{@{}p{3.2cm}p{3.2cm}p{7.5cm}p{2.2cm}@{}}
+\toprule
+中文 & 英文 & 定义（≤20字） & 首次出现 \\
+\midrule
+泛化 & generalization & 在新样本上保持性能 & 第7章 \\
+归纳偏好 & inductive bias & 学习算法内在偏向 & 第7章 \\
+对抗样本 & adversarial example & 微扰使模型误判的输入 & 第10章 \\
+表示学习 & representation learning & 从数据自动提取特征 & 第8章 \\
+因果图 & causal graph & 变量因果关系的有向图 & 第12章 \\
+\bottomrule
+\end{tabular}
+\end{table}

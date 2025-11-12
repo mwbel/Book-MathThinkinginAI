@@ -1,0 +1,34 @@
+---
+title: 全书章节逻辑优化任务（Claude-4-Sonnet）
+description: 对多个章节批量调用 A章节逻辑优化.md 模板
+---
+
+# 任务说明
+本任务将使用 Claude-4-Sonnet 模型与模板 `A章节逻辑优化.md`，
+依次对以下章节进行逻辑连贯性优化、引号修正与标记。
+
+# 模型设置
+model: claude-4-sonnet
+
+# 调用的模板
+prompt: ../prompts/A章节逻辑优化.md
+
+# 要处理的章节文件（可自行增删）
+files:
+  - ../chapters/*.tex
+
+exclude:
+  - ../chapters/*_refined.tex
+  - ../chapters/*_polished.tex
+  - ../chapters/*.aux
+  - ../chapters/*.log
+  - ../chapters/*.out
+  - ../chapters/*.toc
+  - ../chapters/*.bbl
+  - ../chapters/*.blg
+  - ../chapters/*.synctex.gz
+
+# 输出设置（可选）
+output:
+  suffix: _refined
+  include_log: true

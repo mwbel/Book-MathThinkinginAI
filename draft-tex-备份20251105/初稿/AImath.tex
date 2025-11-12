@@ -1,0 +1,59 @@
+\documentclass[lang=cn,14pt]{elegantbook}
+
+\title{人工智能的数学思维}
+\subtitle{Elegant\LaTeX{} 经典之作}
+
+\author{吴敏，  蒲戈光}
+\institute{Elegant\LaTeX{} Program}
+\date{April 9, 2022}
+%\version{4.3}
+%\bioinfo{自定义}{信息}
+
+\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\usepackage{graphicx}
+\usepackage{amsmath}  % 确保加载了 amsmath 包
+\usepackage{hyperref} % 可选：使得 \eqref 的引用带有链接功能
+
+
+\usepackage{url}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+%\include{0-Intro}
+\include{1-Def}
+\include{2-History-Math}
+\input{2-History-Math_history}
+\include{2-History-computer}
+\include{3-Thinking}
+\include{4-Tools}
+\include{5-ML}
+\include{6-LLM}
+\include{7-AI+}
+\include{8-Conclusion}
+%\include{9-Append}
+%\include{10-Ref}
+\include{11-Ack}
+%\include{bib}
+
+\end{document}

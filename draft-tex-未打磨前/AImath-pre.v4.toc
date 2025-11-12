@@ -1,0 +1,243 @@
+\contentsline {part}{第一部分\hspace {1em}追问智能}{1}{part.1}%
+\contentsline {chapter}{前言}{2}{chapter*.2}%
+\contentsline {section}{\numberline {0.1}内容和结构}{3}{section.0.1}%
+\contentsline {chapter}{\numberline {1} 引言 什么是智能？}{35}{chapter.1}%
+\contentsline {section}{\numberline {1.1}什么是智能与人工智能}{35}{section.1.1}%
+\contentsline {section}{\numberline {1.2}鹦鹉与乌鸦：何种智能?}{37}{section.1.2}%
+\contentsline {chapter}{\numberline {2}智能，生于数学 \\简明数学史}{40}{chapter.2}%
+\contentsline {section}{\numberline {2.1}萌芽时期：从计数到位值制}{41}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}史前数学：日常需求与实用计算}{41}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}手指：长在身上的计数器}{41}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}荒岛上的自然教育，人类数字文明的缩影}{43}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}数字的位值系统}{44}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}位值制与对数增长在现代计算机中的应用}{45}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}数字：从具象到抽象}{46}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}初等数学时期：从计算到推理}{46}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}数学的真正诞生：从计算到推理}{46}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}毕达哥拉斯：数与宇宙的关系}{48}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}欧几里得：公理化体系的奠基人}{49}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}阿基米德：数学与物理的桥梁}{49}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}亚里士多德：逻辑与推理}{49}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}古希腊数学的遗产}{50}{subsection.2.2.6}%
+\contentsline {section}{\numberline {2.3}近代数学时期：变量、函数与微积分}{50}{section.2.3}%
+\contentsline {section}{\numberline {2.4}现代数学时期：抽象、结构与计算}{51}{section.2.4}%
+\contentsline {section}{\numberline {2.5} 三次数学危机：从无理数到不完备}{52}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}第一次危机：无理数的发现与算术信仰的破灭}{52}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}第二次数学危机：微积分基础的争议与解析}{53}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}第三次危机：集合论与逻辑的悖论}{54}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}小结}{56}{section.2.6}%
+\contentsline {chapter}{\numberline {3}智能，成于计算机 \\简明AI史}{58}{chapter.3}%
+\contentsline {section}{\numberline {3.1}AI的萌芽期：理论的起源与计算机的诞生}{58}{section.3.1}%
+\contentsline {section}{\numberline {3.2} 1950-1970年代：AI的奠基与早期探索}{60}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}达特茅斯会后早期黄金期：符号主义AI}{61}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}1980年-1987年：专家系统与知识工程的兴起}{64}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}代表性专家系统}{64}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}知识表示与规则推理}{64}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3} 知识工程的广泛应用}{65}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}新兴技术：模糊逻辑与贝叶斯网络}{65}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}第二次“AI 寒冬”的反思与转型}{65}{subsection.3.3.5}%
+\contentsline {section}{\numberline {3.4}人工智能的分化}{66}{section.3.4}%
+\contentsline {section}{\numberline {3.5}1990-2010年代：联结主义和机器学习的兴起}{67}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}2020年代：大语言模型（LLM）与生成式人工智能（AIGC）的崛起}{67}{subsection.3.5.1}%
+\contentsline {section}{\numberline {3.6}人工智能主要学派}{68}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}符号主义学派 (Symbolicism)}{68}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}联结学派/连接学派(Connectionism)：从神经网络到深度学习}{70}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}行为主义学派(Actionism)}{71}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}三大学派的比较}{72}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}三大学派对比总结}{72}{subsection.3.6.5}%
+\contentsline {section}{\numberline {3.7}小结：危机与机遇中的AI发展之旅}{75}{section.3.7}%
+\contentsline {chapter}{参考文献}{77}{chapter*.12}%
+\contentsline {part}{第二部分\hspace {1em}学习的逻辑}{79}{part.2}%
+\contentsline {chapter}{\numberline {4}人工智能的三种思维：从理论到应用的跨越}{80}{chapter.4}%
+\contentsline {section}{\numberline {4.1}数学思维：定义和可能性的框架}{80}{section.4.1}%
+\contentsline {section}{\numberline {4.2} 算法思维：从理论到可计算的路径}{82}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}算法复杂度}{82}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}算法优化}{84}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3} 算法稳定性}{84}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}工程思维：从可计算到可用的实际落地}{85}{section.4.3}%
+\contentsline {section}{\numberline {4.4}两个从数学思维到工程思维的例子}{88}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1} 数字图像处理：从理论到实际应用的三重思维}{88}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1} 数学思维：图像处理的理论基础}{88}{subsubsection.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.2} 算法思维：从理论模型到具体算法}{89}{subsubsection.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.4.1.3} 工程思维：图像处理的实际落地}{89}{subsubsection.4.4.1.3}%
+\contentsline {subsection}{\numberline {4.4.2} 总结}{90}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}推荐系统：从理论到实际应用的三重思维}{90}{subsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.3.1} 数学思维：推荐系统的理论建模}{90}{subsubsection.4.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.4.3.2} 算法思维：理论到实现的路径}{91}{subsubsection.4.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.4.3.3} 工程思维：推荐系统的实际部署}{92}{subsubsection.4.4.3.3}%
+\contentsline {subsection}{\numberline {4.4.4} 综合说明}{92}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5} 小结：三种思维的交融与驱动}{93}{section.4.5}%
+\contentsline {chapter}{参考文献}{94}{chapter*.13}%
+\contentsline {chapter}{\numberline {5} 人工智能的数学工具}{96}{chapter.5}%
+\contentsline {section}{\numberline {5.1}预备知识}{97}{section.5.1}%
+\contentsline {section}{\numberline {5.2}浅谈图像处理：从矩阵到深度学习}{98}{section.5.2}%
+\contentsline {section}{\numberline {5.3}第1章 引言}{98}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}1.1 图像识别如何作用于我们的生活？}{98}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}1.2 追根溯源——其中的数学方法}{99}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}1.3 报告主体结构与主要内容}{99}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}第2章 从矩阵到深度学习}{99}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}2.1 矩阵}{99}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}矩阵的应用现状}{101}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}2.1.3 矩阵的基本操作}{102}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}体会启发与结语}{110}{section.5.5}%
+\contentsline {section}{\numberline {5.6} 次线性算法}{111}{section.5.6}%
+\contentsline {section}{\numberline {5.7}迈进后严谨阶段!}{113}{section.5.7}%
+\contentsline {chapter}{参考文献}{114}{chapter*.14}%
+\contentsline {chapter}{\numberline {6}机器学习：学习如何学习？}{116}{chapter.6}%
+\contentsline {section}{\numberline {6.1}机器学习，必然选择}{117}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}机器学习：从数据中学习规律}{118}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}机器学习是什么？}{118}{section.6.2}%
+\contentsline {section}{\numberline {6.3}机器学习：寻找一个函数}{120}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}数据驱动的函数优化}{122}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2} 挑战：找到一个精准的函数}{122}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}机器学习的未来：构建更灵活的映射函数}{122}{subsection.6.3.3}%
+\contentsline {section}{\numberline {6.4}机器学习三要素：模型、学习准则、优化}{123}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}模型：映射关系的表示}{123}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}损失函数：参数优化的数学工具}{125}{subsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.2.1}损失函数的定义}{126}{subsubsection.6.4.2.1}%
+\contentsline {subsubsection}{\numberline {6.4.2.2}常见的损失函数}{126}{subsubsection.6.4.2.2}%
+\contentsline {subsubsection}{\numberline {6.4.2.3}损失函数的选择}{128}{subsubsection.6.4.2.3}%
+\contentsline {subsubsection}{\numberline {6.4.2.4} 期望风险：理论目标}{128}{subsubsection.6.4.2.4}%
+\contentsline {subsubsection}{\numberline {6.4.2.5} 经验风险：实践近似}{129}{subsubsection.6.4.2.5}%
+\contentsline {subsubsection}{\numberline {6.4.2.6} 结构风险：提高泛化能力}{129}{subsubsection.6.4.2.6}%
+\contentsline {subsection}{\numberline {6.4.3}优化：找到最优参数}{131}{subsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.3.1}参数与超参数}{131}{subsubsection.6.4.3.1}%
+\contentsline {subsection}{\numberline {6.4.4}机器学习三要素的协同作用}{134}{subsection.6.4.4}%
+\contentsline {section}{\numberline {6.5}传统机器学习}{135}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1} 监督学习 (Supervised Learning)：通过标注数据进行映射学习}{135}{subsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.1.1}支持向量机：几何之美，划分世界 还是优雅地划分世界}{136}{subsubsection.6.5.1.1}%
+\contentsline {subsection}{\numberline {6.5.2}支持向量机的基本思想：最大间隔与支持向量}{136}{subsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.2.1}线性可分情形：最大间隔的几何理解}{138}{subsubsection.6.5.2.1}%
+\contentsline {subsubsection}{\numberline {6.5.2.2}简单示例：支持向量机的分类流程}{141}{subsubsection.6.5.2.2}%
+\contentsline {subsubsection}{\numberline {6.5.2.3}近似线性可分与软间隔 SVM}{143}{subsubsection.6.5.2.3}%
+\contentsline {paragraph}{\numberline {6.5.2.3.1}核心思想：放松刚性边界，换取更稳健的分类器}{144}{paragraph.6.5.2.3.1}%
+\contentsline {subsubsection}{\numberline {6.5.2.4}非线性情形与核技巧——如何让不可分数据变得线性可分？}{148}{subsubsection.6.5.2.4}%
+\contentsline {paragraph}{\numberline {6.5.2.4.1}升维背后的数学思想}{148}{paragraph.6.5.2.4.1}%
+\contentsline {subsubsection}{\numberline {6.5.2.5}常见核函数：不同的升维效果}{150}{subsubsection.6.5.2.5}%
+\contentsline {paragraph}{\numberline {6.5.2.5.1}示例：双环分布（环形数据）}{150}{paragraph.6.5.2.5.1}%
+\contentsline {subsection}{\numberline {6.5.3}升维示意图}{153}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}核函数的数学形式}{153}{subsection.6.5.4}%
+\contentsline {paragraph}{\numberline {6.5.4.0.1}例子：同心圆数据的升维}{153}{paragraph.6.5.4.0.1}%
+\contentsline {subsubsection}{\numberline {6.5.4.1}从对偶问题到决策函数：核技巧的最终表达}{153}{subsubsection.6.5.4.1}%
+\contentsline {subsubsection}{\numberline {6.5.4.2}总结：核技巧为何如此强大？}{154}{subsubsection.6.5.4.2}%
+\contentsline {subsection}{\numberline {6.5.5}不同核函数的升维效果比较}{154}{subsection.6.5.5}%
+\contentsline {subsection}{\numberline {6.5.6} 无监督学习 (Unsupervised Learning)：通过未标注数据发现模式}{156}{subsection.6.5.6}%
+\contentsline {subsection}{\numberline {6.5.7}半监督学习 (Semi-Supervised Learning)}{158}{subsection.6.5.7}%
+\contentsline {subsection}{\numberline {6.5.8}传统机器学习的辉煌与局限}{160}{subsection.6.5.8}%
+\contentsline {section}{\numberline {6.6}从生物学启发到机器学习的新方向}{160}{section.6.6}%
+\contentsline {chapter}{参考文献}{162}{chapter*.32}%
+\contentsline {chapter}{\numberline {7}从传统机器学习到深度学习}{165}{chapter.7}%
+\contentsline {section}{\numberline {7.1}从机器学习到深度学习}{165}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}从人工筛选到自动归纳}{165}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}从“人工扶持”到“自主学习”}{166}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}像侦探一样找线索}{166}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}学骑自行车的启示}{167}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5} 深度学习的“洋葱式思考”}{167}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}深度学习为何如此强大？}{167}{subsection.7.1.6}%
+\contentsline {subsubsection}{\numberline {7.1.6.1} 超强泛化能力}{167}{subsubsection.7.1.6.1}%
+\contentsline {subsubsection}{\numberline {7.1.6.2} 数据越多，模型越强}{168}{subsubsection.7.1.6.2}%
+\contentsline {section}{\numberline {7.2}生物神经元的启发：模拟大脑}{168}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}深度学习的起源：向人脑学习}{168}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}智能如何产生：生物神经元的启发}{169}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}生物神经元计算模型的启示}{171}{subsection.7.2.3}%
+\contentsline {section}{\numberline {7.3}M-P模型：人工神经网络的起点 }{174}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}M-P 模型的基本结构}{174}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2} M-P 模型如何实现逻辑运算}{176}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}M-P 模型的局限性}{179}{subsection.7.3.3}%
+\contentsline {section}{小故事：数学天才遇上神经科学家}{180}{Item.49}%
+\contentsline {section}{\numberline {7.4}感知机：第一个可训练的神经网络，神经网络的“Hello World”}{181}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}感知机的工作原理}{182}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}感知机示例：“西瓜 vs 香蕉”分类}{184}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}感知机算法的直观理解}{185}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}感知机的几何意义}{185}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.5}感知机的局限性：XOR 问题与神经网络的停滞}{186}{subsection.7.4.5}%
+\contentsline {subsection}{\numberline {7.4.6} 感知机的实际应用}{187}{subsection.7.4.6}%
+\contentsline {subsection}{\numberline {7.4.7} 感知机的历史影响}{188}{subsection.7.4.7}%
+\contentsline {section}{小故事：感知机的传奇人物：弗兰克·罗森布拉特}{189}{subsection.7.4.7}%
+\contentsline {section}{\numberline {7.5} 多层感知机（1980s 复兴）：突破单层感知机的局限}{190}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}增加隐藏层：解决线性不可分问题}{190}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}两层感知机如何解决“异或”问题}{190}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}真正的突破：反向传播（Backpropagation）}{192}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}反向传播的影响：神经网络的真正复兴}{193}{subsection.7.5.4}%
+\contentsline {section}{\numberline {7.6}前馈神经网络(Forward Neural Networks)：从简单到复杂}{194}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1} 前馈神经网络的基本结构}{194}{subsection.7.6.1}%
+\contentsline {section}{\numberline {7.7}深度学习（2006 及之后）：突破梯度消失，实现多层神经网络的高效训练}{195}{section.7.7}%
+\contentsline {subsubsection}{\numberline {7.7.0.1} 神经元模型}{196}{subsubsection.7.7.0.1}%
+\contentsline {subsubsection}{\numberline {7.7.0.2} 激活函数（Activation Function）}{196}{subsubsection.7.7.0.2}%
+\contentsline {subsection}{\numberline {7.7.1}前馈神经网络的学习过程}{199}{subsection.7.7.1}%
+\contentsline {subsection}{\numberline {7.7.2} 神经网络的数学灵魂：通用逼近定理（Universal Approximation Theorem）}{204}{subsection.7.7.2}%
+\contentsline {section}{\numberline {7.8}人工神经网络的主要类型}{206}{section.7.8}%
+\contentsline {section}{\numberline {7.9}通用逼近定理的局限性：为何我们需要深度学习？}{207}{section.7.9}%
+\contentsline {section}{\numberline {7.10}从浅层网络到深度学习}{209}{section.7.10}%
+\contentsline {section}{\numberline {7.11}小结}{209}{section.7.11}%
+\contentsline {chapter}{参考文献}{211}{chapter*.59}%
+\contentsline {chapter}{\numberline {8}深度学习，真的行}{213}{chapter.8}%
+\contentsline {section}{\numberline {8.1}引言---深度学习：从理论走向现实}{213}{section.8.1}%
+\contentsline {section}{\numberline {8.2}深度学习的方法论}{214}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}端到端(end-to-end)学习：自动特征学习的突破}{214}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}优化方法的改进：让深度网络真正可训练}{215}{subsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.2.1}梯度稳定性问题及解决方案}{216}{subsubsection.8.2.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2.2}梯度消失问题（Vanishing Gradient）}{216}{subsubsection.8.2.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.2.3}梯度爆炸问题（Exploding Gradient）}{217}{subsubsection.8.2.2.3}%
+\contentsline {subsubsection}{\numberline {8.2.2.4} 自适应优化算法（Adaptive Optimization Algorithms）}{217}{subsubsection.8.2.2.4}%
+\contentsline {subsection}{\numberline {8.2.3}正则化：防止过拟合，提高泛化能力}{218}{subsection.8.2.3}%
+\contentsline {subsection}{\numberline {8.2.4}优化与泛化的平衡}{220}{subsection.8.2.4}%
+\contentsline {section}{\numberline {8.3}全连接神经网络：深度学习的“原型”与局限性}{220}{section.8.3}%
+\contentsline {section}{\numberline {8.4}神经网络的不同架构：从认知方式到计算方式}{222}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1} 卷积神经网络（CNN）：如何高效处理图像？}{223}{subsection.8.4.1}%
+\contentsline {subsubsection}{\numberline {8.4.1.1} 从人类视觉到人工智能：CNN 如何"看"世界}{224}{subsubsection.8.4.1.1}%
+\contentsline {subsubsection}{\numberline {8.4.1.2} 人类视觉的分层感知机制}{224}{subsubsection.8.4.1.2}%
+\contentsline {subsubsection}{\numberline {8.4.1.3} CNN 的关键结构及其数学原理}{227}{subsubsection.8.4.1.3}%
+\contentsline {subsubsection}{\numberline {8.4.1.4} CNN 让计算机“看”世界更高效}{233}{subsubsection.8.4.1.4}%
+\contentsline {subsubsection}{\numberline {8.4.1.5} CNN 让计算机“看”世界更高效}{235}{subsubsection.8.4.1.5}%
+\contentsline {subsection}{\numberline {8.4.2}循环神经网络（RNN）：如何建模序列数据？}{235}{subsection.8.4.2}%
+\contentsline {subsubsection}{\numberline {8.4.2.1} Why：为什么需要 RNN？}{235}{subsubsection.8.4.2.1}%
+\contentsline {subsubsection}{\numberline {8.4.2.2} How---RNN 的数学直觉：如何让网络“记住”信息？}{236}{subsubsection.8.4.2.2}%
+\contentsline {subsubsection}{\numberline {8.4.2.3}RNN 的局限性：记忆并不总是可靠}{237}{subsubsection.8.4.2.3}%
+\contentsline {subsubsection}{\numberline {8.4.2.4} LSTM 与 GRU：赋予 RNN 更强的记忆能力}{237}{subsubsection.8.4.2.4}%
+\contentsline {subsubsection}{\numberline {8.4.2.5} RNN 在现实中的应用}{238}{subsubsection.8.4.2.5}%
+\contentsline {subsubsection}{\numberline {8.4.2.6} RNN 与 CNN：互补还是竞争？}{238}{subsubsection.8.4.2.6}%
+\contentsline {subsubsection}{\numberline {8.4.2.7}总结}{238}{subsubsection.8.4.2.7}%
+\contentsline {subsection}{\numberline {8.4.3} Transformer：为什么能取代 RNN？}{238}{subsection.8.4.3}%
+\contentsline {subsubsection}{\numberline {8.4.3.1} 小结：神经网络的不同架构与数学思维}{242}{subsubsection.8.4.3.1}%
+\contentsline {section}{\numberline {8.5}深度学习的“日常任务”}{243}{section.8.5}%
+\contentsline {paragraph}{\numberline {8.5.0.0.1}视觉与语言：两大主战场}{243}{paragraph.8.5.0.0.1}%
+\contentsline {paragraph}{\numberline {8.5.0.0.2}“无感嵌入”：深度学习已成为生活背景的运转引擎}{244}{paragraph.8.5.0.0.2}%
+\contentsline {paragraph}{\numberline {8.5.0.0.3}医疗健康：AI 成为“第二双眼”}{244}{paragraph.8.5.0.0.3}%
+\contentsline {paragraph}{\numberline {8.5.0.0.4}从生活到科学：深度学习成为科研的“加速器”}{244}{paragraph.8.5.0.0.4}%
+\contentsline {paragraph}{\numberline {8.5.0.0.5}未来：理解世界，更是创造世界}{245}{paragraph.8.5.0.0.5}%
+\contentsline {section}{\numberline {8.6}深度学习的局限与挑战}{245}{section.8.6}%
+\contentsline {section}{\numberline {8.7}小结}{248}{section.8.7}%
+\contentsline {chapter}{参考文献}{249}{chapter*.79}%
+\contentsline {part}{第三部分\hspace {1em}理解的边界}{251}{part.3}%
+\contentsline {chapter}{\numberline {9} 深度学习的挑战与幻觉\\ 它真的“理解”了吗？}{252}{chapter.9}%
+\contentsline {chapter}{参考文献}{254}{chapter*.80}%
+\contentsline {chapter}{\numberline {10}AI的边界：图灵机、哥德尔与计算的极限 \\有些问题，AI永远无法回答}{256}{chapter.10}%
+\contentsline {chapter}{参考文献}{259}{chapter*.81}%
+\contentsline {chapter}{\numberline {11}符号、神经与因果：智能的三种建构方式 \\ 三条道路，一场融合}{261}{chapter.11}%
+\contentsline {chapter}{参考文献}{264}{chapter*.82}%
+\contentsline {chapter}{\numberline {12}智能的物理基础：从熵到量子计算\\信息的代价与未来的可能性}{266}{chapter.12}%
+\contentsline {chapter}{参考文献}{268}{chapter*.83}%
+\contentsline {part}{第四部分\hspace {1em}回归与超越}{270}{part.4}%
+\contentsline {chapter}{\numberline {13}语言中的智能：Transformer的意外胜利 \\让机器“听懂”世界的第一步？}{271}{chapter.13}%
+\contentsline {chapter}{参考文献}{276}{chapter*.85}%
+\contentsline {chapter}{\numberline {14}力量倍增器：站在AI的肩膀上}{278}{chapter.14}%
+\contentsline {section}{\numberline {14.1}人类计算(Human Computation)}{279}{section.14.1}%
+\contentsline {section}{\numberline {14.2}对未来人类的影响}{282}{section.14.2}%
+\contentsline {chapter}{参考文献}{283}{chapter*.92}%
+\contentsline {chapter}{\numberline {15}智能的未来，理性的取舍\\我们究竟希望AI成为什么？}{285}{chapter.15}%
+\contentsline {section}{\numberline {15.1}AI的未解之谜：意识、常识、因果}{285}{section.15.1}%
+\contentsline {section}{\numberline {15.2}算法治理：偏见、责任与权力}{286}{section.15.2}%
+\contentsline {section}{\numberline {15.3}AI与人类协同的未来可能}{286}{section.15.3}%
+\contentsline {section}{\numberline {15.4}面向“理解”而非“崇拜”的智能观}{287}{section.15.4}%
+\contentsline {section}{\numberline {15.5}未来开放问题清单}{287}{section.15.5}%
+\contentsline {chapter}{参考文献}{288}{chapter*.93}%
+\contentsline {chapter}{\numberline {16}伦理与挑战}{290}{chapter.16}%
+\contentsline {section}{\numberline {16.1}2010年代至今：AI的全面爆发与伦理挑战}{290}{section.16.1}%
+\contentsline {section}{\numberline {16.2}超级计算机：速度和功耗成为终极挑战}{291}{section.16.2}%
+\contentsline {chapter}{参考文献}{293}{chapter*.95}%
+\contentsline {part}{第五部分\hspace {1em}尾声}{295}{part.5}%
+\contentsline {chapter}{参考文献}{297}{chapter*.97}%
+\contentsline {part}{第六部分\hspace {1em}参考文献}{299}{part.6}%
+\contentsline {chapter}{致谢}{300}{chapter*.98}%
+\renewcommand {\cftchappresnum }{附录 }\renewcommand {\cftchapaftersnum }{}

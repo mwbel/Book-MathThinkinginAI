@@ -1,0 +1,15 @@
+.env
+.env.*
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+*.ipynb_checkpoints/
+# 如果有大图/导出HTML等
+exports/
+plots/
+
