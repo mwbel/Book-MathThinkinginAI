@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chapter 18 Unified0 vs Output Diff</title>
+<style>
+body { font-family: "Courier New", monospace; margin: 20px; line-height: 1.4; }
+.minus { color: red; background-color: #ffe6e6; display: block; white-space: pre-wrap; }
+.plus { color: green; background-color: #e6ffe6; display: block; white-white-space: pre-wrap; }
+.at-sign { color: blue; }
+.diff-header { color: #666; font-weight: bold; }
+h1 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+.summary { background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
+pre { white-space: pre-wrap; word-wrap: break-word; }
+.stats { background: #e8f4fd; padding: 8px; border-radius: 3px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<h1>第十八章文档对比 (18-Ack.v1_unified0.tex vs 18输出.tex)</h1>
+<div class="summary">
+<p><strong>说明：</strong></p>
+<ul>
+<li>🔴 <strong>红色背景</strong> = 删除的内容（来自unified0文件）</li>
+<li>🟢 <strong>绿色背景</strong> = 新增的内容（来自输出文件）</li>
+<li>🔵 <strong>蓝色</strong> = 文件位置信息</li>
+</ul>
+</div>
+<div class="stats">
+<p><strong>统计信息：</strong> 删除 19 行，新增 26 行</p>
+</div>
+<pre>
+<span class="diff-header">--- 18-Ack.v1_unified0.tex	2025-11-12 17:31:38</span>
+<span class="diff-header">+++ 18输出.tex	2025-11-15 16:40:22</span>
+<span class="at-sign">@@ -1,25 +1,32 @@</span>
+<span class="plus">+</span>
+<span class="plus">+5. 修改后 LaTeX 文本</span>
+<span class="plus">+</span>
+<span class="plus">+```tex</span>
+ % !TEX root = AImath.v5.tex
+<span class="minus">-\chapter*{ 致谢}</span>
+<span class="plus">+\chapter*{致谢}</span>
+ \addcontentsline{toc}{chapter}{致谢}
+<span class="minus">-写作是一项孤独的事业。形单影只，与键盘为伴，上一秒文思泉涌，下一秒却自我怀疑。</span>
+<span class="minus">-但从某些方面来说，作家这一职业实质上具有社会性。每位作者都可以反思哪些人激发了他们的创作灵感，并深深感谢那些深刻影响了他们创作的作家、思想家、研究者，以及各种不同的思想。</span>
+<span class="minus">-无论他们是否知道，下列人士都给予了我特别的启发与帮助，谨致谢忱:</span>
+<span class="minus">-我们无比感谢本书的中英文版稿件贡献者和论坛用户们。他们帮助增添或改进了书中内容并提供了有价值的反馈。特别地，我们要感谢每一位为这本中文版开源书提交内容改动的贡献者们。这些贡献者的GitHub用户名或姓名是（排名不分先后）：.....谢谢你们为每一位读者改进这本开源书。</span>
+<span class="minus">-本书的初稿在中国科学技术大学、上海财经大学的“深度学习”课程以及浙江大学的“物联网与信息处理”课程和上海交通大学的“面向视觉识别的卷积神经网络”课程中被用于教学。我们在此感谢这些课程的师生，特别是连德富教授、王智教授和罗家佳教授，感谢他们对改进本书提供的宝贵意见。</span>
+<span class="minus">-此外，我们感谢Amazon Web Services，特别是Swami Sivasubramanian、Raju Gulabani、Charlie Bell和Andrew Jassy在我们撰写本书时给予的慷慨支持。如果没有可用的时间、资源以及来自同事们的讨论和鼓励，就没有这本书的项目。我们还要感谢Apache MXNet团队实现了很多本书所使用的特性。另外，经过同事们的校勘，本书的质量得到了极大的提升。在此我们一一列出章节和校勘人，以表示我们由衷的感谢：引言的校勘人为金颢，预备知识的校勘人为吴俊，深度学习基础的校勘人为张航、王晨光、林海滨，深度学习计算的校勘人为查晟，卷积神经网络的校勘人为张帜、何通，循环神经网络的校勘人为查晟，优化算法的校勘人为郑帅，计算性能的校勘人为郑达、吴俊，计算机视觉的校勘人为解浚源、张帜、何通、张航，自然语言处理的校勘人为王晨光，附录的校勘人为金颢。</span>
+ 
+<span class="plus">+写作是一项孤独的事业。形单影只，与键盘为伴，上一秒文思泉涌，下一秒却陷入自我怀疑。</span>
+ 
+<span class="minus">-感谢将门创投，特别是王慧、高欣欣、常铭珊和白玉为本书的两位中国作者在讲授”动手学深度学习“系列课程时所提供的平台。感谢所有参与这一系列课程的数千名同学们。感谢Amazon Web Services中国团队的同事们，特别是费良宏和王晨对作者的支持与鼓励。感谢本书论坛的3位版主：王鑫、夏鲁豫和杨培文。他们牺牲了自己宝贵的休息时间来回复大家的提问。感谢人民邮电出版社的杨海玲编辑为我们在本书的出版过程中所提供的各种帮助。</span>
+<span class="minus">-感谢中英文草稿的数百位撰稿人。</span>
+<span class="minus">-他们帮助改进了内容并提供了宝贵的反馈。</span>
+<span class="minus">-感谢Anirudh Dagar和唐源将部分较早版本的MXNet实现分别改编为PyTorch和TensorFlow实现。</span>
+<span class="minus">-感谢百度团队将较新的PyTorch实现改编为PaddlePaddle实现。</span>
+<span class="minus">-感谢张帅将更新的LaTeX样式集成进PDF文件的编译。</span>
+<span class="minus">-特别地，我们要感谢这份中文稿的每一位撰稿人，是他们的无私奉献让这本书变得更好。他们的GitHub ID或姓名是(没有特定顺序)：</span>
+<span class="minus">-我们感谢Amazon Web Services，特别是Swami Sivasubramanian、Peter DeSantis、Adam Selipsky和Andrew Jassy对撰写本书的慷慨支持。如果没有可用的时间、资源、与同事的讨论和不断的鼓励，这本书就不会出版。</span>
+<span class="minus">-最后，我们要感谢我们的家人。谢谢你们一直陪伴着我们。</span>
+<span class="plus">+但从另一些方面来说，写作又是一种高度社会化的工作。每一位作者都可以回头追问：是谁点燃了我们的创作欲望？是谁在关键时刻给出了那一句提醒？我们又曾从哪些作家、思想家、研究者以及各种不同的思想中汲取了营养。正是这些可见与不可见的同行者，让一本书慢慢长成现在的样子。</span>
+ 
+<span class="minus">-\newpage</span>
+<span class="plus">+无论他们是否知道，下列个人与机构都给予了我们特别的启发与帮助，谨致谢忱。</span>
+ 
+<span class="minus">-我们在不改动引用与公式的前提下，延展叙述以增强连贯性。补充背景、实践建议、限制与展望，保持与前文术语一致，不引入新概念。</span>
+<span class="minus">-为避免突兀，扩写段落以读者熟悉的场景为参照，强调数据、流程与评价的协同。</span>
+<span class="plus">+首先，我们由衷感谢本书的中英文版稿件贡献者和论坛用户们。作为一部开源教材，这本书从一开始就离不开社区的参与：有的读者提交勘误和补充内容，有的读者在论坛上提出尖锐的问题，有的读者则贡献了整段代码或案例。感谢中英文草稿的数百位撰稿人，他们帮助增添或改进了书中的内容，并提供了宝贵的反馈。特别地，我们要感谢这份中文稿的每一位撰稿人，是他们的无私奉献让这本书变得更好。这些贡献者的 GitHub 用户名或姓名是（排名不分先后）：…… 谢谢你们为每一位读者改进这本开源书。</span>
+<span class="plus">+</span>
+<span class="plus">+本书的初稿曾在多门课程中被用作教学材料，包括中国科学技术大学、上海财经大学的“深度学习”课程，浙江大学的“物联网与信息处理”课程，以及上海交通大学的“面向视觉识别的卷积神经网络”课程。我们在此感谢这些课程的师生，他们既是本书最早的一批读者，也是最严谨的“测试者”。特别感谢连德富教授、王智教授和罗家佳教授，感谢他们在课堂使用、作业设计与学生反馈方面提出的中肯意见，这些建议直接推动了本书结构与内容的改进。</span>
+<span class="plus">+</span>
+<span class="plus">+在写作与实验过程中，我们得到了来自 Amazon Web Services 的大力支持。在此特别感谢 Swami Sivasubramanian、Raju Gulabani、Charlie Bell、Peter DeSantis、Adam Selipsky 和 Andrew Jassy 在本书撰写过程中给予的慷慨支持。如果没有可用的时间、资源，以及来自同事们的讨论和鼓励，这本书的项目就很难真正启动并坚持下来。我们还要感谢 Apache MXNet 团队实现了很多本书所使用的特性，为读者能在实践中复现实验提供了扎实的技术基础。</span>
+<span class="plus">+</span>
+<span class="plus">+在内容质量方面，我们受益于许多同事细致耐心的校勘工作。经过他们一轮又一轮的审阅，本书的质量得到了极大的提升。在此我们一一列出章节和校勘人，以表示我们由衷的感谢：引言的校勘人为金颢，预备知识的校勘人为吴俊，深度学习基础的校勘人为张航、王晨光、林海滨，深度学习计算的校勘人为查晟，卷积神经网络的校勘人为张帜、何通，循环神经网络的校勘人为查晟，优化算法的校勘人为郑帅，计算性能的校勘人为郑达、吴俊，计算机视觉的校勘人为解浚源、张帜、何通、张航，自然语言处理的校勘人为王晨光，附录的校勘人为金颢。谢谢你们对每一个符号、每一行公式、每一处表述的严格把关。</span>
+<span class="plus">+</span>
+<span class="plus">+我们还要感谢将门创投，特别是王慧、高欣欣、常铭珊和白玉，为本书的两位中国作者在讲授“动手学深度学习”系列课程时所提供的平台和组织工作。感谢所有参与这一系列课程的数千名同学，是你们的提问、作业和反馈，让我们看到了教材在真实课堂中的表现，也帮助我们发现并修补了许多不足之处。感谢 Amazon Web Services 中国团队的同事们，特别是费良宏和王晨，在课程与书稿推进过程中的支持与鼓励。</span>
+<span class="plus">+</span>
+<span class="plus">+感谢本书论坛的三位版主：王鑫、夏鲁豫和杨培文。他们牺牲了自己宝贵的休息时间，在论坛上耐心地回复大家的提问、维护讨论秩序，让这本书在纸面之外拥有了一个持续生长的学习空间。感谢人民邮电出版社的杨海玲编辑，在本书出版过程中为我们协调流程、沟通细节、提出专业建议，让这本书最终以更稳定的质量呈现在读者面前。</span>
+<span class="plus">+</span>
+<span class="plus">+在具体实现层面，我们还要感谢为不同深度学习框架改编代码的贡献者。感谢 Anirudh Dagar 和唐源，将部分较早版本的 MXNet 实现分别改编为 PyTorch 和 TensorFlow 实现，使更多读者可以在自己熟悉的框架下动手实践。感谢百度团队将较新的 PyTorch 实现改编为 PaddlePaddle 实现，进一步拓展了本书在工业界与国产框架生态中的适用性。感谢张帅将更新的 LaTeX 样式集成进 PDF 文件的编译流程，让本书以更清晰、美观的排版呈现出来。</span>
+<span class="plus">+</span>
+<span class="plus">+最后，我们要特别感谢我们的家人。谢谢你们一直默默陪伴着我们，在我们埋头写作、反复修改、偶尔沮丧的日子里，承担了许多看不见的时间与情绪成本。没有你们的理解与支持，这本书无法按现在的样子与大家见面。</span>
+<span class="plus">+</span>
+<span class="plus">+\newpage</span>
+<span class="plus">+```</span>
+</pre>
+</body>
+</html>

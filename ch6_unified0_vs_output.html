@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chapter 6 Unified0 vs Output Diff</title>
+<style>
+body { font-family: "Courier New", monospace; margin: 20px; line-height: 1.4; }
+.minus { color: red; background-color: #ffe6e6; display: block; white-space: pre-wrap; }
+.plus { color: green; background-color: #e6ffe6; display: block; white-space: pre-wrap; }
+.at-sign { color: blue; }
+.diff-header { color: #666; font-weight: bold; }
+h1 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+.summary { background: #f9f9f9; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
+pre { white-space: pre-wrap; word-wrap: break-word; }
+.stats { background: #e8f4fd; padding: 8px; border-radius: 3px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<h1>第六章文档对比 (6-ML.v3_polished_unified0.tex vs 6输出.tex)</h1>
+<div class="summary">
+<p><strong>说明：</strong></p>
+<ul>
+<li>🔴 <strong>红色背景</strong> = 删除的内容（来自unified0文件）</li>
+<li>🟢 <strong>绿色背景</strong> = 新增的内容（来自输出文件）</li>
+<li>🔵 <strong>蓝色</strong> = 文件位置信息</li>
+</ul>
+</div>
+<div class="stats">
+<p><strong>统计信息：</strong> 删除 55 行，新增 63 行</p>
+</div>
+<pre>
+<span class="diff-header">--- 6-ML.v3_polished_unified0.tex	2025-11-13 23:45:33</span>
+<span class="diff-header">+++ 6输出.tex	2025-11-15 16:40:22</span>
+<span class="at-sign">@@ -1,3 +1,8 @@</span>
+<span class="plus">+</span>
+<span class="plus">+</span>
+<span class="plus">+5. 修改后 LaTeX 文本</span>
+<span class="plus">+</span>
+<span class="plus">+```tex</span>
+ % !TEX root = AImath.v5.tex
+ \chapter{机器学习：学习如何学习？}\label{ch:机器学习}
+ 
+<span class="at-sign">@@ -23,7 +28,7 @@</span>
+ 
+ 
+ 
+<span class="minus">-Tom M. Mitchell 在1997年的著作中提出了这一定义。  </span>
+<span class="plus">+Tom M. Mitchell 在 1997 年的著作中提出了这一定义。  </span>
+ 二十多年过去，它仍被广泛引用，因为它抓住了“学习”的根本——  
+ 即让计算机能够从数据与经验中提取规律，用以改进未来的判断与行为。  
+ 这也正是我们在本章要探讨的核心：  
+<span class="at-sign">@@ -57,7 +62,7 @@</span>
+ 它迫使我们重新思考：什么才是真正的“学习”？  
+ 这种新观念打破了计算机科学的传统边界，  
+ 将数学、统计学、心理学乃至神经科学都纳入同一个讨论框架。  
+<span class="minus">-接下来，我们将沿着这一问题展开——机器学习如何定义“学习”，又如何在实践中实现它。</span>
+<span class="plus">+接下来，我们就从整体视角出发，先搭好机器学习的“基本框架”，再逐步展开不同的学习方式与数学工具。</span>
+ 
+ \section{从数据到模型：学习的基本框架}
+ 
+<span class="at-sign">@@ -82,10 +87,12 @@</span>
+ 理解这一框架，是学习后续各种模型与算法的前提。  
+ 因为几乎所有机器学习方法——无论是监督、无监督还是强化学习——都建立在这三者的互动之上。
+ 
+<span class="plus">+</span>
+<span class="plus">+</span>
+ 从更宏观的角度看，机器学习本质上是一个“函数逼近”问题。  
+<span class="minus">-给定输入$x$与输出$y$，学习的目标是找到一个函数$f$，  </span>
+<span class="minus">-使得$f(x)$能够尽可能地接近真实值$y$。  </span>
+<span class="minus">-换句话说，我们希望用$f$去“拟合”数据背后的规律。  </span>
+<span class="plus">+给定输入 $x$ 与输出 $y$，学习的目标是找到一个函数 $f$，  </span>
+<span class="plus">+使得 $f(x)$ 能够尽可能地接近真实值 $y$。  </span>
+<span class="plus">+换句话说，我们希望用 $f$ 去“拟合”数据背后的规律。  </span>
+ 这就是所谓的学习——找到最能解释数据的函数。
+ 
+ \begin{figure}[htbp]
+<span class="at-sign">@@ -104,37 +111,20 @@</span>
+ 
+ 
+ 
+<span class="minus">-举个例子，在房价预测问题中，$x$代表房屋的特征——  </span>
+<span class="minus">-例如面积、位置、楼层等，而$y$则是对应的房价。  </span>
+<span class="minus">-机器学习要做的，就是通过大量样本$(x, y)$找到一个函数$f$，  </span>
+<span class="minus">-让它能够根据新的$x$预测出合理的$y$。  </span>
+<span class="plus">+举个例子，在房价预测问题中，$x$ 代表房屋的特征——  </span>
+<span class="plus">+例如面积、位置、楼层等，而 $y$ 则是对应的房价。  </span>
+<span class="plus">+机器学习要做的，就是通过大量样本 $(x, y)$ 找到一个函数 $f$，  </span>
+<span class="plus">+让它能够根据新的 $x$ 预测出合理的 $y$。  </span>
+ 我们之所以称之为“学习”，  
+ 是因为模型通过经验不断调整自己，使预测越来越接近真实。
+ 
+ 
+ 
+<span class="minus">-在这个学习框架下，算法的任务是调整模型的参数，使预测结果尽量接近真实值。  </span>
+<span class="minus">-为此，我们需要一个衡量“差距”的标准——这就是损失函数（Loss Function）。  </span>
+<span class="minus">-损失函数量化了预测$f(x)$与真实$y$之间的误差，  </span>
+<span class="minus">-而学习的过程，就是不断最小化这种误差的过程。  </span>
+<span class="minus">-可以说，优化思想是机器学习的“心跳”。</span>
+<span class="plus">+从这个角度看，“数据—模型—算法”共同构成了一个学习闭环：  </span>
+<span class="plus">+数据提供经验，模型给出对世界的假设，而算法则负责利用数据来改进这个假设。  </span>
+<span class="plus">+图~\ref{fig:construct-function} 概括了这样一种“构造函数”的过程。  </span>
+<span class="plus">+至于在这个闭环中，如何通过损失函数刻画“好坏”，又如何利用优化算法去改进模型，我们将在后面的“优化理论与损失函数”一节中专门讨论。</span>
+ 
+<span class="minus">-</span>
+<span class="minus">-</span>
+<span class="minus">-损失函数的选择取决于任务类型。  </span>
+<span class="minus">-在回归问题中，我们通常使用均方误差（MSE）来惩罚预测偏差；  </span>
+<span class="minus">-而在分类任务中，交叉熵（Cross-Entropy）则更能反映概率分布之间的差异。  </span>
+<span class="minus">-不同的损失函数意味着不同的学习目标——  </span>
+<span class="minus">-它们引导算法关注不同的方面，从而塑造不同的学习行为。</span>
+<span class="minus">-</span>
+<span class="minus">-</span>
+<span class="minus">-</span>
+<span class="minus">-在优化算法（如梯度下降）的驱动下，  </span>
+<span class="minus">-模型会不断调整自身的参数，让损失函数的值逐步下降，  </span>
+<span class="minus">-直到达到一个相对最优的状态。  </span>
+<span class="minus">-这一过程，就像机器在一次次试探与修正中，逐渐找到通往目标的路径。  </span>
+<span class="minus">-接下来，我们将进一步探讨——这些优化算法究竟是如何实现“学习”的。</span>
+<span class="minus">-</span>
+ \begin{figure}[htbp]
+   \centering
+   \includegraphics[width=1\textwidth]{figs/机器学习-构造一个函数.png}
+<span class="at-sign">@@ -142,11 +132,14 @@</span>
+   \label{fig:construct-function}
+ \end{figure}
+ 
+<span class="plus">+在搭好这张“整体框架图”之后，我们接下来要问的就是：在这套框架之下，根据手头的数据长什么样，具体可以发展出哪些典型的“学习方式”。</span>
+<span class="plus">+</span>
+ \section{监督学习与无监督学习}
+ 
+ 从学习所依赖的数据类型来看，  
+ 机器学习最基本的划分方式，是监督学习（Supervised Learning）与无监督学习（Unsupervised Learning）。  
+<span class="minus">-这种区分的核心在于：模型是否依赖带标签的数据进行学习。</span>
+<span class="plus">+这种区分的核心在于：模型是否依赖带标签的数据进行学习。  </span>
+<span class="plus">+换言之，在刚才的“数据—模型—算法”框架之上，我们先根据“数据有没有标签”来区分两种典型情形。</span>
+ 
+ \begin{figure}[htbp]
+   \centering
+<span class="at-sign">@@ -158,9 +151,9 @@</span>
+ 
+ 
+ 监督学习是最常见、也最直观的一种学习方式。  
+<span class="minus">-它依赖于大量带标签的数据样本，每个样本都包含输入$x$和对应的输出$y$。  </span>
+<span class="minus">-算法的目标，就是学习从$x$到$y$的映射关系。  </span>
+<span class="minus">-这里的“监督”，指的是标签$y$在训练过程中起到的“指导作用”，  </span>
+<span class="plus">+它依赖于大量带标签的数据样本，每个样本都包含输入 $x$ 和对应的输出 $y$。  </span>
+<span class="plus">+算法的目标，就是学习从 $x$ 到 $y$ 的映射关系。  </span>
+<span class="plus">+这里的“监督”，指的是标签 $y$ 在训练过程中起到的“指导作用”，  </span>
+ 就像老师在批改作业一样，告诉模型哪里做对了、哪里还需改进。
+ 
+ 
+<span class="at-sign">@@ -210,6 +203,12 @@</span>
+ 从这个角度看，无监督学习不仅是一种技术，  
+ 更是一种“让数据自己说话”的方法论。
+ 
+<span class="plus">+</span>
+<span class="plus">+</span>
+<span class="plus">+监督学习与无监督学习，主要处理的是“静态的数据集”：数据先收集好，再交给算法进行学习。  </span>
+<span class="plus">+在很多场景中，这已经非常有用。  </span>
+<span class="plus">+但在另一些情形下，智能体需要一边行动、一边获得反馈，在与环境不断互动中学习决策策略——这就把我们自然引向了下一种学习方式：强化学习。</span>
+<span class="plus">+</span>
+ \section{强化学习：从试错中学习}
+ 
+ 强化学习（Reinforcement Learning, RL）是一种以“试错”为核心机制的学习方法。  
+<span class="at-sign">@@ -234,18 +233,18 @@</span>
+ 
+ 形式上，强化学习通常建模为一个马尔可夫决策过程（Markov Decision Process, MDP）。  
+ 它由四个要素构成：状态空间、动作空间、状态转移概率以及奖励函数。  
+<span class="minus">-采用MDP的原因在于，它能够刻画“当前决策只依赖当前状态”的情境，  </span>
+<span class="plus">+采用 MDP 的原因在于，它能够刻画“当前决策只依赖当前状态”的情境，  </span>
+ 这为算法提供了清晰的数学框架。
+ 
+ 
+ 
+<span class="minus">-在每个时间步$t$，智能体观察到状态$s_t$，执行动作$a_t$。  </span>
+<span class="minus">-环境则根据转移概率$P(s_{t+1}|s_t, a_t)$变化到新状态$s_{t+1}$，并返回奖励$r_t$。  </span>
+<span class="minus">-智能体的目标，是找到一种策略$\pi$，使得未来所有奖励的折扣和最大化：</span>
+<span class="plus">+在每个时间步 $t$，智能体观察到状态 $s_t$，执行动作 $a_t$。  </span>
+<span class="plus">+环境则根据转移概率 $P(s_{t+1}|s_t, a_t)$ 变化到新状态 $s_{t+1}$，并返回奖励 $r_t$。  </span>
+<span class="plus">+智能体的目标，是找到一种策略 $\pi$，使得未来所有奖励的折扣和最大化：</span>
+ $$
+ \max_\pi \mathbb{E}\left[\sum_{t=0}^\infty \gamma^t r_t\right]
+ $$  
+<span class="minus">-其中，$\gamma$是折扣因子（$0 &lt; \gamma &lt; 1$），  </span>
+<span class="plus">+其中，$\gamma$ 是折扣因子（$0 &lt; \gamma &lt; 1$），  </span>
+ 用于平衡“眼前的收益”和“长远的回报”。
+ 
+ 
+<span class="at-sign">@@ -266,7 +265,7 @@</span>
+ 
+ 
+ 强化学习已在多个领域展现出惊人的成果。  
+<span class="minus">-从击败人类顶级棋手的AlphaGo，到实现动态决策的自动驾驶系统，再到精确操控的智能机器人——  </span>
+<span class="plus">+从击败人类顶级棋手的 AlphaGo，到实现动态决策的自动驾驶系统，再到精确操控的智能机器人——  </span>
+ 这些都是强化学习的成功应用。  
+ 它们的共同点在于：环境复杂、反馈往往延迟、目标依赖长期规划。  
+ 而强化学习，正擅长在这种“不确定而连续”的情境中成长。
+<span class="at-sign">@@ -279,6 +278,13 @@</span>
+ 在不断试探、反馈与调整中，智能体学会了决策、形成了经验，  
+ 这也为我们理解“智能”本身，提供了一个可计算的模型。
+ 
+<span class="plus">+</span>
+<span class="plus">+</span>
+<span class="plus">+无论是监督学习、无监督学习，还是强化学习，  </span>
+<span class="plus">+它们背后都有一个共同的问题：  </span>
+<span class="plus">+如何用一个合适的“目标函数”来衡量好坏，并通过优化算法不断改进模型。  </span>
+<span class="plus">+接下来，我们就从“优化”的角度，再看一看机器学习中的学习过程。</span>
+<span class="plus">+</span>
+ \section{优化理论与损失函数}
+ 
+ 优化，是机器学习的核心思想之一。  
+<span class="at-sign">@@ -293,12 +299,12 @@</span>
+ 
+ 
+ 
+<span class="minus">-优化的目标，就是找到一组参数$\theta$，  </span>
+<span class="minus">-使损失函数$L(\theta)$的值最小化：</span>
+<span class="plus">+优化的目标，就是找到一组参数 $\theta$，  </span>
+<span class="plus">+使损失函数 $L(\theta)$ 的值最小化：</span>
+ $$
+ \min_{\theta} L(\theta)
+ $$  
+<span class="minus">-这里的$\theta$代表模型的可调部分——  </span>
+<span class="plus">+这里的 $\theta$ 代表模型的可调部分——  </span>
+ 比如神经网络的权重、线性回归的系数等。  
+ 优化，就是调整这些参数，让模型在数据上表现得更好。
+ 
+<span class="at-sign">@@ -316,7 +322,7 @@</span>
+ $$
+ \theta_{t+1} = \theta_t - \eta \nabla_\theta L(\theta_t)
+ $$  
+<span class="minus">-其中$\eta$称为学习率（Learning Rate），它决定每次参数更新的步长。  </span>
+<span class="plus">+其中 $\eta$ 称为学习率（Learning Rate），它决定每次参数更新的步长。  </span>
+ 学习率太大，模型可能“跳过”最优点；  
+ 太小，又会导致学习速度过慢。  
+ 因此，选择合适的学习率，是优化的艺术之一。
+<span class="at-sign">@@ -326,7 +332,7 @@</span>
+ 当损失函数的形状复杂时，  
+ 梯度下降法有时会陷入局部最小值，或在狭长的谷地中反复震荡。  
+ 为此，研究者们设计了许多改进算法，  
+<span class="minus">-如动量法（Momentum）、Adam、RMSprop等。  </span>
+<span class="plus">+如动量法（Momentum）、Adam、RMSprop 等。  </span>
+ 它们在不同程度上解决了“速度”与“稳定性”的平衡问题，  
+ 让优化过程更加高效、平滑。
+ 
+<span class="at-sign">@@ -345,10 +351,10 @@</span>
+ 
+ 
+ 
+<span class="minus">-Adam算法可以看作是动量法与自适应学习率的结合体。  </span>
+<span class="plus">+Adam 算法可以看作是动量法与自适应学习率的结合体。  </span>
+ 它会根据每个参数的梯度历史，自主调整学习率的大小，  
+ 从而在不同任务和数据分布下，都能保持较高的稳定性与收敛速度。  
+<span class="minus">-正因如此，Adam几乎成为现代深度学习的“默认选择”。</span>
+<span class="plus">+正因如此，Adam 几乎成为现代深度学习的“默认选择”。</span>
+ 
+ 
+ 
+<span class="at-sign">@@ -377,7 +383,8 @@</span>
+ 前者决定方向，后者决定速度。  
+ 一个恰当的损失函数能让模型朝着正确目标前进，  
+ 而一个高效的优化方法，则让它更快、更稳地抵达终点。  
+<span class="minus">-两者协同，才使学习真正发生。</span>
+<span class="plus">+当然，把训练集上的损失降到很低，只是“学会了教材上的例题”；  </span>
+<span class="plus">+要判断模型是否真正学会了任务本身，还需要考察它在“新题”上的表现——这就引出了泛化与过拟合的问题。</span>
+ 
+ \section{泛化能力与过拟合}
+ 
+<span class="at-sign">@@ -428,17 +435,17 @@</span>
+ 
+ 
+ 
+<span class="minus">-式中的$\lambda$称为正则化系数，用来控制惩罚项的强度。  </span>
+<span class="minus">-$\lambda$过大，模型被“约束”得太紧，容易欠拟合；  </span>
+<span class="minus">-$\lambda$过小，则放任参数自由，容易过拟合。  </span>
+<span class="minus">-因此，找到合适的$\lambda$，  </span>
+<span class="plus">+式中的 $\lambda$ 称为正则化系数，用来控制惩罚项的强度。  </span>
+<span class="plus">+$\lambda$ 过大，模型被“约束”得太紧，容易欠拟合；  </span>
+<span class="plus">+$\lambda$ 过小，则放任参数自由，容易过拟合。  </span>
+<span class="plus">+因此，找到合适的 $\lambda$，  </span>
+ 就是在“自由”与“约束”之间取得平衡的过程。
+ 
+ 
+ 
+<span class="minus">-正则化有多种形式，其中最常见的是L1正则化（Lasso）与L2正则化（Ridge）。  </span>
+<span class="minus">-L1正则化会让部分参数趋近于零，从而实现“自动特征选择”；  </span>
+<span class="minus">-而L2正则化则让参数整体更平滑，避免出现过大的权重。  </span>
+<span class="plus">+正则化有多种形式，其中最常见的是 L1 正则化（Lasso）与 L2 正则化（Ridge）。  </span>
+<span class="plus">+L1 正则化会让部分参数趋近于零，从而实现“自动特征选择”；  </span>
+<span class="plus">+而 L2 正则化则让参数整体更平滑，避免出现过大的权重。  </span>
+ 从直觉上看，前者像“取舍”，后者像“均衡”。
+ 
+ 
+<span class="at-sign">@@ -510,3 +517,4 @@</span>
+ \nocite{*}
+ %\printbibliography[heading=bibintoc, title=\ebibname]
+ \newpage
+<span class="plus">+```</span>
+</pre>
+</body>
+</html>
