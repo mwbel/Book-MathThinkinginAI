@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>AImath.v5.bcf</file>
+      <file>AImath.v6.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>AImath.v5.bbl</file>
+      <file>AImath.v6.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -65,19 +65,19 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>AImath.v5</infile>
+      <infile>AImath.v6</infile>
     </cmdline>
     <input>
-      <file>AImath.v5.bcf</file>
+      <file>AImath.v6.bcf</file>
     </input>
     <output>
-      <file>AImath.v5.bbl</file>
+      <file>AImath.v6.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>AImath.v5.bbl</file>
+      <file>AImath.v6.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>AImath.v5.bcf</file>
+      <file>AImath.v6.bcf</file>
     </requires>
     <requires type="editable">
       <file>reference.bib</file>
