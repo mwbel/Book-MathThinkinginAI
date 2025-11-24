@@ -573,8 +573,7 @@ $$\hat{x}_i = \frac{x_i - \mu_{\mathcal{B}}}{\sqrt{\sigma_{\mathcal{B}}^2 + \eps
 残差网络（ResNet）通过引入跳跃连接（skip connection），使得深度网络的训练突破了层数限制。传统深度网络随着层数增加会出现性能退化，而残差连接通过让网络学习残差函数$F(x) = H(x) - x$而非直接学习目标映射$H(x)$，大大降低了学习难度。
 
 残差块的数学表达：
-$$\mathcal{F}(x) + x$$
-
+$$\mathcal{F}(x) + x,$$
 其中$x$是输入，$\mathcal{F}(x)$是通过几个卷积层学习的残差函数。当网络需要恒等变换时，只需将$\mathcal{F}(x)$学习为零即可，这比学习完整的恒等变换容易得多。
 
 从优化角度看，残差连接为梯度提供了直接传播的路径，避免了梯度在深层网络中的消失。反向传播时，梯度的计算包含直接项：$\frac{\partial \mathcal{L}}{\partial x} = \frac{\partial \mathcal{L}}{\partial y} \cdot (1 + \frac{\partial \mathcal{F}(x)}{\partial x})$，其中1确保了梯度至少能够按原样传播，这从根本上解决了深度网络训练的梯度消失问题。
@@ -584,7 +583,6 @@ $$\mathcal{F}(x) + x$$
 
 Adam（Adaptive Moment Estimation）算法结合了动量法和RMSprop的优点，通过估计梯度的一阶矩和二阶矩来调整每个参数的学习率：
 $$m_t = \beta_1 m_{t-1} + (1-\beta_1)g_t, \quad v_t = \beta_2 v_{t-1} + (1-\beta_2)g_t^2$$
-
 然后进行偏差修正和参数更新：
 $$\hat{m}_t = \frac{m_t}{1-\beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1-\beta_2^t}$$
 $$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t$$
@@ -796,6 +794,78 @@ Adam优化器通过自适应调整学习率解决了传统梯度下降算法收�
 
 %需扩写
 \subsubsection{案例一：深度学习优化算法的演进}
+
+深度学习优化算法的发展史是算法思维演进最生动的体现。从最早的随机梯度下降到如今复杂的自适应优化算法，每一次突破都体现了对优化问题的更深刻理解和更巧妙解决方案。
+
+\paragraph{经典梯度下降：从理论到实践的跨越}
+梯度下降（Gradient Descent, GD）是深度学习优化算法的基础，其核心思想源于多元函数的梯度理论。对于目标函数$f(\theta)$，梯度下降的更新规则为：
+$$\theta_{t+1} = \theta_t - \alpha \nabla f(\theta_t)$$
+
+其中$\alpha$是学习率，$\nabla f(\theta_t)$是函数在$\theta_t$处的梯度。然而，在大规模深度学习中，使用整个数据集计算梯度成本过高，这催生了随机梯度下降（Stochastic Gradient Descent, SGD）：
+$$\theta_{t+1} = \theta_t - \alpha \nabla f(\theta_t; \xi_t)$$
+
+其中$\xi_t$是第$t$次迭代中随机采样的 minibatch。这种从全批量到小批量的转变，体现了算法思维在理论完美性和计算可行性之间的权衡。
+
+SGD虽然计算高效，但存在两个核心问题：梯度噪声和学习率选择。这推动了后续优化算法的发展。
+
+\paragraph{动量方法：历史信息的巧妙利用}
+为了解决SGD的震荡问题，动量方法引入了历史梯度信息的加权平均：
+$$v_t = \beta v_{t-1} + (1-\beta) \nabla f(\theta_t)$$
+$$\theta_{t+1} = \theta_t - \alpha v_t$$
+
+其中$\beta$是动量系数，通常设为0.9。动量方法不仅加速了在平坦方向上的收敛，还有助于跨越局部最优点和鞍点。从物理角度看，动量方法相当于在优化过程中加入了"惯性"，使得参数更新具有方向性和稳定性。
+
+Nesterov Accelerated Gradient (NAG) 进一步改进了动量方法，通过前瞻性梯度计算提升性能：
+$$v_t = \beta v_{t-1} + (1-\beta) \nabla f(\theta_t - \alpha \beta v_{t-1})$$
+$$\theta_{t+1} = \theta_t - \alpha v_t$$
+
+这种"向前看"的策略体现了算法思维中的预见性和优化智慧。
+
+\paragraph{自适应学习率：个性化的参数更新策略}
+自适应学习率算法的兴起标志着优化算法从"一刀切"向"个性化"转变的里程碑。
+
+\textbf{AdaGrad算法}通过累计梯度平方的倒数来调整学习率：
+$$\theta_{t+1,i} = \theta_{t,i} - \frac{\alpha}{\sqrt{G_{t,ii} + \epsilon}} g_{t,i}$$
+
+其中$G_t = \sum_{\tau=1}^{t} g_\tau g_\tau^T$是累计梯度外积矩阵，$g_{t,i}$是第$i$个参数在时刻$t$的梯度。AdaGrad使得频繁更新的参数学习率逐渐减小，而稀疏参数保持较大的学习率。
+
+然而，AdaGrad的学习率单调递减特性可能导致训练过早停止。为此，\textbf{AdaDelta}算法引入了指数移动平均来解决学习率衰减问题：
+$$E[g^2]_t = \rho E[g^2]_{t-1} + (1-\rho) g_t^2$$
+$$\theta_{t+1} = \theta_t - \frac{\text{RMS}[\Delta \theta]_{t-1}}{\text{RMS}[g_t]} g_t$$
+
+\textbf{RMSprop}进一步简化了这一思想，使用指数移动平均来估计梯度二阶矩：
+$$v_t = \beta v_{t-1} + (1-\beta) g_t^2$$
+$$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{v_t + \epsilon}} g_t$$
+
+\paragraph{Adam算法：自适应优化的集大成者}
+Adam算法结合了动量方法和自适应学习率的优点，成为现代深度学习中最受欢迎的优化算法之一。
+
+Adam的核心更新机制：
+\begin{align}
+m_t &= \beta_1 m_{t-1} + (1-\beta_1) g_t && \text{(一阶矩估计)} \\
+v_t &= \beta_2 v_{t-1} + (1-\beta_2) g_t^2 && \text{(二阶矩估计)} \\
+\hat{m}_t &= \frac{m_t}{1-\beta_1^t} && \text{(偏差修正)} \\
+\hat{v}_t &= \frac{v_t}{1-\beta_2^t} && \text{(偏差修正)} \\
+\theta_{t+1} &= \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t && \text{(参数更新)}
+\end{align}
+
+Adam的超参数通常设置为：$\alpha=0.001$, $\beta_1=0.9$, $\beta_2=0.999$, $\epsilon=10^{-8}$。这些设置在大多数问题上表现良好，体现了Adam的鲁棒性。
+
+\paragraph{现代优化算法：更精细化的策略}
+随着深度学习的发展，研究者提出了更多精细化的优化策略：
+
+\textbf{AdamW}引入了权重衰减的解耦，解决了传统Adam中L2正则化与权重衰减的混淆问题：
+$$\theta_{t+1} = (1-\lambda) \theta_t - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$$
+
+\textbf{LAMB}算法针对大规模分布式训练，通过层次化自适应学习率调整优化了BERT等大模型的训练：
+$$\theta_{t+1} = \phi \theta_t - \eta \frac{r_1}{r_2} m_t$$
+
+其中$\phi$是权重衰减系数，$r_1, r_2$是层次化学习率调整因子。
+
+\textbf{Lookahead}机制采用双模型策略，慢模型定期向快模型方向更新，进一步提升了优化性能：
+$$\phi_{t+1} = \phi_t + \alpha (\theta_{t+k} - \phi_t)$$
+
+这种优化算法的演进历程完美展现了算法思维的核心特征：从简单的理论原理出发，通过不断识别和解决实际问题，逐步发展出越来越精细和高效的解决方案。每一次改进都不是对前者的简单替代，而是在理解其优缺点基础上的升华和超越。
 
  
 
