@@ -1,0 +1,86 @@
+% 算法思维部分修改红删绿增diff可视化
+% 使用LaTeX的xcolor和soul包来实现删除线和绿色高亮效果
+
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% 定义删除线命令
+\newcommand{\reddelete}[1]{\textcolor{red}{\st{#1}}}
+% 定义绿色新增命令
+\newcommand{\greenadd}[1]{\textcolor{green}{#1}}
+
+\begin{document}
+
+\section*{算法思维部分修改可视化}
+
+\subsection*{修改前的内容：}
+
+\reddelete{\subsubsection{经典案例分析：Cramer法则与LU分解}}
+
+\reddelete{对于线性方程组$A\mathbf{x} =\mathbf{b}$，数学上的Cramer法则给出了优雅的理论解：}
+\reddelete{$$x_i = \frac{\det(A_i)}{\det(A)}$$}
+
+\reddelete{然而，计算 $n \times n$矩阵的行列式需要 $O(n!)$ 次运算，这意味着对于 $20 \times 20$ 的方程组，即使每秒进行 $10^{12}$ 次运算，也需要约77年才能完成。}
+
+\reddelete{算法思维的选择：采用LU分解算法，复杂度为$O(n^3)$，虽然数学上不如Cramer法则优雅，但在计算上完全可行。这个例子体现了算法思维的核心——在理论完美性和计算可行性之间找到最佳平衡。}
+
+\subsection*{修改后的内容：}
+
+\greenadd{\subsubsection{从数学理论到算法实践：Cramer法则到现代数值方法的演进}}
+
+\greenadd{正如我们在前文深入分析的，Cramer法则完美展现了数学思维的理论优雅性，但其$O(n!)$的复杂度使其在实际计算中完全不可行。这种从"理论存在"到"算法实现"的转换，正是算法思维的核心价值所在。算法思维不质疑数学理论的正确性，而是要回答："我们如何将这个理论转化为实际可行的计算过程？"}
+
+\greenadd{这个转换过程体现了算法思维的几个关键特征：}
+
+\greenadd{\paragraph{计算复杂度意识}}
+\greenadd{算法思维的首要关注点就是复杂度分析。对于线性方程组求解问题，算法思维要求我们寻找更高效的替代方案。LU分解算法提供了一个典型范例：}
+
+\greenadd{\textbf{LU分解的基本思想}：将矩阵$A$分解为下三角矩阵$L$和上三角矩阵$U$的乘积，即$A = LU$。一旦完成分解，求解方程组$A\mathbf{x} = \mathbf{b}$就转化为两步简单的三角方程求解：}
+\greenadd{\begin{enumerate}}
+\greenadd{\item 前向替换：求解$L\mathbf{y} = \mathbf{b}$}
+\greenadd{\item 后向替换：求解$U\mathbf{x} = \mathbf{y}$}
+\greenadd{\end{enumerate}}
+
+\greenadd{LU分解的时间复杂度为$O(n^3)$，相比Cramer法则的$O(n!)$有了质的提升。对于一个$20 \times 20$的方程组，LU分解在普通计算机上只需要几毫秒就能完成，而Cramer法则需要77年。这种差异不仅体现了算法的效率优势，更展示了算法思维如何将理论可能性转化为实际可行性。}
+
+\greenadd{\paragraph{数值稳定性考虑}}
+\greenadd{算法思维不仅关注复杂度，还重视数值稳定性。在浮点运算环境下，不同算法对舍入误差的敏感程度差异巨大。以LU分解为例，简单的LU分解可能在某些矩阵上出现数值不稳定，而引入部分主元(partial pivoting)的LU分解算法则能显著提高稳定性：}
+
+\greenadd{\begin{algorithmic}[1]}
+\greenadd{\STATE \textbf{输入：} 矩阵$A \in \mathbb{R}^{n \times n}$，向量$\mathbf{b} \in \mathbb{R}^n$}
+\greenadd{\STATE \textbf{输出：} 解向量$\mathbf{x}$}
+\greenadd{\STATE 对$A$进行带主元选择的LU分解：$PA = LU$}
+\greenadd{\STATE 求解$L\mathbf{y} = P\mathbf{b}$（前向替换）}
+\greenadd{\STATE 求解$U\mathbf{x} = \mathbf{y}$（后向替换）}
+\greenadd{\STATE \textbf{返回} $\mathbf{x}$}
+\greenadd{\end{algorithmic}}
+
+\greenadd{\paragraph{内存效率优化}}
+\greenadd{现代算法思维还考虑内存访问模式和缓存利用率。稀疏矩阵技术就是典型例子——当矩阵中大部分元素为零时，专门设计的稀疏矩阵存储格式和相应算法可以将空间复杂度从$O(n^2)$降低到$O(\text{nnz})$，其中nnz表示非零元素的个数。这种优化在处理大规模科学计算问题时至关重要，能够将内存需求降低几个数量级。}
+
+\greenadd{\paragraph{算法适应性设计}}
+\greenadd{算法思维强调针对不同的问题特征选择最合适的算法。对于线性方程组求解，现代数值线性代数提供了丰富的算法选择：}
+\greenadd{\begin{itemize}}
+\greenadd{\item \textbf{稠密矩阵}：LU分解、QR分解、Cholesky分解}
+\greenadd{\item \textbf{稀疏矩阵}：共轭梯度法、GMRES、预条件技术}
+\greenadd{\item \textbf{特殊结构}：循环约简法、快速Fourier变换方法}
+\greenadd{\item \textbf{大规模问题}：区域分解法、多层方法}
+\greenadd{\end{itemize}}
+
+\greenadd{这种适应性体现了算法思维的核心原则：不存在"万能"的最优算法，只有"最适合"特定问题特征的算法。}
+
+\subsection*{修改总结：}
+
+\begin{itemize}
+\item \textbf{消除重复}：删除了与前面数学思维部分重复的Cramer法则介绍
+\item \textbf{完善衔接}：增加了"正如我们在前文深入分析的"等过渡句，建立与前面内容的联系
+\item \textbf{内容扩写}：从原来的简单几行扩展到包含四个段落、算法伪代码和多个技术要点的完整内容（约1.5-2倍扩写）
+\item \textbf{技术深化}：增加了数值稳定性、内存优化、算法适应性等深度内容
+\item \textbf{结构优化}：按照算法思维的四个维度组织内容，逻辑更加清晰
+\end{itemize}
+
+\end{document}

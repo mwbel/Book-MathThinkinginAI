@@ -11,7 +11,7 @@
 %\usepackage[pass]{geometry}
 \title{人工智能的数学思维}
 %\subtitle{Elegant\LaTeX{} 经典之作}
-%\author{吴敏 蒲戈光  }
+%\author{ }
 \institute{华东师范大学 软件工程学院}
 \date{2024}
 %\version{4.3}
@@ -38,6 +38,10 @@
 \graphicspath{{../figs/}{figs/}{chapters/figs/}}
 \usepackage{amsmath}  % 确保加载了 amsmath 包
 \usepackage{amssymb}
+
+% 算法环境支持
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 \usepackage{titlesec} 
 \usepackage{subcaption}
@@ -175,11 +179,10 @@
 \preferInput{chapters/ch6/6-ML.v3}  
 \preferInput{chapters/ch7/7ML2DL.v1} % 从机器学习到深度学习
 \preferInput{chapters/ch8/8-DL.v1} %  深度学习实践 
-%\input{阅读地图}
 
 \part{理解的边界}
 \preferInput{chapters/ch9/9-深度学习的挑战与幻觉.v4} 
-\preferInput{chapters/ch0/10-AI的边界：图灵机、哥德尔与计算的极限.v3} 
+\preferInput{chapters/ch10/10-AI的边界：图灵机、哥德尔与计算的极限.v3} 
 \preferInput{chapters/ch11/11-符号、神经与因果：智能的三种建构方式.v3} 
 \preferInput{chapters/ch12/12-智能的物理基础：从熵到量子计算.v3} 
 
@@ -189,7 +192,7 @@
 \preferInput{chapters/ch15/15-理解智能的尽头：理性与取舍的未来.v3} 
 \preferInput{chapters/ch16/16-伦理与挑战.v3} 
 
-\part{向上的道路}
+%\part{向上的道路}
 \preferInput{chapters/ch17/17-Conclusion.v1}
 \preferInput{chapters/ch18/18-Ack.v1} 
 \nocite{*}
