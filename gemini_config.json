@@ -3,73 +3,79 @@
     {
       "key": "AIzaSyD4vsbpKlxU3eJ_nuOoLy8HBDq6gky7i5k",
       "name": "Gemini-1",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyDZ9PvDOc2WvUH0bBxPgGxezCMpuI_mZpc",
       "name": "Gemini-2",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyDKYPcocYVQp_0SUeG0BKH7E4AwKMeWTKI",
       "name": "Gemini-3",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyDQumq0V2TqAdTTXj9TSy0uHtiwgrfRDY4",
       "name": "Gemini-4",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyBC0CKcEAjRAEiAXSOlJNOufzdTaKw_RXk",
       "name": "Gemini-5",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyCK7n8soqlCL0V9-G94_7jpY_BD86GoWcg",
       "name": "Gemini-6",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyBxCbCpjnEGyIeAIV2eBjeyCGhGerPC1Ro",
       "name": "Gemini-7",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyD5AegzQTwS8A2o_jbyw3m5yGxvIlRGjj8",
       "name": "Gemini-8",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     },
     {
       "key": "AIzaSyDe3zpjNwyMyXPIdnCcLYJ8HrgWc_sdu-I",
       "name": "Gemini-9",
-      "daily_limit": 250,
+      "daily_limit": 4000,
       "active": true
     }
   ],
   "settings": {
-    "cooldown_minutes": 60,
+    "cooldown_minutes": 5,
     "retry_on_quota_exceeded": true,
     "max_retries": 3,
     "rate_limits": {
-      "rpm": 10,
-      "tpm": 250000,
-      "tpd": 250000,
+      "rpm": 50,
+      "rph": 3000,
+      "tpm": 1000000,
+      "tpd": 24000000,
       "reset_time_pt": "00:00",
       "reset_time_beijing": "15:00"
     },
     "model_info": {
       "name": "gemini-2.5-flash",
       "type": "standard",
-      "pricing_tier": "free"
+      "pricing_tier": "free",
+      "official_limits": {
+        "rpm_limit": 60,
+        "rph_limit": 3600,
+        "token_pricing": "free"
+      }
     }
   }
 }
