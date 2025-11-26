@@ -1,10 +1,22 @@
 {
   "AIzaSyD4vsbpKlxU3eJ_nuOoLy8HBDq6gky7i5k": {
-    "2025-11-26": {
-      "count": 26,
-      "success_count": 26,
-      "error_count": 0,
-      "last_used": "2025-11-26T19:52:28.081229"
-    }
+    "2025-11-27": {
+      "count": 1,
+      "success_count": 0,
+      "error_count": 1,
+      "last_used": "2025-11-27T00:05:06.886309"
+    },
+    "last_error_time": "2025-11-27T00:05:06.886312",
+    "last_error": "API key 无效或权限不足"
+  },
+  "AIzaSyDZ9PvDOc2WvUH0bBxPgGxezCMpuI_mZpc": {
+    "2025-11-27": {
+      "count": 1,
+      "success_count": 0,
+      "error_count": 1,
+      "last_used": "2025-11-27T00:05:36.905680"
+    },
+    "last_error_time": "2025-11-27T00:05:36.905684",
+    "last_error": "网络请求异常: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=30)"
   }
 }
