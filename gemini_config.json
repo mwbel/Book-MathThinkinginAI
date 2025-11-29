@@ -1,14 +1,14 @@
 {
   "api_keys": [
     {
-      "key": "AIzaSyD4vsbpKlxU3eJ_nuOoLy8HBDq6gky7i5k",
-      "name": "Gemini-1",
+      "key": "AIzaSyBa8epEyCzYu-ob9ifi_MZGBwNg1-cMR8E",
+      "name": "Gemini-Key-1",
       "daily_limit": 4000,
       "active": true
     },
     {
-      "key": "AIzaSyDZ9PvDOc2WvUH0bBxPgGxezCMpuI_mZpc",
-      "name": "Gemini-2",
+      "key": "AIzaSyC14ZjAKkouKxCAbfEV6H5Zpj95DdIe7JI",
+      "name": "Gemini-Key-2",
       "daily_limit": 4000,
       "active": true
     }

@@ -3,24 +3,35 @@
     {
       "name": "latexmk_xelatex",
       "command": "latexmk",
-      "args": ["-xelatex", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"]
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
     },
     {
       "name": "biber",
       "command": "biber",
-      "args": ["%DOCFILE%"]
+      "args": [
+        "%DOCFILE%"
+      ]
     }
   ],
-
   /* 把编译产生的中间文件收纳到 build/（见方案B第1步）*/
   "latex-workshop.latex.outDir": "./build",
-  
   "latex-workshop.latex.recipes": [
     {
       "name": "latexmk (xelatex+biber)",
-      "tools": ["latexmk_xelatex", "biber", "latexmk_xelatex"]
+      "tools": [
+        "latexmk_xelatex",
+        "biber",
+        "latexmk_xelatex"
+      ]
     }
   ],
   "latex-workshop.view.pdf.viewer": "tab",
-  "latex-workshop.latex.autoBuild.run": "onSave"
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "CodeGPT.apiKey": "Google AI Studio"
 }

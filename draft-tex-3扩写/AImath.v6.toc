@@ -51,13 +51,14 @@
 \contentsline {paragraph}{收敛速度的量化}{45}{Item.6}%
 \contentsline {paragraph}{最优学习率的推导}{45}{Item.6}%
 \contentsline {subsection}{\numberline {4.1.2}数学思维的理论边界：存在性、可构造性与复杂性}{45}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}算法思维：从理论到计算的桥梁}{49}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}数学等价性与计算等价性的根本差异}{49}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.1.3}数学思维的理论边界：存在性、可构造性与复杂性}{45}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}算法思维：从理论到计算的桥梁}{50}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}数学等价性与计算等价性的根本差异}{50}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}算法思维的核心要素：复杂度、优化与稳定性}{52}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}算法思维的实践应用：超大规模推荐系统案例}{56}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}工程思维：从算法到系统的实现}{58}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}工程思维的核心特征：实用导向与约束优化}{60}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}工程思维的技术体现：架构设计与质量保障}{64}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.1}工程思维的核心特征：实用导向与约束优化}{59}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}工程思维的技术体现：架构设计与质量保障}{63}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}三种思维的协同：AI系统设计的完整方法论}{65}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}思维层次的递进关系：从抽象到具体的系统性转化}{65}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}思维间的相互促进机制：理论与实践的螺旋式发展}{66}{subsection.4.4.2}%
@@ -83,8 +84,8 @@
 \contentsline {subsection}{\numberline {5.2.4}概率论与统计：不确定性的数学（理论框架）}{82}{subsection.5.2.4}%
 \contentsline {subsubsection}{概率分布的深层理解}{82}{subsection.5.2.4}%
 \contentsline {subsubsection}{贝叶斯推断的数学框架}{82}{subsection.5.2.4}%
-\contentsline {subsubsection}{统计学习理论}{83}{Item.16}%
-\contentsline {subsubsection}{信息论基本量：熵、互信息与 KL 散度}{84}{Item.16}%
+\contentsline {subsubsection}{统计学习理论}{83}{Item.19}%
+\contentsline {subsubsection}{信息论基本量：熵、互信息与 KL 散度}{84}{Item.19}%
 \contentsline {subsection}{\numberline {5.2.5}概率论与统计：不确定性的数学（直观视角）}{84}{subsection.5.2.5}%
 \contentsline {subsection}{\numberline {5.2.6}信息论：量化信息的数学框架（直观视角）}{86}{subsection.5.2.6}%
 \contentsline {subsection}{\numberline {5.2.7}优化理论：寻找最优解的数学}{86}{subsection.5.2.7}%
@@ -286,7 +287,7 @@
 \contentsline {subsection}{\numberline {11.4.3}因果推理的数学工具}{169}{subsection.11.4.3}%
 \contentsline {paragraph}{do-演算}{169}{subsection.11.4.3}%
 \contentsline {paragraph}{后门准则}{169}{subsection.11.4.3}%
-\contentsline {paragraph}{前门准则}{169}{Item.29}%
+\contentsline {paragraph}{前门准则}{169}{Item.32}%
 \contentsline {subsection}{\numberline {11.4.4}因果发现方法}{170}{subsection.11.4.4}%
 \contentsline {paragraph}{基于约束的方法}{170}{subsection.11.4.4}%
 \contentsline {paragraph}{基于评分的方法}{170}{subsection.11.4.4}%
@@ -316,7 +317,7 @@
 \contentsline {paragraph}{系统架构}{174}{subsection.11.7.1}%
 \contentsline {subsection}{\numberline {11.7.2}自动驾驶系统}{174}{subsection.11.7.2}%
 \contentsline {paragraph}{感知-推理-决策链条}{174}{subsection.11.7.2}%
-\contentsline {paragraph}{安全保障}{174}{Item.35}%
+\contentsline {paragraph}{安全保障}{174}{Item.38}%
 \contentsline {subsection}{\numberline {11.7.3}科学发现系统}{174}{subsection.11.7.3}%
 \contentsline {paragraph}{假设生成与验证}{174}{subsection.11.7.3}%
 \contentsline {paragraph}{发现流程}{174}{subsection.11.7.3}%
@@ -522,3 +523,4 @@
 \contentsline {subsection}{\numberline {16.5.2}技术伦理的实践路径}{230}{subsection.16.5.2}%
 \contentsline {section}{\numberline {16.6}本章小结}{232}{section.16.6}%
 \contentsline {chapter}{致谢}{235}{chapter*.43}%
+\contentsline {chapter}{参考文献}{236}{chapter*.44}%

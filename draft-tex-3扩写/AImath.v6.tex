@@ -5,8 +5,8 @@
 
 \documentclass[lang=cn,scheme=chinese,12pt]{elegantbook}
 
-% 加载inputenc包以解决csquotes警告
-\usepackage[utf8]{inputenc}
+% XeLaTeX下不需要inputenc包，已经原生支持UTF-8
+% \usepackage[utf8]{inputenc}  % XeLaTeX下注释掉此行
 
 % 显式加载 biblatex，确保使用 biber
 \usepackage{biblatex}
@@ -29,7 +29,10 @@
 %\logo{logo-blue.png}
 \cover{cover.jpg}
 
+% 字体配置（如果需要可以取消注释）
 %\setCJKmainfont{Songti SC}
+%\setCJKsansfont{Heiti SC}
+%\setCJKmonofont{Kaiti SC}
 
 % 本文档命令
 \usepackage{array}
@@ -41,6 +44,21 @@
 \graphicspath{{../figs/}{figs/}{chapters/figs/}}
 \usepackage{amsmath}  % 确保加载了 amsmath 包
 \usepackage{amssymb}
+% elegantbook模板已包含数学环境，无需加载amsthm
+
+% 修改elegantbook的数学环境编号格式为阿拉伯数字
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}  % 公式编号
+
+% 由于elegantbook使用tcolorbox，需要特殊处理
+\makeatletter
+\renewcommand{\thetcb@cnt@definition}{\arabic{chapter}.\arabic{tcb@cnt@definition}}
+\renewcommand{\thetcb@cnt@theorem}{\arabic{chapter}.\arabic{tcb@cnt@theorem}}
+\renewcommand{\thetcb@cnt@lemma}{\arabic{chapter}.\arabic{tcb@cnt@lemma}}
+\renewcommand{\thetcb@cnt@corollary}{\arabic{chapter}.\arabic{tcb@cnt@corollary}}
+\renewcommand{\thetcb@cnt@proposition}{\arabic{chapter}.\arabic{tcb@cnt@proposition}}
+% example环境的编号
+\renewcommand{\theexam}{\arabic{chapter}.\arabic{exam}}
+\makeatother
 
 % 算法环境支持
 \usepackage{algorithm}
