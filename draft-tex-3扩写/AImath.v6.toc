@@ -57,8 +57,8 @@
 \contentsline {subsection}{\numberline {4.2.2}算法思维的核心要素：复杂度、优化与稳定性}{52}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}算法思维的实践应用：超大规模推荐系统案例}{57}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}工程思维：从算法到系统的实现}{59}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}工程思维的核心特征：实用导向与约束优化}{60}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}工程思维的技术体现：架构设计与质量保障}{64}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.1}工程思维的核心特征：实用导向与约束优化}{61}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}工程思维的技术体现：架构设计与质量保障}{65}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}三种思维的协同：AI系统设计的完整方法论}{66}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}思维层次的递进关系：从抽象到具体的系统性转化}{66}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}思维间的相互促进机制：理论与实践的螺旋式发展}{67}{subsection.4.4.2}%
