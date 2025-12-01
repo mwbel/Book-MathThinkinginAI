@@ -47,7 +47,7 @@
 \contentsline {chapter}{\numberline {五}人工智能的三种思维：理论到实践的跨越}{37}{chapter.4}%
 \contentsline {section}{\numberline {4.1}数学思维：智能的理论基石}{37}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}数学思维的核心特征}{37}{subsection.4.1.1}%
-\contentsline {subsubsection}{抽象化：从现象到本质的认知跃迁}{38}{subsection.4.1.1}%
+\contentsline {subsubsection}{抽象化：从现象到本质的认知跃迁}{37}{subsection.4.1.1}%
 \contentsline {subsubsection}{形式化：精确的数学表达与逻辑推理}{40}{subsection.4.1.1}%
 \contentsline {subsubsection}{严谨性：逻辑的一致性与可验证性}{43}{Item.6}%
 \contentsline {paragraph}{算法的正确性}{45}{Item.6}%
@@ -80,15 +80,22 @@
 \contentsline {subsubsection}{实用性导向：从完美到可用的思维转换}{59}{subsection.4.3.2}%
 \contentsline {subsubsection}{约束优化：在限制中寻找最优解}{59}{subsection.4.3.2}%
 \contentsline {subsubsection}{系统性思考：统筹多维度的复杂权衡}{60}{subsection.4.3.2}%
+\contentsline {subsubsection}{迭代改进：在实践中进化的生命体}{60}{subsection.4.3.2}%
+\contentsline {subsubsection}{实战演练：推荐系统的进化史}{60}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}工程思维的技术基石：架构与质量}{61}{subsection.4.3.3}%
+\contentsline {subsubsection}{架构设计：为变化而设计}{61}{subsection.4.3.3}%
+\contentsline {subsubsection}{质量保障：全链路的防线}{61}{subsection.4.3.3}%
 \contentsline {section}{\numberline {4.4}三种思维的交响：AI系统设计的完整方法论}{62}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}思维的层次递进与螺旋上升}{62}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}思维层次的递进关系：从抽象到具体的系统性转化}{62}{subsection.4.4.2}%
 \contentsline {subsubsection}{递进关系的深层机制：从抽象到具体的系统性转化}{62}{subsection.4.4.2}%
+\contentsline {subsubsection}{递进机制：约束的层级体系}{62}{subsection.4.4.2}%
 \contentsline {subsection}{\numberline {4.4.3}双向促进机制：实践与理论的螺旋式发展}{63}{subsection.4.4.3}%
 \contentsline {subsection}{\numberline {4.4.4}综合案例分析：三种思维的协同实践}{64}{subsection.4.4.4}%
+\contentsline {subsubsection}{案例一：智能手机上的实时物体识别}{64}{subsection.4.4.4}%
 \contentsline {subsubsection}{1、数学思维：问题的抽象化与形式化}{65}{subsection.4.4.4}%
 \contentsline {subsubsection}{案例二：大语言模型：语言智能的三层思维架构}{67}{subsection.4.4.4}%
+\contentsline {subsubsection}{案例三：自动驾驶——安全关键系统的思维闭环}{68}{subsection.4.4.4}%
 \contentsline {section}{\numberline {4.5}本章小结：从思维到工具的桥梁}{68}{section.4.5}%
 \contentsline {chapter}{\numberline {六}人工智能的数学工具箱：从基础到应用}{70}{chapter.5}%
 \contentsline {section}{\numberline {5.1}引言：从思维到工具的实现}{70}{section.5.1}%
