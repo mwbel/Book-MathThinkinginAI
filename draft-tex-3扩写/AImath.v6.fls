@@ -610,6 +610,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 OUTPUT AImath.v6.bcf
+INPUT AImath.v6.bbl
+INPUT ./AImath.v6.bbl
+INPUT ./AImath.v6.bbl
+INPUT ./AImath.v6.bbl
+INPUT AImath.v6.bbl
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-ptm.cfg

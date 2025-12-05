@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber AImath.v6"] 0 "AImath.v6.bcf" "AImath.v6.bbl" "AImath.v6" 1764831539.01198 -1
+["biber AImath.v6"] 0 "AImath.v6.bcf" "AImath.v6.bbl" "AImath.v6" 0 -1
   "AImath.v6.bcf" 0 -1 0 "pdflatex"
   "reference.bib" 1762235792.47792 7728 f61e9db34f0321f7f0832a571dff3048 ""
   (generated)
   "AImath.v6.bbl"
   "AImath.v6.blg"
   (rewritten before read)
-["pdflatex"] 1764831537.73636 "/Users/Min369/Desktop/书/书稿打磨/draft-tex-3扩写/AImath.v6.tex" "AImath.v6.pdf" "AImath.v6" 1764831539.01203 2
+["pdflatex"] 1764922535.74193 "/Users/Min369/Desktop/书/书稿打磨/draft-tex-3扩写/AImath.v6.tex" "AImath.v6.pdf" "AImath.v6" 1764922537.0748 2
   "/System/Library/Fonts/Menlo.ttc" 1752902012 2156036 ec05dfca6821d85440da0899493002c3 ""
-  "/Users/Min369/Desktop/书/书稿打磨/draft-tex-3扩写/AImath.v6.tex" 1764831537.46541 8824 c91d4a55a46ae52a81c5449fc50778f8 ""
+  "/Users/Min369/Desktop/书/书稿打磨/draft-tex-3扩写/AImath.v6.tex" 1764922532.93267 8824 c91d4a55a46ae52a81c5449fc50778f8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc" 1422827479 2083 60e36f8eac802fcaf19eabe2633b406e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -374,9 +374,9 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1760595366 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1760595286 3345732 e58ee7752021a314365f468486588b60 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "AImath.v6.aux" 1764831538.93928 267 f5673a7ec5e27f019b0ef6a4da07c024 "pdflatex"
+  "AImath.v6.aux" 1764922536.97078 267 f5673a7ec5e27f019b0ef6a4da07c024 "pdflatex"
   "AImath.v6.bbl" 0 -1 0 "biber AImath.v6"
-  "AImath.v6.tex" 1764831537.46541 8824 c91d4a55a46ae52a81c5449fc50778f8 ""
+  "AImath.v6.tex" 1764922532.93267 8824 c91d4a55a46ae52a81c5449fc50778f8 ""
   "chapters/ch0/00.tex" 0 -1 0 ""
   "cover.jpg" 1725584302 426434 e182f666c3d3d01d34e08517fb01cd38 ""
   "elegantbook.cls" 1761656955.98051 43105 e1398aa8621218ef42cde8a5f052d746 ""
