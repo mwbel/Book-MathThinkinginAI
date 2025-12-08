@@ -49,6 +49,10 @@
 % 修改elegantbook的数学环境编号格式为阿拉伯数字
 \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}  % 公式编号
 
+% 添加修订跟踪功能
+% \usepackage[final]{changes}  % 设为final隐藏修订，设为draft显示修订
+% 暂时注释掉，避免与elegantbook冲突
+
 % 由于elegantbook使用tcolorbox，需要特殊处理
 \makeatletter
 \renewcommand{\thetcb@cnt@definition}{\arabic{chapter}.\arabic{tcb@cnt@definition}}
@@ -151,6 +155,24 @@
   \end{flushright}
 }
 
+% --- 段落首行缩进设置（缩进2个汉字）---
+% 设置段落首行缩进为2个中文字符的宽度
+\usepackage{indentfirst}
+\setlength{\parindent}{2em} % 2em约等于2个中文字符的宽度
+
+% 确保所有段落都首行缩进，包括章节后的第一段
+\usepackage{etoolbox}
+\makeatletter
+% 对section、subsection等标题后的段落也应用缩进
+\patchcmd{\section}{\@afterindentfalse}{\@afterindenttrue}{\typeout{}}{\typeout{}}
+\patchcmd{\subsection}{\@afterindentfalse}{\@afterindenttrue}{\typeout{}}{\typeout{}}
+\patchcmd{\subsubsection}{\@afterindentfalse}{\@afterindenttrue}{\typeout{}}{\typeout{}}
+\makeatother
+
+% 定义一个命令来在特定情况下取消缩进（如需要时使用）
+\newcommand{\noindentpar}{\noindent}
+
+
 \newenvironment{appendixsection}[1]{
     \section*{附录：#1}
     \addcontentsline{toc}{section}{附录：#1}
@@ -185,12 +207,18 @@
       \typeout{[preferInput] -> Using \prefB}%
       \input{\prefB}%
     }{%
-      \typeout{[preferInput] -> Fallback to \prefC}%
-      \input{\prefC}%
-    }%
-    {%
-      \typeout{[preferInput] -> Fallback to \prefD}%
-      \input{\prefD}%
+      \IfFileExists{\prefC}{%
+        \typeout{[preferInput] -> Fallback to \prefC}%
+        \input{\prefC}%
+      }{%
+        \IfFileExists{\prefD}{%
+          \typeout{[preferInput] -> Fallback to \prefD}%
+          \input{\prefD}%
+        }{%
+          \typeout{[preferInput] -> Fallback to \prefBase.tex}%
+          \input{\prefBase.tex}%
+        }%
+      }%
     }%
   }%
   \endgroup
