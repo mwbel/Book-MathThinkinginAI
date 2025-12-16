@@ -82,7 +82,7 @@
 \contentsline {subsection}{\numberline {5.2.2}链式法则与反向传播（Backpropagation）}{64}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3}自动微分（Automatic Differentiation）}{65}{subsection.5.2.3}%
 \contentsline {subsection}{\numberline {5.2.4}从一阶到二阶：为什么需要曲率感知}{66}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}总结}{70}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.5}总结}{71}{subsection.5.2.5}%
 \contentsline {section}{\numberline {5.3}概率分布的深层理解}{71}{section.5.3}%
 \contentsline {section}{\numberline {5.4}线性代数：数据表示与变换的基石}{72}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}向量与矩阵运算}{72}{subsection.5.4.1}%
@@ -90,15 +90,15 @@
 \contentsline {subsection}{\numberline {5.4.3}线性方程组求解的理论与实践}{73}{subsection.5.4.3}%
 \contentsline {subsection}{\numberline {5.4.4}特征值与特征向量}{74}{subsection.5.4.4}%
 \contentsline {subsection}{\numberline {5.4.5}贝叶斯推断的数学框架}{75}{subsection.5.4.5}%
-\contentsline {subsection}{\numberline {5.4.6}统计学习理论}{75}{subsection.5.4.6}%
+\contentsline {subsection}{\numberline {5.4.6}统计学习理论}{76}{subsection.5.4.6}%
 \contentsline {section}{\numberline {5.5}概率论与统计：不确定性的数学（直观视角）}{76}{section.5.5}%
 \contentsline {subsection}{\numberline {5.5.1}信息论：量化信息的数学框架}{77}{subsection.5.5.1}%
-\contentsline {section}{\numberline {5.6}优化理论：寻找最优解的数学}{78}{section.5.6}%
+\contentsline {section}{\numberline {5.6}优化理论：寻找最优解的数学}{79}{section.5.6}%
 \contentsline {section}{\numberline {5.7}案例：从像素到理解：数学工具的协同作战}{79}{section.5.7}%
 \contentsline {section}{\numberline {5.8}复杂度意识：“能算”到“算得起”}{80}{section.5.8}%
-\contentsline {section}{\numberline {5.9}超越公式：数学思维如何塑造AI}{80}{section.5.9}%
-\contentsline {section}{\numberline {5.10}下一代AI需要哪些新数学？}{81}{section.5.10}%
-\contentsline {section}{\numberline {5.11}本章小结}{82}{section.5.11}%
+\contentsline {section}{\numberline {5.9}超越公式：数学思维如何塑造AI}{81}{section.5.9}%
+\contentsline {section}{\numberline {5.10}下一代AI需要哪些新数学？}{82}{section.5.10}%
+\contentsline {section}{\numberline {5.11}本章小结}{83}{section.5.11}%
 \contentsline {chapter}{\numberline {七}机器学习：学习如何学习？}{84}{chapter.6}%
 \contentsline {section}{\numberline {6.1}从数据到模型：学习的基本框架}{84}{section.6.1}%
 \contentsline {section}{\numberline {6.2}监督学习与无监督学习}{87}{section.6.2}%
@@ -139,7 +139,7 @@
 \contentsline {subsection}{\numberline {7.7.3}多模态学习的兴起}{109}{subsection.7.7.3}%
 \contentsline {section}{\numberline {7.8}深度学习的理论基础与数学原理}{109}{section.7.8}%
 \contentsline {subsection}{\numberline {7.8.1}深度网络的表达能力}{110}{subsection.7.8.1}%
-\contentsline {paragraph}{函数复合的威力}{110}{figure.caption.31}%
+\contentsline {paragraph}{函数复合的威力}{110}{figure.caption.32}%
 \contentsline {paragraph}{特征层次化}{111}{equation.7.9}%
 \contentsline {subsection}{\numberline {7.8.2}深度学习的优化理论}{111}{subsection.7.8.2}%
 \contentsline {paragraph}{损失函数的几何性质}{111}{subsection.7.8.2}%
@@ -165,8 +165,8 @@
 \contentsline {subsection}{\numberline {8.3.1}全连接神经网络：深度学习的基石}{118}{subsection.8.3.1}%
 \contentsline {paragraph}{激活函数的作用}{118}{subsection.8.3.1}%
 \contentsline {subsection}{\numberline {8.3.2}卷积神经网络：视觉智能的突破}{118}{subsection.8.3.2}%
-\contentsline {paragraph}{CNN的核心原理}{119}{figure.caption.34}%
-\contentsline {paragraph}{典型CNN架构演进}{119}{figure.caption.36}%
+\contentsline {paragraph}{CNN的核心原理}{119}{figure.caption.35}%
+\contentsline {paragraph}{典型CNN架构演进}{119}{figure.caption.37}%
 \contentsline {subsection}{\numberline {8.3.3}循环神经网络：序列建模的利器}{120}{subsection.8.3.3}%
 \contentsline {paragraph}{长短时记忆网络（LSTM）}{120}{subsection.8.3.3}%
 \contentsline {subsection}{\numberline {8.3.4}Transformer：注意力机制的革命}{124}{subsection.8.3.4}%
@@ -527,4 +527,4 @@
 \contentsline {subsection}{\numberline {16.5.1}比尔·盖茨的三个指导原则}{221}{subsection.16.5.1}%
 \contentsline {subsection}{\numberline {16.5.2}技术伦理的实践路径}{222}{subsection.16.5.2}%
 \contentsline {section}{\numberline {16.6}本章小结}{224}{section.16.6}%
-\contentsline {chapter}{致谢}{227}{chapter*.43}%
+\contentsline {chapter}{致谢}{227}{chapter*.44}%
