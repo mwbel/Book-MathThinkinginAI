@@ -106,32 +106,32 @@ $$
 
 让我们来理解它的两种主要工作模式：
 
-\textbf{前向模式 AD} 适用于输入维度较低但输出维度较多的场景。对于一个复合函数 $y = f(g(h(x)))$，前向模式同时计算函数值和导数值。这个过程的巧妙之处在于，前向模式 AD 在计算每一步时都会维护一个"双数"（dual number），其中同时存储函数值和导数值：
+\textbf{前向模式 AD} 适用于输入维度较低但输出维度较多的场景。对于一个复合函数 $y = f(g(h(\mathbf{x})))$，前向模式同时计算函数值和导数值。这个过程的巧妙之处在于，前向模式 AD 在计算每一步时都会维护一个"双数"（dual number），其中同时存储函数值和导数值：
 
-$$\frac{dy}{dx} = f'(g(h(x))) \cdot g'(h(x)) \cdot h'(x)$$
+$$\frac{dy}{d\mathbf{x}} = f'(g(h(\mathbf{x}))) \cdot g'(h(\mathbf{x})) \cdot h'(\mathbf{x})$$
 
 具体来说，前向模式 AD 的计算过程如下：
 \begin{enumerate}
-\item 首先计算最内层函数：$u = h(x)$，同时计算 $\frac{du}{dx} = h'(x)$
-\item 然后计算中间层：$v = g(u)$，同时计算 $\frac{dv}{dx} = g'(u) \cdot \frac{du}{dx} = g'(h(x)) \cdot h'(x)$
-\item 最后计算最外层：$y = f(v) = f(g(h(x)))$，同时计算
-$$\frac{dy}{dx} = f'(v) \cdot \frac{dv}{dx} = f'(g(h(x))) \cdot g'(h(x)) \cdot h'(x).$$
+\item 首先计算最内层函数：$u = h(\mathbf{x})$，同时计算 $\frac{du}{d\mathbf{x}} = h'(\mathbf{x})$
+\item 然后计算中间层：$v = g(u)$，同时计算 $\frac{dv}{d\mathbf{x}} = g'(u) \cdot \frac{du}{d\mathbf{x}} = g'(h(\mathbf{x})) \cdot h'(\mathbf{x})$
+\item 最后计算最外层：$y = f(v) = f(g(h(\mathbf{x})))$，同时计算
+$$\frac{dy}{d\mathbf{x}} = f'(v) \cdot \frac{dv}{d\mathbf{x}} = f'(g(h(\mathbf{x}))) \cdot g'(h(\mathbf{x})) \cdot h'(\mathbf{x}).$$
 \end{enumerate}
 
 每一步我们都既保留了函数的计算结果，又累积了导数信息。可以把它想象成一边走路一边记下每一步的方向——我们不仅知道最终到达了哪里（函数值），还清楚整个路径的方向变化（导数值）。
 
-\textbf{反向模式 AD} 则更贴合大多数深度学习应用的需求。当我们需要计算大量参数对单个损失标量的梯度时，先完成一次完整的前向计算，然后再从后往前计算导数。对于同样的复合函数 $y = f(g(h(x)))$，反向模式计算：
+\textbf{反向模式 AD} 则更贴合大多数深度学习应用的需求。当我们需要计算大量参数对单个损失标量的梯度时，先完成一次完整的前向计算，然后再从后往前计算导数。对于同样的复合函数 $y = f(g(h(\mathbf{x})))$，反向模式计算：
 
-$$\frac{dy}{dx} = \frac{dy}{dv} \cdot \frac{dv}{du} \cdot \frac{du}{dx} = f'(v) \cdot g'(u) \cdot h'(x)$$
+$$\frac{dy}{d\mathbf{x}} = \frac{dy}{dv} \cdot \frac{dv}{du} \cdot \frac{du}{d\mathbf{x}} = f'(v) \cdot g'(u) \cdot h'(\mathbf{x})$$
 
 反向模式 AD 的计算过程如下：
 \begin{enumerate}
-\item 首先完成前向计算：$u = h(x)$，$v = g(u)$，$y = f(v)$
+\item 首先完成前向计算：$u = h(\mathbf{x})$，$v = g(u)$，$y = f(v)$
 \item 然后从后往前反向传播梯度：
 \begin{itemize}
 \item 计算输出层的梯度：$\frac{dy}{dv} = f'(v)$
 \item 传播到中间层：$\frac{dy}{du} = \frac{dy}{dv} \cdot \frac{dv}{du} = f'(v) \cdot g'(u)$
-\item 传播到输入层：$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx} = f'(v) \cdot g'(u) \cdot h'(x)$
+\item 传播到输入层：$\frac{dy}{d\mathbf{x}} = \frac{dy}{du} \cdot \frac{du}{d\mathbf{x}} = f'(v) \cdot g'(u) \cdot h'(\mathbf{x})$
 \end{itemize}
 \end{enumerate}
 
@@ -149,9 +149,9 @@ $$\frac{dy}{dx} = \frac{dy}{dv} \cdot \frac{dv}{du} \cdot \frac{du}{dx} = f'(v) 
 
 为了刻画优化中的病态场景，我们考察一个典型的二维二次函数（峡谷函数）：
 \begin{equation}\label{eq:quadratic_eqn}
-f(x,y) = ax^2 + \varepsilon y^2, \quad (a \gg \varepsilon > 0)
+f(\mathbf{x},\mathbf{y}) = a\mathbf{x}^2 + \varepsilon \mathbf{y}^2, \quad (a \gg \varepsilon > 0)
 \end{equation}
-该函数在几何上呈现为一个沿着 $y$ 轴延伸的狭长峡谷：$x$ 方向对应陡峭的谷壁（高曲率 $2a$），$y$ 方向对应平缓的谷底（低曲率 $2\varepsilon$）。
+该函数在几何上呈现为一个沿着 $\mathbf{y}$ 轴延伸的狭长峡谷：$\mathbf{x}$ 方向对应陡峭的谷壁（高曲率 $2a$），$\mathbf{y}$ 方向对应平缓的谷底（低曲率 $2\varepsilon$）。
 
 %二次曲面~\eqref{eq:quadratic_eqn}的几何特性，如几何类型、弯曲程度与是否退化，由参数 $a$ 与 $\varepsilon$ 决定：
 %\begin{itemize}
@@ -161,24 +161,24 @@ f(x,y) = ax^2 + \varepsilon y^2, \quad (a \gg \varepsilon > 0)
 %\item $a=\varepsilon=0$：二次曲面在对应方向退化为平坦，形成圆柱形抛物面。
 %\end{itemize}
 
-在任意点 $(x_0, y_0)$ 处，其梯度为：
+在任意点 $(\mathbf{x}_0, \mathbf{y}_0)$ 处，其梯度为：
 \begin{equation}\label{eq:gradient}
-\nabla f(x_0, y_0) = \begin{bmatrix} 2ax_0 \ 2\varepsilon y_0 \end{bmatrix}
+\nabla f(\mathbf{x}_0, \mathbf{y}_0) = \begin{bmatrix} 2a\mathbf{x}_0 \ 2\varepsilon \mathbf{y}_0 \end{bmatrix}
 \end{equation}
 
-由于 $a \gg \varepsilon$，梯度的 $x$ 分量（$2ax_0$）在数值上远大于 $y$ 分量（$2\varepsilon y_0$）。这意味着：梯度的方向被陡峭的横向分量主导，几乎垂直指向谷壁，而非指向谷底的最优解方向。
+由于 $a \gg \varepsilon$，梯度的 $\mathbf{x}$ 分量（$2a\mathbf{x}_0$）在数值上远大于 $\mathbf{y}$ 分量（$2\varepsilon \mathbf{y}_0$）。这意味着：梯度的方向被陡峭的横向分量主导，几乎垂直指向谷壁，而非指向谷底的最优解方向。
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{抛物面函数.png}
-\caption{参数为 $a=100, \varepsilon=1 $的二次峡谷曲面 $ f(x,y) = 100x^2 + y^2$：梯度方向主要指向陡峭的横切面，而非平缓的纵向延伸方向。}
+\caption{参数为 $a=100, \varepsilon=1 $的二次峡谷曲面 $ f(\mathbf{x},\mathbf{y}) = 100\mathbf{x}^2 + \mathbf{y}^2$：梯度方向主要指向陡峭的横切面，而非平缓的纵向延伸方向。}
 \label{fig:paraboloid}
 \end{figure}
 
 这种“方向误导”导致了一阶梯度下降法的典型病态行为：
 \begin{itemize}
-\item 剧烈横向震荡：算法为了降低陡峭方向的误差，在峡谷两壁之间反复“弹跳”；
-\item 缓慢轴向推进：真正指向最优解的 y 轴方向分量微乎其微，导致收敛极其缓慢。
+\item 剧烈横向震荡：算法为了降低陡峭方向的误差，在峡谷两壁之间反复"弹跳"；
+\item 缓慢轴向推进：真正指向最优解的 $\mathbf{y}$ 轴方向分量微乎其微，导致收敛极其缓慢。
 \end{itemize}
 最终，迭代轨迹呈现出低效的“之”字形（Zig-Zag），虽然目标函数值单调下降，但距离最优解的逼近速度极慢。
 
@@ -190,8 +190,8 @@ $$\kappa =  \frac{\lambda_{\max}}{\lambda_{\min}} = \frac{a}{\varepsilon} \gg 1$
 
 一阶方法的局限性在于只利用了坡度（Slope，一阶导数），而忽略了曲率（Curvature，二阶导数）。它试图用一个统一的标量步长（学习率 $\eta$）来适应所有方向，从而陷入两难：
 \begin{itemize}
-\item 若适应陡峭的 $x$ 方向（选小步长）：消除了震荡，但在平缓的 $y$ 方向上寸步难行；
-\item 若适应平缓的 $y$ 方向（选大步长）：在 $y$ 方向推进快，但在 $x$ 方向会产生剧烈超调甚至发散。
+\item 若适应陡峭的 $\mathbf{x}$ 方向（选小步长）：消除了震荡，但在平缓的 $\mathbf{y}$ 方向上寸步难行；
+\item 若适应平缓的 $\mathbf{y}$ 方向（选大步长）：在 $\mathbf{y}$ 方向推进快，但在 $\mathbf{x}$ 方向会产生剧烈超调甚至发散。
 \end{itemize}
 
 \textbf{3. 理论破局：泰勒展开与牛顿法}
@@ -201,9 +201,9 @@ $$\kappa =  \frac{\lambda_{\max}}{\lambda_{\min}} = \frac{a}{\varepsilon} \gg 1$
 f(\mathbf{x}+\mathbf{d}) \approx f(\mathbf{x}) + \nabla f(\mathbf{x})^T\mathbf{d}
 + \frac{1}{2}\mathbf{d}^T\mathbf{H}\mathbf{d}
 \end{equation}
-其中，$\mathbf{x}\in \mathbb{R}^n$ 表示当前点的位置向量，~$d\in \mathbb{R}^n$ 表示从当前点出发的位移向量，$\mathbf{H} = \left(\frac{\partial^2 f}{\partial x_i \partial x_j} \right)$ 表示海森矩阵（Hessian Matrix）。 例如，对于图~\ref{fig:paraboloid} 中的二次函数 $ f(x,y) = 100x^2 + y^2$，  海森矩阵为
+其中，$\mathbf{x}\in \mathbb{R}^n$ 表示当前点的位置向量，~$\mathbf{d}\in \mathbb{R}^n$ 表示从当前点出发的位移向量，$\mathbf{H} = \left(\frac{\partial^2 f}{\partial x_i \partial x_j} \right)$ 表示海森矩阵（Hessian Matrix）。 例如，对于图~\ref{fig:paraboloid} 中的二次函数 $ f(\mathbf{x},\mathbf{y}) = 100\mathbf{x}^2 + \mathbf{y}^2$，  海森矩阵为
 \[
-\mathbf{H} = \nabla^2 f(x,y) =
+\mathbf{H} = \nabla^2 f(\mathbf{x},\mathbf{y}) =
 \begin{bmatrix}
 2a & 0 \\
 0 & 2\epsilon
@@ -222,7 +222,7 @@ $$
 \mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{d}^* = \mathbf{x}_k - \mathbf{H}^{-1} \nabla f(\mathbf{x}_k).
 $$
 
-这一更新公式的本质是\textbf{步长自适应}和\textbf{各向异性缩放}: 海森矩阵的逆 $\mathbf{H}^{-1}$ 自动识别不同方向的曲率从而自动调整在每个方向上的步长：在陡峭方向（$x$轴）除以大曲率 $2a$ 以缩小步长，在平缓方向（$y$轴）除以小曲率 $2\varepsilon$以放大步长。
+这一更新公式的本质是\textbf{步长自适应}和\textbf{各向异性缩放}: 海森矩阵的逆 $\mathbf{H}^{-1}$ 自动识别不同方向的曲率从而自动调整在每个方向上的步长：在陡峭方向（$\mathbf{x}$轴）除以大曲率 $2a$ 以缩小步长，在平缓方向（$\mathbf{y}$轴）除以小曲率 $2\varepsilon$以放大步长。
 
 几何上，这相当于将原本狭长的椭圆峡谷通过线性变换映射为正圆（各向同性空间）。在这种变换后的空间中，负梯度方向将直接指向圆心（最优解），从而彻底消除震荡，实现一步收敛。这也正是动量法（Momentum）、自适应学习率（Adam）以及拟牛顿法（L-BFGS）试图在工程上近似达到的核心目标。
 
