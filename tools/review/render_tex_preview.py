@@ -408,7 +408,10 @@ def render_page(
       <div class="chapter-picker" data-chapter-picker>
         <label class="picker-field picker-field-wide">
           <span>章节文件夹</span>
-          <input type="text" data-chapters-dir placeholder="/路径/到/chapters" value="{escape(sync_assets.get("chaptersDir", ""))}">
+          <div class="folder-picker-row">
+            <input type="text" data-chapters-dir placeholder="/路径/到/chapters" value="{escape(sync_assets.get("chaptersDir", ""))}">
+            <button type="button" class="picker-button picker-button-compact" data-pick-chapters-folder>选择</button>
+          </div>
         </label>
         <button type="button" class="picker-button" data-import-chapters>导入文件夹</button>
         <label class="picker-field">
@@ -863,10 +866,26 @@ h1 {
   cursor: not-allowed;
 }
 
+.folder-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.folder-picker-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .picker-button {
   min-height: 36px;
   border-color: rgba(255, 250, 240, 0.48);
   background: rgba(255, 250, 240, 0.12);
+}
+
+.picker-button-compact {
+  flex: 0 0 auto;
+  padding-inline: 12px;
 }
 
 .picker-button:disabled {
@@ -1731,6 +1750,7 @@ JS = r"""
   const openChapterButton = document.querySelector("[data-open-chapter]");
   const chapterPickerStatus = document.querySelector("[data-chapter-picker-status]");
   const chaptersDirInput = document.querySelector("[data-chapters-dir]");
+  const pickChaptersFolderButton = document.querySelector("[data-pick-chapters-folder]");
   const importChaptersButton = document.querySelector("[data-import-chapters]");
   const editors = Array.from(document.querySelectorAll("[data-source-editor]"));
   const chapterLabel = workspace ? workspace.dataset.chapterLabel || "" : "";
@@ -2181,6 +2201,30 @@ JS = r"""
       } finally {
         importChaptersButton.disabled = false;
       }
+    });
+  }
+
+  if (pickChaptersFolderButton) {
+    pickChaptersFolderButton.addEventListener("click", async () => {
+      if (window.showDirectoryPicker) {
+        try {
+          const handle = await window.showDirectoryPicker({ mode: "read" });
+          if (chaptersDirInput) {
+            chaptersDirInput.value = handle.name || chaptersDirInput.value;
+          }
+          setChapterPickerStatus("已选择文件夹，请点击“导入文件夹”。", "ok");
+          return;
+        } catch (error) {
+          if (error && error.name === "AbortError") {
+            return;
+          }
+        }
+      }
+      if (chaptersDirInput) {
+        chaptersDirInput.focus();
+        chaptersDirInput.select();
+      }
+      setChapterPickerStatus("当前浏览器不支持文件夹选择，请手动输入路径。", "error");
     });
   }
 
