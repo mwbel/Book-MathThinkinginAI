@@ -1,7 +1,7 @@
 % 让 Latex Workshop/TeX 引擎知道这是“主文件”
 
 % 放在 \documentclass 之前
-\PassOptionsToPackage{backend=biber,style=numeric-comp,sorting=nyt,refsegment=chapter,defernumbers=true}{biblatex}
+\PassOptionsToPackage{backend=biber,style=numeric-comp,sorting=nyt,refsegment=chapter,defernumbers=true}{biblatex} 
 
 \documentclass[lang=cn,scheme=chinese,12pt]{elegantbook}
 
@@ -39,9 +39,10 @@
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 \usepackage{graphicx}
 % 统一图片搜索路径：图片已从 chapters/figs 上移到当前根目录 figs
-% 同时兼容旧路径，避免章节内已有相对路径失效
-%\graphicspath{{figs/}{chapters/figs/}{../figs/}}
-\graphicspath{{../figs/}{figs/}{chapters/figs/}}
+% 主文件在根目录，章节文件在 chapters/chX/ 子目录
+% 主文件编译时：figs/ 即可找到
+% 章节文件编译时：../../figs/ 可找到（从 chapters/chX/ 向上两级）
+\graphicspath{{figs/}{../../figs/}{../figs/}{chapters/figs/}}
 \usepackage{amsmath}  % 确保加载了 amsmath 包
 \usepackage{amssymb}
 % elegantbook模板已包含数学环境，无需加载amsthm
@@ -260,25 +261,25 @@
 \part{学习的逻辑}
 \preferInput{chapters/ch4/4-Thinking.v1}  % 三种思维方法论
 \preferInput{chapters/ch5/5-Tools.v1}  % 数学工具基础
-\preferInput{chapters/ch6/6-ML.v3}  
-\preferInput{chapters/ch7/7ML2DL.v1} % 从机器学习到深度学习
-\preferInput{chapters/ch8/8-DL.v1} %  深度学习实践 
-
-\part{理解的边界}
-\preferInput{chapters/ch9/9-深度学习的挑战与幻觉.v4} 
-\preferInput{chapters/ch10/10-AI的边界：图灵机、哥德尔与计算的极限.v3} 
-\preferInput{chapters/ch11/11-符号、神经与因果：智能的三种建构方式.v3} 
-\preferInput{chapters/ch12/12-智能的物理基础：从熵到量子计算.v3} 
-
-\part{回归与超越}
-\preferInput{chapters/ch13/13-语言中的智能：Transformer的意外胜利.v3} 
-\preferInput{chapters/ch14/14-AI+.v3} 
-\preferInput{chapters/ch15/15-理解智能的尽头：理性与取舍的未来.v3} 
-\preferInput{chapters/ch16/16-伦理与挑战.v3} 
-
-%\part{向上的道路}
-\preferInput{chapters/ch17/17-Conclusion.v1}
-\preferInput{chapters/ch18/18-Ack.v1} 
+%\preferInput{chapters/ch6/6-ML.v3}  
+%\preferInput{chapters/ch7/7ML2DL.v1} % 从机器学习到深度学习
+%\preferInput{chapters/ch8/8-DL.v1} %  深度学习实践 
+%
+%\part{理解的边界}
+%\preferInput{chapters/ch9/9-深度学习的挑战与幻觉.v4} 
+%\preferInput{chapters/ch10/10-AI的边界：图灵机、哥德尔与计算的极限.v3} 
+%\preferInput{chapters/ch11/11-符号、神经与因果：智能的三种建构方式.v3} 
+%\preferInput{chapters/ch12/12-智能的物理基础：从熵到量子计算.v3} 
+%
+%\part{回归与超越}
+%\preferInput{chapters/ch13/13-语言中的智能：Transformer的意外胜利.v3} 
+%\preferInput{chapters/ch14/14-AI+.v3} 
+%\preferInput{chapters/ch15/15-理解智能的尽头：理性与取舍的未来.v3} 
+%\preferInput{chapters/ch16/16-伦理与挑战.v3} 
+%
+%%\part{向上的道路}
+%\preferInput{chapters/ch17/17-Conclusion.v1}
+%\preferInput{chapters/ch18/18-Ack.v1} 
 \nocite{*}
 \printbibliography[heading=bibintoc, title=参考文献]
 

@@ -2381,9 +2381,6 @@
     <bcf:citekey order="2" intorder="3">Tandy1997</bcf:citekey>
     <bcf:citekey order="3" intorder="1" nocite="1">*</bcf:citekey>
     <bcf:citekey order="4" intorder="1" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="5" intorder="1" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="6" intorder="1" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="7" intorder="1" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">
