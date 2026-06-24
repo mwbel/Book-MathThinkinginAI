@@ -24,6 +24,21 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def summarize_build_error(message: str) -> str:
+    """Return a short UI-safe explanation while keeping raw logs out of the header."""
+    text = message.strip()
+    if not text:
+        return "章节生成失败，请查看终端日志。"
+    missing_input = re.search(r"(?:Missing input file|not found on input line)[^'\n]*(?:'([^']+)')?", text, re.I)
+    if missing_input:
+        target = missing_input.group(1) or "图片、参考文献或 LaTeX 输入文件"
+        return f"章节正文预览已优先生成；PDF 编译缺少 {target}。需要 PDF 时请补齐资源后在高级设置中重编译。"
+    if re.search(r"latexmk|xelatex|bibtex|bbl|Unable to load picture", text, re.I):
+        return "章节正文预览已优先生成；PDF 编译失败，通常是缺少图片、参考文献或 LaTeX 依赖。需要 PDF 时请在高级设置中重编译。"
+    first_line = text.splitlines()[0]
+    return first_line[:220]
+
+
 def main() -> int:
     args = parse_args()
     script_dir = Path(__file__).resolve().parent
@@ -242,8 +257,10 @@ def handle_build_chapter(
         "--tex-root",
         str(project_root / "draft-tex-3扩写"),
         "--pretty",
-        "--build-pdf-preview",
     ]
+    if bool(payload.get("buildPdfPreview")):
+        command.append("--build-pdf-preview")
+
     result = subprocess.run(
         command,
         cwd=project_root,
@@ -254,7 +271,7 @@ def handle_build_chapter(
     )
     if result.returncode != 0:
         tail = "\n".join((result.stderr or result.stdout).splitlines()[-60:])
-        raise RuntimeError(tail or "Chapter build failed.")
+        raise RuntimeError(summarize_build_error(tail or "Chapter build failed."))
 
     return {
         "ok": True,

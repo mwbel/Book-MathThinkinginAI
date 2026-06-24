@@ -406,20 +406,24 @@ def render_page(
         <button type="button" data-mode="quad">四栏校对</button>
       </div>
       <div class="chapter-picker" data-chapter-picker>
-        <label class="picker-field picker-field-wide">
-          <span>章节文件夹</span>
-          <div class="folder-picker-row">
-            <input type="text" data-chapters-dir placeholder="/路径/到/chapters" value="{escape(sync_assets.get("chaptersDir", ""))}">
-            <button type="button" class="picker-button picker-button-compact" data-pick-chapters-folder>选择</button>
-          </div>
-        </label>
-        <button type="button" class="picker-button" data-import-chapters>导入文件夹</button>
         <label class="picker-field">
           <span>章节</span>
           <select data-chapter-select>
             <option value="">正在读取章节...</option>
           </select>
         </label>
+        <button type="button" class="picker-button picker-primary" data-open-chapter disabled>打开章节</button>
+        <details class="advanced-picker">
+          <summary>高级设置</summary>
+          <div class="advanced-picker-grid">
+            <label class="picker-field picker-field-wide">
+              <span>章节文件夹</span>
+              <div class="folder-picker-row">
+                <input type="text" data-chapters-dir placeholder="/路径/到/chapters" value="{escape(sync_assets.get("chaptersDir", ""))}">
+                <button type="button" class="picker-button picker-button-compact" data-pick-chapters-folder>选择</button>
+              </div>
+            </label>
+            <button type="button" class="picker-button" data-import-chapters>导入文件夹</button>
         <label class="picker-field">
           <span>原文版本</span>
           <select data-original-select disabled>
@@ -432,12 +436,13 @@ def render_page(
             <option value="">请先选择章节</option>
           </select>
         </label>
-        <button type="button" class="picker-button" data-open-chapter disabled>打开章节</button>
-        <p class="chapter-picker-state" data-chapter-picker-status>通过本地 HTTP 服务可切换到任意章节。</p>
-      </div>
       <div class="compile-controls">
         <button type="button" class="compile-button" data-rebuild-preview>重新编译 PDF</button>
         <p class="compile-state" data-compile-status>PDF 对应最近一次编译结果</p>
+      </div>
+          </div>
+        </details>
+        <p class="chapter-picker-state" data-chapter-picker-status>选择章节后点击“打开章节”。</p>
       </div>
     </div>
   </header>
@@ -544,7 +549,7 @@ def render_source_panel(title: str, source_text: str, variant: str) -> str:
   <div class="pane-title"><span>{escape(title)}<small data-source-state="{escape(variant)}">可临时编辑；SyncTeX 对应最近一次编译的 PDF</small></span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
   <div class="source-workbench">
     <div class="source-gutter" data-source-gutter="{escape(variant)}" aria-hidden="true"></div>
-    <textarea class="source-editor" data-source-editor="{escape(variant)}" spellcheck="false" wrap="off">{escape(source_text)}</textarea>
+    <textarea class="source-editor" data-source-editor="{escape(variant)}" spellcheck="false" wrap="soft">{escape(source_text)}</textarea>
   </div>
 </section>"""
 
@@ -834,9 +839,10 @@ h1 {
 
 .chapter-picker {
   display: grid;
-  grid-template-columns: minmax(180px, 240px) minmax(140px, 180px) minmax(140px, 180px) auto;
+  grid-template-columns: minmax(260px, 520px) auto;
   gap: 10px 12px;
   align-items: end;
+  max-width: 760px;
 }
 
 .picker-field {
@@ -883,6 +889,14 @@ h1 {
   background: rgba(255, 250, 240, 0.12);
 }
 
+.picker-primary {
+  min-width: 120px;
+  border-color: rgba(255, 250, 240, 0.7);
+  background: #fffaf0;
+  color: #2c251d;
+  font-weight: 700;
+}
+
 .picker-button-compact {
   flex: 0 0 auto;
   padding-inline: 12px;
@@ -895,11 +909,50 @@ h1 {
 
 .chapter-picker-state {
   grid-column: 1 / -1;
+  max-width: 760px;
   margin: -2px 0 0;
   color: #eadfcb;
   font-size: 12px;
   line-height: 1.35;
   text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.advanced-picker {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(255, 250, 240, 0.14);
+  padding-top: 8px;
+}
+
+.advanced-picker summary {
+  width: max-content;
+  cursor: pointer;
+  color: #eadfcb;
+  font-size: 12px;
+  list-style: none;
+}
+
+.advanced-picker summary::-webkit-details-marker {
+  display: none;
+}
+
+.advanced-picker summary::before {
+  content: "＋";
+  margin-right: 6px;
+}
+
+.advanced-picker[open] summary::before {
+  content: "－";
+}
+
+.advanced-picker-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) auto minmax(140px, 180px) minmax(140px, 180px);
+  gap: 10px 12px;
+  align-items: end;
+  margin-top: 10px;
 }
 
 .chapter-picker-state.is-error {
@@ -911,6 +964,7 @@ h1 {
 }
 
 .compile-controls {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -1295,7 +1349,10 @@ button:hover {
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr);
   width: 100%;
+  max-width: 100%;
   height: var(--reader-height);
+  box-sizing: border-box;
+  min-width: 0;
   min-height: 560px;
   overflow: hidden;
   background: var(--source-bg);
@@ -1331,7 +1388,10 @@ button:hover {
 .source-editor {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  min-width: 0;
   min-height: 0;
   margin: 0;
   padding: 18px 16px 28px;
@@ -1339,13 +1399,15 @@ button:hover {
   outline: 0;
   resize: none;
   overflow: auto;
+  overflow-x: hidden;
   background: var(--source-bg);
   color: var(--source-ink);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 13px;
   line-height: 1.7;
-  white-space: pre;
-  overflow-wrap: normal;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .page-reader {
@@ -1706,6 +1768,10 @@ button:hover {
     grid-template-columns: 1fr;
   }
 
+  .advanced-picker-grid {
+    grid-template-columns: 1fr;
+  }
+
   .chapter-picker-state,
   .compile-state {
     text-align: left;
@@ -1783,13 +1849,43 @@ JS = r"""
     compileStatus.classList.toggle("is-ok", kind === "ok");
   }
 
+  function enableSourceSoftWrap(editor) {
+    if (!editor) {
+      return;
+    }
+    editor.wrap = "soft";
+    editor.setAttribute("wrap", "soft");
+    editor.style.width = "100%";
+    editor.style.whiteSpace = "pre-wrap";
+    editor.style.overflowWrap = "anywhere";
+    editor.style.wordBreak = "break-word";
+    editor.style.overflowX = "hidden";
+    editor.style.maxWidth = "100%";
+    editor.style.minWidth = "0";
+  }
+
+  editors.forEach(enableSourceSoftWrap);
+
   function setChapterPickerStatus(message, kind) {
     if (!chapterPickerStatus) {
       return;
     }
     chapterPickerStatus.textContent = message;
+    chapterPickerStatus.title = message;
     chapterPickerStatus.classList.toggle("is-error", kind === "error");
     chapterPickerStatus.classList.toggle("is-ok", kind === "ok");
+  }
+
+  function friendlyError(error, fallback) {
+    const raw = String((error && error.message) || fallback || "操作失败。").trim();
+    if (!raw) {
+      return fallback || "操作失败。";
+    }
+    if (/Missing input file|Unable to load picture|Latexmk|xelatex|bbl|bibtex|CalledProcessError|Traceback/i.test(raw)) {
+      console.error(raw);
+      return "PDF 编译失败，通常是缺少图片、参考文献或 LaTeX 依赖；正文预览仍可用于校对。";
+    }
+    return raw.length > 180 ? `${raw.slice(0, 180)}...` : raw;
   }
 
   function apiUrl(path) {
@@ -2174,7 +2270,7 @@ JS = r"""
         setChapterPickerStatus("章节页面生成完成，正在打开...", "ok");
         window.location.href = result.renderUrl;
       } catch (error) {
-        setChapterPickerStatus(error.message || "章节生成失败。", "error");
+        setChapterPickerStatus(friendlyError(error, "章节生成失败。"), "error");
         openChapterButton.disabled = false;
       }
     });
@@ -2197,7 +2293,7 @@ JS = r"""
         setChapterPickerStatus(`已导入章节文件夹，发现 ${result.chapterCount || 0} 个章节。`, "ok");
         await loadChapterCatalog();
       } catch (error) {
-        setChapterPickerStatus(error.message || "章节文件夹导入失败。", "error");
+        setChapterPickerStatus(friendlyError(error, "章节文件夹导入失败。"), "error");
       } finally {
         importChaptersButton.disabled = false;
       }
@@ -2301,7 +2397,7 @@ JS = r"""
         setCompileStatus("重新编译完成，正在刷新页面...", "ok");
         window.location.reload();
       } catch (error) {
-        setCompileStatus(error.message || "重新编译失败。", "error");
+        setCompileStatus(friendlyError(error, "重新编译失败。"), "error");
         rebuildButton.disabled = false;
       }
     });
