@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0 · Intro.v2_polished_3level 校对页 · 测试面板</title>
+  <style>
+
+:root {
+  --bg: #f4efe6;
+  --panel: #fffdf8;
+  --ink: #1f2937;
+  --muted: #667085;
+  --line: #e2d7c7;
+  --accent: #8a5a12;
+  --ok: #157347;
+  --bad: #b42318;
+  --pending: #7a5d22;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+}
+
+.test-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px;
+  background: #27211a;
+  color: #fffaf0;
+}
+
+.eyebrow,
+.meta-line {
+  margin: 0;
+  color: #eadfcb;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 4px 0 4px;
+  font-size: 26px;
+  letter-spacing: 0;
+}
+
+.link-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.link-row a,
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fffaf1;
+  color: #3b3124;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-row a:hover,
+button:hover {
+  border-color: #c99a46;
+  background: #f4e6c9;
+}
+
+.test-layout {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px;
+}
+
+.test-panel,
+.preview-panel {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.test-panel {
+  align-self: start;
+  padding: 16px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat-item {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffaf1;
+}
+
+.stat-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.stat-item strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 22px;
+}
+
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.summary-line {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8f4ec;
+  color: var(--pending);
+  font-weight: 700;
+}
+
+.summary-line.is-ok {
+  color: var(--ok);
+}
+
+.summary-line.is-bad {
+  color: var(--bad);
+}
+
+.result-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.result-list li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.result-list strong {
+  display: block;
+}
+
+.result-list span {
+  color: var(--muted);
+}
+
+.status-mark {
+  font-weight: 800;
+}
+
+.status-mark.is-ok {
+  color: var(--ok);
+}
+
+.status-mark.is-bad {
+  color: var(--bad);
+}
+
+.preview-panel {
+  overflow: hidden;
+}
+
+.preview-frame {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 132px);
+  min-height: 720px;
+  border: 0;
+  background: #fff;
+}
+
+.preview-frame.is-mobile {
+  width: 390px;
+  max-width: 100%;
+  margin: 0 auto;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+@media (max-width: 980px) {
+  .test-header,
+  .test-layout {
+    display: block;
+  }
+
+  .link-row {
+    margin-top: 14px;
+  }
+
+  .preview-panel {
+    margin-top: 18px;
+  }
+
+  .preview-frame {
+    height: 760px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="test-header">
+    <div>
+      <p class="eyebrow">校对页测试面板</p>
+      <h1>0 · Intro.v2_polished_3level 校对页</h1>
+      <p class="meta-line">生成时间：2026-06-24T13:51:02.245418+00:00</p>
+    </div>
+    <nav class="link-row" aria-label="输出文件">
+      <a href="0-Intro.v2_polished_3level__plain__plain-review.html" target="_blank">打开校对页</a>
+      <a href="0-Intro.v2_polished_3level__plain__plain-review-log.md" target="_blank">打开日志</a>
+      <a href="0-Intro.v2_polished_3level__plain__plain-changes.diff" target="_blank">打开 Diff</a>
+    </nav>
+  </header>
+
+  <main class="test-layout">
+    <section class="test-panel" aria-label="测试控制台">
+      <div class="stat-grid">
+        <div class="stat-item">
+        <span>总对照</span>
+        <strong>3</strong>
+      </div>
+        <div class="stat-item">
+        <span>已修改</span>
+        <strong>0</strong>
+      </div>
+        <div class="stat-item">
+        <span>新增</span>
+        <strong>0</strong>
+      </div>
+        <div class="stat-item">
+        <span>删除</span>
+        <strong>0</strong>
+      </div>
+      </div>
+
+      <div class="control-row">
+        <button type="button" data-run-tests>运行自测</button>
+        <button type="button" data-frame-size="desktop">桌面宽度</button>
+        <button type="button" data-frame-size="mobile">移动宽度</button>
+      </div>
+
+      <div class="summary-line" data-test-summary>等待测试</div>
+      <ul class="result-list" data-test-results></ul>
+    </section>
+
+    <section class="preview-panel" aria-label="校对页预览">
+      <iframe class="preview-frame" data-review-frame src="0-Intro.v2_polished_3level__plain__plain-review.html" title="校对页预览"></iframe>
+    </section>
+  </main>
+
+  <script id="test-data" type="application/json">{"expected": {"title": "0 · Intro.v2_polished_3level 校对页", "pairCount": 3, "statusCounts": {"unchanged": 3, "changed": 0, "added": 0, "removed": 0}, "navCount": 0}, "links": {"review": "0-Intro.v2_polished_3level__plain__plain-review.html", "log": "0-Intro.v2_polished_3level__plain__plain-review-log.md", "diff": "0-Intro.v2_polished_3level__plain__plain-changes.diff"}}</script>
+  <script id="review-html" type="application/json">"<!doctype html>\n<html lang=\"zh-CN\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>0 · Intro.v2_polished_3level 校对页<\/title>\n  <style>\n\n:root {\n  --bg: #f6f3ec;\n  --paper: #fffdf8;\n  --ink: #1f2937;\n  --muted: #667085;\n  --line: #e6dccb;\n  --accent: #8a5a12;\n  --changed: #b7791f;\n  --added: #157347;\n  --removed: #b42318;\n  --soft-added: #e9f7ef;\n  --soft-removed: #fdecec;\n  --soft-changed: #fff6db;\n}\n\n* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  background: var(--bg);\n  color: var(--ink);\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", sans-serif;\n  line-height: 1.65;\n}\n\n.app-header {\n  display: flex;\n  justify-content: space-between;\n  gap: 24px;\n  padding: 28px 36px;\n  background: #27211a;\n  color: #fffaf0;\n}\n\n.eyebrow {\n  margin: 0 0 4px;\n  color: #d7b56d;\n  font-size: 13px;\n}\n\nh1 {\n  margin: 0 0 10px;\n  font-size: 28px;\n  letter-spacing: 0;\n}\n\n.file-line {\n  margin: 2px 0;\n  color: #eadfcb;\n  font-size: 13px;\n}\n\n.summary {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(110px, 1fr));\n  gap: 10px;\n  min-width: 300px;\n}\n\n.summary-item {\n  padding: 10px 12px;\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  border-radius: 8px;\n  background: rgba(255, 255, 255, 0.08);\n}\n\n.summary-item span {\n  display: block;\n  color: #eadfcb;\n  font-size: 12px;\n}\n\n.summary-item strong {\n  display: block;\n  margin-top: 2px;\n  font-size: 22px;\n}\n\n.layout {\n  display: grid;\n  grid-template-columns: 280px minmax(0, 1fr);\n  min-height: calc(100vh - 160px);\n}\n\n.sidebar {\n  position: sticky;\n  top: 0;\n  align-self: start;\n  max-height: 100vh;\n  overflow: auto;\n  padding: 22px 18px;\n  border-right: 1px solid var(--line);\n}\n\n.sidebar-title {\n  margin-bottom: 12px;\n  color: var(--accent);\n  font-weight: 700;\n}\n\n.nav-link {\n  display: block;\n  padding: 7px 8px;\n  border-radius: 6px;\n  color: #3b3124;\n  text-decoration: none;\n  font-size: 14px;\n}\n\n.nav-link:hover {\n  background: #ebe1d0;\n}\n\n.indent-1 { padding-left: 18px; }\n.indent-2 { padding-left: 30px; }\n.indent-3 { padding-left: 42px; }\n.indent-4 { padding-left: 54px; }\n\n.content {\n  padding: 24px;\n}\n\n.toolbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 16px;\n  margin-bottom: 16px;\n  padding: 14px 16px;\n  border: 1px solid var(--line);\n  border-radius: 8px;\n  background: var(--paper);\n}\n\n.toolbar-actions {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 12px;\n  flex-wrap: wrap;\n}\n\n.toolbar span,\n.meta,\n.section-title {\n  color: var(--muted);\n  font-size: 13px;\n}\n\n.filter-group,\n.diff-actions {\n  display: flex;\n  gap: 8px;\n  flex-wrap: wrap;\n}\n\n.filter-button,\n.tool-button {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  min-height: 34px;\n  padding: 6px 10px;\n  border: 1px solid var(--line);\n  border-radius: 999px;\n  background: #fffaf1;\n  color: #3b3124;\n  cursor: pointer;\n  font: inherit;\n  font-size: 13px;\n}\n\n.filter-button:hover,\n.tool-button:hover,\n.filter-button.is-active {\n  border-color: #c99a46;\n  background: #f4e6c9;\n}\n\n.filter-button span {\n  color: var(--accent);\n  font-weight: 700;\n}\n\n.result-line {\n  margin: -4px 0 12px;\n  color: var(--muted);\n  font-size: 13px;\n}\n\n.status-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  display: inline-block;\n}\n\n.status-dot.changed { background: var(--changed); }\n.status-dot.added { background: var(--added); }\n.status-dot.removed { background: var(--removed); }\n\n.pair-card {\n  margin-bottom: 16px;\n  border: 1px solid var(--line);\n  border-left: 4px solid transparent;\n  border-radius: 10px;\n  background: var(--paper);\n  overflow: hidden;\n}\n\n.pair-card.is-hidden,\n.empty.is-hidden {\n  display: none;\n}\n\n.pair-card.is-changed { border-left-color: var(--changed); }\n.pair-card.is-added { border-left-color: var(--added); }\n.pair-card.is-removed { border-left-color: var(--removed); }\n\n.pair-head {\n  display: flex;\n  justify-content: space-between;\n  gap: 16px;\n  padding: 14px 16px;\n  border-bottom: 1px solid var(--line);\n}\n\n.status-badge {\n  display: inline-flex;\n  align-items: center;\n  margin-right: 8px;\n  padding: 2px 8px;\n  border-radius: 999px;\n  font-size: 12px;\n  font-weight: 700;\n  background: #ece7dd;\n  color: #4a3b27;\n}\n\n.status-badge.is-changed { background: var(--soft-changed); color: var(--changed); }\n.status-badge.is-added { background: var(--soft-added); color: var(--added); }\n.status-badge.is-removed { background: var(--soft-removed); color: var(--removed); }\n\n.compare-grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 0;\n}\n\n.pane {\n  min-width: 0;\n  padding: 14px 16px 16px;\n}\n\n.pane + .pane {\n  border-left: 1px solid var(--line);\n}\n\n.pane-title {\n  margin-bottom: 8px;\n  color: var(--accent);\n  font-size: 13px;\n  font-weight: 700;\n}\n\n.code-block {\n  min-height: 76px;\n  margin: 0;\n  padding: 14px;\n  border: 1px solid #eadfcb;\n  border-radius: 8px;\n  background: #fffaf1;\n  overflow: auto;\n  white-space: pre-wrap;\n  word-break: break-word;\n  font-family: \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, monospace;\n  font-size: 14px;\n  line-height: 1.7;\n}\n\n.code-block.is-empty {\n  color: var(--muted);\n  background: #f8f4ec;\n}\n\n.diff-detail {\n  padding: 0 16px 16px;\n}\n\n.diff-detail summary {\n  cursor: pointer;\n  color: var(--accent);\n  font-weight: 700;\n}\n\n.diff-inline {\n  margin-top: 10px;\n  padding: 12px;\n  border-radius: 8px;\n  background: #fbf7ef;\n  font-family: \"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, monospace;\n  font-size: 14px;\n  line-height: 1.8;\n  white-space: pre-wrap;\n}\n\n.diff-token.is-insert {\n  background: var(--soft-added);\n  color: var(--added);\n}\n\n.diff-token.is-delete {\n  background: var(--soft-removed);\n  color: var(--removed);\n  text-decoration: line-through;\n}\n\n.empty {\n  color: var(--muted);\n}\n\n@media (max-width: 980px) {\n  .app-header,\n  .toolbar,\n  .pair-head {\n    display: block;\n  }\n\n  .summary {\n    margin-top: 18px;\n  }\n\n  .toolbar-actions {\n    justify-content: flex-start;\n    margin-top: 10px;\n  }\n\n  .layout,\n  .compare-grid {\n    display: block;\n  }\n\n  .sidebar {\n    position: static;\n    max-height: none;\n    border-right: 0;\n    border-bottom: 1px solid var(--line);\n  }\n\n  .pane + .pane {\n    border-left: 0;\n    border-top: 1px solid var(--line);\n  }\n}\n\n  <\/style>\n<\/head>\n<body>\n  <header class=\"app-header\">\n    <div>\n      <p class=\"eyebrow\">LaTeX 教材润色校对<\/p>\n      <h1>0 · Intro.v2_polished_3level 校对页<\/h1>\n      <p class=\"file-line\">原文：draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex<\/p>\n      <p class=\"file-line\">修改后：draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex<\/p>\n    <\/div>\n    <div class=\"summary\">\n      <div class=\"summary-item\">\n        <span>总对照<\/span>\n        <strong>3<\/strong>\n      <\/div>\n      <div class=\"summary-item is-changed\">\n        <span>已修改<\/span>\n        <strong>0<\/strong>\n      <\/div>\n      <div class=\"summary-item is-added\">\n        <span>新增<\/span>\n        <strong>0<\/strong>\n      <\/div>\n      <div class=\"summary-item is-removed\">\n        <span>删除<\/span>\n        <strong>0<\/strong>\n      <\/div>\n    <\/div>\n  <\/header>\n  <main class=\"layout\">\n    <aside class=\"sidebar\">\n      <div class=\"sidebar-title\">章节导航<\/div>\n      <p class=\"empty\">暂无章节结构<\/p>\n    <\/aside>\n    <section class=\"content\">\n      <div class=\"toolbar\">\n        <div>\n          <strong>段落级对照<\/strong>\n          <span>2026-06-24T13:51:02.244515+00:00<\/span>\n        <\/div>\n        <div class=\"toolbar-actions\">\n          <div class=\"filter-group\" aria-label=\"筛选对照块\"><button class=\"filter-button is-active\" type=\"button\" data-filter-status=\"all\">全部 <span>3<\/span><\/button><button class=\"filter-button\" type=\"button\" data-filter-status=\"changed\">已修改 <span>0<\/span><\/button><button class=\"filter-button\" type=\"button\" data-filter-status=\"added\">新增 <span>0<\/span><\/button><button class=\"filter-button\" type=\"button\" data-filter-status=\"removed\">删除 <span>0<\/span><\/button><button class=\"filter-button\" type=\"button\" data-filter-status=\"unchanged\">未变化 <span>3<\/span><\/button><\/div>\n          <div class=\"diff-actions\">\n            <button class=\"tool-button\" type=\"button\" data-diff-action=\"expand\">展开差异<\/button>\n            <button class=\"tool-button\" type=\"button\" data-diff-action=\"collapse\">收起差异<\/button>\n          <\/div>\n        <\/div>\n      <\/div>\n      <div class=\"result-line\" data-result-line>当前显示 3 个对照块<\/div>\n      <p class=\"empty is-hidden\" data-filter-empty>当前筛选条件下没有可显示的对照块。<\/p>\n      <article class=\"pair-card is-unchanged\" id=\"line-1\" data-status=\"unchanged\">\n  <div class=\"pair-head\">\n    <div>\n      <span class=\"status-badge is-unchanged\">未变化<\/span>\n      <strong>pair-0001<\/strong>\n      <span class=\"meta\">comment · L1<\/span>\n    <\/div>\n    <div class=\"section-title\">Front Matter<\/div>\n  <\/div>\n  <div class=\"compare-grid\">\n    <section class=\"pane\">\n      <div class=\"pane-title\">原文<\/div>\n      <pre class=\"code-block\"><code>% 自动生成：三层级压缩包装文件（章→节→小节）<\/code><\/pre>\n    <\/section>\n    <section class=\"pane\">\n      <div class=\"pane-title\">修改后<\/div>\n      <pre class=\"code-block\"><code>% 自动生成：三层级压缩包装文件（章→节→小节）<\/code><\/pre>\n    <\/section>\n  <\/div>\n  \n<\/article>\n<article class=\"pair-card is-unchanged\" id=\"line-2\" data-status=\"unchanged\">\n  <div class=\"pair-head\">\n    <div>\n      <span class=\"status-badge is-unchanged\">未变化<\/span>\n      <strong>pair-0002<\/strong>\n      <span class=\"meta\">comment · L2<\/span>\n    <\/div>\n    <div class=\"section-title\">Front Matter<\/div>\n  <\/div>\n  <div class=\"compare-grid\">\n    <section class=\"pane\">\n      <div class=\"pane-title\">原文<\/div>\n      <pre class=\"code-block\"><code>% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件<\/code><\/pre>\n    <\/section>\n    <section class=\"pane\">\n      <div class=\"pane-title\">修改后<\/div>\n      <pre class=\"code-block\"><code>% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件<\/code><\/pre>\n    <\/section>\n  <\/div>\n  \n<\/article>\n<article class=\"pair-card is-unchanged\" id=\"line-3\" data-status=\"unchanged\">\n  <div class=\"pair-head\">\n    <div>\n      <span class=\"status-badge is-unchanged\">未变化<\/span>\n      <strong>pair-0003<\/strong>\n      <span class=\"meta\">paragraph · L3-L8<\/span>\n    <\/div>\n    <div class=\"section-title\">Front Matter<\/div>\n  <\/div>\n  <div class=\"compare-grid\">\n    <section class=\"pane\">\n      <div class=\"pane-title\">原文<\/div>\n      <pre class=\"code-block\"><code>\\begingroup\n\\setcounter{secnumdepth}{2}\n\\setcounter{tocdepth}{2}\n\\renewcommand\\subsubsection{\\paragraph}\n\\input{0-Intro.v2_refined.tex}\n\\endgroup<\/code><\/pre>\n    <\/section>\n    <section class=\"pane\">\n      <div class=\"pane-title\">修改后<\/div>\n      <pre class=\"code-block\"><code>\\begingroup\n\\setcounter{secnumdepth}{2}\n\\setcounter{tocdepth}{2}\n\\renewcommand\\subsubsection{\\paragraph}\n\\input{0-Intro.v2_refined.tex}\n\\endgroup<\/code><\/pre>\n    <\/section>\n  <\/div>\n  \n<\/article>\n    <\/section>\n  <\/main>\n  <script>\n\n(function () {\n  const cards = Array.from(document.querySelectorAll(\"[data-status]\"));\n  const buttons = Array.from(document.querySelectorAll(\"[data-filter-status]\"));\n  const resultLine = document.querySelector(\"[data-result-line]\");\n  const empty = document.querySelector(\"[data-filter-empty]\");\n\n  function applyFilter(status) {\n    let visibleCount = 0;\n    cards.forEach((card) => {\n      const show = status === \"all\" || card.dataset.status === status;\n      card.classList.toggle(\"is-hidden\", !show);\n      if (show) {\n        visibleCount += 1;\n      }\n    });\n    buttons.forEach((button) => {\n      button.classList.toggle(\"is-active\", button.dataset.filterStatus === status);\n    });\n    if (resultLine) {\n      resultLine.textContent = `当前显示 ${visibleCount} 个对照块`;\n    }\n    if (empty) {\n      empty.classList.toggle(\"is-hidden\", visibleCount !== 0);\n    }\n  }\n\n  buttons.forEach((button) => {\n    button.addEventListener(\"click\", () => applyFilter(button.dataset.filterStatus || \"all\"));\n  });\n\n  document.querySelectorAll(\"[data-diff-action]\").forEach((button) => {\n    button.addEventListener(\"click\", () => {\n      const shouldOpen = button.dataset.diffAction === \"expand\";\n      cards.forEach((card) => {\n        if (card.classList.contains(\"is-hidden\")) {\n          return;\n        }\n        card.querySelectorAll(\"details.diff-detail\").forEach((detail) => {\n          detail.open = shouldOpen;\n        });\n      });\n    });\n  });\n})();\n\n  <\/script>\n<\/body>\n<\/html>\n"</script>
+  <script>
+
+(function () {
+  const config = JSON.parse(document.getElementById("test-data").textContent);
+  const embeddedReviewNode = document.getElementById("review-html");
+  const embeddedReviewHtml = embeddedReviewNode ? JSON.parse(embeddedReviewNode.textContent) : "";
+  const expected = config.expected || {};
+  const frame = document.querySelector("[data-review-frame]");
+  const summary = document.querySelector("[data-test-summary]");
+  const results = document.querySelector("[data-test-results]");
+  const runButton = document.querySelector("[data-run-tests]");
+  const sizeButtons = Array.from(document.querySelectorAll("[data-frame-size]"));
+
+  function mark(name, ok, detail) {
+    const item = document.createElement("li");
+    item.innerHTML = `<div class="status-mark ${ok ? "is-ok" : "is-bad"}">${ok ? "✓" : "×"}</div>
+      <div><strong>${escapeHtml(name)}</strong><span>${escapeHtml(detail || "")}</span></div>`;
+    results.appendChild(item);
+    return ok;
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function readFrameDocument() {
+    try {
+      return frame.contentDocument || frame.contentWindow.document;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function visibleCards(doc) {
+    return Array.from(doc.querySelectorAll("[data-status]")).filter((card) => {
+      return !card.classList.contains("is-hidden");
+    });
+  }
+
+  function countStatuses(cards) {
+    return cards.reduce((acc, card) => {
+      const status = card.dataset.status || "unknown";
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {});
+  }
+
+  function click(doc, selector) {
+    const node = doc.querySelector(selector);
+    if (!node) {
+      return false;
+    }
+    node.click();
+    return true;
+  }
+
+  function waitForFrame() {
+    return new Promise((resolve) => {
+      const doc = readFrameDocument();
+      if (doc && doc.readyState === "complete") {
+        window.setTimeout(resolve, 30);
+        return;
+      }
+      frame.addEventListener("load", () => window.setTimeout(resolve, 30), { once: true });
+      window.setTimeout(resolve, 1500);
+    });
+  }
+
+  async function runTests() {
+    results.innerHTML = "";
+    summary.className = "summary-line";
+    summary.textContent = "正在测试";
+    await waitForFrame();
+
+    const doc = readFrameDocument();
+    if (!doc) {
+      mark("读取校对页", false, "浏览器限制了 iframe 读取。可在 tools/review/outputs 中运行 python3 -m http.server 后再打开本页。");
+      summary.className = "summary-line is-bad";
+      summary.textContent = "测试未完成";
+      return;
+    }
+
+    const cards = Array.from(doc.querySelectorAll("[data-status]"));
+    const counts = countStatuses(cards);
+    const expectedCounts = expected.statusCounts || {};
+    const checks = [];
+
+    checks.push(mark("页面标题", doc.title === expected.title, doc.title));
+    checks.push(mark("对照块数量", cards.length === expected.pairCount, `${cards.length} / ${expected.pairCount}`));
+    checks.push(mark("已修改数量", (counts.changed || 0) === expectedCounts.changed, `${counts.changed || 0} / ${expectedCounts.changed}`));
+    checks.push(mark("新增数量", (counts.added || 0) === expectedCounts.added, `${counts.added || 0} / ${expectedCounts.added}`));
+    checks.push(mark("删除数量", (counts.removed || 0) === expectedCounts.removed, `${counts.removed || 0} / ${expectedCounts.removed}`));
+    checks.push(mark("未变化数量", (counts.unchanged || 0) === expectedCounts.unchanged, `${counts.unchanged || 0} / ${expectedCounts.unchanged}`));
+
+    const filterButtons = Array.from(doc.querySelectorAll("[data-filter-status]")).map((button) => button.dataset.filterStatus).join(",");
+    checks.push(mark("筛选按钮", filterButtons === "all,changed,added,removed,unchanged", filterButtons || "未找到"));
+
+    const navLinks = Array.from(doc.querySelectorAll(".nav-link"));
+    const navTargetsValid = navLinks.every((link) => !!doc.querySelector(link.getAttribute("href") || ""));
+    checks.push(mark("章节导航", navLinks.length === expected.navCount && navTargetsValid, `${navLinks.length} 个锚点`));
+
+    checks.push(mark("外部脚本", doc.querySelectorAll("script[src]").length === 0, `${doc.querySelectorAll("script[src]").length} 个外部脚本`));
+
+    for (const status of ["changed", "added", "removed", "unchanged", "all"]) {
+      click(doc, `[data-filter-status="${status}"]`);
+      const visible = visibleCards(doc).length;
+      const expectedVisible = status === "all" ? expected.pairCount : expectedCounts[status];
+      checks.push(mark(`筛选：${status}`, visible === expectedVisible, `${visible} / ${expectedVisible}`));
+    }
+
+    if ((expectedCounts.changed || 0) > 0) {
+      click(doc, '[data-filter-status="changed"]');
+      const visible = visibleCards(doc);
+      click(doc, '[data-diff-action="expand"]');
+      const details = visible.flatMap((card) => Array.from(card.querySelectorAll("details.diff-detail")));
+      const opened = details.filter((detail) => detail.open).length;
+      click(doc, '[data-diff-action="collapse"]');
+      const closed = details.filter((detail) => !detail.open).length;
+      checks.push(mark("展开差异", opened === details.length && details.length > 0, `${opened} / ${details.length}`));
+      checks.push(mark("收起差异", closed === details.length && details.length > 0, `${closed} / ${details.length}`));
+    }
+
+    frame.classList.remove("is-mobile");
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    const desktopOverflow = doc.documentElement.scrollWidth > frame.clientWidth + 2;
+    checks.push(mark("桌面宽度", !desktopOverflow, desktopOverflow ? "出现横向溢出" : "无横向溢出"));
+
+    frame.classList.add("is-mobile");
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    const grid = doc.querySelector(".compare-grid");
+    const gridDisplay = grid ? frame.contentWindow.getComputedStyle(grid).display : "";
+    const mobileOverflow = doc.documentElement.scrollWidth > frame.clientWidth + 2;
+    checks.push(mark("移动宽度", gridDisplay === "block" && !mobileOverflow, `布局：${gridDisplay || "未知"}`));
+
+    const passed = checks.filter(Boolean).length;
+    const failed = checks.length - passed;
+    summary.className = failed === 0 ? "summary-line is-ok" : "summary-line is-bad";
+    summary.textContent = failed === 0 ? `通过 ${passed} 项` : `通过 ${passed} 项，失败 ${failed} 项`;
+  }
+
+  function loadPreview() {
+    frame.addEventListener("load", runTests, { once: true });
+    if (embeddedReviewHtml && "srcdoc" in frame) {
+      frame.srcdoc = embeddedReviewHtml;
+      return;
+    }
+    const doc = readFrameDocument();
+    if (doc && doc.readyState === "complete") {
+      runTests();
+    }
+  }
+
+  runButton.addEventListener("click", runTests);
+  sizeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      frame.classList.toggle("is-mobile", button.dataset.frameSize === "mobile");
+    });
+  });
+  loadPreview();
+})();
+
+  </script>
+</body>
+</html>

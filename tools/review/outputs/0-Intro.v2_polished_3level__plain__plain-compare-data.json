@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-24T13:51:02.215756+00:00",
+  "sourceFile": "draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex",
+  "targetFile": "draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex",
+  "sourceFileAbsolute": "/Users/Min369/Desktop/书/书稿打磨/draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex",
+  "targetFileAbsolute": "/Users/Min369/Desktop/书/书稿打磨/draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex",
+  "parser": {
+    "name": "tools/review/build_review.py",
+    "strategy": "section_commands + protected_environments + blank_line_paragraphs"
+  },
+  "compare": {
+    "strategy": "sequence_matcher_on_block_signatures_then_ordered_replace_pairing",
+    "summary": {
+      "pairCount": 3,
+      "unchangedCount": 3,
+      "changedCount": 0,
+      "addedCount": 0,
+      "removedCount": 0
+    },
+    "pairs": [
+      {
+        "id": "pair-0001",
+        "status": "unchanged",
+        "blockType": "comment",
+        "sectionPath": [],
+        "sourceBlock": {
+          "id": "comment-0001-4985f40b16",
+          "type": "comment",
+          "content": "% 自动生成：三层级压缩包装文件（章→节→小节）",
+          "startLine": 1,
+          "endLine": 1,
+          "sectionPath": [],
+          "charCount": 24
+        },
+        "targetBlock": {
+          "id": "comment-0001-4985f40b16",
+          "type": "comment",
+          "content": "% 自动生成：三层级压缩包装文件（章→节→小节）",
+          "startLine": 1,
+          "endLine": 1,
+          "sectionPath": [],
+          "charCount": 24
+        },
+        "diffStats": {
+          "sourceCharCount": 24,
+          "targetCharCount": 24,
+          "sourceTokenCount": 24,
+          "targetTokenCount": 24,
+          "equalTokenCount": 24,
+          "insertedTokenCount": 0,
+          "deletedTokenCount": 0,
+          "replacedTokenCount": 0,
+          "similarity": 1.0
+        },
+        "diff": [],
+        "note": ""
+      },
+      {
+        "id": "pair-0002",
+        "status": "unchanged",
+        "blockType": "comment",
+        "sectionPath": [],
+        "sourceBlock": {
+          "id": "comment-0002-57f9c59761",
+          "type": "comment",
+          "content": "% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件",
+          "startLine": 2,
+          "endLine": 2,
+          "sectionPath": [],
+          "charCount": 47
+        },
+        "targetBlock": {
+          "id": "comment-0002-57f9c59761",
+          "type": "comment",
+          "content": "% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件",
+          "startLine": 2,
+          "endLine": 2,
+          "sectionPath": [],
+          "charCount": 47
+        },
+        "diffStats": {
+          "sourceCharCount": 47,
+          "targetCharCount": 47,
+          "sourceTokenCount": 34,
+          "targetTokenCount": 34,
+          "equalTokenCount": 34,
+          "insertedTokenCount": 0,
+          "deletedTokenCount": 0,
+          "replacedTokenCount": 0,
+          "similarity": 1.0
+        },
+        "diff": [],
+        "note": ""
+      },
+      {
+        "id": "pair-0003",
+        "status": "unchanged",
+        "blockType": "paragraph",
+        "sectionPath": [],
+        "sourceBlock": {
+          "id": "paragraph-0001-aceb0740c1",
+          "type": "paragraph",
+          "content": "\\begingroup\n\\setcounter{secnumdepth}{2}\n\\setcounter{tocdepth}{2}\n\\renewcommand\\subsubsection{\\paragraph}\n\\input{0-Intro.v2_refined.tex}\n\\endgroup",
+          "startLine": 3,
+          "endLine": 8,
+          "sectionPath": [],
+          "charCount": 145
+        },
+        "targetBlock": {
+          "id": "paragraph-0001-aceb0740c1",
+          "type": "paragraph",
+          "content": "\\begingroup\n\\setcounter{secnumdepth}{2}\n\\setcounter{tocdepth}{2}\n\\renewcommand\\subsubsection{\\paragraph}\n\\input{0-Intro.v2_refined.tex}\n\\endgroup",
+          "startLine": 3,
+          "endLine": 8,
+          "sectionPath": [],
+          "charCount": 145
+        },
+        "diffStats": {
+          "sourceCharCount": 145,
+          "targetCharCount": 145,
+          "sourceTokenCount": 36,
+          "targetTokenCount": 36,
+          "equalTokenCount": 36,
+          "insertedTokenCount": 0,
+          "deletedTokenCount": 0,
+          "replacedTokenCount": 0,
+          "similarity": 1.0
+        },
+        "diff": [],
+        "note": ""
+      }
+    ]
+  },
+  "source": {
+    "summary": {
+      "blockCount": 3,
+      "sectionCount": 0,
+      "paragraphCount": 1,
+      "environmentCount": 0,
+      "metadataCount": 0,
+      "commentCount": 2
+    },
+    "sections": [
+      {
+        "id": "front-matter",
+        "level": -1,
+        "title": "Front Matter",
+        "startLine": 1,
+        "endLine": 8,
+        "path": [],
+        "blockIds": [
+          "comment-0001-4985f40b16",
+          "comment-0002-57f9c59761",
+          "paragraph-0001-aceb0740c1"
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "comment-0001-4985f40b16",
+        "type": "comment",
+        "content": "% 自动生成：三层级压缩包装文件（章→节→小节）",
+        "startLine": 1,
+        "endLine": 1,
+        "sectionPath": [],
+        "charCount": 24
+      },
+      {
+        "id": "comment-0002-57f9c59761",
+        "type": "comment",
+        "content": "% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件",
+        "startLine": 2,
+        "endLine": 2,
+        "sectionPath": [],
+        "charCount": 47
+      },
+      {
+        "id": "paragraph-0001-aceb0740c1",
+        "type": "paragraph",
+        "content": "\\begingroup\n\\setcounter{secnumdepth}{2}\n\\setcounter{tocdepth}{2}\n\\renewcommand\\subsubsection{\\paragraph}\n\\input{0-Intro.v2_refined.tex}\n\\endgroup",
+        "startLine": 3,
+        "endLine": 8,
+        "sectionPath": [],
+        "charCount": 145
+      }
+    ]
+  },
+  "target": {
+    "summary": {
+      "blockCount": 3,
+      "sectionCount": 0,
+      "paragraphCount": 1,
+      "environmentCount": 0,
+      "metadataCount": 0,
+      "commentCount": 2
+    },
+    "sections": [
+      {
+        "id": "front-matter",
+        "level": -1,
+        "title": "Front Matter",
+        "startLine": 1,
+        "endLine": 8,
+        "path": [],
+        "blockIds": [
+          "comment-0001-4985f40b16",
+          "comment-0002-57f9c59761",
+          "paragraph-0001-aceb0740c1"
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "comment-0001-4985f40b16",
+        "type": "comment",
+        "content": "% 自动生成：三层级压缩包装文件（章→节→小节）",
+        "startLine": 1,
+        "endLine": 1,
+        "sectionPath": [],
+        "charCount": 24
+      },
+      {
+        "id": "comment-0002-57f9c59761",
+        "type": "comment",
+        "content": "% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件",
+        "startLine": 2,
+        "endLine": 2,
+        "sectionPath": [],
+        "charCount": 47
+      },
+      {
+        "id": "paragraph-0001-aceb0740c1",
+        "type": "paragraph",
+        "content": "\\begingroup\n\\setcounter{secnumdepth}{2}\n\\setcounter{tocdepth}{2}\n\\renewcommand\\subsubsection{\\paragraph}\n\\input{0-Intro.v2_refined.tex}\n\\endgroup",
+        "startLine": 3,
+        "endLine": 8,
+        "sectionPath": [],
+        "charCount": 145
+      }
+    ]
+  }
+}

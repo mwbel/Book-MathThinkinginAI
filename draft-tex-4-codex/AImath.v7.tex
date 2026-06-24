@@ -1,0 +1,286 @@
+% 让 Latex Workshop/TeX 引擎知道这是“主文件”
+
+% 放在 \documentclass 之前
+\PassOptionsToPackage{backend=biber,style=numeric-comp,sorting=nyt,refsegment=chapter,defernumbers=true}{biblatex} 
+
+\documentclass[lang=cn,scheme=chinese,12pt]{elegantbook}
+
+% XeLaTeX下不需要inputenc包，已经原生支持UTF-8
+% \usepackage[utf8]{inputenc}  % XeLaTeX下注释掉此行
+
+% 显式加载 biblatex，确保使用 biber
+\usepackage{biblatex}
+
+%\usepackage[pass]{geometry}
+\title{人工智能的数学思维}
+%\subtitle{Elegant\LaTeX{} 经典之作}
+%\author{ }
+\institute{华东师范大学 软件工程学院}
+\date{2024}
+%\version{4.3}
+%\bioinfo{自定义}{信息}
+
+%\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。--- 比企谷八幡}
+% --- 全局：三层级（章→节→小节），编号与目录仅到小节 ---
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+% 版式统一：将 \subsubsection 呈现为段落式标题（与此前章节内的局部设置一致）
+%\renewcommand\subsubsection{\paragraph}
+%\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 字体配置（如果需要可以取消注释）
+%\setCJKmainfont{Songti SC}
+%\setCJKsansfont{Heiti SC}
+%\setCJKmonofont{Kaiti SC}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\usepackage{graphicx}
+% 统一图片搜索路径：图片已从 chapters/figs 上移到当前根目录 figs
+% 主文件在根目录，章节文件在 chapters/chX/ 子目录
+% 主文件编译时：figs/ 即可找到
+% 章节文件编译时：../../figs/ 可找到（从 chapters/chX/ 向上两级）
+\graphicspath{{figs/}{../../figs/}{../figs/}{chapters/figs/}}
+\usepackage{amsmath}  % 确保加载了 amsmath 包
+\usepackage{amssymb}
+% elegantbook模板已包含数学环境，无需加载amsthm
+
+% 修改elegantbook的数学环境编号格式为阿拉伯数字
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}  % 公式编号
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}      % 图形编号
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}        % 表格编号
+
+% 添加修订跟踪功能
+% \usepackage[final]{changes}  % 设为final隐藏修订，设为draft显示修订
+% 暂时注释掉，避免与elegantbook冲突
+
+% 由于elegantbook使用tcolorbox，需要特殊处理
+\makeatletter
+\renewcommand{\thetcb@cnt@definition}{\arabic{chapter}.\arabic{tcb@cnt@definition}}
+\renewcommand{\thetcb@cnt@theorem}{\arabic{chapter}.\arabic{tcb@cnt@theorem}}
+\renewcommand{\thetcb@cnt@lemma}{\arabic{chapter}.\arabic{tcb@cnt@lemma}}
+\renewcommand{\thetcb@cnt@corollary}{\arabic{chapter}.\arabic{tcb@cnt@corollary}}
+\renewcommand{\thetcb@cnt@proposition}{\arabic{chapter}.\arabic{tcb@cnt@proposition}}
+% example环境的编号
+\renewcommand{\theexam}{\arabic{chapter}.\arabic{exam}}
+\makeatother
+
+% 算法环境支持
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{titlesec} 
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- 文本/URL 自动换行，减少 Overfull ---
+\usepackage{xurl} % 让长链接可断行
+\usepackage{microtype}           % 微排版（XeLaTeX 支持部分特性）
+\sloppy                          % 宽松排版（先用，后面可再收紧）
+% 临时缓解 Overfull \hbox（版面溢出）
+\emergencystretch=4em
+
+% --- 中文换行更友好 ---
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 0.2em minus 0.1em
+
+% --- hyperref 选项务必在加载前传入 ---
+\PassOptionsToPackage{unicode,breaklinks}{hyperref}
+\usepackage{hyperref} % 可选：使得 \eqref 的引用带有链接功能
+\hypersetup{hidelinks}
+
+% --- 书签里禁用/替换某些命令（安全写法） ---
+\usepackage{newunicodechar}
+\newunicodechar{＝}{=}
+\newunicodechar{－}{-}
+\newunicodechar{Ｄ}{D}
+\newunicodechar{ｇ}{g}
+\newunicodechar{^^^^200b}{} % 忽略零宽空格 U+200B（注意用 4 个 ^ 的 16 进制写法）
+% 推荐把罗马数字的 Unicode 映射掉（见第 4 节）：（避免 Missing character）
+\newunicodechar{Ⅰ}{I}
+\newunicodechar{Ⅱ}{II}
+\newunicodechar{Ⅲ}{III}
+
+% --- 章节编号格式设置为中文序数（仅章用中文，节以下用数字）---
+\makeatletter
+\newcommand{\zhnumchapter}[1]{%
+  \ifcase#1 一\or 二\or 三\or 四\or 五\or 六\or 七\or 八\or 九\or 十\or
+  十一\or 十二\or 十三\or 十四\or 十五\or 十六\or 十七\or 十八\or 十九\or 二十\else\number#1\fi
+}
+\renewcommand{\thechapter}{\zhnumchapter{\value{chapter}}}
+% 确保节和小节使用标准的数字编号格式
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
+\makeatother
+
+% PDF 书签里不允许出现的东西（如 \\、数学），这里给替代
+\pdfstringdefDisableCommands{%
+  \def\eqref#1{(\ref{#1})}%
+  \def\texttt#1{#1}% 书签里去等宽体
+  \def\footnote#1{}% 书签里丢弃脚注
+  % 如有别的自定义命令造成书签报警，再按此格式加一行
+}
+% --- 目录书签更稳，消除 "Rerun … use package 'bookmark'" ---
+\usepackage{bookmark}
+
+% --- 微案例环境定义 ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\newenvironment{microcase}[1]{%
+  \begin{tcolorbox}[
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    title=#1,
+    arc=2mm,
+    boxrule=0.8pt,
+    top=2mm,
+    bottom=2mm,
+    left=2mm,
+    right=2mm
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+\newcommand{\chapterwithsubtitle}[2]{ \chapter{#1\\ \textit{#2}}  }
+
+% --- 中文右对齐名言（解决 cmr12 缺中文、避免 \\ 进书签）
+\newcommand{\cnquote}[2]{%
+  \begin{flushright}
+    \begin{minipage}{0.85\linewidth}
+      \kaishu #1\par\medskip
+      \hfill---\,#2
+    \end{minipage}
+  \end{flushright}
+}
+
+% --- 段落首行缩进设置（缩进2个汉字）---
+% 设置段落首行缩进为2个中文字符的宽度
+\usepackage{indentfirst}
+\setlength{\parindent}{2em} % 2em约等于2个中文字符的宽度
+
+% 确保所有段落都首行缩进，包括章节后的第一段
+\usepackage{etoolbox}
+\makeatletter
+% 对section、subsection等标题后的段落也应用缩进
+\patchcmd{\section}{\@afterindentfalse}{\@afterindenttrue}{\typeout{}}{\typeout{}}
+\patchcmd{\subsection}{\@afterindentfalse}{\@afterindenttrue}{\typeout{}}{\typeout{}}
+\patchcmd{\subsubsection}{\@afterindentfalse}{\@afterindenttrue}{\typeout{}}{\typeout{}}
+\makeatother
+
+% 定义一个命令来在特定情况下取消缩进（如需要时使用）
+\newcommand{\noindentpar}{\noindent}
+
+
+\newenvironment{appendixsection}[1]{
+    \section*{附录：#1}
+    \addcontentsline{toc}{section}{附录：#1}
+}{}
+
+
+\newenvironment{story}[1]
+{
+    \section*{小故事：#1}
+    \addcontentsline{toc}{section}{小故事：#1}
+}{}
+
+\usepackage{fontawesome5}
+\usepackage{tikz}
+% -----------------------------------------------------------------------------
+% preferInput（精简版：仅 polished_unified / polished / 基础）
+% 优先级：*_polished_unified.tex > *_polished.tex > *.tex
+% -----------------------------------------------------------------------------
+\makeatletter
+\newcommand{\preferInput}[1]{%
+  \begingroup
+  \edef\prefBase{#1}%
+  \edef\prefA{\prefBase\detokenize{_polished_unified_expanded.tex}}%
+  \edef\prefB{\prefBase\detokenize{_polished_unified.tex}}%
+  \edef\prefC{\prefBase\detokenize{_polished.tex}}%
+  \edef\prefD{\prefBase\detokenize{_refined.tex}}%
+  \IfFileExists{\prefA}{%
+    \typeout{[preferInput] -> Using \prefA}%
+    \input{\prefA}%
+  }{%
+    \IfFileExists{\prefB}{%
+      \typeout{[preferInput] -> Using \prefB}%
+      \input{\prefB}%
+    }{%
+      \IfFileExists{\prefC}{%
+        \typeout{[preferInput] -> Fallback to \prefC}%
+        \input{\prefC}%
+      }{%
+        \IfFileExists{\prefD}{%
+          \typeout{[preferInput] -> Fallback to \prefD}%
+          \input{\prefD}%
+        }{%
+          \typeout{[preferInput] -> Fallback to \prefBase.tex}%
+          \input{\prefBase.tex}%
+        }%
+      }%
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+
+% -----------------------------------------------------------------------------
+% 小贴士：
+% - 主文件里务必把上面的宏定义放在 \begin{document} 之前
+% - 章节调用示例：\preferInput{chapters/2-History-Math.v3.2}
+% - chapters/ 下的文件名请使用 ASCII 连字符 '-'（不是中文破折号/短横），避免隐形空格
+% - 建议统一：% !TEX root = ../AImath.v5.tex（位于各章节首行）
+% ---------------------------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+\frontmatter
+
+% 前言/致谢/目录等（无编号）
+
+\preferInput{chapters/ch0/00自序}
+\preferInput{chapters/ch0/01他序}
+
+\preferInput{chapters/ch0/0-Intro.v2}
+
+\tableofcontents
+
+\mainmatter   % ★ 从这里开始：第1章、第2章……
+
+% ===== 正文章节 =====
+\part{追问智能}
+\preferInput{chapters/ch1/1-Def.v1}  % 什么是智能
+\preferInput{chapters/ch2/2-History-Math.v3.2} % 智能，生于数学
+\preferInput{chapters/ch3/3-History-computer.v1}  
+
+\part{学习的逻辑}
+\preferInput{chapters/ch4/4-Thinking.v1}  % 三种思维方法论
+\preferInput{chapters/ch5/5-Tools.v1}  % 数学工具基础
+\preferInput{chapters/ch6/6-ML.v3}  
+\preferInput{chapters/ch7/7ML2DL.v1} % 从机器学习到深度学习
+\preferInput{chapters/ch8/8-DL.v1} %  深度学习实践 
+
+\part{理解的边界}
+\preferInput{chapters/ch9/9-深度学习的挑战与幻觉.v4} 
+\preferInput{chapters/ch10/10-AI的边界：图灵机、哥德尔与计算的极限.v3} 
+\preferInput{chapters/ch11/11-符号、神经与因果：智能的三种建构方式.v3} 
+\preferInput{chapters/ch12/12-智能的物理基础：从熵到量子计算.v3} 
+
+\part{回归与超越}
+\preferInput{chapters/ch13/13-语言中的智能：Transformer的意外胜利.v3} 
+\preferInput{chapters/ch14/14-AI+.v3} 
+\preferInput{chapters/ch15/15-理解智能的尽头：理性与取舍的未来.v3} 
+\preferInput{chapters/ch16/16-伦理与挑战.v3} 
+
+%\part{向上的道路}
+\preferInput{chapters/ch17/17-Conclusion.v1}
+\preferInput{chapters/ch18/18-Ack.v1} 
+\nocite{*}
+\printbibliography[heading=bibintoc, title=参考文献]
+
+\end{document}

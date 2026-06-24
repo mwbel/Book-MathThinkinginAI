@@ -1,0 +1,4690 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>10 · 符号、神经与因果：智能的三种建构方式 校对页 · 渲染预览</title>
+  <style>
+
+:root {
+  --bg: #f5f1e9;
+  --panel: #fffdf8;
+  --paper: #fffaf2;
+  --ink: #1f2937;
+  --muted: #667085;
+  --line: #e2d7c7;
+  --accent: #8a5a12;
+  --eb-structure: #3c71b7;
+  --eb-main: #00a652;
+  --eb-second: #ff8618;
+  --eb-third: #00aef7;
+  --eb-paper: #fffefb;
+  --eb-ink: #252525;
+  --eb-rule: rgba(60, 113, 183, 0.34);
+  --source-bg: #1f2933;
+  --source-ink: #e8edf3;
+  --reader-height: calc(100vh - 214px);
+  --page-height: 760px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.78;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 22px 30px;
+  background: #27211a;
+  color: #fffaf0;
+}
+
+.eyebrow,
+.file-line {
+  margin: 0;
+  color: #eadfcb;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 4px 0 4px;
+  font-size: 26px;
+  letter-spacing: 0;
+}
+
+.top-actions {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.mode-switch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chapter-picker {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(140px, 180px) minmax(140px, 180px) auto;
+  gap: 10px 12px;
+  align-items: end;
+}
+
+.picker-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.picker-field span {
+  color: #eadfcb;
+  font-size: 12px;
+}
+
+.picker-field select {
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 250, 240, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 250, 240, 0.08);
+  color: #fffaf0;
+  font: inherit;
+}
+
+.picker-field select:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.picker-button {
+  min-height: 36px;
+  border-color: rgba(255, 250, 240, 0.48);
+  background: rgba(255, 250, 240, 0.12);
+}
+
+.picker-button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.chapter-picker-state {
+  grid-column: 1 / -1;
+  margin: -2px 0 0;
+  color: #eadfcb;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.chapter-picker-state.is-error {
+  color: #ffb4a8;
+}
+
+.chapter-picker-state.is-ok {
+  color: #d6f5cf;
+}
+
+.compile-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.compile-button {
+  border-color: rgba(255, 250, 240, 0.48);
+  background: rgba(255, 250, 240, 0.08);
+}
+
+.compile-state {
+  max-width: 360px;
+  margin: 0;
+  color: #eadfcb;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.compile-state.is-dirty {
+  color: #ffd98a;
+}
+
+.compile-state.is-error {
+  color: #ffb4a8;
+}
+
+.compile-state.is-ok {
+  color: #d6f5cf;
+}
+
+button {
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: transparent;
+  color: #fffaf0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+}
+
+button.is-active,
+button:hover {
+  background: #fffaf0;
+  color: #2d2418;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: calc(100vh - 112px);
+}
+
+.workspace.is-outline-collapsed {
+  grid-template-columns: 58px minmax(0, 1fr);
+}
+
+.view-panel {
+  display: none;
+  min-width: 0;
+  padding: 32px 28px 60px;
+}
+
+.workspace.is-read .read-view,
+.workspace.is-dual .dual-view,
+.workspace.is-quad .quad-view {
+  display: block;
+}
+
+.outline {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 22px 18px;
+  border-right: 1px solid var(--line);
+}
+
+.workspace.is-outline-collapsed .outline {
+  padding: 18px 8px;
+  overflow: hidden;
+}
+
+.outline-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.outline-title {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.workspace.is-outline-collapsed .outline-head {
+  display: block;
+  text-align: center;
+}
+
+.workspace.is-outline-collapsed .outline-title {
+  writing-mode: vertical-rl;
+  margin: 0 auto 10px;
+}
+
+.workspace.is-outline-collapsed .outline-body {
+  display: none;
+}
+
+.workspace.is-outline-collapsed .outline .collapse-button {
+  min-width: 38px;
+  padding: 6px 4px;
+}
+
+.collapse-button {
+  min-height: 28px;
+  padding: 4px 8px;
+  border-color: var(--line);
+  background: #fffaf1;
+  color: #5c3f12;
+  font-size: 12px;
+}
+
+.outline-link {
+  display: block;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #3b3124;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.outline-link:hover {
+  background: #ebe1d0;
+}
+
+.indent-1 { padding-left: 18px; }
+.indent-2 { padding-left: 30px; }
+.indent-3 { padding-left: 42px; }
+.indent-4 { padding-left: 54px; }
+
+.article {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 42px 54px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 18px 42px rgba(68, 49, 24, 0.08);
+}
+
+.article-compact {
+  max-width: none;
+  height: 100%;
+  margin: 0;
+  padding: 24px 26px;
+  box-shadow: none;
+}
+
+.article h1,
+.article h2,
+.article h3,
+.article h4 {
+  color: #2b241a;
+  line-height: 1.35;
+}
+
+.chapter-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--eb-structure);
+  font-size: 0.56em;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.article h1 {
+  margin: 0 0 28px;
+  font-size: 32px;
+}
+
+.article h2 {
+  margin: 34px 0 14px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 24px;
+}
+
+.article h3 {
+  margin: 24px 0 10px;
+  font-size: 19px;
+}
+
+.article p {
+  margin: 12px 0;
+  font-size: 16px;
+}
+
+.article em {
+  color: #7a4e12;
+  font-style: normal;
+}
+
+.article strong {
+  color: #3b3124;
+}
+
+.intro-box {
+  margin: 18px 0;
+  padding: 16px 20px;
+  border: 1px solid #e3c784;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: #fff9e8;
+}
+
+.intro-title {
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.intro-box ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.intro-box li {
+  margin: 5px 0;
+}
+
+.latex-list {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.latex-list li {
+  margin: 6px 0;
+}
+
+.formula {
+  margin: 18px 0;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbf7ef;
+  overflow: auto;
+  text-align: center;
+  font-family: "Times New Roman", "STIX Two Text", serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.inline-math {
+  padding: 0 2px;
+  color: #6b3f08;
+  font-family: "Times New Roman", serif;
+}
+
+.two-column-grid,
+.quad-grid {
+  display: grid;
+  gap: 14px;
+  align-items: stretch;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+.two-column-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quad-grid {
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
+}
+
+.two-column-grid:has(.compare-pane.is-collapsed),
+.quad-grid:has(.compare-pane.is-collapsed) {
+  grid-template-columns: repeat(auto-fit, minmax(54px, 1fr));
+}
+
+.compare-pane {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.compare-pane.is-collapsed {
+  width: 54px;
+  min-width: 54px;
+}
+
+.compare-pane.is-collapsed .article,
+.compare-pane.is-collapsed .source-editor,
+.compare-pane.is-collapsed .source-workbench {
+  display: none;
+}
+
+.compare-pane.is-collapsed .page-reader {
+  display: none;
+}
+
+.compare-pane.is-collapsed .pane-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  height: 100%;
+  min-height: 260px;
+  padding: 8px 6px 12px;
+  writing-mode: horizontal-tb;
+  text-align: center;
+}
+
+.compare-pane.is-collapsed .pane-title span {
+  writing-mode: vertical-rl;
+}
+
+.compare-pane.is-collapsed .pane-title .collapse-button {
+  order: -1;
+  writing-mode: horizontal-tb;
+  margin: 0;
+  padding: 4px;
+}
+
+.source-pane {
+  background: var(--source-bg);
+  color: var(--source-ink);
+}
+
+.pane-title {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #fff7e8;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.pane-title small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.source-pane .pane-title small {
+  color: #9fb3c8;
+}
+
+.source-pane .pane-title {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  background: #17202a;
+  color: #d7b56d;
+}
+
+.source-pane.is-source-jump {
+  box-shadow: 0 0 0 3px rgba(60, 113, 183, 0.42), 0 0 24px rgba(60, 113, 183, 0.36);
+}
+
+.source-pane.is-source-jump .pane-title {
+  background: #203a5f;
+  color: #f8d88a;
+}
+
+.source-workbench {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  width: 100%;
+  height: var(--reader-height);
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--source-bg);
+}
+
+.source-gutter {
+  height: 100%;
+  padding: 18px 8px 28px 0;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: #18222d;
+  color: #77889a;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: right;
+  user-select: none;
+}
+
+.source-gutter-line {
+  height: 22.1px;
+  padding-right: 6px;
+  border-right: 2px solid transparent;
+}
+
+.source-gutter-line.is-line-hit {
+  border-right-color: #f8d88a;
+  background: rgba(248, 216, 138, 0.12);
+  color: #f8d88a;
+  font-weight: 700;
+}
+
+.source-editor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 18px 16px 28px;
+  border: 0;
+  outline: 0;
+  resize: none;
+  overflow: auto;
+  background: var(--source-bg);
+  color: var(--source-ink);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.page-reader {
+  height: var(--reader-height);
+  min-height: 560px;
+  padding: 18px 14px 24px;
+  overflow: auto;
+  background:
+    linear-gradient(90deg, rgba(60, 113, 183, 0.05), transparent 28%, transparent 72%, rgba(60, 113, 183, 0.05)),
+    #ded8cf;
+}
+
+.real-pdf-reader {
+  padding: 18px 18px 28px;
+}
+
+.pdf-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: min(100%, 540px);
+  margin: -4px auto 8px;
+  padding: 7px 8px;
+  border: 1px solid rgba(60, 113, 183, 0.18);
+  border-radius: 6px;
+  background: rgba(255, 253, 248, 0.97);
+  color: #44546a;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.pdf-toolbar button {
+  min-height: 26px;
+  padding: 3px 8px;
+  border-color: rgba(60, 113, 183, 0.24);
+  background: #ffffff;
+  color: #2f5f9f;
+  font-size: 12px;
+}
+
+.pdf-page-state,
+.pdf-zoom-state {
+  min-width: 50px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdf-toolbar-separator {
+  width: 1px;
+  height: 18px;
+  background: rgba(60, 113, 183, 0.22);
+}
+
+.synctex-status {
+  position: sticky;
+  top: 42px;
+  z-index: 3;
+  margin: 0 auto 12px;
+  max-width: 540px;
+  padding: 7px 10px;
+  border: 1px solid rgba(60, 113, 183, 0.22);
+  border-radius: 6px;
+  background: rgba(255, 253, 248, 0.96);
+  color: #44546a;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.synctex-status.is-error {
+  border-color: rgba(170, 40, 40, 0.36);
+  color: #8f1d1d;
+}
+
+.synctex-status.is-ok {
+  border-color: rgba(60, 113, 183, 0.4);
+  color: #254f8f;
+}
+
+.real-pdf-page {
+  position: relative;
+  width: min(100%, 540px);
+  max-width: none;
+  margin: 0 auto 18px;
+  padding: 0;
+  border: 1px solid #d7deea;
+  border-radius: 2px;
+  background: white;
+  box-shadow: 0 14px 32px rgba(31, 45, 64, 0.18);
+  overflow: hidden;
+}
+
+.real-pdf-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  cursor: context-menu;
+}
+
+.real-pdf-page img:not([src]) {
+  min-height: 420px;
+  background:
+    linear-gradient(90deg, rgba(60, 113, 183, 0.06), transparent 30%, transparent 70%, rgba(60, 113, 183, 0.06)),
+    #fff;
+}
+
+.real-pdf-page figcaption {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--eb-structure);
+  font-size: 11px;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.real-pdf-page.is-sync-hit {
+  outline: 2px solid rgba(60, 113, 183, 0.72);
+  outline-offset: 3px;
+}
+
+.pdf-sync-marker {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #2f72c6;
+  border-radius: 999px;
+  background: rgba(47, 114, 198, 0.14);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-shadow: 0 0 0 5px rgba(47, 114, 198, 0.12);
+}
+
+.render-pane .article-compact {
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.pdf-page {
+  width: min(100%, 540px);
+  height: var(--page-height);
+  margin: 0 auto 18px;
+  padding: 0;
+  border: 1px solid #d7deea;
+  border-radius: 2px;
+  background: var(--eb-paper);
+  box-shadow: 0 14px 32px rgba(31, 45, 64, 0.18);
+  display: grid;
+  grid-template-rows: 48px minmax(0, 1fr) 42px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pdf-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: 18px 40px 7px;
+  border-bottom: 1px solid var(--eb-structure);
+  color: var(--eb-structure);
+  font-family: "TeX Gyre Heros", "Helvetica Neue", Arial, "PingFang SC", sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.pdf-page-header span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-page-body {
+  min-height: 0;
+  padding: 24px 42px 8px;
+  overflow: hidden;
+}
+
+.pdf-page-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 40px 15px;
+  color: var(--eb-structure);
+  font-family: "TeX Gyre Heros", "Helvetica Neue", Arial, "PingFang SC", sans-serif;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.pdf-page-footer .footer-left,
+.pdf-page-footer .footer-right {
+  min-width: 0;
+  color: rgba(60, 113, 183, 0.66);
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-page-footer .footer-right {
+  text-align: right;
+}
+
+.pdf-page-footer .page-number {
+  min-width: 48px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.pdf-page h1 {
+  margin: 0 0 24px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--eb-rule);
+  color: var(--eb-structure);
+  font-family: "TeX Gyre Heros", "Helvetica Neue", Arial, "PingFang SC", sans-serif;
+  font-size: clamp(24px, 6vw, 30px);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.pdf-page h2 {
+  margin: 24px 0 12px;
+  padding-top: 0;
+  border-top: 0;
+  color: var(--eb-structure);
+  font-family: "TeX Gyre Heros", "Helvetica Neue", Arial, "PingFang SC", sans-serif;
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+.pdf-page h3 {
+  margin: 18px 0 8px;
+  color: var(--eb-structure);
+  font-size: 17px;
+}
+
+.pdf-page h4 {
+  margin: 14px 0 6px;
+  color: var(--eb-structure);
+  font-size: 15px;
+}
+
+.pdf-page p,
+.pdf-page li {
+  color: var(--eb-ink);
+  font-family: "TeX Gyre Termes", "Times New Roman", "Songti SC", "SimSun", serif;
+  font-size: 14.5px;
+  line-height: 1.78;
+}
+
+.pdf-page p {
+  margin: 8px 0;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+.pdf-page em {
+  color: var(--eb-structure);
+}
+
+.pdf-page strong {
+  color: #1f3760;
+}
+
+.pdf-page .intro-box {
+  margin: 16px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.pdf-page .intro-title {
+  margin: 0;
+  padding: 7px 12px;
+  background: var(--eb-main);
+  color: white;
+  font-family: "TeX Gyre Heros", "Helvetica Neue", Arial, "PingFang SC", sans-serif;
+  font-weight: 800;
+}
+
+.pdf-page .intro-box ul {
+  margin: 0;
+  padding: 10px 18px 10px 30px;
+  border: 1px solid rgba(0, 166, 82, 0.42);
+  border-top: 0;
+  background: rgba(0, 166, 82, 0.055);
+}
+
+.pdf-page .latex-list {
+  padding-left: 22px;
+}
+
+.pdf-page .formula {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(60, 113, 183, 0.28);
+  border-radius: 2px;
+  background: #f7faff;
+  color: #17233d;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.pdf-page .inline-math {
+  color: #7d1c1c;
+}
+
+.render-pane [data-source-line] {
+  cursor: context-menu;
+}
+
+.render-pane .is-sync-hit {
+  outline: 2px solid rgba(60, 113, 183, 0.72);
+  outline-offset: 3px;
+  border-radius: 3px;
+  background-color: rgba(60, 113, 183, 0.055);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (max-width: 1100px) {
+  .topbar {
+    align-items: stretch;
+  }
+
+  .top-actions {
+    justify-items: stretch;
+  }
+
+  .chapter-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter-picker-state,
+  .compile-state {
+    text-align: left;
+  }
+
+  .workspace,
+  .workspace.is-read,
+  .workspace.is-dual,
+  .workspace.is-quad {
+    display: block;
+  }
+
+  .outline {
+    position: static;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .two-column-grid,
+  .quad-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article {
+    padding: 28px 24px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">校对稿渲染预览</p>
+      <h1>10 · 符号、神经与因果：智能的三种建构方式 校对页 · 渲染预览</h1>
+      <p class="file-line">原文：10-符号、神经与因果：智能的三种建构方式.v3_refined.tex</p>
+      <p class="file-line">修改稿：10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex · 2026-06-22T11:42:28.867508+00:00</p>
+    </div>
+    <div class="top-actions">
+      <div class="mode-switch" aria-label="视图模式">
+        <button type="button" class="is-active" data-mode="read">Typora 阅读</button>
+        <button type="button" data-mode="dual">双栏对照</button>
+        <button type="button" data-mode="quad">四栏校对</button>
+      </div>
+      <div class="chapter-picker" data-chapter-picker>
+        <label class="picker-field">
+          <span>章节</span>
+          <select data-chapter-select>
+            <option value="">正在读取章节...</option>
+          </select>
+        </label>
+        <label class="picker-field">
+          <span>原文版本</span>
+          <select data-original-select disabled>
+            <option value="">请先选择章节</option>
+          </select>
+        </label>
+        <label class="picker-field">
+          <span>修改稿版本</span>
+          <select data-target-select disabled>
+            <option value="">请先选择章节</option>
+          </select>
+        </label>
+        <button type="button" class="picker-button" data-open-chapter disabled>打开章节</button>
+        <p class="chapter-picker-state" data-chapter-picker-status>通过本地 HTTP 服务可切换到任意章节。</p>
+      </div>
+      <div class="compile-controls">
+        <button type="button" class="compile-button" data-rebuild-preview>重新编译 PDF</button>
+        <p class="compile-state" data-compile-status>PDF 对应最近一次编译结果</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace is-read" data-workspace data-chapter-label="第十章">
+    <aside class="outline">
+      <div class="outline-head">
+        <div class="outline-title">目录</div>
+        <button type="button" class="collapse-button" data-toggle-outline>收起</button>
+      </div>
+      <nav class="outline-body">
+        <a class="outline-link indent-0" href="#target-sec-1">符号、神经与因果：智能的三种建构方式</a>
+<a class="outline-link indent-1" href="#target-sec-2">引言：智能建构的多元路径</a>
+<a class="outline-link indent-1" href="#target-sec-3">符号主义：逻辑推理的形式化</a>
+<a class="outline-link indent-2" href="#target-sec-4">理论基础与哲学根源</a>
+<a class="outline-link indent-2" href="#target-sec-5">数学基础：一阶逻辑与推理</a>
+<a class="outline-link indent-4" href="#target-sec-6">语法结构</a>
+<a class="outline-link indent-4" href="#target-sec-7">推理规则</a>
+<a class="outline-link indent-2" href="#target-sec-8">知识表示与推理机制</a>
+<a class="outline-link indent-4" href="#target-sec-9">产生式规则系统</a>
+<a class="outline-link indent-4" href="#target-sec-10">语义网络</a>
+<a class="outline-link indent-4" href="#target-sec-11">框架理论</a>
+<a class="outline-link indent-2" href="#target-sec-12">经典成就与应用</a>
+<a class="outline-link indent-4" href="#target-sec-13">专家系统</a>
+<a class="outline-link indent-4" href="#target-sec-14">定理证明</a>
+<a class="outline-link indent-2" href="#target-sec-15">局限性分析</a>
+<a class="outline-link indent-4" href="#target-sec-16">知识获取瓶颈</a>
+<a class="outline-link indent-4" href="#target-sec-17">脆性问题</a>
+<a class="outline-link indent-4" href="#target-sec-18">感知能力限制</a>
+<a class="outline-link indent-1" href="#target-sec-19">连接主义：神经网络的分布式表示</a>
+<a class="outline-link indent-2" href="#target-sec-20">理论基础与生物启发</a>
+<a class="outline-link indent-2" href="#target-sec-21">数学基础：神经网络理论</a>
+<a class="outline-link indent-4" href="#target-sec-22">神经元模型</a>
+<a class="outline-link indent-4" href="#target-sec-23">网络学习算法</a>
+<a class="outline-link indent-4" href="#target-sec-24">通用逼近定理</a>
+<a class="outline-link indent-2" href="#target-sec-25">深度学习的突破</a>
+<a class="outline-link indent-4" href="#target-sec-26">表示学习</a>
+<a class="outline-link indent-4" href="#target-sec-27">注意力机制</a>
+<a class="outline-link indent-4" href="#target-sec-28">残差连接</a>
+<a class="outline-link indent-2" href="#target-sec-29">连接主义的优势</a>
+<a class="outline-link indent-4" href="#target-sec-30">强大的模式识别能力</a>
+<a class="outline-link indent-4" href="#target-sec-31">自适应学习机制</a>
+<a class="outline-link indent-2" href="#target-sec-32">连接主义的局限</a>
+<a class="outline-link indent-4" href="#target-sec-33">可解释性问题</a>
+<a class="outline-link indent-4" href="#target-sec-34">推理能力限制</a>
+<a class="outline-link indent-4" href="#target-sec-35">数据依赖性</a>
+<a class="outline-link indent-1" href="#target-sec-36">因果主义：理解世界的因果结构</a>
+<a class="outline-link indent-2" href="#target-sec-37">因果推理的理论基础</a>
+<a class="outline-link indent-4" href="#target-sec-38">因果层次</a>
+<a class="outline-link indent-2" href="#target-sec-39">因果图与结构方程模型</a>
+<a class="outline-link indent-4" href="#target-sec-40">因果图</a>
+<a class="outline-link indent-4" href="#target-sec-41">结构方程模型</a>
+<a class="outline-link indent-2" href="#target-sec-42">因果推理的数学工具</a>
+<a class="outline-link indent-4" href="#target-sec-43">do-演算</a>
+<a class="outline-link indent-4" href="#target-sec-44">后门准则</a>
+<a class="outline-link indent-4" href="#target-sec-45">前门准则</a>
+<a class="outline-link indent-2" href="#target-sec-46">因果发现方法</a>
+<a class="outline-link indent-4" href="#target-sec-47">基于约束的方法</a>
+<a class="outline-link indent-4" href="#target-sec-48">基于评分的方法</a>
+<a class="outline-link indent-4" href="#target-sec-49">基于函数的方法</a>
+<a class="outline-link indent-2" href="#target-sec-50">因果主义的优势</a>
+<a class="outline-link indent-4" href="#target-sec-51">可解释性</a>
+<a class="outline-link indent-4" href="#target-sec-52">泛化能力</a>
+<a class="outline-link indent-4" href="#target-sec-53">决策支持</a>
+<a class="outline-link indent-2" href="#target-sec-54">因果主义的局限</a>
+<a class="outline-link indent-4" href="#target-sec-55">因果发现的困难</a>
+<a class="outline-link indent-4" href="#target-sec-56">计算复杂性</a>
+<a class="outline-link indent-4" href="#target-sec-57">数据需求</a>
+<a class="outline-link indent-1" href="#target-sec-58">三种范式的比较与分析</a>
+<a class="outline-link indent-2" href="#target-sec-59">认知能力对比</a>
+<a class="outline-link indent-2" href="#target-sec-60">适用场景分析</a>
+<a class="outline-link indent-4" href="#target-sec-61">符号主义适用场景</a>
+<a class="outline-link indent-4" href="#target-sec-62">连接主义适用场景</a>
+<a class="outline-link indent-4" href="#target-sec-63">因果主义适用场景</a>
+<a class="outline-link indent-1" href="#target-sec-64">神经符号融合：走向统一的智能</a>
+<a class="outline-link indent-2" href="#target-sec-65">融合的必要性</a>
+<a class="outline-link indent-2" href="#target-sec-66">融合架构</a>
+<a class="outline-link indent-4" href="#target-sec-67">松耦合架构</a>
+<a class="outline-link indent-4" href="#target-sec-68">紧耦合架构</a>
+<a class="outline-link indent-4" href="#target-sec-69">端到端架构</a>
+<a class="outline-link indent-2" href="#target-sec-70">典型融合方法</a>
+<a class="outline-link indent-4" href="#target-sec-71">神经模块网络</a>
+<a class="outline-link indent-4" href="#target-sec-72">可微分神经计算机</a>
+<a class="outline-link indent-4" href="#target-sec-73">图神经网络</a>
+<a class="outline-link indent-2" href="#target-sec-74">因果感知的神经网络</a>
+<a class="outline-link indent-4" href="#target-sec-75">因果表示学习</a>
+<a class="outline-link indent-4" href="#target-sec-76">反事实数据增强</a>
+<a class="outline-link indent-4" href="#target-sec-77">因果注意力机制</a>
+<a class="outline-link indent-1" href="#target-sec-78">实际应用案例</a>
+<a class="outline-link indent-2" href="#target-sec-79">医疗诊断系统</a>
+<a class="outline-link indent-4" href="#target-sec-80">多模态融合</a>
+<a class="outline-link indent-4" href="#target-sec-81">系统架构</a>
+<a class="outline-link indent-2" href="#target-sec-82">自动驾驶系统</a>
+<a class="outline-link indent-4" href="#target-sec-83">感知-推理-决策链条</a>
+<a class="outline-link indent-4" href="#target-sec-84">安全保障</a>
+<a class="outline-link indent-2" href="#target-sec-85">科学发现系统</a>
+<a class="outline-link indent-4" href="#target-sec-86">假设生成与验证</a>
+<a class="outline-link indent-4" href="#target-sec-87">发现流程</a>
+<a class="outline-link indent-1" href="#target-sec-88">挑战与未来方向</a>
+<a class="outline-link indent-2" href="#target-sec-89">技术挑战</a>
+<a class="outline-link indent-4" href="#target-sec-90">表示对齐</a>
+<a class="outline-link indent-4" href="#target-sec-91">学习机制</a>
+<a class="outline-link indent-4" href="#target-sec-92">推理效率</a>
+<a class="outline-link indent-2" href="#target-sec-93">理论挑战</a>
+<a class="outline-link indent-4" href="#target-sec-94">统一理论框架</a>
+<a class="outline-link indent-4" href="#target-sec-95">可解释性理论</a>
+<a class="outline-link indent-2" href="#target-sec-96">未来发展方向</a>
+<a class="outline-link indent-4" href="#target-sec-97">认知启发的AI</a>
+<a class="outline-link indent-4" href="#target-sec-98">自主学习系统</a>
+<a class="outline-link indent-4" href="#target-sec-99">通用人工智能</a>
+<a class="outline-link indent-1" href="#target-sec-100">哲学思考：智能的本质</a>
+<a class="outline-link indent-2" href="#target-sec-101">智能的多元性</a>
+<a class="outline-link indent-2" href="#target-sec-102">计算与认知的关系</a>
+<a class="outline-link indent-4" href="#target-sec-103">计算主义观点</a>
+<a class="outline-link indent-4" href="#target-sec-104">体现认知观点</a>
+<a class="outline-link indent-4" href="#target-sec-105">预测处理观点</a>
+<a class="outline-link indent-2" href="#target-sec-106">意识与智能</a>
+<a class="outline-link indent-4" href="#target-sec-107">意识的作用</a>
+<a class="outline-link indent-4" href="#target-sec-108">人工意识的可能性</a>
+<a class="outline-link indent-1" href="#target-sec-109">结论：走向统一的智能理论</a>
+<a class="outline-link indent-2" href="#target-sec-110">融合的必然性</a>
+<a class="outline-link indent-2" href="#target-sec-111">统一理论的前景</a>
+<a class="outline-link indent-2" href="#target-sec-112">对人工智能发展的启示</a>
+<a class="outline-link indent-4" href="#target-sec-113">技术发展策略</a>
+<a class="outline-link indent-4" href="#target-sec-114">应用开发原则</a>
+<a class="outline-link indent-4" href="#target-sec-115">社会影响考虑</a>
+      </nav>
+    </aside>
+    <section class="view-panel read-view" data-view="read">
+      <article class="article target-read-article">
+        <h1 id="target-sec-1" class="latex-heading latex-chapter" data-heading-level="1" data-source-line="2" data-source-end-line="2"><span class="chapter-label">第十章</span>符号、神经与因果：智能的三种建构方式</h1>
+<h2 id="target-sec-2" class="latex-heading latex-section" data-heading-level="2" data-source-line="4" data-source-end-line="4">引言：智能建构的多元路径</h2>
+<p data-source-line="6" data-source-end-line="6">在探索人工智能的历程中，我们见证了深度学习的辉煌成就，也认识到了其固有的局限性。这促使我们思考一个根本性问题：智能究竟是什么？我们应该如何建构真正的人工智能？</p>
+<p data-source-line="8" data-source-end-line="8">历史上，人工智能研究主要沿着三条不同的路径发展，每条路径都代表了对智能本质的不同理解：</p>
+<ul class="latex-list" data-source-line="10" data-source-end-line="14"><li><strong>符号主义</strong>（Symbolism）：将智能视为符号操作和逻辑推理的过程</li>
+<li><strong>连接主义</strong>（Connectionism）：认为智能源于神经元网络的连接和激活模式</li>
+<li><strong>因果主义</strong>（Causalism）：强调智能需要理解和推理因果关系</li></ul>
+<p data-source-line="16" data-source-end-line="16">这三种范式并非相互排斥，而是从不同角度揭示了智能的多面性。本章将深入分析这三种建构方式的理论基础、技术实现、优势局限，以及它们在未来智能系统中的融合前景。</p>
+<h2 id="target-sec-3" class="latex-heading latex-section" data-heading-level="2" data-source-line="18" data-source-end-line="18">符号主义：逻辑推理的形式化</h2>
+<h3 id="target-sec-4" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="20" data-source-end-line="20">理论基础与哲学根源</h3>
+<p data-source-line="22" data-source-end-line="22">符号主义的理论基础可以追溯到古希腊的逻辑学传统和现代数理逻辑的发展。其核心假设是：</p>
+<p data-source-line="24" data-source-end-line="26">\begin{quote}<br><strong>物理符号系统假设</strong>：物理符号系统具有进行智能行为的必要和充分手段。<br>\end{quote}</p>
+<p data-source-line="28" data-source-end-line="28">这一假设由Newell和Simon在1976年提出，它意味着智能可以通过符号的操作和变换来实现。</p>
+<h3 id="target-sec-5" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="30" data-source-end-line="30">数学基础：一阶逻辑与推理</h3>
+<p data-source-line="32" data-source-end-line="32">符号主义系统通常基于一阶逻辑（First-Order Logic, FOL）构建。一阶逻辑的语法包括：</p>
+<h4 id="target-sec-6" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="34" data-source-end-line="34">语法结构</h4>
+<ul class="latex-list" data-source-line="35" data-source-end-line="39"><li><strong>项</strong>（Terms）：常量、变量、函数</li>
+<li><strong>原子公式</strong>：谓词应用于项</li>
+<li><strong>复合公式</strong>：通过逻辑连接词组合的公式</li></ul>
+<h4 id="target-sec-7" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="41" data-source-end-line="41">推理规则</h4>
+<p data-source-line="42" data-source-end-line="42">符号系统的推理基于形式化的推理规则，如：</p>
+<p data-source-line="44" data-source-end-line="45"><strong>肯定前件</strong>（Modus Ponens）：<br>$<span class="inline-math">$\frac{P \rightarrow Q, \quad P}{Q}$</span>$</p>
+<p data-source-line="47" data-source-end-line="48"><strong>全称实例化</strong>（Universal Instantiation）：<br>$<span class="inline-math">$\frac{\forall x \, P(x)}{P(c)}$</span>$</p>
+<p data-source-line="50" data-source-end-line="50">其中<span class="inline-math">$c$</span>是任意常量。</p>
+<h3 id="target-sec-8" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="52" data-source-end-line="52">知识表示与推理机制</h3>
+<h4 id="target-sec-9" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="54" data-source-end-line="54">产生式规则系统</h4>
+<p data-source-line="55" data-source-end-line="55">符号主义系统通常采用产生式规则（Production Rules）来表示知识：</p>
+<p data-source-line="57" data-source-end-line="57">$<span class="inline-math">$<span>IF </span> <span>条件</span> <span> THEN </span> <span>动作</span>$</span>$</p>
+<p data-source-line="59" data-source-end-line="60">例如，在医疗诊断系统中：<br>$<span class="inline-math">$<span>IF </span> <span>发烧</span> \land <span>咳嗽</span> \land <span>胸痛</span> <span> THEN </span> <span>肺炎</span>$</span>$</p>
+<h4 id="target-sec-10" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="62" data-source-end-line="62">语义网络</h4>
+<p data-source-line="63" data-source-end-line="63">语义网络通过节点和边来表示概念及其关系：</p>
+<ul class="latex-list" data-source-line="64" data-source-end-line="67"><li><strong>节点</strong>：表示概念或对象</li>
+<li><strong>边</strong>：表示关系（如&quot;是一个&quot;、&quot;属于&quot;等）</li></ul>
+<h4 id="target-sec-11" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="69" data-source-end-line="69">框架理论</h4>
+<p data-source-line="70" data-source-end-line="70">Minsky提出的框架理论将知识组织为结构化的数据结构，每个框架包含：</p>
+<ul class="latex-list" data-source-line="71" data-source-end-line="75"><li><strong>槽</strong>（Slots）：属性或关系</li>
+<li><strong>填充值</strong>：具体的属性值</li>
+<li><strong>默认值</strong>：缺省情况下的值</li></ul>
+<h3 id="target-sec-12" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="77" data-source-end-line="77">经典成就与应用</h3>
+<h4 id="target-sec-13" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="79" data-source-end-line="79">专家系统</h4>
+<p data-source-line="80" data-source-end-line="80">20世纪70-80年代，专家系统代表了符号主义的巅峰成就：</p>
+<ul class="latex-list" data-source-line="82" data-source-end-line="86"><li><strong>MYCIN</strong>：医疗诊断系统，准确率达到专家水平</li>
+<li><strong>DENDRAL</strong>：化学结构分析系统</li>
+<li><strong>XCON</strong>：计算机配置系统，为DEC公司节省数千万美元</li></ul>
+<h4 id="target-sec-14" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="88" data-source-end-line="88">定理证明</h4>
+<p data-source-line="89" data-source-end-line="89">符号主义在自动定理证明方面取得了重要进展：</p>
+<ul class="latex-list" data-source-line="90" data-source-end-line="93"><li><strong>Resolution原理</strong>：Robinson提出的通用推理方法</li>
+<li><strong>Boyer-Moore定理证明器</strong>：在数学定理证明中的应用</li></ul>
+<h3 id="target-sec-15" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="95" data-source-end-line="95">局限性分析</h3>
+<h4 id="target-sec-16" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="97" data-source-end-line="97">知识获取瓶颈</h4>
+<p data-source-line="98" data-source-end-line="98">符号系统面临的最大挑战是知识获取瓶颈：</p>
+<ul class="latex-list" data-source-line="99" data-source-end-line="103"><li><strong>知识工程困难</strong>：将专家知识形式化极其困难</li>
+<li><strong>知识维护成本</strong>：规则库的维护和更新成本高昂</li>
+<li><strong>知识不完整性</strong>：难以穷尽所有可能的规则和例外</li></ul>
+<h4 id="target-sec-17" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="105" data-source-end-line="105">脆性问题</h4>
+<p data-source-line="106" data-source-end-line="106">符号系统表现出明显的脆性：</p>
+<ul class="latex-list" data-source-line="107" data-source-end-line="111"><li><strong>优雅降级缺失</strong>：系统在遇到未知情况时容易完全失效</li>
+<li><strong>常识推理困难</strong>：难以处理常识性知识</li>
+<li><strong>不确定性处理</strong>：传统逻辑难以处理模糊和不确定信息</li></ul>
+<h4 id="target-sec-18" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="113" data-source-end-line="113">感知能力限制</h4>
+<p data-source-line="114" data-source-end-line="114">符号系统在感知任务上表现不佳：</p>
+<ul class="latex-list" data-source-line="115" data-source-end-line="118"><li><strong>符号接地问题</strong>：符号与现实世界的对应关系难以建立</li>
+<li><strong>模式识别困难</strong>：无法有效处理图像、语音等感知数据</li></ul>
+<h2 id="target-sec-19" class="latex-heading latex-section" data-heading-level="2" data-source-line="120" data-source-end-line="120">连接主义：神经网络的分布式表示</h2>
+<h3 id="target-sec-20" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="122" data-source-end-line="122">理论基础与生物启发</h3>
+<p data-source-line="124" data-source-end-line="124">连接主义的理论基础来自对大脑神经网络的模拟和理解。其核心思想是：</p>
+<p data-source-line="126" data-source-end-line="128">\begin{quote}<br><strong>分布式表示假设</strong>：智能源于大量简单处理单元的并行连接和协同工作。<br>\end{quote}</p>
+<h3 id="target-sec-21" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="130" data-source-end-line="130">数学基础：神经网络理论</h3>
+<h4 id="target-sec-22" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="132" data-source-end-line="132">神经元模型</h4>
+<p data-source-line="133" data-source-end-line="133">人工神经元的数学模型可以表示为：</p>
+<p data-source-line="135" data-source-end-line="135">$<span class="inline-math">$y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)$</span>$</p>
+<p data-source-line="137" data-source-end-line="137">其中：</p>
+<ul class="latex-list" data-source-line="138" data-source-end-line="143"><li><span class="inline-math">$x_i$</span>：输入信号</li>
+<li><span class="inline-math">$w_i$</span>：连接权重</li>
+<li><span class="inline-math">$b$</span>：偏置项</li>
+<li><span class="inline-math">$f$</span>：激活函数</li></ul>
+<h4 id="target-sec-23" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="145" data-source-end-line="145">网络学习算法</h4>
+<p data-source-line="146" data-source-end-line="146">反向传播算法是连接主义的核心学习机制：</p>
+<p data-source-line="148" data-source-end-line="148">$<span class="inline-math">$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial y_j} \frac{\partial y_j}{\partial net_j} \frac{\partial net_j}{\partial w_{ij}}$</span>$</p>
+<p data-source-line="150" data-source-end-line="150">其中<span class="inline-math">$E$</span>是误差函数，<span class="inline-math">$net_j$</span>是神经元<span class="inline-math">$j$</span>的净输入。</p>
+<h4 id="target-sec-24" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="152" data-source-end-line="152">通用逼近定理</h4>
+<p data-source-line="153" data-source-end-line="153">Cybenko和Hornik等人证明了神经网络的通用逼近能力：</p>
+<p data-source-line="155" data-source-end-line="159">\begin{theorem}[]{通用逼近定理}<br>设<span class="inline-math">$\sigma$</span>是非常数、有界、单调递增的连续函数。则对于任意连续函数<span class="inline-math">$f$</span>和任意<span class="inline-math">$\varepsilon &gt; 0$</span>，存在有限个隐藏单元的前馈网络，使得：<br>$<span class="inline-math">$\left|G(x) - f(x)\right| &lt; \varepsilon$</span><span class="inline-math">$<br>对所有$</span>x \in [0,1]^n$成立。<br>\end{theorem}</p>
+<h3 id="target-sec-25" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="161" data-source-end-line="161">深度学习的突破</h3>
+<h4 id="target-sec-26" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="163" data-source-end-line="163">表示学习</h4>
+<p data-source-line="164" data-source-end-line="164">深度学习的核心贡献是自动学习层次化特征表示：</p>
+<p data-source-line="166" data-source-end-line="166">$<span class="inline-math">$h^{(l+1)} = f\left(W^{(l)} h^{(l)} + b^{(l)}\right)$</span>$</p>
+<p data-source-line="168" data-source-end-line="168">其中<span class="inline-math">$h^{(l)}$</span>表示第<span class="inline-math">$l$</span>层的隐藏表示。</p>
+<h4 id="target-sec-27" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="170" data-source-end-line="170">注意力机制</h4>
+<p data-source-line="171" data-source-end-line="171">Transformer架构引入的自注意力机制：</p>
+<p data-source-line="173" data-source-end-line="173">$<span class="inline-math">$<span>Attention</span>(Q, K, V) = <span>softmax</span>\left(\frac{QK^T}{\sqrt{d_k}}\right)V$</span>$</p>
+<p data-source-line="175" data-source-end-line="175">其中<span class="inline-math">$Q$</span>、<span class="inline-math">$K$</span>、<span class="inline-math">$V$</span>分别是查询、键、值矩阵。</p>
+<h4 id="target-sec-28" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="177" data-source-end-line="177">残差连接</h4>
+<p data-source-line="178" data-source-end-line="178">ResNet引入的残差连接解决了深度网络的梯度消失问题：</p>
+<p data-source-line="180" data-source-end-line="180">$<span class="inline-math">$y = F(x, \{W_i\}) + x$</span>$</p>
+<p data-source-line="182" data-source-end-line="182">其中<span class="inline-math">$F$</span>是残差映射。</p>
+<h3 id="target-sec-29" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="184" data-source-end-line="184">连接主义的优势</h3>
+<h4 id="target-sec-30" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="186" data-source-end-line="186">强大的模式识别能力</h4>
+<ul class="latex-list" data-source-line="187" data-source-end-line="191"><li><strong>感知任务优势</strong>：在图像、语音、文本等感知任务上表现卓越</li>
+<li><strong>端到端学习</strong>：能够直接从原始数据学习到任务相关的表示</li>
+<li><strong>泛化能力</strong>：在相似任务间具有良好的迁移能力</li></ul>
+<h4 id="target-sec-31" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="193" data-source-end-line="193">自适应学习机制</h4>
+<ul class="latex-list" data-source-line="194" data-source-end-line="198"><li><strong>数据驱动</strong>：能够从大规模数据中自动发现模式</li>
+<li><strong>并行处理</strong>：天然支持并行计算</li>
+<li><strong>容错性</strong>：对噪声和缺失数据具有一定的鲁棒性</li></ul>
+<h3 id="target-sec-32" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="200" data-source-end-line="200">连接主义的局限</h3>
+<h4 id="target-sec-33" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="202" data-source-end-line="202">可解释性问题</h4>
+<ul class="latex-list" data-source-line="203" data-source-end-line="207"><li><strong>黑盒特性</strong>：难以理解网络的内部决策过程</li>
+<li><strong>特征不可解释</strong>：学习到的特征往往缺乏明确的语义含义</li>
+<li><strong>决策依据不明</strong>：难以解释具体决策的原因</li></ul>
+<h4 id="target-sec-34" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="209" data-source-end-line="209">推理能力限制</h4>
+<ul class="latex-list" data-source-line="210" data-source-end-line="214"><li><strong>逻辑推理困难</strong>：在需要严格逻辑推理的任务上表现不佳</li>
+<li><strong>组合泛化问题</strong>：难以处理训练时未见过的组合</li>
+<li><strong>系统性缺失</strong>：缺乏系统性的推理能力</li></ul>
+<h4 id="target-sec-35" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="216" data-source-end-line="216">数据依赖性</h4>
+<ul class="latex-list" data-source-line="217" data-source-end-line="221"><li><strong>大数据需求</strong>：需要大量标注数据才能达到良好性能</li>
+<li><strong>分布偏移敏感</strong>：对训练和测试数据分布的差异敏感</li>
+<li><strong>对抗脆弱性</strong>：容易受到对抗攻击的影响</li></ul>
+<h2 id="target-sec-36" class="latex-heading latex-section" data-heading-level="2" data-source-line="223" data-source-end-line="223">因果主义：理解世界的因果结构</h2>
+<h3 id="target-sec-37" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="225" data-source-end-line="225">因果推理的理论基础</h3>
+<p data-source-line="227" data-source-end-line="227">因果主义认为，真正的智能不仅要能够预测，更要能够理解和推理因果关系。Judea Pearl提出了因果推理的三层架构：</p>
+<h4 id="target-sec-38" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="229" data-source-end-line="229">因果层次</h4>
+<ol class="latex-list" data-source-line="230" data-source-end-line="234"><li><strong>关联层</strong>（Association）：<span class="inline-math">$P(y|x)$</span> - 观察到的统计关联</li>
+<li><strong>干预层</strong>（Intervention）：<span class="inline-math">$P(y|do(x))$</span> - 主动干预的效果</li>
+<li><strong>反事实层</strong>（Counterfactual）：<span class="inline-math">$P(y_x|x&#x27;, y&#x27;)$</span> - 反事实推理</li></ol>
+<h3 id="target-sec-39" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="236" data-source-end-line="236">因果图与结构方程模型</h3>
+<h4 id="target-sec-40" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="238" data-source-end-line="238">因果图</h4>
+<p data-source-line="239" data-source-end-line="239">因果图是一个有向无环图（DAG），其中：</p>
+<ul class="latex-list" data-source-line="240" data-source-end-line="244"><li><strong>节点</strong>：表示变量</li>
+<li><strong>有向边</strong>：表示因果关系</li>
+<li><strong>缺失边</strong>：表示条件独立性</li></ul>
+<h4 id="target-sec-41" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="246" data-source-end-line="246">结构方程模型</h4>
+<p data-source-line="247" data-source-end-line="247">因果关系可以用结构方程模型表示：</p>
+<p data-source-line="249" data-source-end-line="249">$<span class="inline-math">$X_i = f_i(PA_i, U_i), \quad i = 1, 2, …, n$</span>$</p>
+<p data-source-line="251" data-source-end-line="251">其中：</p>
+<ul class="latex-list" data-source-line="252" data-source-end-line="256"><li><span class="inline-math">$PA_i$</span>：变量<span class="inline-math">$X_i$</span>的父节点集合</li>
+<li><span class="inline-math">$U_i$</span>：外生噪声变量</li>
+<li><span class="inline-math">$f_i$</span>：结构函数</li></ul>
+<h3 id="target-sec-42" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="258" data-source-end-line="258">因果推理的数学工具</h3>
+<h4 id="target-sec-43" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="260" data-source-end-line="260">do-演算</h4>
+<p data-source-line="261" data-source-end-line="261">Pearl提出的do-演算提供了从观察数据推断因果效应的规则：</p>
+<p data-source-line="263" data-source-end-line="264"><strong>规则1</strong>（插入/删除观察）：<br>$<span class="inline-math">$P(y|do(x), z, w) = P(y|do(x), w) <span> if </span> (Y \perp Z | X, W)_G$</span>$</p>
+<p data-source-line="266" data-source-end-line="267"><strong>规则2</strong>（动作/观察交换）：<br>$<span class="inline-math">$P(y|do(x), do(z), w) = P(y|do(x), z, w) <span> if </span> (Y \perp Z | X, W)_{G_{\overline{X}}}$</span>$</p>
+<p data-source-line="269" data-source-end-line="270"><strong>规则3</strong>（插入/删除动作）：<br>$<span class="inline-math">$P(y|do(x), do(z), w) = P(y|do(x), w) <span> if </span> (Y \perp Z | X, W)_{G_{\overline{X}\underline{Z}}}$</span>$</p>
+<h4 id="target-sec-44" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="272" data-source-end-line="272">后门准则</h4>
+<p data-source-line="273" data-source-end-line="273">后门准则提供了识别因果效应的充分条件：</p>
+<p data-source-line="275" data-source-end-line="276">\begin{definition}[]{后门准则}<br>设<span class="inline-math">$G$</span>是因果图，<span class="inline-math">$X$</span>和<span class="inline-math">$Y$</span>是两个不相交的变量集合。变量集合<span class="inline-math">$Z$</span>满足相对于<span class="inline-math">$(X,Y)$</span>的后门准则，当且仅当：</p>
+<ol class="latex-list" data-source-line="278" data-source-end-line="281"><li><span class="inline-math">$Z$</span>中没有<span class="inline-math">$X$</span>的后代</li>
+<li><span class="inline-math">$Z$</span>阻断了<span class="inline-math">$X$</span>和<span class="inline-math">$Y$</span>之间的每条包含指向<span class="inline-math">$X$</span>的箭头的路径</li></ol>
+<p data-source-line="282" data-source-end-line="282">\end{definition}</p>
+<h4 id="target-sec-45" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="284" data-source-end-line="284">前门准则</h4>
+<p data-source-line="285" data-source-end-line="285">当后门准则不满足时，前门准则提供了另一种识别策略：</p>
+<p data-source-line="287" data-source-end-line="288">\begin{definition}[]{前门准则}<br>变量集合<span class="inline-math">$Z$</span>满足相对于<span class="inline-math">$(X,Y)$</span>的前门准则，当且仅当：</p>
+<ol class="latex-list" data-source-line="289" data-source-end-line="293"><li><span class="inline-math">$Z$</span>截断了从<span class="inline-math">$X$</span>到<span class="inline-math">$Y$</span>的所有有向路径</li>
+<li>不存在从<span class="inline-math">$X$</span>到<span class="inline-math">$Z$</span>的后门路径</li>
+<li>所有从<span class="inline-math">$Z$</span>到<span class="inline-math">$Y$</span>的后门路径都被<span class="inline-math">$X$</span>阻断</li></ol>
+<p data-source-line="294" data-source-end-line="294">\end{definition}</p>
+<h3 id="target-sec-46" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="296" data-source-end-line="296">因果发现方法</h3>
+<h4 id="target-sec-47" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="298" data-source-end-line="298">基于约束的方法</h4>
+<ul class="latex-list" data-source-line="299" data-source-end-line="303"><li><strong>PC算法</strong>：基于条件独立性测试构建因果图</li>
+<li><strong>FCI算法</strong>：处理潜在混淆变量的情况</li>
+<li><strong>RFCI算法</strong>：FCI的改进版本</li></ul>
+<h4 id="target-sec-48" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="305" data-source-end-line="305">基于评分的方法</h4>
+<ul class="latex-list" data-source-line="306" data-source-end-line="309"><li><strong>GES算法</strong>：贪婪等价搜索</li>
+<li><strong>GIES算法</strong>：处理干预数据的GES扩展</li></ul>
+<h4 id="target-sec-49" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="311" data-source-end-line="311">基于函数的方法</h4>
+<ul class="latex-list" data-source-line="312" data-source-end-line="316"><li><strong>LiNGAM</strong>：线性非高斯无环模型</li>
+<li><strong>ANM</strong>：加性噪声模型</li>
+<li><strong>PNL</strong>：后非线性模型</li></ul>
+<h3 id="target-sec-50" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="318" data-source-end-line="318">因果主义的优势</h3>
+<h4 id="target-sec-51" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="320" data-source-end-line="320">可解释性</h4>
+<ul class="latex-list" data-source-line="321" data-source-end-line="325"><li><strong>透明的推理过程</strong>：因果图提供了清晰的推理路径</li>
+<li><strong>反事实解释</strong>：能够回答&quot;如果...会怎样&quot;的问题</li>
+<li><strong>机制理解</strong>：揭示变量间的因果机制</li></ul>
+<h4 id="target-sec-52" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="327" data-source-end-line="327">泛化能力</h4>
+<ul class="latex-list" data-source-line="328" data-source-end-line="332"><li><strong>分布外泛化</strong>：因果关系在不同分布下保持稳定</li>
+<li><strong>迁移学习</strong>：因果知识可以迁移到新的环境</li>
+<li><strong>鲁棒性</strong>：对分布偏移具有更强的鲁棒性</li></ul>
+<h4 id="target-sec-53" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="334" data-source-end-line="334">决策支持</h4>
+<ul class="latex-list" data-source-line="335" data-source-end-line="339"><li><strong>政策评估</strong>：评估干预政策的效果</li>
+<li><strong>反事实推理</strong>：分析历史决策的后果</li>
+<li><strong>最优干预</strong>：寻找最优的干预策略</li></ul>
+<h3 id="target-sec-54" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="341" data-source-end-line="341">因果主义的局限</h3>
+<h4 id="target-sec-55" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="343" data-source-end-line="343">因果发现的困难</h4>
+<ul class="latex-list" data-source-line="344" data-source-end-line="348"><li><strong>识别问题</strong>：多个因果图可能与同一观察分布兼容</li>
+<li><strong>潜在混淆</strong>：未观察到的混淆变量影响因果推断</li>
+<li><strong>非线性关系</strong>：复杂的非线性因果关系难以发现</li></ul>
+<h4 id="target-sec-56" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="350" data-source-end-line="350">计算复杂性</h4>
+<ul class="latex-list" data-source-line="351" data-source-end-line="355"><li><strong>NP困难问题</strong>：因果发现在一般情况下是NP困难的</li>
+<li><strong>搜索空间巨大</strong>：可能的因果图数量随变量数指数增长</li>
+<li><strong>统计检验困难</strong>：条件独立性测试在高维情况下困难</li></ul>
+<h4 id="target-sec-57" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="357" data-source-end-line="357">数据需求</h4>
+<ul class="latex-list" data-source-line="358" data-source-end-line="362"><li><strong>干预数据稀缺</strong>：获取干预数据往往成本高昂或不可行</li>
+<li><strong>样本复杂度</strong>：准确的因果推断需要大量样本</li>
+<li><strong>测量误差</strong>：变量测量误差影响因果推断的准确性</li></ul>
+<h2 id="target-sec-58" class="latex-heading latex-section" data-heading-level="2" data-source-line="364" data-source-end-line="364">三种范式的比较与分析</h2>
+<h3 id="target-sec-59" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="366" data-source-end-line="366">认知能力对比</h3>
+<p data-source-line="368" data-source-end-line="383">\begin{table}[h]<br>\centering<br>\caption{三种智能建构方式的认知能力对比}<br>\begin{tabular}{|l|c|c|c|}<br>\hline<br><strong>认知能力</strong> &amp; <strong>符号主义</strong> &amp; <strong>连接主义</strong> &amp; <strong>因果主义</strong> \\<br>\hline<br>逻辑推理 &amp; 强 &amp; 弱 &amp; 中 \\<br>模式识别 &amp; 弱 &amp; 强 &amp; 中 \\<br>因果推理 &amp; 中 &amp; 弱 &amp; 强 \\<br>可解释性 &amp; 强 &amp; 弱 &amp; 强 \\<br>学习能力 &amp; 弱 &amp; 强 &amp; 中 \\<br>泛化能力 &amp; 弱 &amp; 中 &amp; 强 \\<br>\hline<br>\end{tabular}<br>\end{table}</p>
+<h3 id="target-sec-60" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="385" data-source-end-line="385">适用场景分析</h3>
+<h4 id="target-sec-61" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="387" data-source-end-line="387">符号主义适用场景</h4>
+<ul class="latex-list" data-source-line="388" data-source-end-line="392"><li><strong>专家系统</strong>：医疗诊断、法律咨询等需要明确规则的领域</li>
+<li><strong>规划问题</strong>：路径规划、资源调度等组合优化问题</li>
+<li><strong>定理证明</strong>：数学定理证明、程序验证等形式化推理</li></ul>
+<h4 id="target-sec-62" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="394" data-source-end-line="394">连接主义适用场景</h4>
+<ul class="latex-list" data-source-line="395" data-source-end-line="399"><li><strong>感知任务</strong>：图像识别、语音识别、自然语言处理</li>
+<li><strong>模式挖掘</strong>：数据挖掘、推荐系统、异常检测</li>
+<li><strong>生成任务</strong>：图像生成、文本生成、语音合成</li></ul>
+<h4 id="target-sec-63" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="401" data-source-end-line="401">因果主义适用场景</h4>
+<ul class="latex-list" data-source-line="402" data-source-end-line="406"><li><strong>科学发现</strong>：发现变量间的因果关系</li>
+<li><strong>政策评估</strong>：评估政策干预的效果</li>
+<li><strong>公平性分析</strong>：分析和消除算法偏见</li></ul>
+<h2 id="target-sec-64" class="latex-heading latex-section" data-heading-level="2" data-source-line="408" data-source-end-line="408">神经符号融合：走向统一的智能</h2>
+<h3 id="target-sec-65" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="410" data-source-end-line="410">融合的必要性</h3>
+<p data-source-line="412" data-source-end-line="412">单一范式的局限性促使研究者探索不同方法的融合：</p>
+<ul class="latex-list" data-source-line="414" data-source-end-line="418"><li><strong>互补性</strong>：不同范式在不同认知任务上各有优势</li>
+<li><strong>完整性</strong>：人类智能本身就是多种认知机制的融合</li>
+<li><strong>实用性</strong>：现实应用往往需要多种能力的结合</li></ul>
+<h3 id="target-sec-66" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="420" data-source-end-line="420">融合架构</h3>
+<h4 id="target-sec-67" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="422" data-source-end-line="422">松耦合架构</h4>
+<p data-source-line="423" data-source-end-line="423">不同模块相对独立，通过接口进行交互：</p>
+<p data-source-line="425" data-source-end-line="425">$<span class="inline-math">$<span>输出</span> = <span>符号模块</span>(<span>神经模块</span>(<span>输入</span>))$</span>$</p>
+<h4 id="target-sec-68" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="427" data-source-end-line="427">紧耦合架构</h4>
+<p data-source-line="428" data-source-end-line="428">符号和神经组件深度集成：</p>
+<p data-source-line="430" data-source-end-line="430">$<span class="inline-math">$h_{t+1} = <span>神经网络</span>(h_t, <span>符号约束</span>)$</span>$</p>
+<h4 id="target-sec-69" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="432" data-source-end-line="432">端到端架构</h4>
+<p data-source-line="433" data-source-end-line="433">整个系统可以端到端训练：</p>
+<p data-source-line="435" data-source-end-line="435">$<span class="inline-math">$\mathcal{L} = \mathcal{L}_{<span>神经</span>} + \lambda \mathcal{L}_{<span>符号</span>}$</span>$</p>
+<h3 id="target-sec-70" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="437" data-source-end-line="437">典型融合方法</h3>
+<h4 id="target-sec-71" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="439" data-source-end-line="439">神经模块网络</h4>
+<p data-source-line="440" data-source-end-line="440">将复杂推理分解为可组合的神经模块：</p>
+<p data-source-line="442" data-source-end-line="442">$<span class="inline-math">$<span>答案</span> = <span>Count</span>(<span>Filter</span>(<span>Scene</span>, <span>红色</span>))$</span>$</p>
+<h4 id="target-sec-72" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="444" data-source-end-line="444">可微分神经计算机</h4>
+<p data-source-line="445" data-source-end-line="445">结合神经网络和外部记忆：</p>
+<p data-source-line="447" data-source-end-line="447">$<span class="inline-math">$\mathbf{r}_t = \sum_{i=1}^{N} w_t^r[i] \mathbf{M}_t[i]$</span>$</p>
+<p data-source-line="449" data-source-end-line="449">其中<span class="inline-math">$w_t^r$</span>是读取权重，<span class="inline-math">$\mathbf{M}_t$</span>是记忆矩阵。</p>
+<h4 id="target-sec-73" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="451" data-source-end-line="451">图神经网络</h4>
+<p data-source-line="452" data-source-end-line="452">在图结构上进行神经计算：</p>
+<p data-source-line="454" data-source-end-line="454">$<span class="inline-math">$h_v^{(l+1)} = <span>UPDATE</span>^{(l)}\left(h_v^{(l)}, <span>AGGREGATE</span>^{(l)}\left(\{h_u^{(l)} : u \in \mathcal{N}(v)\}\right)\right)$</span>$</p>
+<h3 id="target-sec-74" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="456" data-source-end-line="456">因果感知的神经网络</h3>
+<h4 id="target-sec-75" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="458" data-source-end-line="458">因果表示学习</h4>
+<p data-source-line="459" data-source-end-line="459">学习因果不变的表示：</p>
+<p data-source-line="461" data-source-end-line="461">$<span class="inline-math">$\min_{\theta} \mathbb{E}_{e \sim \mathcal{E}} \left[ \mathcal{L}(f_\theta(x^e), y^e) \right] + \lambda \Omega(\theta)$</span>$</p>
+<p data-source-line="463" data-source-end-line="463">其中<span class="inline-math">$\mathcal{E}$</span>是环境集合，<span class="inline-math">$\Omega(\theta)$</span>是因果正则化项。</p>
+<h4 id="target-sec-76" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="465" data-source-end-line="465">反事实数据增强</h4>
+<p data-source-line="466" data-source-end-line="466">使用反事实样本增强训练：</p>
+<p data-source-line="468" data-source-end-line="468">$<span class="inline-math">$\mathcal{D}_{<span>aug</span>} = \mathcal{D} \cup \{(x_{cf}, y_{cf}) : x_{cf} = <span>Counterfactual</span>(x, do(z))\}$</span>$</p>
+<h4 id="target-sec-77" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="470" data-source-end-line="470">因果注意力机制</h4>
+<p data-source-line="471" data-source-end-line="471">基于因果关系的注意力权重：</p>
+<p data-source-line="473" data-source-end-line="473">$<span class="inline-math">$\alpha_{ij} = \frac{\exp(<span>causal\_score</span>(x_i, x_j))}{\sum_{k} \exp(<span>causal\_score</span>(x_i, x_k))}$</span>$</p>
+<h2 id="target-sec-78" class="latex-heading latex-section" data-heading-level="2" data-source-line="475" data-source-end-line="475">实际应用案例</h2>
+<h3 id="target-sec-79" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="477" data-source-end-line="477">医疗诊断系统</h3>
+<h4 id="target-sec-80" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="479" data-source-end-line="479">多模态融合</h4>
+<p data-source-line="480" data-source-end-line="480">结合符号知识和神经感知：</p>
+<ul class="latex-list" data-source-line="482" data-source-end-line="486"><li><strong>神经模块</strong>：从医学影像中提取特征</li>
+<li><strong>符号模块</strong>：基于医学知识进行推理</li>
+<li><strong>因果模块</strong>：分析症状与疾病的因果关系</li></ul>
+<h4 id="target-sec-81" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="488" data-source-end-line="488">系统架构</h4>
+<p data-source-line="489" data-source-end-line="489">$<span class="inline-math">$<span>诊断</span> = <span>推理引擎</span>(<span>医学知识</span>, <span>CNN</span>(<span>影像</span>), <span>因果图</span>)$</span>$</p>
+<h3 id="target-sec-82" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="491" data-source-end-line="491">自动驾驶系统</h3>
+<h4 id="target-sec-83" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="493" data-source-end-line="493">感知-推理-决策链条</h4>
+<ol class="latex-list" data-source-line="494" data-source-end-line="498"><li><strong>感知</strong>：使用深度学习进行环境感知</li>
+<li><strong>推理</strong>：基于交通规则进行逻辑推理</li>
+<li><strong>决策</strong>：考虑因果关系进行安全决策</li></ol>
+<h4 id="target-sec-84" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="500" data-source-end-line="500">安全保障</h4>
+<p data-source-line="501" data-source-end-line="501">通过因果分析确保决策的安全性：</p>
+<p data-source-line="503" data-source-end-line="503">$<span class="inline-math">$<span>安全性</span> = P(<span>事故</span>|do(<span>动作</span>)) &lt; \epsilon$</span>$</p>
+<h3 id="target-sec-85" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="505" data-source-end-line="505">科学发现系统</h3>
+<h4 id="target-sec-86" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="507" data-source-end-line="507">假设生成与验证</h4>
+<ul class="latex-list" data-source-line="508" data-source-end-line="512"><li><strong>神经网络</strong>：从数据中发现模式</li>
+<li><strong>符号系统</strong>：生成可验证的假设</li>
+<li><strong>因果推理</strong>：验证假设的因果关系</li></ul>
+<h4 id="target-sec-87" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="514" data-source-end-line="514">发现流程</h4>
+<p data-source-line="515" data-source-end-line="515">$<span class="inline-math">$<span>科学发现</span> = <span>验证</span>(<span>假设生成</span>(<span>模式发现</span>(<span>数据</span>)))$</span>$</p>
+<h2 id="target-sec-88" class="latex-heading latex-section" data-heading-level="2" data-source-line="517" data-source-end-line="517">挑战与未来方向</h2>
+<h3 id="target-sec-89" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="519" data-source-end-line="519">技术挑战</h3>
+<h4 id="target-sec-90" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="521" data-source-end-line="521">表示对齐</h4>
+<ul class="latex-list" data-source-line="522" data-source-end-line="526"><li><strong>符号接地</strong>：如何将符号与感知表示对应</li>
+<li><strong>抽象层次</strong>：不同抽象层次的表示如何统一</li>
+<li><strong>动态对齐</strong>：表示对齐的动态调整机制</li></ul>
+<h4 id="target-sec-91" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="528" data-source-end-line="528">学习机制</h4>
+<ul class="latex-list" data-source-line="529" data-source-end-line="533"><li><strong>联合优化</strong>：如何同时优化不同类型的目标</li>
+<li><strong>梯度传播</strong>：在离散符号操作中的梯度传播</li>
+<li><strong>样本效率</strong>：提高融合系统的样本效率</li></ul>
+<h4 id="target-sec-92" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="535" data-source-end-line="535">推理效率</h4>
+<ul class="latex-list" data-source-line="536" data-source-end-line="540"><li><strong>计算复杂度</strong>：融合系统的计算开销</li>
+<li><strong>并行化</strong>：不同模块的并行执行</li>
+<li><strong>近似推理</strong>：在保证精度的前提下提高效率</li></ul>
+<h3 id="target-sec-93" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="542" data-source-end-line="542">理论挑战</h3>
+<h4 id="target-sec-94" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="544" data-source-end-line="544">统一理论框架</h4>
+<ul class="latex-list" data-source-line="545" data-source-end-line="549"><li><strong>认知架构</strong>：统一的认知架构理论</li>
+<li><strong>学习理论</strong>：融合系统的学习理论基础</li>
+<li><strong>复杂性理论</strong>：融合系统的计算复杂性分析</li></ul>
+<h4 id="target-sec-95" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="551" data-source-end-line="551">可解释性理论</h4>
+<ul class="latex-list" data-source-line="552" data-source-end-line="556"><li><strong>解释层次</strong>：不同层次的解释需求</li>
+<li><strong>解释质量</strong>：解释质量的评估标准</li>
+<li><strong>解释生成</strong>：自动生成高质量解释的方法</li></ul>
+<h3 id="target-sec-96" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="558" data-source-end-line="558">未来发展方向</h3>
+<h4 id="target-sec-97" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="560" data-source-end-line="560">认知启发的AI</h4>
+<ul class="latex-list" data-source-line="561" data-source-end-line="565"><li><strong>认知科学融合</strong>：借鉴认知科学的最新发现</li>
+<li><strong>发展AI</strong>：模拟人类认知发展过程</li>
+<li><strong>元认知</strong>：具有元认知能力的AI系统</li></ul>
+<h4 id="target-sec-98" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="567" data-source-end-line="567">自主学习系统</h4>
+<ul class="latex-list" data-source-line="568" data-source-end-line="572"><li><strong>终身学习</strong>：持续学习新知识而不遗忘旧知识</li>
+<li><strong>自主探索</strong>：主动探索环境获取新知识</li>
+<li><strong>知识整合</strong>：自动整合不同来源的知识</li></ul>
+<h4 id="target-sec-99" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="574" data-source-end-line="574">通用人工智能</h4>
+<ul class="latex-list" data-source-line="575" data-source-end-line="579"><li><strong>多任务学习</strong>：在多个任务上同时表现良好</li>
+<li><strong>快速适应</strong>：快速适应新任务和新环境</li>
+<li><strong>创造性思维</strong>：具有创造性解决问题的能力</li></ul>
+<h2 id="target-sec-100" class="latex-heading latex-section" data-heading-level="2" data-source-line="581" data-source-end-line="581">哲学思考：智能的本质</h2>
+<h3 id="target-sec-101" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="583" data-source-end-line="583">智能的多元性</h3>
+<p data-source-line="585" data-source-end-line="585">三种建构方式反映了智能的多元本质：</p>
+<ul class="latex-list" data-source-line="587" data-source-end-line="591"><li><strong>逻辑智能</strong>：基于规则和推理的理性思维</li>
+<li><strong>直觉智能</strong>：基于模式识别的感性认知</li>
+<li><strong>因果智能</strong>：基于因果理解的深层认知</li></ul>
+<h3 id="target-sec-102" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="593" data-source-end-line="593">计算与认知的关系</h3>
+<h4 id="target-sec-103" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="595" data-source-end-line="595">计算主义观点</h4>
+<p data-source-line="596" data-source-end-line="596">认为智能本质上是计算过程，不同的建构方式代表不同的计算范式。</p>
+<h4 id="target-sec-104" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="598" data-source-end-line="598">体现认知观点</h4>
+<p data-source-line="599" data-source-end-line="599">强调智能与身体和环境的交互，认为智能不能脱离具体的体现形式。</p>
+<h4 id="target-sec-105" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="601" data-source-end-line="601">预测处理观点</h4>
+<p data-source-line="602" data-source-end-line="602">将大脑视为预测机器，智能的核心是预测和误差最小化。</p>
+<h3 id="target-sec-106" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="604" data-source-end-line="604">意识与智能</h3>
+<h4 id="target-sec-107" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="606" data-source-end-line="606">意识的作用</h4>
+<ul class="latex-list" data-source-line="607" data-source-end-line="611"><li><strong>全局工作空间</strong>：意识作为信息整合的全局工作空间</li>
+<li><strong>注意力机制</strong>：意识与注意力的关系</li>
+<li><strong>自我模型</strong>：意识中的自我表示</li></ul>
+<h4 id="target-sec-108" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="613" data-source-end-line="613">人工意识的可能性</h4>
+<ul class="latex-list" data-source-line="614" data-source-end-line="618"><li><strong>功能主义观点</strong>：意识是功能的产物，可以在人工系统中实现</li>
+<li><strong>生物自然主义观点</strong>：意识需要特定的生物基础</li>
+<li><strong>整合信息理论</strong>：意识与信息整合的程度相关</li></ul>
+<h2 id="target-sec-109" class="latex-heading latex-section" data-heading-level="2" data-source-line="620" data-source-end-line="620">结论：走向统一的智能理论</h2>
+<h3 id="target-sec-110" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="622" data-source-end-line="622">融合的必然性</h3>
+<p data-source-line="624" data-source-end-line="624">三种智能建构方式的融合不是偶然的，而是智能发展的必然趋势：</p>
+<ul class="latex-list" data-source-line="626" data-source-end-line="630"><li><strong>互补性</strong>：不同方式在不同方面各有优势</li>
+<li><strong>完整性</strong>：单一方式无法涵盖智能的全部方面</li>
+<li><strong>实用性</strong>：现实应用需要多种能力的结合</li></ul>
+<h3 id="target-sec-111" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="632" data-source-end-line="632">统一理论的前景</h3>
+<p data-source-line="634" data-source-end-line="634">未来的智能理论可能是一个统一的框架，包含：</p>
+<ul class="latex-list" data-source-line="636" data-source-end-line="640"><li><strong>多层次表示</strong>：从感知到抽象的多层次表示</li>
+<li><strong>多模态推理</strong>：结合感知、逻辑和因果推理</li>
+<li><strong>自适应学习</strong>：根据任务需求动态调整推理策略</li></ul>
+<h3 id="target-sec-112" class="latex-heading latex-subsection" data-heading-level="3" data-source-line="642" data-source-end-line="642">对人工智能发展的启示</h3>
+<h4 id="target-sec-113" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="644" data-source-end-line="644">技术发展策略</h4>
+<ul class="latex-list" data-source-line="645" data-source-end-line="649"><li><strong>避免单一路径</strong>：不应过度依赖单一技术路径</li>
+<li><strong>重视基础理论</strong>：加强对智能本质的理论研究</li>
+<li><strong>跨学科合作</strong>：促进计算机科学与认知科学的合作</li></ul>
+<h4 id="target-sec-114" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="651" data-source-end-line="651">应用开发原则</h4>
+<ul class="latex-list" data-source-line="652" data-source-end-line="656"><li><strong>任务导向</strong>：根据具体任务选择合适的方法组合</li>
+<li><strong>可解释性</strong>：重视系统的可解释性和透明度</li>
+<li><strong>安全性</strong>：确保系统的安全性和可控性</li></ul>
+<h4 id="target-sec-115" class="latex-heading latex-paragraph" data-heading-level="5" data-source-line="658" data-source-end-line="658">社会影响考虑</h4>
+<ul class="latex-list" data-source-line="659" data-source-end-line="663"><li><strong>伦理考量</strong>：考虑AI系统的伦理影响</li>
+<li><strong>公平性</strong>：确保AI系统的公平性和包容性</li>
+<li><strong>可持续性</strong>：关注AI发展的可持续性</li></ul>
+<p data-source-line="665" data-source-end-line="665">智能的建构是一个复杂而深刻的问题，需要我们从多个角度进行思考和探索。符号主义、连接主义和因果主义为我们提供了三种不同的视角，它们的融合将为人工智能的发展开辟新的道路。在这个过程中，我们不仅在构建更强大的AI系统，也在更深入地理解智能本身的本质。</p>
+<p data-source-line="667" data-source-end-line="667">这种理解不仅有助于技术的进步，也丰富了我们对人类认知和智能的认识。未来的人工智能将不再是单一范式的产物，而是多种智能建构方式有机融合的结果。这种融合不仅是技术的进步，更是我们对智能理解的深化。</p>
+      </article>
+    </section>
+
+    <section class="view-panel dual-view" data-view="dual">
+      <div class="two-column-grid">
+        <section class="compare-pane render-pane is-original">
+  <div class="pane-title"><span>原文渲染</span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
+  <div
+    class="page-reader real-pdf-reader"
+    data-page-reader="original"
+    data-synctex-reader="original"
+    data-pdf-path="/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/preview-original.pdf"
+    data-source-path="/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_refined.tex"
+    data-page-width-pt="595.28"
+    data-page-height-pt="841.89">
+    <div class="pdf-toolbar" data-pdf-toolbar="original">
+      <button type="button" data-pdf-prev>上一页</button>
+      <span class="pdf-page-state"><span data-current-page>1</span> / 14</span>
+      <button type="button" data-pdf-next>下一页</button>
+      <span class="pdf-toolbar-separator"></span>
+      <button type="button" data-pdf-zoom-out>缩小</button>
+      <span class="pdf-zoom-state" data-pdf-zoom-state>100%</span>
+      <button type="button" data-pdf-zoom-in>放大</button>
+    </div>
+    <div class="synctex-status" data-synctex-status="original">真实 PDF 预览 · 右键点击页面可跳转源码行</div>
+    <figure class="real-pdf-page" data-pdf-page="1">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-01.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 1">
+      <figcaption>1 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="2">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-02.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 2">
+      <figcaption>2 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="3">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-03.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 3">
+      <figcaption>3 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="4">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-04.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 4">
+      <figcaption>4 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="5">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-05.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 5">
+      <figcaption>5 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="6">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-06.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 6">
+      <figcaption>6 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="7">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-07.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 7">
+      <figcaption>7 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="8">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-08.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 8">
+      <figcaption>8 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="9">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-09.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 9">
+      <figcaption>9 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="10">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-10.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 10">
+      <figcaption>10 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="11">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-11.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 11">
+      <figcaption>11 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="12">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-12.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 12">
+      <figcaption>12 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="13">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-13.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 13">
+      <figcaption>13 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="14">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-14.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 14">
+      <figcaption>14 / 14</figcaption>
+    </figure>
+  </div>
+</section>
+        <section class="compare-pane render-pane is-target">
+  <div class="pane-title"><span>修改稿渲染</span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
+  <div
+    class="page-reader real-pdf-reader"
+    data-page-reader="target"
+    data-synctex-reader="target"
+    data-pdf-path="/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/preview-target.pdf"
+    data-source-path="/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex"
+    data-page-width-pt="595.28"
+    data-page-height-pt="841.89">
+    <div class="pdf-toolbar" data-pdf-toolbar="target">
+      <button type="button" data-pdf-prev>上一页</button>
+      <span class="pdf-page-state"><span data-current-page>1</span> / 14</span>
+      <button type="button" data-pdf-next>下一页</button>
+      <span class="pdf-toolbar-separator"></span>
+      <button type="button" data-pdf-zoom-out>缩小</button>
+      <span class="pdf-zoom-state" data-pdf-zoom-state>100%</span>
+      <button type="button" data-pdf-zoom-in>放大</button>
+    </div>
+    <div class="synctex-status" data-synctex-status="target">真实 PDF 预览 · 右键点击页面可跳转源码行</div>
+    <figure class="real-pdf-page" data-pdf-page="1">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-01.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 1">
+      <figcaption>1 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="2">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-02.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 2">
+      <figcaption>2 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="3">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-03.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 3">
+      <figcaption>3 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="4">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-04.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 4">
+      <figcaption>4 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="5">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-05.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 5">
+      <figcaption>5 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="6">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-06.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 6">
+      <figcaption>6 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="7">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-07.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 7">
+      <figcaption>7 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="8">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-08.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 8">
+      <figcaption>8 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="9">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-09.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 9">
+      <figcaption>9 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="10">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-10.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 10">
+      <figcaption>10 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="11">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-11.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 11">
+      <figcaption>11 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="12">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-12.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 12">
+      <figcaption>12 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="13">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-13.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 13">
+      <figcaption>13 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="14">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-14.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 14">
+      <figcaption>14 / 14</figcaption>
+    </figure>
+  </div>
+</section>
+      </div>
+    </section>
+
+    <section class="view-panel quad-view" data-view="quad">
+      <div class="quad-grid">
+        <section class="compare-pane source-pane is-original">
+  <div class="pane-title"><span>原文源码<small data-source-state="original">可临时编辑；SyncTeX 对应最近一次编译的 PDF</small></span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
+  <div class="source-workbench">
+    <div class="source-gutter" data-source-gutter="original" aria-hidden="true"></div>
+    <textarea class="source-editor" data-source-editor="original" spellcheck="false" wrap="soft">% !TEX root = AImath.v4.tex
+\chapter{符号、神经与因果：智能的三种建构方式}
+
+\section{引言：智能建构的多元路径}
+
+在探索人工智能的历程中，我们见证了深度学习的辉煌成就，也认识到了其固有的局限性。这促使我们思考一个根本性问题：智能究竟是什么？我们应该如何建构真正的人工智能？
+
+历史上，人工智能研究主要沿着三条不同的路径发展，每条路径都代表了对智能本质的不同理解：
+
+\begin{itemize}
+\item \textbf{符号主义}（Symbolism）：将智能视为符号操作和逻辑推理的过程
+\item \textbf{连接主义}（Connectionism）：认为智能源于神经元网络的连接和激活模式
+\item \textbf{因果主义}（Causalism）：强调智能需要理解和推理因果关系
+\end{itemize}
+
+这三种范式并非相互排斥，而是从不同角度揭示了智能的多面性。本章将深入分析这三种建构方式的理论基础、技术实现、优势局限，以及它们在未来智能系统中的融合前景。
+
+\section{符号主义：逻辑推理的形式化}
+
+\subsection{理论基础与哲学根源}
+
+符号主义的理论基础可以追溯到古希腊的逻辑学传统和现代数理逻辑的发展。其核心假设是：
+
+\begin{quote}
+\textbf{物理符号系统假设}：物理符号系统具有进行智能行为的必要和充分手段。
+\end{quote}
+
+这一假设由Newell和Simon在1976年提出，它意味着智能可以通过符号的操作和变换来实现。
+
+\subsection{数学基础：一阶逻辑与推理}
+
+符号主义系统通常基于一阶逻辑（First-Order Logic, FOL）构建。一阶逻辑的语法包括：
+
+\paragraph{语法结构}
+\begin{itemize}
+\item \textbf{项}（Terms）：常量、变量、函数
+\item \textbf{原子公式}：谓词应用于项
+\item \textbf{复合公式}：通过逻辑连接词组合的公式
+\end{itemize}
+
+\paragraph{推理规则}
+符号系统的推理基于形式化的推理规则，如：
+
+\textbf{肯定前件}（Modus Ponens）：
+$$\frac{P \rightarrow Q, \quad P}{Q}$$
+
+\textbf{全称实例化}（Universal Instantiation）：
+$$\frac{\forall x \, P(x)}{P(c)}$$
+
+其中$c$是任意常量。
+
+\subsection{知识表示与推理机制}
+
+\paragraph{产生式规则系统}
+符号主义系统通常采用产生式规则（Production Rules）来表示知识：
+
+$$\text{IF } \text{条件} \text{ THEN } \text{动作}$$
+
+例如，在医疗诊断系统中：
+$$\text{IF } \text{发烧} \land \text{咳嗽} \land \text{胸痛} \text{ THEN } \text{肺炎}$$
+
+\paragraph{语义网络}
+语义网络通过节点和边来表示概念及其关系：
+\begin{itemize}
+\item \textbf{节点}：表示概念或对象
+\item \textbf{边}：表示关系（如&quot;是一个&quot;、&quot;属于&quot;等）
+\end{itemize}
+
+\paragraph{框架理论}
+Minsky提出的框架理论将知识组织为结构化的数据结构，每个框架包含：
+\begin{itemize}
+\item \textbf{槽}（Slots）：属性或关系
+\item \textbf{填充值}：具体的属性值
+\item \textbf{默认值}：缺省情况下的值
+\end{itemize}
+
+\subsection{经典成就与应用}
+
+\paragraph{专家系统}
+20世纪70-80年代，专家系统代表了符号主义的巅峰成就：
+
+\begin{itemize}
+\item \textbf{MYCIN}：医疗诊断系统，准确率达到专家水平
+\item \textbf{DENDRAL}：化学结构分析系统
+\item \textbf{XCON}：计算机配置系统，为DEC公司节省数千万美元
+\end{itemize}
+
+\paragraph{定理证明}
+符号主义在自动定理证明方面取得了重要进展：
+\begin{itemize}
+\item \textbf{Resolution原理}：Robinson提出的通用推理方法
+\item \textbf{Boyer-Moore定理证明器}：在数学定理证明中的应用
+\end{itemize}
+
+\subsection{局限性分析}
+
+\paragraph{知识获取瓶颈}
+符号系统面临的最大挑战是知识获取瓶颈：
+\begin{itemize}
+\item \textbf{知识工程困难}：将专家知识形式化极其困难
+\item \textbf{知识维护成本}：规则库的维护和更新成本高昂
+\item \textbf{知识不完整性}：难以穷尽所有可能的规则和例外
+\end{itemize}
+
+\paragraph{脆性问题}
+符号系统表现出明显的脆性：
+\begin{itemize}
+\item \textbf{优雅降级缺失}：系统在遇到未知情况时容易完全失效
+\item \textbf{常识推理困难}：难以处理常识性知识
+\item \textbf{不确定性处理}：传统逻辑难以处理模糊和不确定信息
+\end{itemize}
+
+\paragraph{感知能力限制}
+符号系统在感知任务上表现不佳：
+\begin{itemize}
+\item \textbf{符号接地问题}：符号与现实世界的对应关系难以建立
+\item \textbf{模式识别困难}：无法有效处理图像、语音等感知数据
+\end{itemize}
+
+\section{连接主义：神经网络的分布式表示}
+
+\subsection{理论基础与生物启发}
+
+连接主义的理论基础来自对大脑神经网络的模拟和理解。其核心思想是：
+
+\begin{quote}
+\textbf{分布式表示假设}：智能源于大量简单处理单元的并行连接和协同工作。
+\end{quote}
+
+\subsection{数学基础：神经网络理论}
+
+\paragraph{神经元模型}
+人工神经元的数学模型可以表示为：
+
+$$y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)$$
+
+其中：
+\begin{itemize}
+\item $x_i$：输入信号
+\item $w_i$：连接权重
+\item $b$：偏置项
+\item $f$：激活函数
+\end{itemize}
+
+\paragraph{网络学习算法}
+反向传播算法是连接主义的核心学习机制：
+
+$$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial y_j} \frac{\partial y_j}{\partial net_j} \frac{\partial net_j}{\partial w_{ij}}$$
+
+其中$E$是误差函数，$net_j$是神经元$j$的净输入。
+
+\paragraph{通用逼近定理}
+Cybenko和Hornik等人证明了神经网络的通用逼近能力：
+
+\begin{theorem}[]{通用逼近定理}
+设$\sigma$是非常数、有界、单调递增的连续函数。则对于任意连续函数$f$和任意$\varepsilon &gt; 0$，存在有限个隐藏单元的前馈网络，使得：
+$$\left|G(x) - f(x)\right| &lt; \varepsilon$$
+对所有$x \in [0,1]^n$成立。
+\end{theorem}
+
+\subsection{深度学习的突破}
+
+\paragraph{表示学习}
+深度学习的核心贡献是自动学习层次化特征表示：
+
+$$h^{(l+1)} = f\left(W^{(l)} h^{(l)} + b^{(l)}\right)$$
+
+其中$h^{(l)}$表示第$l$层的隐藏表示。
+
+\paragraph{注意力机制}
+Transformer架构引入的自注意力机制：
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+其中$Q$、$K$、$V$分别是查询、键、值矩阵。
+
+\paragraph{残差连接}
+ResNet引入的残差连接解决了深度网络的梯度消失问题：
+
+$$y = F(x, \{W_i\}) + x$$
+
+其中$F$是残差映射。
+
+\subsection{连接主义的优势}
+
+\paragraph{强大的模式识别能力}
+\begin{itemize}
+\item \textbf{感知任务优势}：在图像、语音、文本等感知任务上表现卓越
+\item \textbf{端到端学习}：能够直接从原始数据学习到任务相关的表示
+\item \textbf{泛化能力}：在相似任务间具有良好的迁移能力
+\end{itemize}
+
+\paragraph{自适应学习机制}
+\begin{itemize}
+\item \textbf{数据驱动}：能够从大规模数据中自动发现模式
+\item \textbf{并行处理}：天然支持并行计算
+\item \textbf{容错性}：对噪声和缺失数据具有一定的鲁棒性
+\end{itemize}
+
+\subsection{连接主义的局限}
+
+\paragraph{可解释性问题}
+\begin{itemize}
+\item \textbf{黑盒特性}：难以理解网络的内部决策过程
+\item \textbf{特征不可解释}：学习到的特征往往缺乏明确的语义含义
+\item \textbf{决策依据不明}：难以解释具体决策的原因
+\end{itemize}
+
+\paragraph{推理能力限制}
+\begin{itemize}
+\item \textbf{逻辑推理困难}：在需要严格逻辑推理的任务上表现不佳
+\item \textbf{组合泛化问题}：难以处理训练时未见过的组合
+\item \textbf{系统性缺失}：缺乏系统性的推理能力
+\end{itemize}
+
+\paragraph{数据依赖性}
+\begin{itemize}
+\item \textbf{大数据需求}：需要大量标注数据才能达到良好性能
+\item \textbf{分布偏移敏感}：对训练和测试数据分布的差异敏感
+\item \textbf{对抗脆弱性}：容易受到对抗攻击的影响
+\end{itemize}
+
+\section{因果主义：理解世界的因果结构}
+
+\subsection{因果推理的理论基础}
+
+因果主义认为，真正的智能不仅要能够预测，更要能够理解和推理因果关系。Judea Pearl提出了因果推理的三层架构：
+
+\paragraph{因果层次}
+\begin{enumerate}
+\item \textbf{关联层}（Association）：$P(y|x)$ - 观察到的统计关联
+\item \textbf{干预层}（Intervention）：$P(y|do(x))$ - 主动干预的效果
+\item \textbf{反事实层}（Counterfactual）：$P(y_x|x&#x27;, y&#x27;)$ - 反事实推理
+\end{enumerate}
+
+\subsection{因果图与结构方程模型}
+
+\paragraph{因果图}
+因果图是一个有向无环图（DAG），其中：
+\begin{itemize}
+\item \textbf{节点}：表示变量
+\item \textbf{有向边}：表示因果关系
+\item \textbf{缺失边}：表示条件独立性
+\end{itemize}
+
+\paragraph{结构方程模型}
+因果关系可以用结构方程模型表示：
+
+$$X_i = f_i(PA_i, U_i), \quad i = 1, 2, \ldots, n$$
+
+其中：
+\begin{itemize}
+\item $PA_i$：变量$X_i$的父节点集合
+\item $U_i$：外生噪声变量
+\item $f_i$：结构函数
+\end{itemize}
+
+\subsection{因果推理的数学工具}
+
+\paragraph{do-演算}
+Pearl提出的do-演算提供了从观察数据推断因果效应的规则：
+
+\textbf{规则1}（插入/删除观察）：
+$$P(y|do(x), z, w) = P(y|do(x), w) \text{ if } (Y \perp Z | X, W)_G$$
+
+\textbf{规则2}（动作/观察交换）：
+$$P(y|do(x), do(z), w) = P(y|do(x), z, w) \text{ if } (Y \perp Z | X, W)_{G_{\overline{X}}}$$
+
+\textbf{规则3}（插入/删除动作）：
+$$P(y|do(x), do(z), w) = P(y|do(x), w) \text{ if } (Y \perp Z | X, W)_{G_{\overline{X}\underline{Z}}}$$
+
+\paragraph{后门准则}
+后门准则提供了识别因果效应的充分条件：
+
+\begin{definition}[]{后门准则}
+设$G$是因果图，$X$和$Y$是两个不相交的变量集合。变量集合$Z$满足相对于$(X,Y)$的后门准则，当且仅当：
+
+\begin{enumerate}
+\item $Z$中没有$X$的后代
+\item $Z$阻断了$X$和$Y$之间的每条包含指向$X$的箭头的路径
+\end{enumerate}
+\end{definition}
+
+\paragraph{前门准则}
+当后门准则不满足时，前门准则提供了另一种识别策略：
+
+\begin{definition}[]{前门准则}
+变量集合$Z$满足相对于$(X,Y)$的前门准则，当且仅当：
+\begin{enumerate}
+\item $Z$截断了从$X$到$Y$的所有有向路径
+\item 不存在从$X$到$Z$的后门路径
+\item 所有从$Z$到$Y$的后门路径都被$X$阻断
+\end{enumerate}
+\end{definition}
+
+\subsection{因果发现方法}
+
+\paragraph{基于约束的方法}
+\begin{itemize}
+\item \textbf{PC算法}：基于条件独立性测试构建因果图
+\item \textbf{FCI算法}：处理潜在混淆变量的情况
+\item \textbf{RFCI算法}：FCI的改进版本
+\end{itemize}
+
+\paragraph{基于评分的方法}
+\begin{itemize}
+\item \textbf{GES算法}：贪婪等价搜索
+\item \textbf{GIES算法}：处理干预数据的GES扩展
+\end{itemize}
+
+\paragraph{基于函数的方法}
+\begin{itemize}
+\item \textbf{LiNGAM}：线性非高斯无环模型
+\item \textbf{ANM}：加性噪声模型
+\item \textbf{PNL}：后非线性模型
+\end{itemize}
+
+\subsection{因果主义的优势}
+
+\paragraph{可解释性}
+\begin{itemize}
+\item \textbf{透明的推理过程}：因果图提供了清晰的推理路径
+\item \textbf{反事实解释}：能够回答&quot;如果...会怎样&quot;的问题
+\item \textbf{机制理解}：揭示变量间的因果机制
+\end{itemize}
+
+\paragraph{泛化能力}
+\begin{itemize}
+\item \textbf{分布外泛化}：因果关系在不同分布下保持稳定
+\item \textbf{迁移学习}：因果知识可以迁移到新的环境
+\item \textbf{鲁棒性}：对分布偏移具有更强的鲁棒性
+\end{itemize}
+
+\paragraph{决策支持}
+\begin{itemize}
+\item \textbf{政策评估}：评估干预政策的效果
+\item \textbf{反事实推理}：分析历史决策的后果
+\item \textbf{最优干预}：寻找最优的干预策略
+\end{itemize}
+
+\subsection{因果主义的局限}
+
+\paragraph{因果发现的困难}
+\begin{itemize}
+\item \textbf{识别问题}：多个因果图可能与同一观察分布兼容
+\item \textbf{潜在混淆}：未观察到的混淆变量影响因果推断
+\item \textbf{非线性关系}：复杂的非线性因果关系难以发现
+\end{itemize}
+
+\paragraph{计算复杂性}
+\begin{itemize}
+\item \textbf{NP困难问题}：因果发现在一般情况下是NP困难的
+\item \textbf{搜索空间巨大}：可能的因果图数量随变量数指数增长
+\item \textbf{统计检验困难}：条件独立性测试在高维情况下困难
+\end{itemize}
+
+\paragraph{数据需求}
+\begin{itemize}
+\item \textbf{干预数据稀缺}：获取干预数据往往成本高昂或不可行
+\item \textbf{样本复杂度}：准确的因果推断需要大量样本
+\item \textbf{测量误差}：变量测量误差影响因果推断的准确性
+\end{itemize}
+
+\section{三种范式的比较与分析}
+
+\subsection{认知能力对比}
+
+\begin{table}[h]
+\centering
+\caption{三种智能建构方式的认知能力对比}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{认知能力} &amp; \textbf{符号主义} &amp; \textbf{连接主义} &amp; \textbf{因果主义} \\
+\hline
+逻辑推理 &amp; 强 &amp; 弱 &amp; 中 \\
+模式识别 &amp; 弱 &amp; 强 &amp; 中 \\
+因果推理 &amp; 中 &amp; 弱 &amp; 强 \\
+可解释性 &amp; 强 &amp; 弱 &amp; 强 \\
+学习能力 &amp; 弱 &amp; 强 &amp; 中 \\
+泛化能力 &amp; 弱 &amp; 中 &amp; 强 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{适用场景分析}
+
+\paragraph{符号主义适用场景}
+\begin{itemize}
+\item \textbf{专家系统}：医疗诊断、法律咨询等需要明确规则的领域
+\item \textbf{规划问题}：路径规划、资源调度等组合优化问题
+\item \textbf{定理证明}：数学定理证明、程序验证等形式化推理
+\end{itemize}
+
+\paragraph{连接主义适用场景}
+\begin{itemize}
+\item \textbf{感知任务}：图像识别、语音识别、自然语言处理
+\item \textbf{模式挖掘}：数据挖掘、推荐系统、异常检测
+\item \textbf{生成任务}：图像生成、文本生成、语音合成
+\end{itemize}
+
+\paragraph{因果主义适用场景}
+\begin{itemize}
+\item \textbf{科学发现}：发现变量间的因果关系
+\item \textbf{政策评估}：评估政策干预的效果
+\item \textbf{公平性分析}：分析和消除算法偏见
+\end{itemize}
+
+\section{神经符号融合：走向统一的智能}
+
+\subsection{融合的必要性}
+
+单一范式的局限性促使研究者探索不同方法的融合：
+
+\begin{itemize}
+\item \textbf{互补性}：不同范式在不同认知任务上各有优势
+\item \textbf{完整性}：人类智能本身就是多种认知机制的融合
+\item \textbf{实用性}：现实应用往往需要多种能力的结合
+\end{itemize}
+
+\subsection{融合架构}
+
+\paragraph{松耦合架构}
+不同模块相对独立，通过接口进行交互：
+
+$$\text{输出} = \text{符号模块}(\text{神经模块}(\text{输入}))$$
+
+\paragraph{紧耦合架构}
+符号和神经组件深度集成：
+
+$$h_{t+1} = \text{神经网络}(h_t, \text{符号约束})$$
+
+\paragraph{端到端架构}
+整个系统可以端到端训练：
+
+$$\mathcal{L} = \mathcal{L}_{\text{神经}} + \lambda \mathcal{L}_{\text{符号}}$$
+
+\subsection{典型融合方法}
+
+\paragraph{神经模块网络}
+将复杂推理分解为可组合的神经模块：
+
+$$\text{答案} = \text{Count}(\text{Filter}(\text{Scene}, \text{红色}))$$
+
+\paragraph{可微分神经计算机}
+结合神经网络和外部记忆：
+
+$$\mathbf{r}_t = \sum_{i=1}^{N} w_t^r[i] \mathbf{M}_t[i]$$
+
+其中$w_t^r$是读取权重，$\mathbf{M}_t$是记忆矩阵。
+
+\paragraph{图神经网络}
+在图结构上进行神经计算：
+
+$$h_v^{(l+1)} = \text{UPDATE}^{(l)}\left(h_v^{(l)}, \text{AGGREGATE}^{(l)}\left(\{h_u^{(l)} : u \in \mathcal{N}(v)\}\right)\right)$$
+
+\subsection{因果感知的神经网络}
+
+\paragraph{因果表示学习}
+学习因果不变的表示：
+
+$$\min_{\theta} \mathbb{E}_{e \sim \mathcal{E}} \left[ \mathcal{L}(f_\theta(x^e), y^e) \right] + \lambda \Omega(\theta)$$
+
+其中$\mathcal{E}$是环境集合，$\Omega(\theta)$是因果正则化项。
+
+\paragraph{反事实数据增强}
+使用反事实样本增强训练：
+
+$$\mathcal{D}_{\text{aug}} = \mathcal{D} \cup \{(x_{cf}, y_{cf}) : x_{cf} = \text{Counterfactual}(x, do(z))\}$$
+
+\paragraph{因果注意力机制}
+基于因果关系的注意力权重：
+
+$$\alpha_{ij} = \frac{\exp(\text{causal\_score}(x_i, x_j))}{\sum_{k} \exp(\text{causal\_score}(x_i, x_k))}$$
+
+\section{实际应用案例}
+
+\subsection{医疗诊断系统}
+
+\paragraph{多模态融合}
+结合符号知识和神经感知：
+
+\begin{itemize}
+\item \textbf{神经模块}：从医学影像中提取特征
+\item \textbf{符号模块}：基于医学知识进行推理
+\item \textbf{因果模块}：分析症状与疾病的因果关系
+\end{itemize}
+
+\paragraph{系统架构}
+$$\text{诊断} = \text{推理引擎}(\text{医学知识}, \text{CNN}(\text{影像}), \text{因果图})$$
+
+\subsection{自动驾驶系统}
+
+\paragraph{感知-推理-决策链条}
+\begin{enumerate}
+\item \textbf{感知}：使用深度学习进行环境感知
+\item \textbf{推理}：基于交通规则进行逻辑推理
+\item \textbf{决策}：考虑因果关系进行安全决策
+\end{enumerate}
+
+\paragraph{安全保障}
+通过因果分析确保决策的安全性：
+
+$$\text{安全性} = P(\text{事故}|do(\text{动作})) &lt; \epsilon$$
+
+\subsection{科学发现系统}
+
+\paragraph{假设生成与验证}
+\begin{itemize}
+\item \textbf{神经网络}：从数据中发现模式
+\item \textbf{符号系统}：生成可验证的假设
+\item \textbf{因果推理}：验证假设的因果关系
+\end{itemize}
+
+\paragraph{发现流程}
+$$\text{科学发现} = \text{验证}(\text{假设生成}(\text{模式发现}(\text{数据})))$$
+
+\section{挑战与未来方向}
+
+\subsection{技术挑战}
+
+\paragraph{表示对齐}
+\begin{itemize}
+\item \textbf{符号接地}：如何将符号与感知表示对应
+\item \textbf{抽象层次}：不同抽象层次的表示如何统一
+\item \textbf{动态对齐}：表示对齐的动态调整机制
+\end{itemize}
+
+\paragraph{学习机制}
+\begin{itemize}
+\item \textbf{联合优化}：如何同时优化不同类型的目标
+\item \textbf{梯度传播}：在离散符号操作中的梯度传播
+\item \textbf{样本效率}：提高融合系统的样本效率
+\end{itemize}
+
+\paragraph{推理效率}
+\begin{itemize}
+\item \textbf{计算复杂度}：融合系统的计算开销
+\item \textbf{并行化}：不同模块的并行执行
+\item \textbf{近似推理}：在保证精度的前提下提高效率
+\end{itemize}
+
+\subsection{理论挑战}
+
+\paragraph{统一理论框架}
+\begin{itemize}
+\item \textbf{认知架构}：统一的认知架构理论
+\item \textbf{学习理论}：融合系统的学习理论基础
+\item \textbf{复杂性理论}：融合系统的计算复杂性分析
+\end{itemize}
+
+\paragraph{可解释性理论}
+\begin{itemize}
+\item \textbf{解释层次}：不同层次的解释需求
+\item \textbf{解释质量}：解释质量的评估标准
+\item \textbf{解释生成}：自动生成高质量解释的方法
+\end{itemize}
+
+\subsection{未来发展方向}
+
+\paragraph{认知启发的AI}
+\begin{itemize}
+\item \textbf{认知科学融合}：借鉴认知科学的最新发现
+\item \textbf{发展AI}：模拟人类认知发展过程
+\item \textbf{元认知}：具有元认知能力的AI系统
+\end{itemize}
+
+\paragraph{自主学习系统}
+\begin{itemize}
+\item \textbf{终身学习}：持续学习新知识而不遗忘旧知识
+\item \textbf{自主探索}：主动探索环境获取新知识
+\item \textbf{知识整合}：自动整合不同来源的知识
+\end{itemize}
+
+\paragraph{通用人工智能}
+\begin{itemize}
+\item \textbf{多任务学习}：在多个任务上同时表现良好
+\item \textbf{快速适应}：快速适应新任务和新环境
+\item \textbf{创造性思维}：具有创造性解决问题的能力
+\end{itemize}
+
+\section{哲学思考：智能的本质}
+
+\subsection{智能的多元性}
+
+三种建构方式反映了智能的多元本质：
+
+\begin{itemize}
+\item \textbf{逻辑智能}：基于规则和推理的理性思维
+\item \textbf{直觉智能}：基于模式识别的感性认知
+\item \textbf{因果智能}：基于因果理解的深层认知
+\end{itemize}
+
+\subsection{计算与认知的关系}
+
+\paragraph{计算主义观点}
+认为智能本质上是计算过程，不同的建构方式代表不同的计算范式。
+
+\paragraph{体现认知观点}
+强调智能与身体和环境的交互，认为智能不能脱离具体的体现形式。
+
+\paragraph{预测处理观点}
+将大脑视为预测机器，智能的核心是预测和误差最小化。
+
+\subsection{意识与智能}
+
+\paragraph{意识的作用}
+\begin{itemize}
+\item \textbf{全局工作空间}：意识作为信息整合的全局工作空间
+\item \textbf{注意力机制}：意识与注意力的关系
+\item \textbf{自我模型}：意识中的自我表示
+\end{itemize}
+
+\paragraph{人工意识的可能性}
+\begin{itemize}
+\item \textbf{功能主义观点}：意识是功能的产物，可以在人工系统中实现
+\item \textbf{生物自然主义观点}：意识需要特定的生物基础
+\item \textbf{整合信息理论}：意识与信息整合的程度相关
+\end{itemize}
+
+\section{结论：走向统一的智能理论}
+
+\subsection{融合的必然性}
+
+三种智能建构方式的融合不是偶然的，而是智能发展的必然趋势：
+
+\begin{itemize}
+\item \textbf{互补性}：不同方式在不同方面各有优势
+\item \textbf{完整性}：单一方式无法涵盖智能的全部方面
+\item \textbf{实用性}：现实应用需要多种能力的结合
+\end{itemize}
+
+\subsection{统一理论的前景}
+
+未来的智能理论可能是一个统一的框架，包含：
+
+\begin{itemize}
+\item \textbf{多层次表示}：从感知到抽象的多层次表示
+\item \textbf{多模态推理}：结合感知、逻辑和因果推理
+\item \textbf{自适应学习}：根据任务需求动态调整推理策略
+\end{itemize}
+
+\subsection{对人工智能发展的启示}
+
+\paragraph{技术发展策略}
+\begin{itemize}
+\item \textbf{避免单一路径}：不应过度依赖单一技术路径
+\item \textbf{重视基础理论}：加强对智能本质的理论研究
+\item \textbf{跨学科合作}：促进计算机科学与认知科学的合作
+\end{itemize}
+
+\paragraph{应用开发原则}
+\begin{itemize}
+\item \textbf{任务导向}：根据具体任务选择合适的方法组合
+\item \textbf{可解释性}：重视系统的可解释性和透明度
+\item \textbf{安全性}：确保系统的安全性和可控性
+\end{itemize}
+
+\paragraph{社会影响考虑}
+\begin{itemize}
+\item \textbf{伦理考量}：考虑AI系统的伦理影响
+\item \textbf{公平性}：确保AI系统的公平性和包容性
+\item \textbf{可持续性}：关注AI发展的可持续性
+\end{itemize}
+
+智能的建构是一个复杂而深刻的问题，需要我们从多个角度进行思考和探索。符号主义、连接主义和因果主义为我们提供了三种不同的视角，它们的融合将为人工智能的发展开辟新的道路。在这个过程中，我们不仅在构建更强大的AI系统，也在更深入地理解智能本身的本质。
+
+这种理解不仅有助于技术的进步，也丰富了我们对人类认知和智能的认识。未来的人工智能将不再是单一范式的产物，而是多种智能建构方式有机融合的结果。这种融合不仅是技术的进步，更是我们对智能理解的深化。</textarea>
+  </div>
+</section>
+        <section class="compare-pane render-pane is-original">
+  <div class="pane-title"><span>原文渲染</span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
+  <div
+    class="page-reader real-pdf-reader"
+    data-page-reader="original"
+    data-synctex-reader="original"
+    data-pdf-path="/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/preview-original.pdf"
+    data-source-path="/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_refined.tex"
+    data-page-width-pt="595.28"
+    data-page-height-pt="841.89">
+    <div class="pdf-toolbar" data-pdf-toolbar="original">
+      <button type="button" data-pdf-prev>上一页</button>
+      <span class="pdf-page-state"><span data-current-page>1</span> / 14</span>
+      <button type="button" data-pdf-next>下一页</button>
+      <span class="pdf-toolbar-separator"></span>
+      <button type="button" data-pdf-zoom-out>缩小</button>
+      <span class="pdf-zoom-state" data-pdf-zoom-state>100%</span>
+      <button type="button" data-pdf-zoom-in>放大</button>
+    </div>
+    <div class="synctex-status" data-synctex-status="original">真实 PDF 预览 · 右键点击页面可跳转源码行</div>
+    <figure class="real-pdf-page" data-pdf-page="1">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-01.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 1">
+      <figcaption>1 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="2">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-02.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 2">
+      <figcaption>2 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="3">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-03.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 3">
+      <figcaption>3 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="4">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-04.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 4">
+      <figcaption>4 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="5">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-05.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 5">
+      <figcaption>5 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="6">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-06.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 6">
+      <figcaption>6 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="7">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-07.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 7">
+      <figcaption>7 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="8">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-08.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 8">
+      <figcaption>8 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="9">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-09.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 9">
+      <figcaption>9 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="10">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-10.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 10">
+      <figcaption>10 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="11">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-11.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 11">
+      <figcaption>11 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="12">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-12.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 12">
+      <figcaption>12 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="13">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-13.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 13">
+      <figcaption>13 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="14">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-14.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="original PDF page 14">
+      <figcaption>14 / 14</figcaption>
+    </figure>
+  </div>
+</section>
+        <section class="compare-pane source-pane is-target">
+  <div class="pane-title"><span>修改稿源码<small data-source-state="target">可临时编辑；SyncTeX 对应最近一次编译的 PDF</small></span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
+  <div class="source-workbench">
+    <div class="source-gutter" data-source-gutter="target" aria-hidden="true"></div>
+    <textarea class="source-editor" data-source-editor="target" spellcheck="false" wrap="soft">% !TEX root = AImath.v4.tex
+\chapter{符号、神经与因果：智能的三种建构方式}
+
+\section{引言：智能建构的多元路径}
+
+在探索人工智能的历程中，我们见证了深度学习的辉煌成就，也认识到了其固有的局限性。这促使我们思考一个根本性问题：智能究竟是什么？我们应该如何建构真正的人工智能？
+
+历史上，人工智能研究主要沿着三条不同的路径发展，每条路径都代表了对智能本质的不同理解：
+
+\begin{itemize}
+\item \textbf{符号主义}（Symbolism）：将智能视为符号操作和逻辑推理的过程
+\item \textbf{连接主义}（Connectionism）：认为智能源于神经元网络的连接和激活模式
+\item \textbf{因果主义}（Causalism）：强调智能需要理解和推理因果关系
+\end{itemize}
+
+这三种范式并非相互排斥，而是从不同角度揭示了智能的多面性。本章将深入分析这三种建构方式的理论基础、技术实现、优势局限，以及它们在未来智能系统中的融合前景。
+
+\section{符号主义：逻辑推理的形式化}
+
+\subsection{理论基础与哲学根源}
+
+符号主义的理论基础可以追溯到古希腊的逻辑学传统和现代数理逻辑的发展。其核心假设是：
+
+\begin{quote}
+\textbf{物理符号系统假设}：物理符号系统具有进行智能行为的必要和充分手段。
+\end{quote}
+
+这一假设由Newell和Simon在1976年提出，它意味着智能可以通过符号的操作和变换来实现。
+
+\subsection{数学基础：一阶逻辑与推理}
+
+符号主义系统通常基于一阶逻辑（First-Order Logic, FOL）构建。一阶逻辑的语法包括：
+
+\paragraph{语法结构}
+\begin{itemize}
+\item \textbf{项}（Terms）：常量、变量、函数
+\item \textbf{原子公式}：谓词应用于项
+\item \textbf{复合公式}：通过逻辑连接词组合的公式
+\end{itemize}
+
+\paragraph{推理规则}
+符号系统的推理基于形式化的推理规则，如：
+
+\textbf{肯定前件}（Modus Ponens）：
+$$\frac{P \rightarrow Q, \quad P}{Q}$$
+
+\textbf{全称实例化}（Universal Instantiation）：
+$$\frac{\forall x \, P(x)}{P(c)}$$
+
+其中$c$是任意常量。
+
+\subsection{知识表示与推理机制}
+
+\paragraph{产生式规则系统}
+符号主义系统通常采用产生式规则（Production Rules）来表示知识：
+
+$$\text{IF } \text{条件} \text{ THEN } \text{动作}$$
+
+例如，在医疗诊断系统中：
+$$\text{IF } \text{发烧} \land \text{咳嗽} \land \text{胸痛} \text{ THEN } \text{肺炎}$$
+
+\paragraph{语义网络}
+语义网络通过节点和边来表示概念及其关系：
+\begin{itemize}
+\item \textbf{节点}：表示概念或对象
+\item \textbf{边}：表示关系（如&quot;是一个&quot;、&quot;属于&quot;等）
+\end{itemize}
+
+\paragraph{框架理论}
+Minsky提出的框架理论将知识组织为结构化的数据结构，每个框架包含：
+\begin{itemize}
+\item \textbf{槽}（Slots）：属性或关系
+\item \textbf{填充值}：具体的属性值
+\item \textbf{默认值}：缺省情况下的值
+\end{itemize}
+
+\subsection{经典成就与应用}
+
+\paragraph{专家系统}
+20世纪70-80年代，专家系统代表了符号主义的巅峰成就：
+
+\begin{itemize}
+\item \textbf{MYCIN}：医疗诊断系统，准确率达到专家水平
+\item \textbf{DENDRAL}：化学结构分析系统
+\item \textbf{XCON}：计算机配置系统，为DEC公司节省数千万美元
+\end{itemize}
+
+\paragraph{定理证明}
+符号主义在自动定理证明方面取得了重要进展：
+\begin{itemize}
+\item \textbf{Resolution原理}：Robinson提出的通用推理方法
+\item \textbf{Boyer-Moore定理证明器}：在数学定理证明中的应用
+\end{itemize}
+
+\subsection{局限性分析}
+
+\paragraph{知识获取瓶颈}
+符号系统面临的最大挑战是知识获取瓶颈：
+\begin{itemize}
+\item \textbf{知识工程困难}：将专家知识形式化极其困难
+\item \textbf{知识维护成本}：规则库的维护和更新成本高昂
+\item \textbf{知识不完整性}：难以穷尽所有可能的规则和例外
+\end{itemize}
+
+\paragraph{脆性问题}
+符号系统表现出明显的脆性：
+\begin{itemize}
+\item \textbf{优雅降级缺失}：系统在遇到未知情况时容易完全失效
+\item \textbf{常识推理困难}：难以处理常识性知识
+\item \textbf{不确定性处理}：传统逻辑难以处理模糊和不确定信息
+\end{itemize}
+
+\paragraph{感知能力限制}
+符号系统在感知任务上表现不佳：
+\begin{itemize}
+\item \textbf{符号接地问题}：符号与现实世界的对应关系难以建立
+\item \textbf{模式识别困难}：无法有效处理图像、语音等感知数据
+\end{itemize}
+
+\section{连接主义：神经网络的分布式表示}
+
+\subsection{理论基础与生物启发}
+
+连接主义的理论基础来自对大脑神经网络的模拟和理解。其核心思想是：
+
+\begin{quote}
+\textbf{分布式表示假设}：智能源于大量简单处理单元的并行连接和协同工作。
+\end{quote}
+
+\subsection{数学基础：神经网络理论}
+
+\paragraph{神经元模型}
+人工神经元的数学模型可以表示为：
+
+$$y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)$$
+
+其中：
+\begin{itemize}
+\item $x_i$：输入信号
+\item $w_i$：连接权重
+\item $b$：偏置项
+\item $f$：激活函数
+\end{itemize}
+
+\paragraph{网络学习算法}
+反向传播算法是连接主义的核心学习机制：
+
+$$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial y_j} \frac{\partial y_j}{\partial net_j} \frac{\partial net_j}{\partial w_{ij}}$$
+
+其中$E$是误差函数，$net_j$是神经元$j$的净输入。
+
+\paragraph{通用逼近定理}
+Cybenko和Hornik等人证明了神经网络的通用逼近能力：
+
+\begin{theorem}[]{通用逼近定理}
+设$\sigma$是非常数、有界、单调递增的连续函数。则对于任意连续函数$f$和任意$\varepsilon &gt; 0$，存在有限个隐藏单元的前馈网络，使得：
+$$\left|G(x) - f(x)\right| &lt; \varepsilon$$
+对所有$x \in [0,1]^n$成立。
+\end{theorem}
+
+\subsection{深度学习的突破}
+
+\paragraph{表示学习}
+深度学习的核心贡献是自动学习层次化特征表示：
+
+$$h^{(l+1)} = f\left(W^{(l)} h^{(l)} + b^{(l)}\right)$$
+
+其中$h^{(l)}$表示第$l$层的隐藏表示。
+
+\paragraph{注意力机制}
+Transformer架构引入的自注意力机制：
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+其中$Q$、$K$、$V$分别是查询、键、值矩阵。
+
+\paragraph{残差连接}
+ResNet引入的残差连接解决了深度网络的梯度消失问题：
+
+$$y = F(x, \{W_i\}) + x$$
+
+其中$F$是残差映射。
+
+\subsection{连接主义的优势}
+
+\paragraph{强大的模式识别能力}
+\begin{itemize}
+\item \textbf{感知任务优势}：在图像、语音、文本等感知任务上表现卓越
+\item \textbf{端到端学习}：能够直接从原始数据学习到任务相关的表示
+\item \textbf{泛化能力}：在相似任务间具有良好的迁移能力
+\end{itemize}
+
+\paragraph{自适应学习机制}
+\begin{itemize}
+\item \textbf{数据驱动}：能够从大规模数据中自动发现模式
+\item \textbf{并行处理}：天然支持并行计算
+\item \textbf{容错性}：对噪声和缺失数据具有一定的鲁棒性
+\end{itemize}
+
+\subsection{连接主义的局限}
+
+\paragraph{可解释性问题}
+\begin{itemize}
+\item \textbf{黑盒特性}：难以理解网络的内部决策过程
+\item \textbf{特征不可解释}：学习到的特征往往缺乏明确的语义含义
+\item \textbf{决策依据不明}：难以解释具体决策的原因
+\end{itemize}
+
+\paragraph{推理能力限制}
+\begin{itemize}
+\item \textbf{逻辑推理困难}：在需要严格逻辑推理的任务上表现不佳
+\item \textbf{组合泛化问题}：难以处理训练时未见过的组合
+\item \textbf{系统性缺失}：缺乏系统性的推理能力
+\end{itemize}
+
+\paragraph{数据依赖性}
+\begin{itemize}
+\item \textbf{大数据需求}：需要大量标注数据才能达到良好性能
+\item \textbf{分布偏移敏感}：对训练和测试数据分布的差异敏感
+\item \textbf{对抗脆弱性}：容易受到对抗攻击的影响
+\end{itemize}
+
+\section{因果主义：理解世界的因果结构}
+
+\subsection{因果推理的理论基础}
+
+因果主义认为，真正的智能不仅要能够预测，更要能够理解和推理因果关系。Judea Pearl提出了因果推理的三层架构：
+
+\paragraph{因果层次}
+\begin{enumerate}
+\item \textbf{关联层}（Association）：$P(y|x)$ - 观察到的统计关联
+\item \textbf{干预层}（Intervention）：$P(y|do(x))$ - 主动干预的效果
+\item \textbf{反事实层}（Counterfactual）：$P(y_x|x&#x27;, y&#x27;)$ - 反事实推理
+\end{enumerate}
+
+\subsection{因果图与结构方程模型}
+
+\paragraph{因果图}
+因果图是一个有向无环图（DAG），其中：
+\begin{itemize}
+\item \textbf{节点}：表示变量
+\item \textbf{有向边}：表示因果关系
+\item \textbf{缺失边}：表示条件独立性
+\end{itemize}
+
+\paragraph{结构方程模型}
+因果关系可以用结构方程模型表示：
+
+$$X_i = f_i(PA_i, U_i), \quad i = 1, 2, \ldots, n$$
+
+其中：
+\begin{itemize}
+\item $PA_i$：变量$X_i$的父节点集合
+\item $U_i$：外生噪声变量
+\item $f_i$：结构函数
+\end{itemize}
+
+\subsection{因果推理的数学工具}
+
+\paragraph{do-演算}
+Pearl提出的do-演算提供了从观察数据推断因果效应的规则：
+
+\textbf{规则1}（插入/删除观察）：
+$$P(y|do(x), z, w) = P(y|do(x), w) \text{ if } (Y \perp Z | X, W)_G$$
+
+\textbf{规则2}（动作/观察交换）：
+$$P(y|do(x), do(z), w) = P(y|do(x), z, w) \text{ if } (Y \perp Z | X, W)_{G_{\overline{X}}}$$
+
+\textbf{规则3}（插入/删除动作）：
+$$P(y|do(x), do(z), w) = P(y|do(x), w) \text{ if } (Y \perp Z | X, W)_{G_{\overline{X}\underline{Z}}}$$
+
+\paragraph{后门准则}
+后门准则提供了识别因果效应的充分条件：
+
+\begin{definition}[]{后门准则}
+设$G$是因果图，$X$和$Y$是两个不相交的变量集合。变量集合$Z$满足相对于$(X,Y)$的后门准则，当且仅当：
+
+\begin{enumerate}
+\item $Z$中没有$X$的后代
+\item $Z$阻断了$X$和$Y$之间的每条包含指向$X$的箭头的路径
+\end{enumerate}
+\end{definition}
+
+\paragraph{前门准则}
+当后门准则不满足时，前门准则提供了另一种识别策略：
+
+\begin{definition}[]{前门准则}
+变量集合$Z$满足相对于$(X,Y)$的前门准则，当且仅当：
+\begin{enumerate}
+\item $Z$截断了从$X$到$Y$的所有有向路径
+\item 不存在从$X$到$Z$的后门路径
+\item 所有从$Z$到$Y$的后门路径都被$X$阻断
+\end{enumerate}
+\end{definition}
+
+\subsection{因果发现方法}
+
+\paragraph{基于约束的方法}
+\begin{itemize}
+\item \textbf{PC算法}：基于条件独立性测试构建因果图
+\item \textbf{FCI算法}：处理潜在混淆变量的情况
+\item \textbf{RFCI算法}：FCI的改进版本
+\end{itemize}
+
+\paragraph{基于评分的方法}
+\begin{itemize}
+\item \textbf{GES算法}：贪婪等价搜索
+\item \textbf{GIES算法}：处理干预数据的GES扩展
+\end{itemize}
+
+\paragraph{基于函数的方法}
+\begin{itemize}
+\item \textbf{LiNGAM}：线性非高斯无环模型
+\item \textbf{ANM}：加性噪声模型
+\item \textbf{PNL}：后非线性模型
+\end{itemize}
+
+\subsection{因果主义的优势}
+
+\paragraph{可解释性}
+\begin{itemize}
+\item \textbf{透明的推理过程}：因果图提供了清晰的推理路径
+\item \textbf{反事实解释}：能够回答&quot;如果...会怎样&quot;的问题
+\item \textbf{机制理解}：揭示变量间的因果机制
+\end{itemize}
+
+\paragraph{泛化能力}
+\begin{itemize}
+\item \textbf{分布外泛化}：因果关系在不同分布下保持稳定
+\item \textbf{迁移学习}：因果知识可以迁移到新的环境
+\item \textbf{鲁棒性}：对分布偏移具有更强的鲁棒性
+\end{itemize}
+
+\paragraph{决策支持}
+\begin{itemize}
+\item \textbf{政策评估}：评估干预政策的效果
+\item \textbf{反事实推理}：分析历史决策的后果
+\item \textbf{最优干预}：寻找最优的干预策略
+\end{itemize}
+
+\subsection{因果主义的局限}
+
+\paragraph{因果发现的困难}
+\begin{itemize}
+\item \textbf{识别问题}：多个因果图可能与同一观察分布兼容
+\item \textbf{潜在混淆}：未观察到的混淆变量影响因果推断
+\item \textbf{非线性关系}：复杂的非线性因果关系难以发现
+\end{itemize}
+
+\paragraph{计算复杂性}
+\begin{itemize}
+\item \textbf{NP困难问题}：因果发现在一般情况下是NP困难的
+\item \textbf{搜索空间巨大}：可能的因果图数量随变量数指数增长
+\item \textbf{统计检验困难}：条件独立性测试在高维情况下困难
+\end{itemize}
+
+\paragraph{数据需求}
+\begin{itemize}
+\item \textbf{干预数据稀缺}：获取干预数据往往成本高昂或不可行
+\item \textbf{样本复杂度}：准确的因果推断需要大量样本
+\item \textbf{测量误差}：变量测量误差影响因果推断的准确性
+\end{itemize}
+
+\section{三种范式的比较与分析}
+
+\subsection{认知能力对比}
+
+\begin{table}[h]
+\centering
+\caption{三种智能建构方式的认知能力对比}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{认知能力} &amp; \textbf{符号主义} &amp; \textbf{连接主义} &amp; \textbf{因果主义} \\
+\hline
+逻辑推理 &amp; 强 &amp; 弱 &amp; 中 \\
+模式识别 &amp; 弱 &amp; 强 &amp; 中 \\
+因果推理 &amp; 中 &amp; 弱 &amp; 强 \\
+可解释性 &amp; 强 &amp; 弱 &amp; 强 \\
+学习能力 &amp; 弱 &amp; 强 &amp; 中 \\
+泛化能力 &amp; 弱 &amp; 中 &amp; 强 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{适用场景分析}
+
+\paragraph{符号主义适用场景}
+\begin{itemize}
+\item \textbf{专家系统}：医疗诊断、法律咨询等需要明确规则的领域
+\item \textbf{规划问题}：路径规划、资源调度等组合优化问题
+\item \textbf{定理证明}：数学定理证明、程序验证等形式化推理
+\end{itemize}
+
+\paragraph{连接主义适用场景}
+\begin{itemize}
+\item \textbf{感知任务}：图像识别、语音识别、自然语言处理
+\item \textbf{模式挖掘}：数据挖掘、推荐系统、异常检测
+\item \textbf{生成任务}：图像生成、文本生成、语音合成
+\end{itemize}
+
+\paragraph{因果主义适用场景}
+\begin{itemize}
+\item \textbf{科学发现}：发现变量间的因果关系
+\item \textbf{政策评估}：评估政策干预的效果
+\item \textbf{公平性分析}：分析和消除算法偏见
+\end{itemize}
+
+\section{神经符号融合：走向统一的智能}
+
+\subsection{融合的必要性}
+
+单一范式的局限性促使研究者探索不同方法的融合：
+
+\begin{itemize}
+\item \textbf{互补性}：不同范式在不同认知任务上各有优势
+\item \textbf{完整性}：人类智能本身就是多种认知机制的融合
+\item \textbf{实用性}：现实应用往往需要多种能力的结合
+\end{itemize}
+
+\subsection{融合架构}
+
+\paragraph{松耦合架构}
+不同模块相对独立，通过接口进行交互：
+
+$$\text{输出} = \text{符号模块}(\text{神经模块}(\text{输入}))$$
+
+\paragraph{紧耦合架构}
+符号和神经组件深度集成：
+
+$$h_{t+1} = \text{神经网络}(h_t, \text{符号约束})$$
+
+\paragraph{端到端架构}
+整个系统可以端到端训练：
+
+$$\mathcal{L} = \mathcal{L}_{\text{神经}} + \lambda \mathcal{L}_{\text{符号}}$$
+
+\subsection{典型融合方法}
+
+\paragraph{神经模块网络}
+将复杂推理分解为可组合的神经模块：
+
+$$\text{答案} = \text{Count}(\text{Filter}(\text{Scene}, \text{红色}))$$
+
+\paragraph{可微分神经计算机}
+结合神经网络和外部记忆：
+
+$$\mathbf{r}_t = \sum_{i=1}^{N} w_t^r[i] \mathbf{M}_t[i]$$
+
+其中$w_t^r$是读取权重，$\mathbf{M}_t$是记忆矩阵。
+
+\paragraph{图神经网络}
+在图结构上进行神经计算：
+
+$$h_v^{(l+1)} = \text{UPDATE}^{(l)}\left(h_v^{(l)}, \text{AGGREGATE}^{(l)}\left(\{h_u^{(l)} : u \in \mathcal{N}(v)\}\right)\right)$$
+
+\subsection{因果感知的神经网络}
+
+\paragraph{因果表示学习}
+学习因果不变的表示：
+
+$$\min_{\theta} \mathbb{E}_{e \sim \mathcal{E}} \left[ \mathcal{L}(f_\theta(x^e), y^e) \right] + \lambda \Omega(\theta)$$
+
+其中$\mathcal{E}$是环境集合，$\Omega(\theta)$是因果正则化项。
+
+\paragraph{反事实数据增强}
+使用反事实样本增强训练：
+
+$$\mathcal{D}_{\text{aug}} = \mathcal{D} \cup \{(x_{cf}, y_{cf}) : x_{cf} = \text{Counterfactual}(x, do(z))\}$$
+
+\paragraph{因果注意力机制}
+基于因果关系的注意力权重：
+
+$$\alpha_{ij} = \frac{\exp(\text{causal\_score}(x_i, x_j))}{\sum_{k} \exp(\text{causal\_score}(x_i, x_k))}$$
+
+\section{实际应用案例}
+
+\subsection{医疗诊断系统}
+
+\paragraph{多模态融合}
+结合符号知识和神经感知：
+
+\begin{itemize}
+\item \textbf{神经模块}：从医学影像中提取特征
+\item \textbf{符号模块}：基于医学知识进行推理
+\item \textbf{因果模块}：分析症状与疾病的因果关系
+\end{itemize}
+
+\paragraph{系统架构}
+$$\text{诊断} = \text{推理引擎}(\text{医学知识}, \text{CNN}(\text{影像}), \text{因果图})$$
+
+\subsection{自动驾驶系统}
+
+\paragraph{感知-推理-决策链条}
+\begin{enumerate}
+\item \textbf{感知}：使用深度学习进行环境感知
+\item \textbf{推理}：基于交通规则进行逻辑推理
+\item \textbf{决策}：考虑因果关系进行安全决策
+\end{enumerate}
+
+\paragraph{安全保障}
+通过因果分析确保决策的安全性：
+
+$$\text{安全性} = P(\text{事故}|do(\text{动作})) &lt; \epsilon$$
+
+\subsection{科学发现系统}
+
+\paragraph{假设生成与验证}
+\begin{itemize}
+\item \textbf{神经网络}：从数据中发现模式
+\item \textbf{符号系统}：生成可验证的假设
+\item \textbf{因果推理}：验证假设的因果关系
+\end{itemize}
+
+\paragraph{发现流程}
+$$\text{科学发现} = \text{验证}(\text{假设生成}(\text{模式发现}(\text{数据})))$$
+
+\section{挑战与未来方向}
+
+\subsection{技术挑战}
+
+\paragraph{表示对齐}
+\begin{itemize}
+\item \textbf{符号接地}：如何将符号与感知表示对应
+\item \textbf{抽象层次}：不同抽象层次的表示如何统一
+\item \textbf{动态对齐}：表示对齐的动态调整机制
+\end{itemize}
+
+\paragraph{学习机制}
+\begin{itemize}
+\item \textbf{联合优化}：如何同时优化不同类型的目标
+\item \textbf{梯度传播}：在离散符号操作中的梯度传播
+\item \textbf{样本效率}：提高融合系统的样本效率
+\end{itemize}
+
+\paragraph{推理效率}
+\begin{itemize}
+\item \textbf{计算复杂度}：融合系统的计算开销
+\item \textbf{并行化}：不同模块的并行执行
+\item \textbf{近似推理}：在保证精度的前提下提高效率
+\end{itemize}
+
+\subsection{理论挑战}
+
+\paragraph{统一理论框架}
+\begin{itemize}
+\item \textbf{认知架构}：统一的认知架构理论
+\item \textbf{学习理论}：融合系统的学习理论基础
+\item \textbf{复杂性理论}：融合系统的计算复杂性分析
+\end{itemize}
+
+\paragraph{可解释性理论}
+\begin{itemize}
+\item \textbf{解释层次}：不同层次的解释需求
+\item \textbf{解释质量}：解释质量的评估标准
+\item \textbf{解释生成}：自动生成高质量解释的方法
+\end{itemize}
+
+\subsection{未来发展方向}
+
+\paragraph{认知启发的AI}
+\begin{itemize}
+\item \textbf{认知科学融合}：借鉴认知科学的最新发现
+\item \textbf{发展AI}：模拟人类认知发展过程
+\item \textbf{元认知}：具有元认知能力的AI系统
+\end{itemize}
+
+\paragraph{自主学习系统}
+\begin{itemize}
+\item \textbf{终身学习}：持续学习新知识而不遗忘旧知识
+\item \textbf{自主探索}：主动探索环境获取新知识
+\item \textbf{知识整合}：自动整合不同来源的知识
+\end{itemize}
+
+\paragraph{通用人工智能}
+\begin{itemize}
+\item \textbf{多任务学习}：在多个任务上同时表现良好
+\item \textbf{快速适应}：快速适应新任务和新环境
+\item \textbf{创造性思维}：具有创造性解决问题的能力
+\end{itemize}
+
+\section{哲学思考：智能的本质}
+
+\subsection{智能的多元性}
+
+三种建构方式反映了智能的多元本质：
+
+\begin{itemize}
+\item \textbf{逻辑智能}：基于规则和推理的理性思维
+\item \textbf{直觉智能}：基于模式识别的感性认知
+\item \textbf{因果智能}：基于因果理解的深层认知
+\end{itemize}
+
+\subsection{计算与认知的关系}
+
+\paragraph{计算主义观点}
+认为智能本质上是计算过程，不同的建构方式代表不同的计算范式。
+
+\paragraph{体现认知观点}
+强调智能与身体和环境的交互，认为智能不能脱离具体的体现形式。
+
+\paragraph{预测处理观点}
+将大脑视为预测机器，智能的核心是预测和误差最小化。
+
+\subsection{意识与智能}
+
+\paragraph{意识的作用}
+\begin{itemize}
+\item \textbf{全局工作空间}：意识作为信息整合的全局工作空间
+\item \textbf{注意力机制}：意识与注意力的关系
+\item \textbf{自我模型}：意识中的自我表示
+\end{itemize}
+
+\paragraph{人工意识的可能性}
+\begin{itemize}
+\item \textbf{功能主义观点}：意识是功能的产物，可以在人工系统中实现
+\item \textbf{生物自然主义观点}：意识需要特定的生物基础
+\item \textbf{整合信息理论}：意识与信息整合的程度相关
+\end{itemize}
+
+\section{结论：走向统一的智能理论}
+
+\subsection{融合的必然性}
+
+三种智能建构方式的融合不是偶然的，而是智能发展的必然趋势：
+
+\begin{itemize}
+\item \textbf{互补性}：不同方式在不同方面各有优势
+\item \textbf{完整性}：单一方式无法涵盖智能的全部方面
+\item \textbf{实用性}：现实应用需要多种能力的结合
+\end{itemize}
+
+\subsection{统一理论的前景}
+
+未来的智能理论可能是一个统一的框架，包含：
+
+\begin{itemize}
+\item \textbf{多层次表示}：从感知到抽象的多层次表示
+\item \textbf{多模态推理}：结合感知、逻辑和因果推理
+\item \textbf{自适应学习}：根据任务需求动态调整推理策略
+\end{itemize}
+
+\subsection{对人工智能发展的启示}
+
+\paragraph{技术发展策略}
+\begin{itemize}
+\item \textbf{避免单一路径}：不应过度依赖单一技术路径
+\item \textbf{重视基础理论}：加强对智能本质的理论研究
+\item \textbf{跨学科合作}：促进计算机科学与认知科学的合作
+\end{itemize}
+
+\paragraph{应用开发原则}
+\begin{itemize}
+\item \textbf{任务导向}：根据具体任务选择合适的方法组合
+\item \textbf{可解释性}：重视系统的可解释性和透明度
+\item \textbf{安全性}：确保系统的安全性和可控性
+\end{itemize}
+
+\paragraph{社会影响考虑}
+\begin{itemize}
+\item \textbf{伦理考量}：考虑AI系统的伦理影响
+\item \textbf{公平性}：确保AI系统的公平性和包容性
+\item \textbf{可持续性}：关注AI发展的可持续性
+\end{itemize}
+
+智能的建构是一个复杂而深刻的问题，需要我们从多个角度进行思考和探索。符号主义、连接主义和因果主义为我们提供了三种不同的视角，它们的融合将为人工智能的发展开辟新的道路。在这个过程中，我们不仅在构建更强大的AI系统，也在更深入地理解智能本身的本质。
+
+这种理解不仅有助于技术的进步，也丰富了我们对人类认知和智能的认识。未来的人工智能将不再是单一范式的产物，而是多种智能建构方式有机融合的结果。这种融合不仅是技术的进步，更是我们对智能理解的深化。</textarea>
+  </div>
+</section>
+        <section class="compare-pane render-pane is-target">
+  <div class="pane-title"><span>修改稿渲染</span><button type="button" class="collapse-button" data-toggle-pane>收起</button></div>
+  <div
+    class="page-reader real-pdf-reader"
+    data-page-reader="target"
+    data-synctex-reader="target"
+    data-pdf-path="/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/preview-target.pdf"
+    data-source-path="/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex"
+    data-page-width-pt="595.28"
+    data-page-height-pt="841.89">
+    <div class="pdf-toolbar" data-pdf-toolbar="target">
+      <button type="button" data-pdf-prev>上一页</button>
+      <span class="pdf-page-state"><span data-current-page>1</span> / 14</span>
+      <button type="button" data-pdf-next>下一页</button>
+      <span class="pdf-toolbar-separator"></span>
+      <button type="button" data-pdf-zoom-out>缩小</button>
+      <span class="pdf-zoom-state" data-pdf-zoom-state>100%</span>
+      <button type="button" data-pdf-zoom-in>放大</button>
+    </div>
+    <div class="synctex-status" data-synctex-status="target">真实 PDF 预览 · 右键点击页面可跳转源码行</div>
+    <figure class="real-pdf-page" data-pdf-page="1">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-01.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 1">
+      <figcaption>1 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="2">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-02.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 2">
+      <figcaption>2 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="3">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-03.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 3">
+      <figcaption>3 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="4">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-04.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 4">
+      <figcaption>4 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="5">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-05.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 5">
+      <figcaption>5 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="6">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-06.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 6">
+      <figcaption>6 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="7">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-07.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 7">
+      <figcaption>7 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="8">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-08.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 8">
+      <figcaption>8 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="9">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-09.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 9">
+      <figcaption>9 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="10">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-10.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 10">
+      <figcaption>10 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="11">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-11.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 11">
+      <figcaption>11 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="12">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-12.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 12">
+      <figcaption>12 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="13">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-13.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 13">
+      <figcaption>13 / 14</figcaption>
+    </figure><figure class="real-pdf-page" data-pdf-page="14">
+      <img
+        class="pdf-page-image"
+        data-src="10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-14.png"
+        loading="lazy"
+        decoding="async"
+        width="893"
+        height="1263"
+        alt="target PDF page 14">
+      <figcaption>14 / 14</figcaption>
+    </figure>
+  </div>
+</section>
+      </div>
+    </section>
+  </main>
+  <script id="preview-data" type="application/json">{"generatedAt": "2026-06-22T11:42:28.867508+00:00", "syncTex": {"enabled": true, "assetRoot": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets", "apiBase": "", "variants": {"target": {"variant": "target", "sourcePath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex", "sourceInput": "chapters/10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex", "pdfPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/preview-target.pdf", "pdfUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/preview-target.pdf", "synctexPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/preview-target.synctex.gz", "pageCount": 14, "pageWidthPt": 595.28, "pageHeightPt": 841.89, "pages": [{"page": 1, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-01.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 2, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-02.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 3, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-03.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 4, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-04.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 5, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-05.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 6, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-06.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 7, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-07.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 8, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-08.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 9, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-09.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 10, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-10.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 11, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-11.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 12, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-12.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 13, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-13.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 14, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/target/png/page-14.png", "imageWidth": 893, "imageHeight": 1263}]}, "original": {"variant": "original", "sourcePath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_refined.tex", "sourceInput": "chapters/10-符号、神经与因果：智能的三种建构方式.v3_refined.tex", "pdfPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/preview-original.pdf", "pdfUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/preview-original.pdf", "synctexPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/preview-original.synctex.gz", "pageCount": 14, "pageWidthPt": 595.28, "pageHeightPt": 841.89, "pages": [{"page": 1, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-01.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 2, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-02.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 3, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-03.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 4, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-04.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 5, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-05.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 6, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-06.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 7, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-07.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 8, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-08.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 9, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-09.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 10, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-10.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 11, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-11.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 12, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-12.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 13, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-13.png", "imageWidth": 893, "imageHeight": 1263}, {"page": 14, "imageUrl": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render-assets/original/png/page-14.png", "imageWidth": 893, "imageHeight": 1263}]}}, "rebuild": {"sourcePath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex", "originalSourcePath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_refined.tex", "outputPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render.html", "texRoot": "/Users/Min369/Desktop/书/书稿打磨/draft-tex", "title": "10 · 符号、神经与因果：智能的三种建构方式 校对页 · 渲染预览"}}, "chapterPicker": {"currentSourcePath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_polished0.tex", "currentOriginalPath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/10-符号、神经与因果：智能的三种建构方式.v3_refined.tex", "currentRenderPath": "10-符号-神经与因果-智能的三种建构方式.v3__refined__polished0-render.html"}}</script>
+  <script>
+
+(function () {
+  const workspace = document.querySelector("[data-workspace]");
+  const buttons = Array.from(document.querySelectorAll("[data-mode]"));
+  const outlineToggle = document.querySelector("[data-toggle-outline]");
+  const rebuildButton = document.querySelector("[data-rebuild-preview]");
+  const compileStatus = document.querySelector("[data-compile-status]");
+  const chapterSelect = document.querySelector("[data-chapter-select]");
+  const originalSelect = document.querySelector("[data-original-select]");
+  const targetSelect = document.querySelector("[data-target-select]");
+  const openChapterButton = document.querySelector("[data-open-chapter]");
+  const chapterPickerStatus = document.querySelector("[data-chapter-picker-status]");
+  const editors = Array.from(document.querySelectorAll("[data-source-editor]"));
+  const chapterLabel = workspace ? workspace.dataset.chapterLabel || "" : "";
+  const previewDataElement = document.getElementById("preview-data");
+  const previewData = previewDataElement ? JSON.parse(previewDataElement.textContent || "{}") : {};
+  const syncTex = previewData.syncTex || {};
+  const chapterPicker = previewData.chapterPicker || {};
+  const syncApiBase = window.location.protocol.startsWith("http") ? "" : "http://127.0.0.1:8766";
+  const pdfImageObserver = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadPdfImage(entry.target);
+            pdfImageObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "700px 0px" })
+    : null;
+  let hasUnsavedBrowserEdits = false;
+  let chapterCatalog = [];
+
+  function setCompileStatus(message, kind) {
+    if (!compileStatus) {
+      return;
+    }
+    compileStatus.textContent = message;
+    compileStatus.classList.toggle("is-dirty", kind === "dirty");
+    compileStatus.classList.toggle("is-error", kind === "error");
+    compileStatus.classList.toggle("is-ok", kind === "ok");
+  }
+
+  function setChapterPickerStatus(message, kind) {
+    if (!chapterPickerStatus) {
+      return;
+    }
+    chapterPickerStatus.textContent = message;
+    chapterPickerStatus.classList.toggle("is-error", kind === "error");
+    chapterPickerStatus.classList.toggle("is-ok", kind === "ok");
+  }
+
+  function apiUrl(path) {
+    return `${syncApiBase}${path}`;
+  }
+
+  async function getApiJson(path) {
+    const response = await fetch(apiUrl(path));
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || data.ok === false) {
+      throw new Error(data.error || `Request failed: ${response.status}`);
+    }
+    return data;
+  }
+
+  function replaceSelectOptions(select, items, selectedValue, placeholder) {
+    if (!select) {
+      return;
+    }
+    select.innerHTML = "";
+    if (!items.length) {
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = placeholder;
+      select.appendChild(option);
+      select.disabled = true;
+      return;
+    }
+    items.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item.value;
+      option.textContent = item.label;
+      if (item.value === selectedValue) {
+        option.selected = true;
+      }
+      select.appendChild(option);
+    });
+    select.disabled = false;
+  }
+
+  function chapterById(chapterId) {
+    return chapterCatalog.find((item) => item.id === chapterId) || null;
+  }
+
+  function currentChapterSelection() {
+    return {
+      chapterId: chapterSelect ? chapterSelect.value : "",
+      originalKey: originalSelect ? originalSelect.value : "",
+      targetKey: targetSelect ? targetSelect.value : "",
+    };
+  }
+
+  function populateVersionSelects(chapter, originalKey, targetKey) {
+    const versions = chapter ? chapter.versions || [] : [];
+    replaceSelectOptions(
+      originalSelect,
+      versions.map((item) => ({ value: item.key, label: item.label })),
+      originalKey || (chapter ? chapter.defaultOriginalKey : ""),
+      "当前章节没有可选版本"
+    );
+    replaceSelectOptions(
+      targetSelect,
+      versions.map((item) => ({ value: item.key, label: item.label })),
+      targetKey || (chapter ? chapter.defaultTargetKey : ""),
+      "当前章节没有可选版本"
+    );
+    if (openChapterButton) {
+      openChapterButton.disabled = !chapter || !versions.length;
+    }
+  }
+
+  function findCurrentCatalogSelection(chapters) {
+    const currentSource = chapterPicker.currentSourcePath || "";
+    const currentOriginal = chapterPicker.currentOriginalPath || "";
+    for (const chapter of chapters) {
+      let sourceVersion = null;
+      let originalVersion = null;
+      for (const version of chapter.versions || []) {
+        if (version.path === currentSource) {
+          sourceVersion = version;
+        }
+        if (version.path === currentOriginal) {
+          originalVersion = version;
+        }
+      }
+      if (sourceVersion || originalVersion) {
+        return {
+          chapterId: chapter.id,
+          originalKey: originalVersion ? originalVersion.key : chapter.defaultOriginalKey,
+          targetKey: sourceVersion ? sourceVersion.key : chapter.defaultTargetKey,
+        };
+      }
+    }
+    return chapters.length
+      ? {
+          chapterId: chapters[0].id,
+          originalKey: chapters[0].defaultOriginalKey,
+          targetKey: chapters[0].defaultTargetKey,
+        }
+      : null;
+  }
+
+  function syncChapterControls(selection) {
+    if (!selection || !chapterSelect) {
+      return;
+    }
+    chapterSelect.value = selection.chapterId;
+    const chapter = chapterById(selection.chapterId);
+    populateVersionSelects(chapter, selection.originalKey, selection.targetKey);
+  }
+
+  function setMode(mode) {
+    workspace.classList.remove("is-read", "is-dual", "is-quad");
+    workspace.classList.add(`is-${mode}`);
+    buttons.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.mode === mode);
+    });
+    updateAllGrids();
+  }
+
+  function loadPdfImage(image) {
+    if (!image || image.dataset.loaded === "1") {
+      return;
+    }
+    const source = image.dataset.src;
+    if (!source) {
+      return;
+    }
+    image.src = source;
+    image.dataset.loaded = "1";
+  }
+
+  function preparePdfImages(root) {
+    const scope = root || document;
+    scope.querySelectorAll(".pdf-page-image[data-src]").forEach((image) => {
+      if (image.dataset.observed === "1" || image.dataset.loaded === "1") {
+        return;
+      }
+      image.dataset.observed = "1";
+      if (pdfImageObserver) {
+        pdfImageObserver.observe(image);
+      } else {
+        loadPdfImage(image);
+      }
+    });
+  }
+
+  function loadFirstVisiblePdfPages() {
+    document.querySelectorAll(".real-pdf-reader").forEach((reader) => {
+      if (reader.getClientRects().length === 0) {
+        return;
+      }
+      Array.from(reader.querySelectorAll(".pdf-page-image[data-src]"))
+        .slice(0, 2)
+        .forEach(loadPdfImage);
+    });
+  }
+
+  function pdfPages(reader) {
+    return Array.from(reader.querySelectorAll(".real-pdf-page"));
+  }
+
+  function readerBasePageWidth(reader) {
+    const available = Math.max(240, reader.clientWidth - 36);
+    return Math.min(540, available);
+  }
+
+  function setReaderZoom(reader, zoom) {
+    const previousZoom = Number(reader.dataset.pdfZoom || "1");
+    const previousCenter = reader.scrollLeft + reader.clientWidth / 2;
+    const nextZoom = Math.min(1.6, Math.max(0.72, zoom));
+    const baseWidth = readerBasePageWidth(reader);
+    reader.dataset.pdfZoom = String(nextZoom);
+    reader.dataset.pdfBaseWidth = String(baseWidth);
+    pdfPages(reader).forEach((page) => {
+      page.style.width = `${Math.round(baseWidth * nextZoom)}px`;
+    });
+    const state = reader.querySelector("[data-pdf-zoom-state]");
+    if (state) {
+      state.textContent = `${Math.round(nextZoom * 100)}%`;
+    }
+    if (previousZoom > 0 && reader.scrollWidth > reader.clientWidth) {
+      const ratio = nextZoom / previousZoom;
+      reader.scrollLeft = Math.max(0, previousCenter * ratio - reader.clientWidth / 2);
+    }
+    loadFirstVisiblePdfPages();
+  }
+
+  function refreshVisibleReaderZooms() {
+    document.querySelectorAll(".real-pdf-reader").forEach((reader) => {
+      if (reader.getClientRects().length === 0) {
+        return;
+      }
+      const currentBase = readerBasePageWidth(reader);
+      const previousBase = Number(reader.dataset.pdfBaseWidth || "0");
+      if (Math.abs(currentBase - previousBase) > 2) {
+        setReaderZoom(reader, Number(reader.dataset.pdfZoom || "1"));
+      }
+    });
+  }
+
+  function updateReaderPageState(reader, pageNumber) {
+    const current = reader.querySelector("[data-current-page]");
+    if (current) {
+      current.textContent = String(pageNumber || 1);
+    }
+    reader.dataset.currentPage = String(pageNumber || 1);
+  }
+
+  function visiblePdfPage(reader) {
+    const pages = pdfPages(reader);
+    if (!pages.length) {
+      return 1;
+    }
+    const probeY = reader.scrollTop + reader.clientHeight * 0.35;
+    let selected = pages[0];
+    for (const page of pages) {
+      if (page.offsetTop <= probeY) {
+        selected = page;
+      } else {
+        break;
+      }
+    }
+    return Number(selected.dataset.pdfPage || "1");
+  }
+
+  function scrollReaderToPage(reader, pageNumber) {
+    const targetPage = Math.max(1, Number(pageNumber) || 1);
+    const page = reader.querySelector(`[data-pdf-page="${targetPage}"]`);
+    if (!page) {
+      return;
+    }
+    const image = page.querySelector(".pdf-page-image");
+    if (image) {
+      loadPdfImage(image);
+    }
+    reader.scrollTop = Math.max(0, page.offsetTop - 54);
+    updateReaderPageState(reader, targetPage);
+  }
+
+  function initPdfToolbars(root) {
+    const scope = root || document;
+    scope.querySelectorAll(".real-pdf-reader").forEach((reader) => {
+      if (reader.dataset.pdfToolbarReady === "1") {
+        return;
+      }
+      reader.dataset.pdfToolbarReady = "1";
+      reader.dataset.pdfZoom = reader.dataset.pdfZoom || "1";
+      const pageCount = pdfPages(reader).length;
+      const previous = reader.querySelector("[data-pdf-prev]");
+      const next = reader.querySelector("[data-pdf-next]");
+      const zoomIn = reader.querySelector("[data-pdf-zoom-in]");
+      const zoomOut = reader.querySelector("[data-pdf-zoom-out]");
+      if (previous) {
+        previous.addEventListener("click", () => {
+          scrollReaderToPage(reader, Math.max(1, visiblePdfPage(reader) - 1));
+        });
+      }
+      if (next) {
+        next.addEventListener("click", () => {
+          scrollReaderToPage(reader, Math.min(pageCount, visiblePdfPage(reader) + 1));
+        });
+      }
+      if (zoomIn) {
+        zoomIn.addEventListener("click", () => {
+          setReaderZoom(reader, Number(reader.dataset.pdfZoom || "1") + 0.12);
+        });
+      }
+      if (zoomOut) {
+        zoomOut.addEventListener("click", () => {
+          setReaderZoom(reader, Number(reader.dataset.pdfZoom || "1") - 0.12);
+        });
+      }
+      reader.addEventListener("scroll", () => {
+        window.clearTimeout(reader._pageStateTimer);
+        reader._pageStateTimer = window.setTimeout(() => {
+          updateReaderPageState(reader, visiblePdfPage(reader));
+        }, 80);
+      });
+      setReaderZoom(reader, Number(reader.dataset.pdfZoom || "1"));
+      updateReaderPageState(reader, visiblePdfPage(reader));
+    });
+  }
+
+  function updateGrid(grid) {
+    const panes = Array.from(grid.querySelectorAll(".compare-pane"));
+    if (!panes.length) {
+      return;
+    }
+    grid.style.gridTemplateColumns = panes
+      .map((pane) => (pane.classList.contains("is-collapsed") ? "54px" : "minmax(260px, 1fr)"))
+      .join(" ");
+  }
+
+  function updateAllGrids() {
+    document.querySelectorAll(".two-column-grid, .quad-grid").forEach(updateGrid);
+    window.requestAnimationFrame(() => {
+      paginateVisibleReaders();
+      preparePdfImages(document);
+      loadFirstVisiblePdfPages();
+      initPdfToolbars(document);
+      refreshVisibleReaderZooms();
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    window.clearTimeout(window._pdfResizeTimer);
+    window._pdfResizeTimer = window.setTimeout(refreshVisibleReaderZooms, 120);
+  });
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => setMode(button.dataset.mode || "read"));
+  });
+
+  if (chapterSelect) {
+    chapterSelect.addEventListener("change", () => {
+      const chapter = chapterById(chapterSelect.value);
+      if (!chapter) {
+        populateVersionSelects(null, "", "");
+        return;
+      }
+      populateVersionSelects(chapter, chapter.defaultOriginalKey, chapter.defaultTargetKey);
+      setChapterPickerStatus("已切换章节，请点击“打开章节”生成对应页面。", "");
+    });
+  }
+
+  if (originalSelect) {
+    originalSelect.addEventListener("change", () => {
+      setChapterPickerStatus("原文版本已更新，请点击“打开章节”生成对应页面。", "");
+    });
+  }
+
+  if (targetSelect) {
+    targetSelect.addEventListener("change", () => {
+      setChapterPickerStatus("修改稿版本已更新，请点击“打开章节”生成对应页面。", "");
+    });
+  }
+
+  if (openChapterButton) {
+    openChapterButton.addEventListener("click", async () => {
+      const selection = currentChapterSelection();
+      if (!selection.chapterId) {
+        setChapterPickerStatus("请先选择章节。", "error");
+        return;
+      }
+      openChapterButton.disabled = true;
+      setChapterPickerStatus("正在生成所选章节的校对页，请稍候...", "ok");
+      try {
+        const result = await postSyncTex("/api/build-chapter", selection);
+        setChapterPickerStatus("章节页面生成完成，正在打开...", "ok");
+        window.location.href = result.renderUrl;
+      } catch (error) {
+        setChapterPickerStatus(error.message || "章节生成失败。", "error");
+        openChapterButton.disabled = false;
+      }
+    });
+  }
+
+  async function loadChapterCatalog() {
+    if (!chapterSelect) {
+      return;
+    }
+    try {
+      const data = await getApiJson("/api/chapters");
+      chapterCatalog = Array.isArray(data.chapters) ? data.chapters : [];
+      replaceSelectOptions(
+        chapterSelect,
+        chapterCatalog.map((item) => ({ value: item.id, label: item.label })),
+        "",
+        "没有可用章节"
+      );
+      const selection = findCurrentCatalogSelection(chapterCatalog);
+      if (!selection) {
+        populateVersionSelects(null, "", "");
+        setChapterPickerStatus("没有发现可用章节。", "error");
+        return;
+      }
+      syncChapterControls(selection);
+      setChapterPickerStatus("可直接切换到任意章节与版本组合。", "ok");
+    } catch (error) {
+      replaceSelectOptions(chapterSelect, [], "", "无法读取章节目录");
+      populateVersionSelects(null, "", "");
+      setChapterPickerStatus(error.message || "章节目录读取失败。请确认本地 HTTP 服务已启动。", "error");
+    }
+  }
+
+  if (outlineToggle) {
+    outlineToggle.addEventListener("click", () => {
+      const collapsed = workspace.classList.toggle("is-outline-collapsed");
+      outlineToggle.textContent = collapsed ? "展开" : "收起";
+    });
+  }
+
+  document.querySelectorAll("[data-toggle-pane]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const pane = button.closest(".compare-pane");
+      if (!pane) {
+        return;
+      }
+      const collapsed = pane.classList.toggle("is-collapsed");
+      button.textContent = collapsed ? "展开" : "收起";
+      const grid = pane.closest(".two-column-grid, .quad-grid");
+      if (grid) {
+        updateGrid(grid);
+      }
+    });
+  });
+
+  if (rebuildButton) {
+    rebuildButton.addEventListener("click", async () => {
+      const rebuildPayload = syncTex.rebuild || null;
+      if (!rebuildPayload) {
+        setCompileStatus("当前页面没有可重新编译的 PDF 配置。", "error");
+        return;
+      }
+      if (hasUnsavedBrowserEdits) {
+        const proceed = window.confirm("源码栏有浏览器内临时修改。重新编译会读取磁盘上的 .tex 文件，这些临时修改不会进入 PDF。是否继续？");
+        if (!proceed) {
+          return;
+        }
+      }
+      rebuildButton.disabled = true;
+      setCompileStatus("正在重新编译 PDF，请稍候...", "ok");
+      try {
+        await postSyncTex("/api/rebuild-preview", rebuildPayload);
+        setCompileStatus("重新编译完成，正在刷新页面...", "ok");
+        window.location.reload();
+      } catch (error) {
+        setCompileStatus(error.message || "重新编译失败。", "error");
+        rebuildButton.disabled = false;
+      }
+    });
+  }
+
+  function visibleMode() {
+    if (workspace.classList.contains("is-quad")) {
+      return "quad";
+    }
+    if (workspace.classList.contains("is-dual")) {
+      return "dual";
+    }
+    return "read";
+  }
+
+  function sourceEditorForVariant(variant) {
+    return document.querySelector(`[data-source-editor="${variant}"]`);
+  }
+
+  function renderPaneForVariant(variant) {
+    const mode = visibleMode();
+    return (
+      document.querySelector(`.${mode}-view .render-pane.is-${variant}`) ||
+      document.querySelector(`.quad-view .render-pane.is-${variant}`) ||
+      document.querySelector(`.dual-view .render-pane.is-${variant}`)
+    );
+  }
+
+  function syncAssetForVariant(variant) {
+    return syncTex && syncTex.variants ? syncTex.variants[variant] : null;
+  }
+
+  function sourceGutterForVariant(variant) {
+    return document.querySelector(`[data-source-gutter="${variant}"]`);
+  }
+
+  function editorVariant(editor) {
+    return editor ? editor.dataset.sourceEditor || "target" : "target";
+  }
+
+  function sourceLineCount(text) {
+    return String(text).split(/\r?\n/).length;
+  }
+
+  function updateSourceGutter(editor) {
+    if (!editor) {
+      return;
+    }
+    const gutter = sourceGutterForVariant(editorVariant(editor));
+    if (!gutter) {
+      return;
+    }
+    const lineCount = sourceLineCount(editor.value);
+    if (Number(gutter.dataset.lineCount || "0") === lineCount) {
+      return;
+    }
+    const rows = [];
+    for (let line = 1; line <= lineCount; line += 1) {
+      rows.push(`<div class="source-gutter-line" data-line="${line}">${line}</div>`);
+    }
+    gutter.innerHTML = rows.join("");
+    gutter.dataset.lineCount = String(lineCount);
+    gutter.scrollTop = editor.scrollTop;
+  }
+
+  function syncSourceGutterScroll(editor) {
+    const gutter = sourceGutterForVariant(editorVariant(editor));
+    if (gutter) {
+      gutter.scrollTop = editor.scrollTop;
+    }
+  }
+
+  function markSourceDirty(variant) {
+    hasUnsavedBrowserEdits = true;
+    document.querySelectorAll(`[data-source-state="${variant}"]`).forEach((item) => {
+      item.textContent = "浏览器内已有临时修改；PDF/SyncTeX 仍对应最近一次编译";
+    });
+    setCompileStatus("源码栏有临时修改，PDF 尚未重新编译；重新编译会读取磁盘上的 .tex 文件。", "dirty");
+  }
+
+  function markSourceLines(editor, startLine, endLine) {
+    const gutter = sourceGutterForVariant(editorVariant(editor));
+    if (!gutter) {
+      return null;
+    }
+    gutter.querySelectorAll(".is-line-hit").forEach((line) => line.classList.remove("is-line-hit"));
+    const safeStart = Math.max(1, Number(startLine) || 1);
+    const safeEnd = Math.max(safeStart, Number(endLine) || safeStart);
+    let first = null;
+    for (let line = safeStart; line <= safeEnd; line += 1) {
+      const item = gutter.querySelector(`[data-line="${line}"]`);
+      if (item) {
+        item.classList.add("is-line-hit");
+        if (!first) {
+          first = item;
+        }
+      }
+      if (line - safeStart > 80) {
+        break;
+      }
+    }
+    return first;
+  }
+
+  function sourceScrollTopForLine(editor, lineElement, startLine) {
+    if (lineElement) {
+      return Math.max(0, lineElement.offsetTop - editor.clientHeight * 0.35);
+    }
+    const style = window.getComputedStyle(editor);
+    const parsedLineHeight = Number.parseFloat(style.lineHeight);
+    const fontSize = Number.parseFloat(style.fontSize) || 13;
+    const lineHeight = Number.isFinite(parsedLineHeight) ? parsedLineHeight : fontSize * 1.7;
+    return Math.max(0, (Math.max(1, startLine) - 1) * lineHeight - editor.clientHeight * 0.35);
+  }
+
+  function openPane(pane) {
+    if (!pane || !pane.classList.contains("is-collapsed")) {
+      return;
+    }
+    pane.classList.remove("is-collapsed");
+    const button = pane.querySelector("[data-toggle-pane]");
+    if (button) {
+      button.textContent = "收起";
+    }
+    const grid = pane.closest(".two-column-grid, .quad-grid");
+    if (grid) {
+      updateGrid(grid);
+    }
+  }
+
+  function lineStartOffset(text, lineNumber) {
+    const line = Math.max(1, Number(lineNumber) || 1);
+    if (line <= 1) {
+      return 0;
+    }
+    let offset = 0;
+    for (let current = 1; current < line; current += 1) {
+      const nextBreak = text.indexOf("\n", offset);
+      if (nextBreak === -1) {
+        return text.length;
+      }
+      offset = nextBreak + 1;
+    }
+    return offset;
+  }
+
+  function lineEndOffset(text, lineNumber) {
+    const start = lineStartOffset(text, lineNumber);
+    const nextBreak = text.indexOf("\n", start);
+    return nextBreak === -1 ? text.length : nextBreak;
+  }
+
+  function flashSourcePane(pane) {
+    pane.classList.add("is-source-jump");
+    window.clearTimeout(pane._sourceJumpTimer);
+    pane._sourceJumpTimer = window.setTimeout(() => {
+      pane.classList.remove("is-source-jump");
+    }, 1200);
+  }
+
+  function flashRenderBlock(block) {
+    document.querySelectorAll(".is-sync-hit").forEach((item) => item.classList.remove("is-sync-hit"));
+    block.classList.add("is-sync-hit");
+    window.clearTimeout(block._syncHitTimer);
+    block._syncHitTimer = window.setTimeout(() => {
+      block.classList.remove("is-sync-hit");
+    }, 1200);
+  }
+
+  function syncStatus(variant, message, kind) {
+    const statuses = Array.from(document.querySelectorAll(`[data-synctex-status="${variant}"]`));
+    if (!statuses.length) {
+      return;
+    }
+    statuses.forEach((status) => {
+      status.textContent = message;
+      status.classList.toggle("is-error", kind === "error");
+      status.classList.toggle("is-ok", kind === "ok");
+    });
+  }
+
+  async function postSyncTex(path, payload) {
+    const response = await fetch(`${syncApiBase}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || data.ok === false) {
+      throw new Error(data.error || `SyncTeX request failed: ${response.status}`);
+    }
+    return data;
+  }
+
+  function flashPdfPage(pageElement, xPercent, yPercent) {
+    document.querySelectorAll(".real-pdf-page.is-sync-hit").forEach((page) => {
+      page.classList.remove("is-sync-hit");
+    });
+    pageElement.classList.add("is-sync-hit");
+    let marker = pageElement.querySelector(".pdf-sync-marker");
+    if (!marker) {
+      marker = document.createElement("span");
+      marker.className = "pdf-sync-marker";
+      pageElement.appendChild(marker);
+    }
+    marker.style.left = `${xPercent}%`;
+    marker.style.top = `${yPercent}%`;
+    window.clearTimeout(pageElement._pdfSyncTimer);
+    pageElement._pdfSyncTimer = window.setTimeout(() => {
+      pageElement.classList.remove("is-sync-hit");
+    }, 1600);
+  }
+
+  async function jumpFromPdfToSource(variant, pageElement, event) {
+    const asset = syncAssetForVariant(variant);
+    const image = pageElement.querySelector(".pdf-page-image");
+    if (!asset || !image) {
+      syncStatus(variant, "缺少 PDF/SyncTeX 资源，请重新生成预览。", "error");
+      return;
+    }
+    const rect = image.getBoundingClientRect();
+    const xRatio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    const yRatio = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+    const x = xRatio * Number(asset.pageWidthPt || 0);
+    const y = yRatio * Number(asset.pageHeightPt || 0);
+    const page = Number(pageElement.dataset.pdfPage || "1");
+    flashPdfPage(pageElement, xRatio * 100, yRatio * 100);
+    syncStatus(variant, `正在用 SyncTeX 定位第 ${page} 页...`, "ok");
+    const result = await postSyncTex("/api/synctex/edit", {
+      pdfPath: asset.pdfPath,
+      page,
+      x,
+      y,
+    });
+    const line = Number(result.line || 0);
+    if (!line) {
+      throw new Error("SyncTeX 没有返回源码行号。");
+    }
+    syncStatus(variant, `已定位到源码第 ${line} 行。`, "ok");
+    jumpToSource(variant, line, line);
+  }
+
+  function scrollToPdfPosition(variant, page, x, y) {
+    const pane = renderPaneForVariant(variant);
+    openPane(pane);
+    const asset = syncAssetForVariant(variant);
+    const reader = pane ? pane.querySelector("[data-synctex-reader]") : null;
+    const pageElement = reader ? reader.querySelector(`[data-pdf-page="${page}"]`) : null;
+    if (!asset || !reader || !pageElement) {
+      return;
+    }
+    const image = pageElement.querySelector(".pdf-page-image");
+    if (image) {
+      loadPdfImage(image);
+    }
+    if (visibleMode() !== "quad") {
+      setMode("quad");
+    }
+    const xPercent = Number(asset.pageWidthPt || 0) ? (Number(x) / Number(asset.pageWidthPt)) * 100 : 50;
+    const yPercent = Number(asset.pageHeightPt || 0) ? (Number(y) / Number(asset.pageHeightPt)) * 100 : 50;
+    reader.scrollTop = Math.max(0, pageElement.offsetTop - reader.clientHeight * 0.2);
+    flashPdfPage(pageElement, xPercent, yPercent);
+  }
+
+  async function jumpFromSourceToPdf(variant, lineNumber) {
+    const asset = syncAssetForVariant(variant);
+    if (!asset) {
+      return;
+    }
+    syncStatus(variant, `正在用 SyncTeX 定位源码第 ${lineNumber} 行...`, "ok");
+    const result = await postSyncTex("/api/synctex/view", {
+      pdfPath: asset.pdfPath,
+      sourcePath: asset.sourcePath,
+      line: lineNumber,
+      column: 1,
+    });
+    const first = result.matches && result.matches.length ? result.matches[0] : result;
+    if (!first.page) {
+      throw new Error("SyncTeX 没有返回 PDF 页码。");
+    }
+    syncStatus(variant, `已定位到 PDF 第 ${first.page} 页。`, "ok");
+    scrollToPdfPosition(variant, Number(first.page), Number(first.x || 0), Number(first.y || 0));
+  }
+
+  function jumpToSource(variant, startLine, endLine) {
+    if (visibleMode() !== "quad") {
+      setMode("quad");
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const editor = sourceEditorForVariant(variant);
+        if (!editor) {
+          return;
+        }
+        const pane = editor.closest(".compare-pane");
+        openPane(pane);
+        updateSourceGutter(editor);
+        const start = lineStartOffset(editor.value, startLine);
+        const end = lineEndOffset(editor.value, endLine || startLine);
+        editor.focus({ preventScroll: true });
+        editor.setSelectionRange(start, Math.max(start, end));
+        const lineElement = markSourceLines(editor, startLine, endLine || startLine);
+        editor.scrollTop = sourceScrollTopForLine(editor, lineElement, startLine);
+        syncSourceGutterScroll(editor);
+        if (pane) {
+          flashSourcePane(pane);
+        }
+      });
+    });
+  }
+
+  document.querySelectorAll(".render-pane").forEach((pane) => {
+    pane.addEventListener("contextmenu", (event) => {
+      const pdfPage = event.target.closest(".real-pdf-page");
+      if (pdfPage && pane.contains(pdfPage)) {
+        const variant = pane.classList.contains("is-original") ? "original" : "target";
+        event.preventDefault();
+        jumpFromPdfToSource(variant, pdfPage, event).catch((error) => {
+          syncStatus(variant, error.message || "SyncTeX 定位失败。", "error");
+        });
+        return;
+      }
+
+      const block = event.target.closest("[data-source-line]");
+      if (!block || !pane.contains(block)) {
+        return;
+      }
+      const variant = pane.classList.contains("is-original") ? "original" : "target";
+      const startLine = Number.parseInt(block.dataset.sourceLine || "", 10);
+      const endLine = Number.parseInt(block.dataset.sourceEndLine || block.dataset.sourceLine || "", 10);
+      if (!Number.isFinite(startLine)) {
+        return;
+      }
+      event.preventDefault();
+      flashRenderBlock(block);
+      jumpToSource(variant, startLine, endLine);
+    });
+  });
+
+  document.addEventListener("contextmenu", (event) => {
+    const lineElement = event.target.closest(".source-gutter-line");
+    if (!lineElement) {
+      return;
+    }
+    const gutter = lineElement.closest("[data-source-gutter]");
+    const variant = gutter ? gutter.dataset.sourceGutter || "target" : "target";
+    const lineNumber = Number(lineElement.dataset.line || "0");
+    if (!lineNumber || !syncAssetForVariant(variant)) {
+      return;
+    }
+    event.preventDefault();
+    jumpFromSourceToPdf(variant, lineNumber).catch((error) => {
+      syncStatus(variant, error.message || "SyncTeX 定位失败。", "error");
+    });
+  });
+
+  function escapeHtml(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function replaceCommand(text, command, tag) {
+    const pattern = new RegExp("\\\\" + command + "\\{([^{}]*)\\}", "g");
+    let current = text;
+    while (true) {
+      const next = current.replace(pattern, `<${tag}>$1</${tag}>`);
+      if (next === current) {
+        return current;
+      }
+      current = next;
+    }
+  }
+
+  function renderInlineLatex(text) {
+    let rendered = escapeHtml(text);
+    rendered = replaceCommand(rendered, "textbf", "strong");
+    rendered = replaceCommand(rendered, "emph", "em");
+    rendered = replaceCommand(rendered, "text", "span");
+    rendered = rendered.replace(/\$([^$]+)\$/g, (_, body) => `<span class="inline-math">$${body}$</span>`);
+    rendered = rendered.replaceAll("\\ldots", "…");
+    rendered = rendered.replaceAll("\\;", " ");
+    rendered = rendered.replace(/\\fa[A-Za-z]+/g, "");
+    return rendered;
+  }
+
+  function cleanInlineLatex(text) {
+    const holder = document.createElement("div");
+    holder.innerHTML = renderInlineLatex(text);
+    return holder.textContent.trim();
+  }
+
+  function renderLatexPreview(source) {
+    const lines = source.split(/\r?\n/);
+    const state = {
+      body: [],
+      paragraph: [],
+      paragraphStartLine: 0,
+      math: [],
+      mathStartLine: 0,
+      introTitle: "",
+      introItems: [],
+      introStartLine: 0,
+      listEnv: "",
+      listItems: [],
+      listStartLine: 0,
+      inMath: false,
+      inIntro: false,
+      inList: false,
+      sectionCounter: 0,
+    };
+
+    function sourceAttrs(startLine, endLine) {
+      if (!startLine || startLine < 1) {
+        return "";
+      }
+      const resolvedEnd = endLine && endLine >= startLine ? endLine : startLine;
+      return `data-source-line="${startLine}" data-source-end-line="${resolvedEnd}"`;
+    }
+
+    function flushParagraph(endLine) {
+      if (!state.paragraph.length) {
+        return;
+      }
+      const text = state.paragraph.map((line) => line.trimEnd()).join("\n").trim();
+      state.paragraph = [];
+      if (text) {
+        state.body.push(`<p ${sourceAttrs(state.paragraphStartLine, endLine)}>${renderInlineLatex(text).replaceAll("\n", "<br>")}</p>`);
+      }
+      state.paragraphStartLine = 0;
+    }
+
+    function flushMath(endLine) {
+      const formula = state.math.map((line) => line.trim()).join("\n").trim();
+      state.body.push(`<pre class="formula" ${sourceAttrs(state.mathStartLine, endLine)}><code>${escapeHtml(formula)}</code></pre>`);
+      state.math = [];
+      state.mathStartLine = 0;
+      state.inMath = false;
+    }
+
+    function flushIntro(endLine) {
+      const items = state.introItems.map((item) => `<li>${renderInlineLatex(item)}</li>`).join("\n");
+      state.body.push(`<section class="intro-box" ${sourceAttrs(state.introStartLine, endLine)}>
+  <div class="intro-title">${escapeHtml(state.introTitle || "提示")}</div>
+  <ul>${items}</ul>
+</section>`);
+      state.introTitle = "";
+      state.introItems = [];
+      state.introStartLine = 0;
+      state.inIntro = false;
+    }
+
+    function flushList(endLine) {
+      const tag = state.listEnv === "enumerate" ? "ol" : "ul";
+      const items = state.listItems.map((item) => `<li>${renderInlineLatex(item)}</li>`).join("\n");
+      state.body.push(`<${tag} class="latex-list" ${sourceAttrs(state.listStartLine, endLine)}>${items}</${tag}>`);
+      state.listEnv = "";
+      state.listItems = [];
+      state.listStartLine = 0;
+      state.inList = false;
+    }
+
+    function appendSection(command, title) {
+      const levels = { chapter: 1, section: 2, subsection: 3, subsubsection: 4, paragraph: 5 };
+      const level = levels[command] || 2;
+      const tag = `h${Math.min(level, 4)}`;
+      state.sectionCounter += 1;
+      const label = command === "chapter" && chapterLabel
+        ? `<span class="chapter-label">${escapeHtml(chapterLabel)}</span>`
+        : "";
+      state.body.push(
+        `<${tag} id="live-sec-${state.sectionCounter}" class="latex-heading latex-${command}" data-heading-level="${level}" ${sourceAttrs(state.currentLine || 1)}>${label}${renderInlineLatex(title)}</${tag}>`
+      );
+    }
+
+    lines.forEach((line, index) => {
+      const lineNumber = index + 1;
+      state.currentLine = lineNumber;
+      const stripped = line.trim();
+
+      if (state.inList) {
+        const endList = stripped.match(/^\\end\{([^}]+)\}\s*$/);
+        if (endList && endList[1] === state.listEnv) {
+          flushList(lineNumber);
+          return;
+        }
+        if (stripped.startsWith("\\item")) {
+          state.listItems.push(stripped.slice("\\item".length).trim());
+        } else if (stripped) {
+          if (state.listItems.length) {
+            state.listItems[state.listItems.length - 1] += " " + stripped;
+          } else {
+            state.listItems.push(stripped);
+          }
+        }
+        return;
+      }
+
+      if (state.inMath) {
+        if (stripped === "\\]") {
+          flushMath(lineNumber);
+        } else {
+          state.math.push(line);
+        }
+        return;
+      }
+
+      if (state.inIntro) {
+        if (/^\\end\{introduction\}\s*$/.test(stripped)) {
+          flushIntro(lineNumber);
+          return;
+        }
+        if (stripped.startsWith("\\item")) {
+          state.introItems.push(stripped.slice("\\item".length).trim());
+        } else if (stripped) {
+          if (state.introItems.length) {
+            state.introItems[state.introItems.length - 1] += " " + stripped;
+          } else {
+            state.introItems.push(stripped);
+          }
+        }
+        return;
+      }
+
+      if (!stripped) {
+        flushParagraph(lineNumber - 1);
+        return;
+      }
+
+      if (/^\s*%\s*!TEX\b/i.test(line) || /^\s*%/.test(line)) {
+        flushParagraph(lineNumber - 1);
+        return;
+      }
+
+      const section = stripped.match(/^\\(chapter|section|subsection|subsubsection|paragraph)\*?(?:\[[^\]]*\])?\{(.*)\}\s*$/);
+      if (section) {
+        flushParagraph(lineNumber - 1);
+        appendSection(section[1], section[2]);
+        return;
+      }
+
+      const begin = stripped.match(/^\\begin\{([^}]+)\}(?:\[(.*)\])?\s*$/);
+      if (begin && begin[1] === "introduction") {
+        flushParagraph(lineNumber - 1);
+        state.inIntro = true;
+        state.introTitle = cleanInlineLatex(begin[2] || "提示");
+        state.introItems = [];
+        state.introStartLine = lineNumber;
+        return;
+      }
+      if (begin && (begin[1] === "itemize" || begin[1] === "enumerate")) {
+        flushParagraph(lineNumber - 1);
+        state.inList = true;
+        state.listEnv = begin[1];
+        state.listItems = [];
+        state.listStartLine = lineNumber;
+        return;
+      }
+
+      if (stripped === "\\[") {
+        flushParagraph(lineNumber - 1);
+        state.inMath = true;
+        state.math = [];
+        state.mathStartLine = lineNumber;
+        return;
+      }
+
+      if (!state.paragraph.length) {
+        state.paragraphStartLine = lineNumber;
+      }
+      state.paragraph.push(line);
+    });
+
+    const lastLine = lines.length;
+    flushParagraph(lastLine);
+    if (state.inMath) {
+      flushMath(lastLine);
+    }
+    if (state.inIntro) {
+      flushIntro(lastLine);
+    }
+    if (state.inList) {
+      flushList(lastLine);
+    }
+    return state.body.join("\n") || '<p class="muted">暂无内容</p>';
+  }
+
+  function createPage(pageNumber) {
+    const wrapper = document.createElement("section");
+    wrapper.className = "pdf-page";
+    wrapper.dataset.pageNumber = String(pageNumber);
+    const header = document.createElement("div");
+    header.className = "pdf-page-header";
+    const headerText = document.createElement("span");
+    header.appendChild(headerText);
+    const body = document.createElement("div");
+    body.className = "pdf-page-body";
+    const footer = document.createElement("div");
+    footer.className = "pdf-page-footer";
+    footer.innerHTML = '<span class="footer-left">人工智能的数学思维</span><span class="page-number"></span><span class="footer-right">ElegantBook Preview</span>';
+    wrapper.append(header, body, footer);
+    return { wrapper, header, headerText, body, footer };
+  }
+
+  function pageHeadingText(page, fallback) {
+    const heading = page.querySelector("h1, h2, h3, h4");
+    if (!heading) {
+      return fallback;
+    }
+    const text = heading.textContent.replace(/\s+/g, " ").trim();
+    return text || fallback;
+  }
+
+  function updatePageFooters(article) {
+    const pages = Array.from(article.querySelectorAll(".pdf-page"));
+    let runningTitle = chapterLabel || document.title;
+    pages.forEach((page, index) => {
+      runningTitle = pageHeadingText(page, runningTitle);
+      const headerText = page.querySelector(".pdf-page-header span");
+      if (headerText) {
+        headerText.textContent = runningTitle;
+      }
+      const pageNumber = page.querySelector(".page-number");
+      if (pageNumber) {
+        pageNumber.textContent = `${index + 1} / ${pages.length}`;
+      }
+    });
+  }
+
+  function paginateArticle(article) {
+    if (!article || article.dataset.paginating === "1") {
+      return;
+    }
+    if (!article.dataset.rawHtml) {
+      article.dataset.rawHtml = article.innerHTML;
+    }
+    article.dataset.paginating = "1";
+
+    const holder = document.createElement("div");
+    holder.innerHTML = article.dataset.rawHtml;
+    const blocks = Array.from(holder.children);
+    article.innerHTML = "";
+
+    let pageNumber = 1;
+    let page = createPage(pageNumber);
+    article.appendChild(page.wrapper);
+    blocks.forEach((block) => {
+      const clone = block.cloneNode(true);
+      page.body.appendChild(clone);
+      if (page.body.scrollHeight > page.body.clientHeight && page.body.children.length > 1) {
+        page.body.removeChild(clone);
+        pageNumber += 1;
+        page = createPage(pageNumber);
+        article.appendChild(page.wrapper);
+        page.body.appendChild(clone);
+      }
+    });
+
+    updatePageFooters(article);
+    article.dataset.paginating = "0";
+  }
+
+  function paginateVisibleReaders() {
+    document.querySelectorAll(".render-pane [data-render-content]").forEach(paginateArticle);
+  }
+
+  function updatePreview(variant, source) {
+    const rendered = renderLatexPreview(source);
+    document.querySelectorAll(`.render-pane.is-${variant} .article`).forEach((article) => {
+      article.dataset.rawHtml = rendered;
+      article.innerHTML = rendered;
+      paginateArticle(article);
+    });
+    if (variant === "target") {
+      const readArticle = document.querySelector(".target-read-article");
+      if (readArticle) {
+        readArticle.innerHTML = rendered;
+      }
+    }
+  }
+
+  editors.forEach((editor) => {
+    let timer = 0;
+    updateSourceGutter(editor);
+    editor.addEventListener("scroll", () => {
+      syncSourceGutterScroll(editor);
+    });
+    editor.addEventListener("input", () => {
+      markSourceDirty(editor.dataset.sourceEditor || "target");
+      updateSourceGutter(editor);
+      syncSourceGutterScroll(editor);
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        updatePreview(editor.dataset.sourceEditor || "target", editor.value);
+      }, 120);
+    });
+  });
+
+  updateAllGrids();
+  preparePdfImages(document);
+  loadFirstVisiblePdfPages();
+  paginateVisibleReaders();
+  loadChapterCatalog();
+})();
+
+  </script>
+</body>
+</html>

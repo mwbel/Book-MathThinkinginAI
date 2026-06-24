@@ -1,0 +1,70 @@
+{
+    "models": [
+        {
+            "title": "GLM-4 (Zhipu-compatible)",
+            "provider": "openai",
+            "model": "glm-4",
+            "apiKey": "sk-0608bfac12ae33755667214aa6d00657.oljJQXnYGuGGF6pf",
+            "baseUrl": "https://open.bigmodel.cn/api/paas/v4"
+        },
+        {
+            "title": "Gemini 1.5 Flash (Direct)",
+            "provider": "gemini",
+            "model": "gemini-1.5-flash",
+            "apiKey": "$GEMINI_API_KEY"
+        },
+        {
+            "title": "Gemini 2.0 Flash",
+            "model": "gemini-2.0-flash",
+            "contextLength": 1000000,
+            "apiKey": "$GEMINI_API_KEY",
+            "provider": "gemini"
+        },
+        {
+            "title": "Claude Sonnet 4.5",
+            "provider": "anthropic",
+            "model": "claude-sonnet-4-5-20250929",
+            "apiKey": "$ANTHROPIC_API_KEY"
+        }
+    ],
+    "defaultModel": "Gemini 2.0 Flash",
+    "contextLength": 8000,
+    "allowAnonymousTelemetry": false,
+    "slashCommands": [
+        {
+            "name": "refine",
+            "description": "智能润色助手 - 选择合适的润色模式",
+            "prompt": "你是《人工智能的数学思维》的专业编辑，熟悉书稿风格要求。\n\n我提供以下几种润色模式，请告诉我需要哪种：\n\n**📝 可用润色模式：**\n\n1. **examples** - 为抽象概念生成贴近生活的例子/类比\n   - 帮助跨专业读者建立直觉\n   - 贴近日常生活或技术场景\n   - 语气温和，课堂讲解风格\n\n2. **diff** - 对照式润色 + diff视图\n   - 保留原结构，优化表述和语气\n   - 提供修改前后的对比\n   - 最小差异编辑，便于审阅\n\n3. **expand** - 深度扩展\n   - 扩写到1.5-2倍篇幅\n   - 增加解释、例子和直观描述\n   - 保持逻辑结构不变\n\n4. **struct** - 结构诊断\n   - 分析章节结构与逻辑\n   - 识别结构性问题\n   - 提供重构建议\n\n请告诉我您想使用哪种模式，然后提供需要处理的文本。\n\n**💡 VS Code 快捷提示：**\n- 在编辑器中输入 `mtai-examples` + Tab 可快速插入例子生成模板\n- 输入 `mtai-refin-diff` + Tab 可快速插入润色模板\n- 输入 `mtai-expand` + Tab 可快速插入扩写模板"
+        },
+        {
+            "name": "examples",
+            "description": "快速生成例子/类比",
+            "prompt": "你是《人工智能的数学思维》的AI教育专家，擅长用生动例子解释抽象概念。\n\n请为我提供的概念生成2-3个贴近生活的例子或类比。\n\n**要求：**\n- 与概念有清晰对应关系\n- 例子本身简单易懂，贴近日常\n- 语气温和，课堂讲解风格\n- 每个例子1-3段\n\n**VS Code提示：** 输入 `mtai-examples` + Tab 可使用完整模板\n\n请提供需要解释的概念："
+        },
+        {
+            "name": "diff",
+            "description": "对照式润色 + diff视图",
+            "prompt": "你是《人工智能的数学思维》的专业编辑，请对LaTeX文本进行对照式润色。\n\n**润色要求：**\n- 保留原有知识点和信息量\n- 语气更接近通识+课堂讲解体\n- 修顺语句，补足过渡和思维引导\n- 保留LaTeX结构，不修改标签和引用\n- 每段≤7行\n\n**输出格式：**\n1）原文备份\n2）diff视图（-删除，+新增）\n3）修改后版本\n\n**VS Code提示：** 输入 `mtai-refin-diff` + Tab 可使用完整模板\n\n请提供需要润色的LaTeX文本："
+        },
+        {
+            "name": "expand",
+            "description": "深度扩展内容",
+            "prompt": "你是《人工智能的数学思维》的作者合作者，请对文本进行深度扩展。\n\n**扩展要求：**\n- 扩写到1.5-2倍篇幅\n- 增加关键概念的解释和例子\n- 保持原结构和立场\n- 语气更像课堂讲解\n- LaTeX环境必须块状排版\n- 行内数学使用 `~$...$` 格式\n\n**VS Code提示：** 输入 `mtai-expand` + Tab 可使用完整模板\n\n请提供需要扩展的文本："
+        },
+        {
+            "name": "struct",
+            "description": "章节结构诊断",
+            "prompt": "你是《人工智能的数学思维》的结构工程师，请对章节进行结构诊断。\n\n**诊断维度：**\n1）核心问题与关键信息\n2）现有结构优点\n3）结构性问题与风险点\n4）重构建议与新结构草案\n\n**VS Code提示：** 输入 `mtai-struct` + Tab 可使用完整模板\n\n请提供需要诊断的LaTeX文本："
+        },
+        {
+            "name": "snippets",
+            "description": "显示可用的代码片段",
+            "prompt": "**📋 VS Code 代码片段使用指南：**\n\n在编辑器中输入以下前缀，然后按 Tab 键即可展开：\n\n**基础操作类：**\n- `mtai-examples` - 生成例子/类比的完整模板\n- `mtai-refin-diff` - 对照式润色 + diff视图模板\n- `mtai-expand` - 深度扩展模板\n\n**高级操作类：**\n- `mtai-diff` - 对选中文本的快速diff修改\n- `mtai-struct` - 章节结构诊断模板\n- `mtai-struct-edit` - 结构诊断 + 修改版LaTeX\n\n**使用场景：**\n- 写作时：先用 `mtai-examples` 准备例子，用 `mtai-expand` 扩展内容\n- 修改时：用 `mtai-refin-diff` 做对照润色，用 `mtai-diff` 快速修改\n- 调整结构时：用 `mtai-struct` 做诊断，用 `mtai-struct-edit` 生成修改版\n\n💡 提示：所有模板都已按照《人工智能的数学思维》书稿风格预设好了！"
+        },
+        {
+            "name": "help",
+            "description": "显示所有可用命令",
+            "prompt": "**🤖 Continue 命令帮助：**\n\n**润色类命令：**\n- `/refine` - 智能润色助手，选择合适模式\n- `/examples` - 快速生成例子/类比\n- `/diff` - 对照式润色 + diff视图\n- `/expand` - 深度扩展内容\n- `/struct` - 章节结构诊断\n\n**辅助类命令：**\n- `/snippets` - 显示VS Code代码片段使用指南\n- `/help` - 显示此帮助信息\n\n**VS Code快捷操作：**\n- 输入 `mtai-*` 前缀 + Tab 快速插入模板\n- 使用 Cmd+Shift+P 打开命令面板\n- 使用 Ctrl+Space 触发代码建议\n\n📚 更多使用技巧请查看《书稿风格与编辑手册》"
+        }
+    ]
+}

@@ -1,0 +1,97 @@
+{
+  "variant": "original",
+  "sourcePath": "/Users/Min369/Desktop/书/书稿打磨/draft-tex/chapters/12-语言中的智能：Transformer的意外胜利.v3_refined.tex",
+  "sourceInput": "chapters/12-语言中的智能：Transformer的意外胜利.v3_refined.tex",
+  "pdfPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/ch12-clean-render-assets/original/preview-original.pdf",
+  "pdfUrl": "ch12-clean-render-assets/original/preview-original.pdf",
+  "synctexPath": "/Users/Min369/Desktop/书/书稿打磨/tools/review/outputs/ch12-clean-render-assets/original/preview-original.synctex.gz",
+  "pageCount": 14,
+  "pageWidthPt": 595.28,
+  "pageHeightPt": 841.89,
+  "pages": [
+    {
+      "page": 1,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-01.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 2,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-02.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 3,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-03.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 4,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-04.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 5,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-05.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 6,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-06.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 7,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-07.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 8,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-08.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 9,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-09.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 10,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-10.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 11,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-11.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 12,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-12.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 13,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-13.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    },
+    {
+      "page": 14,
+      "imageUrl": "ch12-clean-render-assets/original/png/page-14.png",
+      "imageWidth": 893,
+      "imageHeight": 1263
+    }
+  ]
+}

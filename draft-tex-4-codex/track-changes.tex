@@ -1,0 +1,45 @@
+% 修订跟踪命令集合
+% 使用方法：
+% \added[id=作者,remark=说明]{新增内容}
+% \deleted[id=作者,remark=说明]{删除内容}
+% \replaced[id=作者,remark=说明]{新内容}{旧内容}
+
+\usepackage{xcolor}
+\usepackage{soul}
+
+% 定义颜色
+\definecolor{addedcolor}{rgb}{0,0.6,0}
+\definecolor{deletedcolor}{rgb}{0.8,0,0}
+\definecolor{replacedcolor}{rgb}{0,0,0.8}
+
+% 新增内容命令
+\newcommand{\added}[2][]{%
+  \textcolor{addedcolor}{\ulcorner{#2}\urcorner}%
+  \ifx&#1\else%
+    \textcolor{gray}{\tiny[#1]}%
+  \fi%
+}
+
+% 删除内容命令
+\newcommand{\deleted}[2][]{%
+  \textcolor{deletedcolor}{\sout{#2}}%
+  \ifx&#1\else%
+    \textcolor{gray}{\tiny[#1]}%
+  \fi%
+}
+
+% 替换内容命令
+\newcommand{\replaced}[3][]{%
+  \deleted[#1]{#3} $\rightarrow$ \added[#1]{#2}%
+}
+
+% 批准修订命令（将修订设为正式）
+\newcommand{\accept}[1]{#1}
+
+% 拒绝修订命令（移除修订标记）
+\newcommand{\reject}[1]{}
+
+% 简化的使用示例
+% \added{这是新增内容}
+% \deleted[reviewer]{这是删除内容}
+% \replaced[editor]{新内容}{旧内容}

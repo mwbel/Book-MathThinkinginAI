@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0 · Intro.v2_polished_3level 校对页</title>
+  <style>
+
+:root {
+  --bg: #f6f3ec;
+  --paper: #fffdf8;
+  --ink: #1f2937;
+  --muted: #667085;
+  --line: #e6dccb;
+  --accent: #8a5a12;
+  --changed: #b7791f;
+  --added: #157347;
+  --removed: #b42318;
+  --soft-added: #e9f7ef;
+  --soft-removed: #fdecec;
+  --soft-changed: #fff6db;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.65;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 36px;
+  background: #27211a;
+  color: #fffaf0;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #d7b56d;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  letter-spacing: 0;
+}
+
+.file-line {
+  margin: 2px 0;
+  color: #eadfcb;
+  font-size: 13px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(110px, 1fr));
+  gap: 10px;
+  min-width: 300px;
+}
+
+.summary-item {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.summary-item span {
+  display: block;
+  color: #eadfcb;
+  font-size: 12px;
+}
+
+.summary-item strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 22px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: calc(100vh - 160px);
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 22px 18px;
+  border-right: 1px solid var(--line);
+}
+
+.sidebar-title {
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.nav-link {
+  display: block;
+  padding: 7px 8px;
+  border-radius: 6px;
+  color: #3b3124;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-link:hover {
+  background: #ebe1d0;
+}
+
+.indent-1 { padding-left: 18px; }
+.indent-2 { padding-left: 30px; }
+.indent-3 { padding-left: 42px; }
+.indent-4 { padding-left: 54px; }
+
+.content {
+  padding: 24px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toolbar span,
+.meta,
+.section-title {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.filter-group,
+.diff-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-button,
+.tool-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fffaf1;
+  color: #3b3124;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+
+.filter-button:hover,
+.tool-button:hover,
+.filter-button.is-active {
+  border-color: #c99a46;
+  background: #f4e6c9;
+}
+
+.filter-button span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.result-line {
+  margin: -4px 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.changed { background: var(--changed); }
+.status-dot.added { background: var(--added); }
+.status-dot.removed { background: var(--removed); }
+
+.pair-card {
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.pair-card.is-hidden,
+.empty.is-hidden {
+  display: none;
+}
+
+.pair-card.is-changed { border-left-color: var(--changed); }
+.pair-card.is-added { border-left-color: var(--added); }
+.pair-card.is-removed { border-left-color: var(--removed); }
+
+.pair-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #ece7dd;
+  color: #4a3b27;
+}
+
+.status-badge.is-changed { background: var(--soft-changed); color: var(--changed); }
+.status-badge.is-added { background: var(--soft-added); color: var(--added); }
+.status-badge.is-removed { background: var(--soft-removed); color: var(--removed); }
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.pane {
+  min-width: 0;
+  padding: 14px 16px 16px;
+}
+
+.pane + .pane {
+  border-left: 1px solid var(--line);
+}
+
+.pane-title {
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.code-block {
+  min-height: 76px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #eadfcb;
+  border-radius: 8px;
+  background: #fffaf1;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.code-block.is-empty {
+  color: var(--muted);
+  background: #f8f4ec;
+}
+
+.diff-detail {
+  padding: 0 16px 16px;
+}
+
+.diff-detail summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.diff-inline {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fbf7ef;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.diff-token.is-insert {
+  background: var(--soft-added);
+  color: var(--added);
+}
+
+.diff-token.is-delete {
+  background: var(--soft-removed);
+  color: var(--removed);
+  text-decoration: line-through;
+}
+
+.empty {
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .app-header,
+  .toolbar,
+  .pair-head {
+    display: block;
+  }
+
+  .summary {
+    margin-top: 18px;
+  }
+
+  .toolbar-actions {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .layout,
+  .compare-grid {
+    display: block;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pane + .pane {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">LaTeX 教材润色校对</p>
+      <h1>0 · Intro.v2_polished_3level 校对页</h1>
+      <p class="file-line">原文：draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex</p>
+      <p class="file-line">修改后：draft-tex-3扩写/chapters-20251105/0-Intro.v2_polished_3level.tex</p>
+    </div>
+    <div class="summary">
+      <div class="summary-item">
+        <span>总对照</span>
+        <strong>3</strong>
+      </div>
+      <div class="summary-item is-changed">
+        <span>已修改</span>
+        <strong>0</strong>
+      </div>
+      <div class="summary-item is-added">
+        <span>新增</span>
+        <strong>0</strong>
+      </div>
+      <div class="summary-item is-removed">
+        <span>删除</span>
+        <strong>0</strong>
+      </div>
+    </div>
+  </header>
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-title">章节导航</div>
+      <p class="empty">暂无章节结构</p>
+    </aside>
+    <section class="content">
+      <div class="toolbar">
+        <div>
+          <strong>段落级对照</strong>
+          <span>2026-06-24T13:51:02.244515+00:00</span>
+        </div>
+        <div class="toolbar-actions">
+          <div class="filter-group" aria-label="筛选对照块"><button class="filter-button is-active" type="button" data-filter-status="all">全部 <span>3</span></button><button class="filter-button" type="button" data-filter-status="changed">已修改 <span>0</span></button><button class="filter-button" type="button" data-filter-status="added">新增 <span>0</span></button><button class="filter-button" type="button" data-filter-status="removed">删除 <span>0</span></button><button class="filter-button" type="button" data-filter-status="unchanged">未变化 <span>3</span></button></div>
+          <div class="diff-actions">
+            <button class="tool-button" type="button" data-diff-action="expand">展开差异</button>
+            <button class="tool-button" type="button" data-diff-action="collapse">收起差异</button>
+          </div>
+        </div>
+      </div>
+      <div class="result-line" data-result-line>当前显示 3 个对照块</div>
+      <p class="empty is-hidden" data-filter-empty>当前筛选条件下没有可显示的对照块。</p>
+      <article class="pair-card is-unchanged" id="line-1" data-status="unchanged">
+  <div class="pair-head">
+    <div>
+      <span class="status-badge is-unchanged">未变化</span>
+      <strong>pair-0001</strong>
+      <span class="meta">comment · L1</span>
+    </div>
+    <div class="section-title">Front Matter</div>
+  </div>
+  <div class="compare-grid">
+    <section class="pane">
+      <div class="pane-title">原文</div>
+      <pre class="code-block"><code>% 自动生成：三层级压缩包装文件（章→节→小节）</code></pre>
+    </section>
+    <section class="pane">
+      <div class="pane-title">修改后</div>
+      <pre class="code-block"><code>% 自动生成：三层级压缩包装文件（章→节→小节）</code></pre>
+    </section>
+  </div>
+  
+</article>
+<article class="pair-card is-unchanged" id="line-2" data-status="unchanged">
+  <div class="pair-head">
+    <div>
+      <span class="status-badge is-unchanged">未变化</span>
+      <strong>pair-0002</strong>
+      <span class="meta">comment · L2</span>
+    </div>
+    <div class="section-title">Front Matter</div>
+  </div>
+  <div class="compare-grid">
+    <section class="pane">
+      <div class="pane-title">原文</div>
+      <pre class="code-block"><code>% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件</code></pre>
+    </section>
+    <section class="pane">
+      <div class="pane-title">修改后</div>
+      <pre class="code-block"><code>% 注意：本包装文件指向 refined 版本；如需切换 polished，请改为输入对应文件</code></pre>
+    </section>
+  </div>
+  
+</article>
+<article class="pair-card is-unchanged" id="line-3" data-status="unchanged">
+  <div class="pair-head">
+    <div>
+      <span class="status-badge is-unchanged">未变化</span>
+      <strong>pair-0003</strong>
+      <span class="meta">paragraph · L3-L8</span>
+    </div>
+    <div class="section-title">Front Matter</div>
+  </div>
+  <div class="compare-grid">
+    <section class="pane">
+      <div class="pane-title">原文</div>
+      <pre class="code-block"><code>\begingroup
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\renewcommand\subsubsection{\paragraph}
+\input{0-Intro.v2_refined.tex}
+\endgroup</code></pre>
+    </section>
+    <section class="pane">
+      <div class="pane-title">修改后</div>
+      <pre class="code-block"><code>\begingroup
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\renewcommand\subsubsection{\paragraph}
+\input{0-Intro.v2_refined.tex}
+\endgroup</code></pre>
+    </section>
+  </div>
+  
+</article>
+    </section>
+  </main>
+  <script>
+
+(function () {
+  const cards = Array.from(document.querySelectorAll("[data-status]"));
+  const buttons = Array.from(document.querySelectorAll("[data-filter-status]"));
+  const resultLine = document.querySelector("[data-result-line]");
+  const empty = document.querySelector("[data-filter-empty]");
+
+  function applyFilter(status) {
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const show = status === "all" || card.dataset.status === status;
+      card.classList.toggle("is-hidden", !show);
+      if (show) {
+        visibleCount += 1;
+      }
+    });
+    buttons.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.filterStatus === status);
+    });
+    if (resultLine) {
+      resultLine.textContent = `当前显示 ${visibleCount} 个对照块`;
+    }
+    if (empty) {
+      empty.classList.toggle("is-hidden", visibleCount !== 0);
+    }
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => applyFilter(button.dataset.filterStatus || "all"));
+  });
+
+  document.querySelectorAll("[data-diff-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const shouldOpen = button.dataset.diffAction === "expand";
+      cards.forEach((card) => {
+        if (card.classList.contains("is-hidden")) {
+          return;
+        }
+        card.querySelectorAll("details.diff-detail").forEach((detail) => {
+          detail.open = shouldOpen;
+        });
+      });
+    });
+  });
+})();
+
+  </script>
+</body>
+</html>
