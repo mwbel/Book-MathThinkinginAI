@@ -117,7 +117,6 @@ HTTPS_URL="$(to_https_url "${SSH_URL:-${REMOTE_OR_URL}}")" || {
 
 if [[ -n "${GITHUB_TOKEN:-${GH_TOKEN:-}}" ]]; then
   TOKEN="${GITHUB_TOKEN:-${GH_TOKEN:-}}"
-  HTTPS_URL_AUTH="$(sed "s#https://#https://${TOKEN}@#;s#https://##" <<< "${HTTPS_URL}")"
   HTTPS_URL_AUTH="https://${TOKEN}@${HTTPS_URL#https://}"
 else
   HTTPS_URL_AUTH="${HTTPS_URL}"
