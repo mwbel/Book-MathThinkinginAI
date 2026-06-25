@@ -20,7 +20,12 @@ trap cleanup EXIT
 
 sleep 2
 
-TARGET_PAGE="${TARGET_PAGE:-http://${HOST}:${PORT}/ch12-clean-render.html}"
+LATEST_RENDER="$(find "${REVIEW_DIR}/outputs" -maxdepth 1 -name '*-render.html' -type f -print0 | xargs -0 ls -t 2>/dev/null | head -n 1 || true)"
+if [[ -n "${LATEST_RENDER}" ]]; then
+  TARGET_PAGE="${TARGET_PAGE:-http://${HOST}:${PORT}/$(basename "${LATEST_RENDER}")}"
+else
+  TARGET_PAGE="${TARGET_PAGE:-http://${HOST}:${PORT}/1-Def.v1__plain__polished_unified_expanded-render.html}"
+fi
 if command -v open >/dev/null 2>&1; then
   open "${TARGET_PAGE}"
 else

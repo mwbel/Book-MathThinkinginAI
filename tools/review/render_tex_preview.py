@@ -13,7 +13,7 @@ import subprocess
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 
 SECTION_RE = re.compile(
@@ -319,14 +319,19 @@ def source_attrs(start_line: int, end_line: int | None = None) -> str:
 
 
 def render_inline_latex(text: str) -> str:
-    rendered = escape(text)
+    rendered = escape(normalize_inline_latex(text))
     rendered = replace_balanced_command(rendered, "textbf", "strong")
     rendered = replace_balanced_command(rendered, "emph", "em")
+    rendered = replace_balanced_command(rendered, "textit", "em")
+    rendered = replace_balanced_command(rendered, "texttt", "code")
+    rendered = replace_balanced_command(rendered, "underline", "span")
     rendered = replace_balanced_command(rendered, "text", "span")
     rendered = re.sub(r"\$([^$]+)\$", r'<span class="inline-math">$\1$</span>', rendered)
     rendered = rendered.replace(r"\ldots", "…")
     rendered = rendered.replace(r"\;", " ")
     rendered = re.sub(r"\\fa[A-Za-z]+", "", rendered)
+    rendered = re.sub(r"\\[A-Za-z]+\*?(?:\[[^\]]*\])?\{([^{}]*)\}", r"\1", rendered)
+    rendered = re.sub(r"\\[A-Za-z]+\*?", "", rendered)
     return rendered
 
 
@@ -336,6 +341,120 @@ def clean_inline_latex(text: str) -> str:
     cleaned = html.unescape(cleaned)
     cleaned = re.sub(r"\s+", " ", cleaned).strip()
     return escape(cleaned)
+
+
+def normalize_inline_latex(text: str) -> str:
+    normalized = text
+    normalized = replace_two_arg_command(normalized, "texorpdfstring", normalize_texorpdfstring)
+    normalized = replace_two_arg_command(normalized, "cnquote", lambda quote, author: f"“{quote}”\n——{author}")
+    normalized = replace_two_arg_command(normalized, "enquote", lambda quote, author: f"“{quote}”\n——{author}")
+    normalized = replace_two_arg_command(normalized, "href", lambda _url, label: label)
+    normalized = replace_two_arg_command(normalized, "textcolor", lambda _color, value: value)
+    normalized = replace_one_arg_command(normalized, "url", lambda value: value)
+    normalized = replace_one_arg_command(normalized, "footnote", lambda value: f"（注：{value}）")
+    normalized = replace_one_arg_command(normalized, "label", lambda _value: "")
+    normalized = replace_one_arg_command(normalized, "index", lambda _value: "")
+    normalized = normalized.replace(r"\quad", " ")
+    normalized = normalized.replace(r"\qquad", " ")
+    normalized = normalized.replace(r"\,", " ")
+    normalized = normalized.replace(r"\;", " ")
+    normalized = normalized.replace(r"\:", " ")
+    normalized = normalized.replace(r"\!", "")
+    normalized = normalized.replace(r"~", " ")
+    normalized = normalized.replace(r"\\", "\n")
+    return normalized
+
+
+def normalize_texorpdfstring(tex_value: str, pdf_value: str) -> str:
+    visible = tex_value.strip()
+    if visible in {r"\\", r"\\*"}:
+        return " "
+    if visible:
+        return visible
+    return pdf_value
+
+
+def replace_one_arg_command(text: str, command: str, replacer: Callable[[str], str]) -> str:
+    return replace_latex_command(text, command, 1, lambda args: replacer(args[0]))
+
+
+def replace_two_arg_command(text: str, command: str, replacer: Callable[[str, str], str]) -> str:
+    return replace_latex_command(text, command, 2, lambda args: replacer(args[0], args[1]))
+
+
+def replace_latex_command(text: str, command: str, arity: int, replacer: Callable[[list[str]], str]) -> str:
+    pattern = f"\\{command}"
+    cursor = 0
+    pieces: list[str] = []
+    changed = False
+
+    while True:
+        index = text.find(pattern, cursor)
+        if index < 0:
+            pieces.append(text[cursor:])
+            break
+        previous = text[index - 1] if index > 0 else ""
+        if previous == "\\" or (previous.isascii() and previous.isalpha()):
+            pieces.append(text[cursor : index + len(pattern)])
+            cursor = index + len(pattern)
+            continue
+
+        arg_cursor = index + len(pattern)
+        args: list[str] = []
+        ok = True
+        for _ in range(arity):
+            while arg_cursor < len(text) and text[arg_cursor].isspace():
+                arg_cursor += 1
+            if arg_cursor >= len(text) or text[arg_cursor] != "{":
+                ok = False
+                break
+            parsed = read_braced_argument(text, arg_cursor)
+            if parsed is None:
+                ok = False
+                break
+            value, arg_cursor = parsed
+            args.append(value)
+
+        if not ok:
+            pieces.append(text[cursor : index + len(pattern)])
+            cursor = index + len(pattern)
+            continue
+
+        pieces.append(text[cursor:index])
+        pieces.append(replacer(args))
+        cursor = arg_cursor
+        changed = True
+
+    return "".join(pieces) if changed else text
+
+
+def read_braced_argument(text: str, start: int) -> tuple[str, int] | None:
+    if start >= len(text) or text[start] != "{":
+        return None
+    depth = 0
+    chars: list[str] = []
+    index = start
+    while index < len(text):
+        char = text[index]
+        if char == "\\":
+            if index + 1 < len(text):
+                chars.append(char)
+                chars.append(text[index + 1])
+                index += 2
+                continue
+        if char == "{":
+            depth += 1
+            if depth > 1:
+                chars.append(char)
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return "".join(chars), index + 1
+            chars.append(char)
+        else:
+            chars.append(char)
+        index += 1
+    return None
 
 
 def replace_balanced_command(text: str, command: str, tag: str) -> str:
@@ -393,37 +512,37 @@ def render_page(
 </head>
 <body>
   <header class="topbar">
-    <div>
+    <div class="topbar-title">
       <p class="eyebrow">校对稿渲染预览</p>
       <h1>{escape(page_title)}</h1>
       <p class="file-line">原文：{escape(original_label)}</p>
       <p class="file-line">修改稿：{escape(source_path.name)} · {escape(generated_at)}</p>
     </div>
-    <div class="top-actions">
-      <div class="mode-switch" aria-label="视图模式">
-        <button type="button" class="is-active" data-mode="read">Typora 阅读</button>
-        <button type="button" data-mode="dual">双栏对照</button>
-        <button type="button" data-mode="quad">四栏校对</button>
-      </div>
-      <div class="chapter-picker" data-chapter-picker>
-        <label class="picker-field">
-          <span>章节</span>
-          <select data-chapter-select>
-            <option value="">正在读取章节...</option>
-          </select>
-        </label>
-        <button type="button" class="picker-button picker-primary" data-open-chapter disabled>打开章节</button>
-        <details class="advanced-picker">
-          <summary>高级设置</summary>
-          <div class="advanced-picker-grid">
-            <label class="picker-field picker-field-wide">
-              <span>章节文件夹</span>
-              <div class="folder-picker-row">
-                <input type="text" data-chapters-dir placeholder="/路径/到/chapters" value="{escape(sync_assets.get("chaptersDir", ""))}">
-                <button type="button" class="picker-button picker-button-compact" data-pick-chapters-folder>选择</button>
-              </div>
-            </label>
-            <button type="button" class="picker-button" data-import-chapters>导入文件夹</button>
+    <div class="chapter-picker" data-chapter-picker>
+      <label class="picker-field">
+        <span>章节</span>
+        <select data-chapter-select>
+          <option value="">正在读取章节...</option>
+        </select>
+      </label>
+      <label class="picker-field picker-field-folder">
+        <span>章节文件夹</span>
+        <div class="folder-picker-row">
+          <input type="text" data-chapters-dir placeholder="/路径/到/chapters" value="{escape(sync_assets.get("chaptersDir", ""))}">
+          <button type="button" class="picker-button picker-button-compact" data-pick-chapters-folder>选择</button>
+        </div>
+      </label>
+      <p class="chapter-picker-state" data-chapter-picker-status></p>
+    </div>
+  </header>
+
+  <section class="view-toolbar" aria-label="校对视图工具栏">
+    <div class="mode-switch" aria-label="视图模式">
+      <button type="button" class="is-active" data-mode="read">Typora 阅读</button>
+      <button type="button" data-mode="dual">双栏对照</button>
+      <button type="button" data-mode="quad">四栏校对</button>
+    </div>
+    <div class="version-controls">
         <label class="picker-field">
           <span>原文版本</span>
           <select data-original-select disabled>
@@ -440,12 +559,8 @@ def render_page(
         <button type="button" class="compile-button" data-rebuild-preview>重新编译 PDF</button>
         <p class="compile-state" data-compile-status>PDF 对应最近一次编译结果</p>
       </div>
-          </div>
-        </details>
-        <p class="chapter-picker-state" data-chapter-picker-status>选择章节后点击“打开章节”。</p>
-      </div>
     </div>
-  </header>
+  </section>
 
   <main class="workspace is-read" data-workspace data-chapter-label="{escape(chapter_label)}">
     <aside class="outline">
@@ -803,13 +918,17 @@ body {
 }
 
 .topbar {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 22px;
-  padding: 22px 30px;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(520px, 1.15fr);
+  align-items: end;
+  gap: 18px;
+  padding: 14px 30px 12px;
   background: #27211a;
   color: #fffaf0;
+}
+
+.topbar-title {
+  min-width: 0;
 }
 
 .eyebrow,
@@ -821,14 +940,18 @@ body {
 
 h1 {
   margin: 4px 0 4px;
-  font-size: 26px;
+  font-size: 23px;
   letter-spacing: 0;
 }
 
-.top-actions {
+.view-toolbar {
   display: grid;
-  justify-items: end;
-  gap: 10px;
+  justify-items: center;
+  gap: 8px;
+  padding: 12px 30px 14px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 250, 242, 0.82);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
 }
 
 .mode-switch {
@@ -839,10 +962,11 @@ h1 {
 
 .chapter-picker {
   display: grid;
-  grid-template-columns: minmax(260px, 520px) auto;
-  gap: 10px 12px;
+  grid-template-columns: minmax(260px, 1.1fr) minmax(280px, 0.9fr);
+  gap: 8px 12px;
   align-items: end;
-  max-width: 760px;
+  width: min(100%, 880px);
+  justify-self: end;
 }
 
 .picker-field {
@@ -881,6 +1005,13 @@ h1 {
 .folder-picker-row input {
   flex: 1 1 auto;
   min-width: 0;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 250, 240, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 250, 240, 0.92);
+  color: #2d2418;
+  font: inherit;
 }
 
 .picker-button {
@@ -909,8 +1040,7 @@ h1 {
 
 .chapter-picker-state {
   grid-column: 1 / -1;
-  max-width: 760px;
-  margin: -2px 0 0;
+  margin: 0;
   color: #eadfcb;
   font-size: 12px;
   line-height: 1.35;
@@ -920,39 +1050,8 @@ h1 {
   text-overflow: ellipsis;
 }
 
-.advanced-picker {
-  grid-column: 1 / -1;
-  border-top: 1px solid rgba(255, 250, 240, 0.14);
-  padding-top: 8px;
-}
-
-.advanced-picker summary {
-  width: max-content;
-  cursor: pointer;
-  color: #eadfcb;
-  font-size: 12px;
-  list-style: none;
-}
-
-.advanced-picker summary::-webkit-details-marker {
+.chapter-picker-state:empty {
   display: none;
-}
-
-.advanced-picker summary::before {
-  content: "＋";
-  margin-right: 6px;
-}
-
-.advanced-picker[open] summary::before {
-  content: "－";
-}
-
-.advanced-picker-grid {
-  display: grid;
-  grid-template-columns: minmax(220px, 320px) auto minmax(140px, 180px) minmax(140px, 180px);
-  gap: 10px 12px;
-  align-items: end;
-  margin-top: 10px;
 }
 
 .chapter-picker-state.is-error {
@@ -964,26 +1063,48 @@ h1 {
 }
 
 .compile-controls {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
 }
 
+.version-controls {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 10px 12px;
+  flex-wrap: wrap;
+  max-width: 980px;
+}
+
+.view-toolbar .picker-field span {
+  color: #6f5a3c;
+  font-weight: 700;
+}
+
+.view-toolbar .picker-field select {
+  min-width: 190px;
+  border: 1px solid #d8c8b4;
+  background: #fffaf2;
+  color: #2d2418;
+}
+
 .compile-button {
-  border-color: rgba(255, 250, 240, 0.48);
-  background: rgba(255, 250, 240, 0.08);
+  border-color: #d8c8b4;
+  background: #fffaf2;
+  color: #2d2418;
+  font-weight: 700;
 }
 
 .compile-state {
   max-width: 360px;
   margin: 0;
-  color: #eadfcb;
+  color: #6f5a3c;
   font-size: 12px;
   line-height: 1.35;
-  text-align: right;
+  text-align: left;
 }
 
 .compile-state.is-dirty {
@@ -1016,10 +1137,22 @@ button:hover {
   color: #2d2418;
 }
 
+.view-toolbar button {
+  border-color: #d8c8b4;
+  background: #fffaf2;
+  color: #2d2418;
+}
+
+.view-toolbar button.is-active,
+.view-toolbar button:hover {
+  background: #27211a;
+  color: #fffaf0;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
-  min-height: calc(100vh - 112px);
+  min-height: calc(100vh - 170px);
 }
 
 .workspace.is-outline-collapsed {
@@ -1757,19 +1890,27 @@ button:hover {
 
 @media (max-width: 1100px) {
   .topbar {
+    grid-template-columns: 1fr;
     align-items: stretch;
-  }
-
-  .top-actions {
-    justify-items: stretch;
   }
 
   .chapter-picker {
     grid-template-columns: 1fr;
+    width: 100%;
+    justify-self: stretch;
   }
 
-  .advanced-picker-grid {
+  .version-controls {
+    display: grid;
     grid-template-columns: 1fr;
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  .view-toolbar .picker-field select,
+  .compile-controls,
+  .compile-button {
+    width: 100%;
   }
 
   .chapter-picker-state,
@@ -1813,11 +1954,9 @@ JS = r"""
   const chapterSelect = document.querySelector("[data-chapter-select]");
   const originalSelect = document.querySelector("[data-original-select]");
   const targetSelect = document.querySelector("[data-target-select]");
-  const openChapterButton = document.querySelector("[data-open-chapter]");
   const chapterPickerStatus = document.querySelector("[data-chapter-picker-status]");
   const chaptersDirInput = document.querySelector("[data-chapters-dir]");
   const pickChaptersFolderButton = document.querySelector("[data-pick-chapters-folder]");
-  const importChaptersButton = document.querySelector("[data-import-chapters]");
   const editors = Array.from(document.querySelectorAll("[data-source-editor]"));
   const chapterLabel = workspace ? workspace.dataset.chapterLabel || "" : "";
   const previewDataElement = document.getElementById("preview-data");
@@ -1838,6 +1977,8 @@ JS = r"""
     : null;
   let hasUnsavedBrowserEdits = false;
   let chapterCatalog = [];
+  let isApplyingCatalogSelection = false;
+  let pendingOpenTimer = 0;
 
   function setCompileStatus(message, kind) {
     if (!compileStatus) {
@@ -1884,6 +2025,9 @@ JS = r"""
     if (/Missing input file|Unable to load picture|Latexmk|xelatex|bbl|bibtex|CalledProcessError|Traceback/i.test(raw)) {
       console.error(raw);
       return "PDF 编译失败，通常是缺少图片、参考文献或 LaTeX 依赖；正文预览仍可用于校对。";
+    }
+    if (/Failed to fetch|NetworkError|Load failed/i.test(raw)) {
+      return "无法连接本地服务。请确认已通过 start_review_daemon.sh 启动，并使用 http://127.0.0.1:8766 打开页面。";
     }
     return raw.length > 180 ? `${raw.slice(0, 180)}...` : raw;
   }
@@ -1965,9 +2109,6 @@ JS = r"""
       targetKey || (chapter ? chapter.defaultTargetKey : ""),
       "当前章节没有可选版本"
     );
-    if (openChapterButton) {
-      openChapterButton.disabled = !chapter || !versions.length;
-    }
   }
 
   function findCurrentCatalogSelection(chapters) {
@@ -1992,6 +2133,9 @@ JS = r"""
         };
       }
     }
+    if (currentSource || currentOriginal) {
+      return null;
+    }
     return chapters.length
       ? {
           chapterId: chapters[0].id,
@@ -2005,9 +2149,14 @@ JS = r"""
     if (!selection || !chapterSelect) {
       return;
     }
-    chapterSelect.value = selection.chapterId;
-    const chapter = chapterById(selection.chapterId);
-    populateVersionSelects(chapter, selection.originalKey, selection.targetKey);
+    isApplyingCatalogSelection = true;
+    try {
+      chapterSelect.value = selection.chapterId;
+      const chapter = chapterById(selection.chapterId);
+      populateVersionSelects(chapter, selection.originalKey, selection.targetKey);
+    } finally {
+      isApplyingCatalogSelection = false;
+    }
   }
 
   function updateChapterPickerPrompt(text) {
@@ -2018,7 +2167,7 @@ JS = r"""
       return;
     }
     if (!chapterCatalog.length) {
-      setChapterPickerStatus(text || "请先导入包含章节 .tex 的文件夹，再打开章节。", "error");
+      setChapterPickerStatus(text || "请先导入包含章节 .tex 的文件夹，然后选择章节自动打开。", "error");
     }
   }
 
@@ -2232,6 +2381,30 @@ JS = r"""
     button.addEventListener("click", () => setMode(button.dataset.mode || "read"));
   });
 
+  function scheduleOpenSelectedChapter() {
+    if (isApplyingCatalogSelection) {
+      return;
+    }
+    window.clearTimeout(pendingOpenTimer);
+    pendingOpenTimer = window.setTimeout(openSelectedChapter, 180);
+  }
+
+  async function openSelectedChapter() {
+    const selection = currentChapterSelection();
+    if (!selection.chapterId) {
+      setChapterPickerStatus("请先选择章节。", "error");
+      return;
+    }
+    setChapterPickerStatus("正在生成并打开所选章节，请稍候...", "ok");
+    try {
+      const result = await postSyncTex("/api/build-chapter", selection);
+      setChapterPickerStatus("章节页面生成完成，正在打开...", "ok");
+      window.location.href = result.renderUrl;
+    } catch (error) {
+      setChapterPickerStatus(friendlyError(error, "章节生成失败。"), "error");
+    }
+  }
+
   if (chapterSelect) {
     chapterSelect.addEventListener("change", () => {
       const chapter = chapterById(chapterSelect.value);
@@ -2240,64 +2413,57 @@ JS = r"""
         return;
       }
       populateVersionSelects(chapter, chapter.defaultOriginalKey, chapter.defaultTargetKey);
-      setChapterPickerStatus("已切换章节，请点击“打开章节”生成对应页面。", "");
+      scheduleOpenSelectedChapter();
     });
   }
 
   if (originalSelect) {
     originalSelect.addEventListener("change", () => {
-      setChapterPickerStatus("原文版本已更新，请点击“打开章节”生成对应页面。", "");
+      scheduleOpenSelectedChapter();
     });
   }
 
   if (targetSelect) {
     targetSelect.addEventListener("change", () => {
-      setChapterPickerStatus("修改稿版本已更新，请点击“打开章节”生成对应页面。", "");
+      scheduleOpenSelectedChapter();
     });
   }
 
-  if (openChapterButton) {
-    openChapterButton.addEventListener("click", async () => {
-      const selection = currentChapterSelection();
-      if (!selection.chapterId) {
-        setChapterPickerStatus("请先选择章节。", "error");
-        return;
+  async function importChaptersDir(chaptersDir) {
+    const targetDir = String(chaptersDir || "").trim();
+    if (!targetDir) {
+      setChapterPickerStatus("请先填写章节文件夹路径。", "error");
+      return;
+    }
+    if (pickChaptersFolderButton) {
+      pickChaptersFolderButton.disabled = true;
+    }
+    setChapterPickerStatus("正在导入章节文件夹，请稍候...", "ok");
+    try {
+      const result = await postApiJson("/api/import-chapters-dir", { chaptersDir: targetDir });
+      if (chaptersDirInput) {
+        chaptersDirInput.value = result.chaptersDir || targetDir;
       }
-      openChapterButton.disabled = true;
-      setChapterPickerStatus("正在生成所选章节的校对页，请稍候...", "ok");
-      try {
-        const result = await postSyncTex("/api/build-chapter", selection);
-        setChapterPickerStatus("章节页面生成完成，正在打开...", "ok");
-        window.location.href = result.renderUrl;
-      } catch (error) {
-        setChapterPickerStatus(friendlyError(error, "章节生成失败。"), "error");
-        openChapterButton.disabled = false;
+      setChapterPickerStatus(`已导入章节文件夹，发现 ${result.chapterCount || 0} 个章节。`, "ok");
+      await loadChapterCatalog();
+    } catch (error) {
+      setChapterPickerStatus(friendlyError(error, "章节文件夹导入失败。"), "error");
+    } finally {
+      if (pickChaptersFolderButton) {
+        pickChaptersFolderButton.disabled = false;
       }
-    });
+    }
   }
 
-  if (importChaptersButton) {
-    importChaptersButton.addEventListener("click", async () => {
-      const chaptersDir = chaptersDirInput ? chaptersDirInput.value.trim() : "";
-      if (!chaptersDir) {
-        setChapterPickerStatus("请先填写章节文件夹路径。", "error");
-        return;
-      }
-      importChaptersButton.disabled = true;
-      setChapterPickerStatus("正在导入章节文件夹，请稍候...", "ok");
-      try {
-        const result = await postApiJson("/api/import-chapters-dir", { chaptersDir });
-        if (chaptersDirInput) {
-          chaptersDirInput.value = result.chaptersDir || chaptersDir;
-        }
-        setChapterPickerStatus(`已导入章节文件夹，发现 ${result.chapterCount || 0} 个章节。`, "ok");
-        await loadChapterCatalog();
-      } catch (error) {
-        setChapterPickerStatus(friendlyError(error, "章节文件夹导入失败。"), "error");
-      } finally {
-        importChaptersButton.disabled = false;
-      }
-    });
+  function folderPathFromHandle(handle) {
+    const name = handle && handle.name ? String(handle.name) : "";
+    if (name === "draft-tex-4-codex") {
+      return "draft-tex-4-codex/chapters";
+    }
+    if (name === "chapters" && defaultChaptersDir) {
+      return defaultChaptersDir;
+    }
+    return name;
   }
 
   if (pickChaptersFolderButton) {
@@ -2305,10 +2471,11 @@ JS = r"""
       if (window.showDirectoryPicker) {
         try {
           const handle = await window.showDirectoryPicker({ mode: "read" });
+          const selectedPath = folderPathFromHandle(handle);
           if (chaptersDirInput) {
-            chaptersDirInput.value = handle.name || chaptersDirInput.value;
+            chaptersDirInput.value = selectedPath || chaptersDirInput.value;
           }
-          setChapterPickerStatus("已选择文件夹，请点击“导入文件夹”。", "ok");
+          await importChaptersDir(selectedPath || (chaptersDirInput ? chaptersDirInput.value : ""));
           return;
         } catch (error) {
           if (error && error.name === "AbortError") {
@@ -2320,7 +2487,22 @@ JS = r"""
         chaptersDirInput.focus();
         chaptersDirInput.select();
       }
-      setChapterPickerStatus("当前浏览器不支持文件夹选择，请手动输入路径。", "error");
+      setChapterPickerStatus("当前浏览器不支持读取完整路径，请输入章节文件夹路径后按回车导入。", "error");
+    });
+  }
+
+  if (chaptersDirInput) {
+    chaptersDirInput.addEventListener("keydown", async (event) => {
+      if (event.key !== "Enter") {
+        return;
+      }
+      event.preventDefault();
+      await importChaptersDir(chaptersDirInput.value);
+    });
+    chaptersDirInput.addEventListener("change", async () => {
+      if (chaptersDirInput.value.trim()) {
+        await importChaptersDir(chaptersDirInput.value);
+      }
     });
   }
 
@@ -2343,11 +2525,16 @@ JS = r"""
       const selection = findCurrentCatalogSelection(chapterCatalog);
       if (!selection) {
         populateVersionSelects(null, "", "");
-        updateChapterPickerPrompt("没有发现可用章节。请导入一个包含章节 .tex 的文件夹。");
+        const hasCurrentPaths = Boolean(chapterPicker.currentSourcePath || chapterPicker.currentOriginalPath);
+        updateChapterPickerPrompt(
+          hasCurrentPaths
+            ? "当前渲染页面与导入的章节文件夹不匹配。请导入生成此页面的章节文件夹，然后重新选择章节。"
+            : "没有发现可用章节。请导入一个包含章节 .tex 的文件夹。"
+        );
         return;
       }
       syncChapterControls(selection);
-      setChapterPickerStatus("可直接切换到任意章节与版本组合。", "ok");
+      setChapterPickerStatus("", "");
     } catch (error) {
       replaceSelectOptions(chapterSelect, [], "", "无法读取章节目录");
       populateVersionSelects(null, "", "");

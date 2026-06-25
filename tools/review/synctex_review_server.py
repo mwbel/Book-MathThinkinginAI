@@ -35,6 +35,8 @@ def summarize_build_error(message: str) -> str:
         return f"章节正文预览已优先生成；PDF 编译缺少 {target}。需要 PDF 时请补齐资源后在高级设置中重编译。"
     if re.search(r"latexmk|xelatex|bibtex|bbl|Unable to load picture", text, re.I):
         return "章节正文预览已优先生成；PDF 编译失败，通常是缺少图片、参考文献或 LaTeX 依赖。需要 PDF 时请在高级设置中重编译。"
+    if "TeX root does not contain elegantbook.cls" in text:
+        return "TeX 根目录不匹配。请重启本地 review 服务，或重新导入包含当前章节的 draft-tex-4-codex/chapters。"
     first_line = text.splitlines()[0]
     return first_line[:220]
 
@@ -45,12 +47,12 @@ def main() -> int:
     root = Path(args.root).expanduser().resolve() if args.root else script_dir / "outputs"
     root.mkdir(parents=True, exist_ok=True)
     project_root = script_dir.parent.parent
-    default_chapters_dir = project_root / "draft-tex-3扩写" / "chapters-20251105"
+    default_chapters_dir = project_root / "draft-tex-4-codex" / "chapters"
 
     handler = make_handler(root, project_root, default_chapters_dir)
     server = ThreadingHTTPServer((args.host, args.port), handler)
     print(f"Serving review outputs from {root}")
-    print(f"Open http://{args.host}:{args.port}/ch12-clean-render.html")
+    print(f"Open http://{args.host}:{args.port}/")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
@@ -255,7 +257,7 @@ def handle_build_chapter(
         "--project-root",
         str(project_root),
         "--tex-root",
-        str(project_root / "draft-tex-3扩写"),
+        str(resolve_tex_root(chapters_dir, project_root)),
         "--pretty",
     ]
     if bool(payload.get("buildPdfPreview")):
@@ -299,12 +301,37 @@ def handle_import_chapters_dir(
     else:
         chapters_dir = chapters_dir.resolve()
     if not chapters_dir.exists():
-        raise ValueError(f"chaptersDir does not exist: {chapters_dir}")
+        fallback = project_root / "draft-tex-4-codex" / raw_dir
+        if fallback.exists():
+            chapters_dir = fallback.resolve()
+        else:
+            raise ValueError(f"chaptersDir does not exist: {chapters_dir}")
     if not chapters_dir.is_dir():
         raise ValueError(f"chaptersDir must be a directory: {chapters_dir}")
+    chapters_dir = normalize_chapters_dir(chapters_dir)
     current_chapters_dir["path"] = chapters_dir
     catalog = discover_chapter_catalog(chapters_dir)
+    if not catalog:
+        raise ValueError(f"No chapter tex files found in: {chapters_dir}")
     return {"ok": True, "chaptersDir": str(chapters_dir), "chapterCount": len(catalog)}
+
+
+def normalize_chapters_dir(chapters_dir: Path) -> Path:
+    nested = chapters_dir / "chapters"
+    if nested.is_dir():
+        nested_catalog = discover_chapter_catalog(nested)
+        if nested_catalog:
+            return nested.resolve()
+    return chapters_dir.resolve()
+
+
+def resolve_tex_root(chapters_dir: Path, project_root: Path) -> Path:
+    for candidate in (chapters_dir, *chapters_dir.parents):
+        if (candidate / "elegantbook.cls").exists():
+            return candidate
+        if candidate == project_root:
+            break
+    return project_root
 
 
 def build_output_name(base_stem: str, original_key: str, target_key: str) -> str:

@@ -8,17 +8,30 @@ from pathlib import Path
 from typing import Any
 
 
-VARIANT_RE = re.compile(
-    r"^(?P<base>.+?)(?:[_-](?P<tag>refined|temp|expanded|conservative|polished\d*|clean))(?P<tail>(?:[_-]clean)?)$"
-)
 VERSION_RE = re.compile(r"\.v\d+(?:\.\d+)?$", re.IGNORECASE)
 LEADING_NUMBER_RE = re.compile(r"^(?P<number>\d{1,3})(?:[-_ ]|$)")
+KNOWN_VARIANT_SUFFIXES = (
+    "polished_unified_expanded_clean",
+    "polished_unified_expanded",
+    "polished_unified_clean",
+    "polished_unified",
+    "polished_expanded_clean",
+    "polished_expanded",
+    "conservative",
+    "expanded",
+    "refined",
+    "clean",
+    "temp",
+)
+IGNORED_PATH_MARKERS = (".dedupe_removed", "中间产物", "中间结果", "中间文档")
 
 
 def discover_chapter_catalog(chapters_dir: Path) -> list[dict[str, Any]]:
     grouped: dict[str, dict[str, Any]] = {}
     for path in sorted(chapters_dir.rglob("*.tex")):
         if not path.is_file():
+            continue
+        if any(marker in part for part in path.parts for marker in IGNORED_PATH_MARKERS):
             continue
         stem = path.stem
         base_stem, variant_key = split_variant(stem)
@@ -60,13 +73,20 @@ def discover_chapter_catalog(chapters_dir: Path) -> list[dict[str, Any]]:
 
 
 def split_variant(stem: str) -> tuple[str, str]:
-    match = VARIANT_RE.match(stem)
-    if not match:
-        return stem, "plain"
-    key = match.group("tag")
-    if match.group("tail"):
-        key = f"{key}_clean"
-    return match.group("base"), key
+    for suffix in KNOWN_VARIANT_SUFFIXES:
+        for separator in ("_", "-"):
+            marker = f"{separator}{suffix}"
+            if stem.endswith(marker):
+                return stem[: -len(marker)], suffix
+
+    polished_match = re.match(r"^(?P<base>.+?)[_-](?P<tag>polished\d*)(?P<tail>(?:[_-]clean)?)$", stem)
+    if polished_match:
+        key = polished_match.group("tag")
+        if polished_match.group("tail"):
+            key = f"{key}_clean"
+        return polished_match.group("base"), key
+
+    return stem, "plain"
 
 
 def build_chapter_label(base_stem: str) -> str:
@@ -98,6 +118,12 @@ def slugify(value: str) -> str:
 def variant_label(key: str) -> str:
     if key == "plain":
         return "当前稿"
+    if key == "polished_unified_expanded":
+        return "当前最终稿"
+    if key == "polished_unified_expanded_clean":
+        return "清洗后的最终稿"
+    if key.startswith("polished_"):
+        return key.replace("_", " ")
     if key == "refined":
         return "refined"
     if key == "temp":
@@ -114,6 +140,12 @@ def variant_label(key: str) -> str:
 
 
 def version_sort_score(key: str) -> tuple[int, int]:
+    if key == "polished_unified_expanded_clean":
+        return (130, 0)
+    if key == "polished_unified_expanded":
+        return (120, 0)
+    if key.startswith("polished_"):
+        return (110, 0)
     if key == "plain":
         return (30, 0)
     if key == "refined":
